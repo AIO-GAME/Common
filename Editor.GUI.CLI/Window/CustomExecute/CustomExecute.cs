@@ -26,14 +26,15 @@ namespace AIO.UEditor
             )]
     public class CustomExecute : GraphicWindow
     {
-        public enum ExecuterMode
+        public enum ExecutedMode
         {
             Dynamic,
             Static
         }
 
-        private static string       _projectPath;
-        private        ExecuterMode _mode = ExecuterMode.Dynamic;
+        private static string _projectPath;
+
+        private ExecutedMode _mode = ExecutedMode.Dynamic;
 
         /// <summary>
         /// 项目路径（也即是 Application.dataPath 路径的末尾去掉了 Assets）
@@ -100,13 +101,13 @@ namespace AIO
         protected override void OnDraw()
         {
             GUILayout.BeginHorizontal();
-            if (GUILayout.Toggle(_mode == ExecuterMode.Dynamic, "Dynamic", GEStyle.LargeButtonLeft)) _mode = ExecuterMode.Dynamic;
+            if (GUILayout.Toggle(_mode == ExecutedMode.Dynamic, "Dynamic", GEStyle.LargeButtonLeft)) _mode = ExecutedMode.Dynamic;
 
-            if (GUILayout.Toggle(_mode == ExecuterMode.Static, "Static", GEStyle.LargeButtonRight)) _mode = ExecuterMode.Static;
+            if (GUILayout.Toggle(_mode == ExecutedMode.Static, "Static", GEStyle.LargeButtonRight)) _mode = ExecutedMode.Static;
 
             GUILayout.EndHorizontal();
 
-            if (_mode == ExecuterMode.Dynamic)
+            if (_mode == ExecutedMode.Dynamic)
                 DynamicGUI();
             else
                 StaticGUI();
@@ -233,21 +234,24 @@ namespace AIO
             Entity = EditorGUILayout.ObjectField(Entity, typeof(GameObject), true) as GameObject;
             GUILayout.EndHorizontal();
 
-            using (new EditorGUI.DisabledScope(Entity))
+            using (new EditorGUI.DisabledScope(!Entity))
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Target:", GUILayout.Width(60));
                 var content = Target ? EditorGUIUtility.ObjectContent(Target, Target.GetType()) : new GUIContent("<None>");
                 if (GUILayout.Button(content, GEStyle.MiniPopup))
                 {
-                    var gm         = new GenericMenu();
-                    var components = Entity.GetComponents<Component>();
+                    var gm = new GenericMenu();
                     gm.AddItem(new GUIContent("<None>"), !Target, () => { Target = null; });
-                    foreach (var component in components)
+                    if (Entity)
                     {
-                        var component1 = component;
-                        gm.AddItem(new GUIContent(component.GetType().FullName), Target == component, () => { Target = component1; });
+                        foreach (var component in Entity.GetComponents<Component>())
+                        {
+                            var component1 = component;
+                            gm.AddItem(EditorGUIUtility.TrTempContent(component.GetType().FullName), Target == component, () => { Target = component1; });
+                        }
                     }
+
 
                     gm.ShowAsContext();
                 }
@@ -302,13 +306,13 @@ namespace AIO
                     case "Boolean":
                         _parameters[i].BoolValue = EditorGUILayout.Toggle(_parameters[i].BoolValue);
                         break;
-                    case "Vector2":
+                    case nameof(Vector2):
                         _parameters[i].Vector2Value = EditorGUILayout.Vector2Field("", _parameters[i].Vector2Value);
                         break;
-                    case "Vector3":
+                    case nameof(Vector3):
                         _parameters[i].Vector3Value = EditorGUILayout.Vector3Field("", _parameters[i].Vector3Value);
                         break;
-                    case "Color":
+                    case nameof(Color):
                         _parameters[i].ColorValue = EditorGUILayout.ColorField(_parameters[i].ColorValue);
                         break;
                     default:

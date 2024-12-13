@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 #endregion
@@ -84,10 +85,8 @@ namespace AIO
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
 
-            var value = array[0];
-            foreach (var item in array)
-                if (value.CompareTo(item) > 0)
-                    value = item;
+            var value                                                                  = array[0];
+            foreach (var item in array.Where(item => value.CompareTo(item) > 0)) value = item;
             return value;
         }
 
@@ -155,10 +154,8 @@ namespace AIO
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
 
-            var value = array[0];
-            foreach (var item in array)
-                if (value.CompareTo(item) < 0)
-                    value = item;
+            var value                                                                  = array[0];
+            foreach (var item in array.Where(item => value.CompareTo(item) < 0)) value = item;
             return value;
         }
 

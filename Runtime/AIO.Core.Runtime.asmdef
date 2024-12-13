@@ -1,63 +1,70 @@
 {
-  "name": "AIO.Core.Runtime",
-  "references": [
-    "UniTask",
-    "UniTask.DOTween",
-    "UniTask.Linq",
-    "Unity.TextMeshPro",
-    "UniTask.TextMeshPro",
-    "DOTween.Modules",
-    "UnityEditor.UI",
-    "UnityEngine.UI",
-    "com.bbbirder.injection",
-    "com.bbbirder.directattribute"
-  ],
-  "includePlatforms": [],
-  "excludePlatforms": [],
-  "allowUnsafeCode": true,
-  "overrideReferences": true,
-  "precompiledReferences": [
-    "AIO.Attribute.dll",
-    "AIO.Common.dll",
-    "YamlDotNet.dll",
-    "ICSharpCode.SharpZipLib.dll",
-    "DOTween.dll",
-    "AIO.Print.dll",
-    "AIO.Print.Unity.dll"
-  ],
-  "autoReferenced": true,
-  "defineConstraints": [],
-  "versionDefines": [
-    {
-      "name": "com.self.package",
-      "expression": "",
-      "define": "SUPPORT_AIOPACKAGE"
-    },
-    {
-      "name": "com.tuyoogame.yooasset",
-      "expression": "",
-      "define": "SUPPORT_YOOASSET"
-    },
-    {
-      "name": "com.cysharp.unitask",
-      "expression": "",
-      "define": "SUPPORT_UNITASK"
-    },
-    {
-      "name": "com.demigiant.dotween",
-      "expression": "",
-      "define": "SUPPORT_DOTWEEN"
-    },
-    {
-      "name": "com.unity.textmeshpro",
-      "expression": "",
-      "define": "SUPPORT_TEXTMESHPRO"
-    },
-    {
-      "name": "com.self.fgui",
-      "expression": "",
-      "define": "SUPPORT_FGUI"
-    }
-  ],
-  "noEngineReferences": false
+    "name": "AIO.Core.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "UniTask",
+        "UniTask.DOTween",
+        "UniTask.Linq",
+        "Unity.TextMeshPro",
+        "UniTask.TextMeshPro",
+        "DOTween.Modules",
+        "UnityEditor.UI",
+        "UnityEngine.UI",
+        "com.bbbirder.injection",
+        "com.bbbirder.directattribute",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "AIO.Attribute.dll",
+        "AIO.Common.dll",
+        "YamlDotNet.dll",
+        "ICSharpCode.SharpZipLib.dll",
+        "DOTween.dll",
+        "AIO.Print.dll",
+        "AIO.Print.Unity.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.self.package",
+            "expression": "",
+            "define": "SUPPORT_AIOPACKAGE"
+        },
+        {
+            "name": "com.tuyoogame.yooasset",
+            "expression": "",
+            "define": "SUPPORT_YOOASSET"
+        },
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "",
+            "define": "SUPPORT_UNITASK"
+        },
+        {
+            "name": "com.demigiant.dotween",
+            "expression": "",
+            "define": "SUPPORT_DOTWEEN"
+        },
+        {
+            "name": "com.unity.textmeshpro",
+            "expression": "",
+            "define": "SUPPORT_TEXTMESHPRO"
+        },
+        {
+            "name": "com.self.fgui",
+            "expression": "",
+            "define": "SUPPORT_FGUI"
+        },
+        {
+            "name": "com.unity.inputsystem",
+            "expression": "",
+            "define": "SUPPORT_INPUTSYSTEM"
+        }
+    ],
+    "noEngineReferences": false
 }

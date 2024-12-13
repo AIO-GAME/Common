@@ -3,11 +3,13 @@
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Linq;
 using UnityEditor.PackageManager;
+using UnityEngine;
 
 #endregion
 
 [assembly: InternalsVisibleTo("AIO.Unity.Editor")]
 [assembly: InternalsVisibleTo("AIO.Build.Editor")]
+[assembly: UnityAPICompatibilityVersion("2019.4.0", true)]
 
 namespace AIO.UEditor
 {
@@ -26,7 +28,7 @@ namespace AIO.UEditor
         [AInit(mode: EInitAttrMode.Both, int.MaxValue)]
         public static void Initialize()
         {
-            var package = PackageInfo.FindForAssembly(typeof(Setting).Assembly);
+            var package     = PackageInfo.FindForAssembly(typeof(Setting).Assembly);
             var packageJson = AHelper.IO.ReadJsonUTF8<JObject>(string.Concat(package.resolvedPath, "/package.json"));
             Version = packageJson.Value<string>("version");
         }

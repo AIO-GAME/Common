@@ -1,8 +1,8 @@
 {
   "name": "com.aio.package",
   "displayName": "AIO Unity Common",
-  "description": "AIO Unity Common",
-  "version": "1.0.46-preview",
+  "description": "unity common function",
+  "version": "1.0.51-preview",
   "unity": "2019.4",
   "type": "library",
   "category": "Runtime",

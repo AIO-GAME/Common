@@ -52,10 +52,12 @@ namespace AIO
             /// <summary>
             ///  DateTime时间格式转换为Unix时间戳格式
             /// </summary>
-            public static long ConvertDateTime(DateTime time)
-            {
-                return (time.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
-            }
+            public static long ConvertDateTime(DateTime time) { return (time.ToUniversalTime().Ticks - 621355968000000000) / 10000000; }
+
+            /// <summary>
+            /// 获取时间戳
+            /// </summary>
+            public static long UtcNowTimeStamp => Convert.ToInt64((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds);
         }
 
         #endregion

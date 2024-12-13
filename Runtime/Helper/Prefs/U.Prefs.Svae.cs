@@ -123,7 +123,7 @@ namespace AIO
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetString(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
+                    PlayerPrefs.SetString(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_String"), value);
                     PlayerPrefs.Save();
                 }
             }
@@ -137,7 +137,7 @@ namespace AIO
                 var fullName = clazz.GetType().FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetString(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
+                    PlayerPrefs.SetString(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_String"), value);
                     PlayerPrefs.Save();
                 }
             }
@@ -164,7 +164,7 @@ namespace AIO
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value ? 1 : 0);
+                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean"), value ? 1 : 0);
                     PlayerPrefs.Save();
                 }
             }
@@ -177,7 +177,7 @@ namespace AIO
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value ? 1 : 0);
+                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean"), value ? 1 : 0);
                     PlayerPrefs.Save();
                 }
             }
@@ -194,7 +194,7 @@ namespace AIO
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
+                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Int"), value);
                     PlayerPrefs.Save();
                 }
             }
@@ -207,7 +207,7 @@ namespace AIO
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
+                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Int"), value);
                     PlayerPrefs.Save();
                 }
             }

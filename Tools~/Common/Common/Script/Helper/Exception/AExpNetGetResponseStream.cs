@@ -14,7 +14,8 @@ namespace AIO
     {
         /// <inheritdoc />
         public AExpNetGetResponseStream(
-            in string message, in WebResponse response) :
+            in string      message,
+            in WebResponse response) :
             base(message, new Exception("GetResponseStream is Null"), WebExceptionStatus.ReceiveFailure, response) { }
 
         /// <inheritdoc />

@@ -24,7 +24,7 @@ namespace AIO
             {
                 var fullName = key.GetType().FullName;
                 if (string.IsNullOrEmpty(fullName)) return string.Empty;
-                return PlayerPrefs.GetString(string.Concat(fullName.GetHashCode(), field.GetHashCode()));
+                return PlayerPrefs.GetString(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_String"));
             }
 
             /// <summary>
@@ -38,7 +38,7 @@ namespace AIO
             {
                 var fullName = key.GetType().FullName;
                 if (string.IsNullOrEmpty(fullName)) return 0;
-                return PlayerPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()));
+                return PlayerPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Int"));
             }
 
             /// <summary>
@@ -52,7 +52,7 @@ namespace AIO
             {
                 var fullName = key.GetType().FullName;
                 if (string.IsNullOrEmpty(fullName)) return false;
-                return PlayerPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode())) == 1;
+                return PlayerPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean")) == 1;
             }
 
             /// <summary>
@@ -63,8 +63,8 @@ namespace AIO
             /// <returns>返回值</returns>
             public static string LoadString(in string key, in string def = null)
             {
-                if (PlayerPrefs.HasKey(string.Concat(key, "_String"))) return def;
-                return PlayerPrefs.GetString(key);
+                var address = string.Concat(key, "_String");
+                return PlayerPrefs.HasKey(address) ? def : PlayerPrefs.GetString(address);
             }
 
             /// <summary>
@@ -75,8 +75,8 @@ namespace AIO
             /// <returns>返回值</returns>
             public static int LoadInt(in string key, in int def = 0)
             {
-                if (PlayerPrefs.HasKey(string.Concat(key, "_Int"))) return def;
-                return PlayerPrefs.GetInt(key);
+                var address = string.Concat(key, "_Int");
+                return PlayerPrefs.HasKey(address) ? def : PlayerPrefs.GetInt(address);
             }
 
             /// <summary>
@@ -89,8 +89,9 @@ namespace AIO
             public static T LoadEnum<T>(in string key, in T def = default)
             where T : Enum
             {
-                if (PlayerPrefs.HasKey(string.Concat(key, "_Enum"))) return def;
-                return (T)Enum.Parse(typeof(T), PlayerPrefs.GetInt(key).ToString());
+                var address = string.Concat(key, "_Enum");
+                if (PlayerPrefs.HasKey(address)) return def;
+                return (T)Enum.Parse(typeof(T), PlayerPrefs.GetInt(address).ToString());
             }
 
             /// <summary>
@@ -104,8 +105,9 @@ namespace AIO
             {
                 var fullName = typeof(T).FullName;
                 if (string.IsNullOrEmpty(fullName)) return def;
-                if (PlayerPrefs.HasKey(string.Concat(fullName, "_Enum"))) return def;
-                return (T)Enum.Parse(typeof(T), PlayerPrefs.GetInt(fullName).ToString());
+                var address = string.Concat(fullName, "_Enum");
+                if (PlayerPrefs.HasKey(address)) return def;
+                return (T)Enum.Parse(typeof(T), PlayerPrefs.GetInt(address).ToString());
             }
 
             /// <summary>
@@ -117,8 +119,8 @@ namespace AIO
             /// <returns>返回值</returns>
             public static T LoadJsonData<T>(in string key, in T def = default)
             {
-                if (PlayerPrefs.HasKey(string.Concat(key, "_Json"))) return def;
-                return AHelper.Json.Deserialize<T>(PlayerPrefs.GetString(key));
+                var address = string.Concat(key, "_Json");
+                return PlayerPrefs.HasKey(address) ? def : AHelper.Json.Deserialize<T>(PlayerPrefs.GetString(address));
             }
 
             /// <summary>
@@ -129,8 +131,8 @@ namespace AIO
             /// <returns>返回值</returns>
             public static float LoadFloat(in string key, in float def = 0)
             {
-                if (PlayerPrefs.HasKey(string.Concat(key, "_Float"))) return def;
-                return PlayerPrefs.GetFloat(key);
+                var address = string.Concat(key, "_Float");
+                return PlayerPrefs.HasKey(address) ? def : PlayerPrefs.GetFloat(address);
             }
         }
 

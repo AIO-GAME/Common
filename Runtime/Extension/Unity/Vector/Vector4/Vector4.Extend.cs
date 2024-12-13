@@ -49,10 +49,10 @@ namespace AIO.UEngine
         public static Vector4 Cross(this in Vector4 source, in Vector4 target)
         {
             return new Vector4(
-                source.y * target.z - source.z * target.y,
-                source.z * target.w - source.w * target.z,
-                source.w * target.x - source.x * target.w,
-                source.x * target.y - source.y * target.x);
+                               source.y * target.z - source.z * target.y,
+                               source.z * target.w - source.w * target.z,
+                               source.w * target.x - source.x * target.w,
+                               source.x * target.y - source.y * target.x);
         }
 
         /// <summary>
@@ -68,10 +68,10 @@ namespace AIO.UEngine
         public static Vector4 Cross(this in Vector4 source, in float x, in float y = 0, in float z = 0, in float w = 0)
         {
             return new Vector4(
-                source.y * z - source.z * y,
-                source.z * w - source.w * z,
-                source.w * x - source.x * w,
-                source.x * y - source.y * x);
+                               source.y * z - source.z * y,
+                               source.z * w - source.w * z,
+                               source.w * x - source.x * w,
+                               source.x * y - source.y * x);
         }
 
         //Dot > 0 方向基本相同，夹角在0°到90°之间

@@ -28,14 +28,49 @@ namespace AIO
             }
 
             /// <summary>
+            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            /// </summary>
+            /// <param name="remoteUrl">远端路径</param>
+            /// <param name="data">上传数据</param>
+            /// <param name="options">选项参数</param>
+            public static string Post<T>(string remoteUrl, T data, Option options = default)
+            {
+                options ??= new Option();
+                return Post(remoteUrl, options?.Encoding.GetBytes(Json.Serialize(data)), options);
+            }
+
+            /// <summary>
+            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            /// </summary>
+            /// <param name="remoteUrl">远端路径</param>
+            /// <param name="data">上传数据</param>
+            /// <param name="options">选项参数</param>
+            public static Result Post<Result>(string remoteUrl, string data, Option options = default)
+            {
+                options ??= new Option();
+                var result = Post(remoteUrl, options?.Encoding.GetBytes(data), options);
+                return Json.Deserialize<Result>(result);
+            }
+
+            /// <summary>
+            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            /// </summary>
+            /// <param name="remoteUrl">远端路径</param>
+            /// <param name="data">上传数据</param>
+            /// <param name="options">选项参数</param>
+            public static Result Post<T, Result>(string remoteUrl, T data, Option options = default)
+            {
+                options ??= new Option();
+                var result = Post(remoteUrl, options?.Encoding.GetBytes(Json.Serialize(data)), options);
+                return Json.Deserialize<Result>(result);
+            }
+
+            /// <summary>
             /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             /// </summary>
             /// <param name="remoteUrl">远端路径</param>
             /// <param name="options">选项参数</param>
-            public static string Post(string remoteUrl, Option options = default)
-            {
-                return Post(remoteUrl, Array.Empty<byte>(), options);
-            }
+            public static string Post(string remoteUrl, Option options = default) { return Post(remoteUrl, Array.Empty<byte>(), options); }
 
             /// <summary>
             /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
@@ -69,20 +104,14 @@ namespace AIO
             /// <param name="remoteUrl">远端路径</param>
             /// <param name="data">上传数据</param>
             /// <param name="options">选项参数</param>
-            public static Stream PostStream(string remoteUrl, string data, Option options = default)
-            {
-                return PostStream(remoteUrl, options.Encoding.GetBytes(data), options);
-            }
+            public static Stream PostStream(string remoteUrl, string data, Option options = default) { return PostStream(remoteUrl, options.Encoding.GetBytes(data), options); }
 
             /// <summary>
             /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             /// </summary>
             /// <param name="remoteUrl">远端路径</param>
             /// <param name="options">选项参数</param>
-            public static Stream PostStream(string remoteUrl, Option options = default)
-            {
-                return PostStream(remoteUrl, Array.Empty<byte>(), options);
-            }
+            public static Stream PostStream(string remoteUrl, Option options = default) { return PostStream(remoteUrl, Array.Empty<byte>(), options); }
 
             /// <summary>
             /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
@@ -123,14 +152,24 @@ namespace AIO
             }
 
             /// <summary>
+            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            /// </summary>
+            /// <param name="remoteUrl">远端路径</param>
+            /// <param name="data">上传数据</param>
+            /// <param name="options">选项参数</param>
+            public static async Task<Result> PostAsync<T, Result>(string remoteUrl, T data, Option options = default)
+            {
+                options ??= new Option();
+                var result = await PostAsync(remoteUrl, options.Encoding.GetBytes(Json.Serialize(data)), options);
+                return Json.Deserialize<Result>(result);
+            }
+
+            /// <summary>
             /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             /// </summary>
             /// <param name="remoteUrl">远端路径</param>
             /// <param name="options">选项参数</param>
-            public static Task<string> PostAsync(string remoteUrl, Option options = default)
-            {
-                return PostAsync(remoteUrl, Array.Empty<byte>(), options);
-            }
+            public static Task<string> PostAsync(string remoteUrl, Option options = default) { return PostAsync(remoteUrl, Array.Empty<byte>(), options); }
 
             /// <summary>
             /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
@@ -152,7 +191,7 @@ namespace AIO
                     if (data == null || data.Length == 0) request.ContentLength = 0;
                     return await GetResponseTextAsync(request, options.Encoding);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     request?.Abort();
                     return null;
@@ -165,7 +204,8 @@ namespace AIO
             /// <param name="remoteUrl">远端路径</param>
             /// <param name="data">上传数据</param>
             /// <param name="options">选项参数</param>
-            public static Task<Stream> PostStreamAsync(string remoteUrl, string data,
+            public static Task<Stream> PostStreamAsync(string remoteUrl,
+                                                       string data,
                                                        Option options = default)
             {
                 options ??= new Option();
@@ -177,10 +217,7 @@ namespace AIO
             /// </summary>
             /// <param name="remoteUrl">远端路径</param>
             /// <param name="options">选项参数</param>
-            public static Task<Stream> PostStreamAsync(string remoteUrl, Option options = default)
-            {
-                return PostStreamAsync(remoteUrl, Array.Empty<byte>(), options);
-            }
+            public static Task<Stream> PostStreamAsync(string remoteUrl, Option options = default) { return PostStreamAsync(remoteUrl, Array.Empty<byte>(), options); }
 
             /// <summary>
             /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
@@ -189,7 +226,8 @@ namespace AIO
             /// <param name="data">上传数据</param>
             /// <param name="options">选项参数</param>
             /// <returns>返回内容</returns>
-            public static async Task<Stream> PostStreamAsync(string remoteUrl, byte[] data,
+            public static async Task<Stream> PostStreamAsync(string remoteUrl,
+                                                             byte[] data,
                                                              Option options = default)
             {
                 options ??= new Option();

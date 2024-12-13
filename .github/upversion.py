@@ -8,7 +8,7 @@ import requests
 from tqdm import tqdm
 
 
-def get_latest_github_tag(repo_url) -> str | None:
+def get_latest_github_tag(repo_url) -> str:
     # 从仓库 URL 提取用户和仓库名称
     repo_path = repo_url.split("https://github.com/")[1].replace(".git", "")
     print(f"Fetching tags from {repo_path}")
@@ -97,7 +97,7 @@ def read_local_email() -> str:
     return result.stdout.decode('utf-8').strip()
 
 
-def read_current_version() -> str | None:
+def read_current_version() -> str:
     try:
         subprocess.run(['git', 'fetch', '--tags'], check=True)
         tags = os.popen("git tag").read().split("\n")
@@ -136,6 +136,7 @@ ignore_list = [
     ".github/*.py",
     ".github/*.sh",
     ".github/*.bat",
+    "Tools/*",
 ]
 
 github = os.popen("git remote get-url origin").read().strip()
@@ -169,6 +170,7 @@ with open("package.json", "r+") as f:
     current_version = package["version"]
     package["version"] = new_version
     f.seek(0)
+    f.truncate()
     json.dump(package, f, indent=2)
     print("写入配置: 版本号 {0} -> {1}".format(current_version, new_version))
     f.close()
@@ -176,7 +178,7 @@ with open("package.json", "r+") as f:
 # 上传到远程仓库 捕获异常
 if current_version != new_version:
     try:
-        subprocess.run(['git', 'pull'], check=True)
+        subprocess.run(['git', 'pull', 'origin', current_branch], check=True)
         subprocess.run(['git', 'add', 'package.json'], check=True)
         subprocess.run(['git', 'commit', '-m', f"✨ up version {current_branch} -> {new_version}"], check=True)
         subprocess.run(['git', 'push', 'origin', current_branch], check=True)
@@ -243,6 +245,7 @@ with open("package.json", "r+") as f:
     package = json.load(f)
     package["type"] = "module"
     f.seek(0)
+    f.truncate()
     json.dump(package, f, indent=2)
     f.close()
 
