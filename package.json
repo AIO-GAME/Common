@@ -4,7 +4,7 @@
   "description": "unity common function",
   "version": "1.0.51-preview",
   "unity": "2019.4",
-  "type": "library",
+  "type": "module",
   "category": "Runtime",
   "unityRelease": "0f1",
   "license": "MIT",
