@@ -101,7 +101,7 @@ namespace AIO
             set
             {
                 if (value < ReadIndex)
-                    Console.WriteLine($"Set Top invalid top : {value}");
+                    CS.WriteLine($"Set Top invalid top : {value}");
                 WriteIndex = value;
             }
         }
@@ -179,7 +179,7 @@ namespace AIO
         public int Read(T[] Buffer, int Offset, int count)
         {
             if (Buffer.Length < Offset + count)
-                Console.WriteLine($"Buffer List length < count, buffer length: {Buffer.Length} {Offset} {count}");
+                CS.WriteLine($"Buffer List length < count, buffer length: {Buffer.Length} {Offset} {count}");
 
             var length = Count;
             // 传入读取长度 比 存储容量小的时候 则默认读取 存储容量的最大值 并将实际读取长度返回

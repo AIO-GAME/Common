@@ -35,9 +35,7 @@ namespace AIO
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
             if (key == null) throw new ArgumentNullException(nameof(key));
-
-            if (dic.ContainsKey(key)) dic[key] = value;
-            else dic.Add(key, value);
+            dic[key] = value;
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace AIO
     {
         #region Nested type: HTTP
 
-        public partial class HTTP
+        public partial class Http
         {
             /// <summary>
             /// 预留给能够将连接改为管道方式的代理服务器

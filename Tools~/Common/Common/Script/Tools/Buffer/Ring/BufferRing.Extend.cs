@@ -17,7 +17,7 @@ namespace AIO
         /// </summary>
         public static void Read(this BufferRing<byte> buffer, Stream stream, in int count)
         {
-            if (count > buffer.Count) Console.WriteLine($"bufferList length < count, {buffer.Count} {count}");
+            if (count > buffer.Count) CS.WriteLine($"bufferList length < count, {buffer.Count} {count}");
             var alreadyCopyCount = 0;
             while (alreadyCopyCount < count)
             {

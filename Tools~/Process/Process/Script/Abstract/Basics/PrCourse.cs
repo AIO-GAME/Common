@@ -25,7 +25,7 @@ namespace AIO
         /// <summary>
         /// 编码
         /// </summary>
-        protected Encoding encoding;
+        protected Encoding encoding = Encoding.UTF8;
 
         /// <summary>
         /// 创建进程构造器

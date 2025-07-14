@@ -18,13 +18,13 @@ namespace AIO
         /// <summary>
         /// HTTP 处理器
         /// </summary>
-        public sealed class HTTP : IDisposable
+        public sealed class Http : IDisposable
         {
             /// <summary>
             /// 构造函数
             /// </summary>
             /// <param name="remoteURL">远端跟路径</param>
-            private HTTP(string remoteURL) { RemoteURL = remoteURL; }
+            private Http(string remoteURL) { RemoteURL = remoteURL; }
 
             /// <summary>
             /// 远端路径
@@ -70,7 +70,7 @@ namespace AIO
             /// </summary>
             /// <param name="remoteURL">远端路径</param>
             /// <returns>处理器</returns>
-            public static HTTP Create(string remoteURL) { return new HTTP(remoteURL); }
+            public static Http Create(string remoteURL) { return new Http(remoteURL); }
 
             #region Delete
 
@@ -82,7 +82,7 @@ namespace AIO
             public string Delete(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Delete(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Delete(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -94,7 +94,7 @@ namespace AIO
             public string Delete(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Delete(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Delete(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -106,7 +106,7 @@ namespace AIO
             public string Delete(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Delete(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Delete(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -117,7 +117,7 @@ namespace AIO
             public Task<string> DeleteAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.DeleteAsync(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.DeleteAsync(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -129,7 +129,7 @@ namespace AIO
             public Task<string> DeleteAsync(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.DeleteAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.DeleteAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -141,7 +141,7 @@ namespace AIO
             public Task<string> DeleteAsync(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.DeleteAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.DeleteAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             #endregion
@@ -162,7 +162,7 @@ namespace AIO
             {
                 var sourcePath = Path.Combine(RemoteURL, remotePath);
                 var targetPath = Path.Combine(savePath, Path.GetFileName(remotePath));
-                var operation  = AHelper.HTTP.Download(sourcePath, targetPath, isOverWrite, TimeOut, BufferSize);
+                var operation  = AHelper.Http.DownloadOperation(sourcePath, targetPath, isOverWrite, TimeOut, BufferSize);
                 operation.Event = aProgress;
                 operation.Wait();
             }
@@ -180,7 +180,7 @@ namespace AIO
                                  bool                isOverWrite = false)
             {
                 var sourcePath = remotePath.Select(path => Path.Combine(RemoteURL, path)).ToArray();
-                var operation  = AHelper.HTTP.Download(sourcePath, savePath, isOverWrite, TimeOut, BufferSize);
+                var operation  = AHelper.Http.Download(sourcePath, savePath, isOverWrite, TimeOut, BufferSize);
                 operation.Event = aProgress;
                 operation.Wait();
             }
@@ -199,7 +199,7 @@ namespace AIO
             {
                 var sourcePath = Path.Combine(RemoteURL, remotePath);
                 var targetPath = Path.Combine(savePath, Path.GetFileName(remotePath));
-                var operation  = AHelper.HTTP.Download(sourcePath, targetPath, isOverWrite, TimeOut, BufferSize);
+                var operation  = AHelper.Http.DownloadOperation(sourcePath, targetPath, isOverWrite, TimeOut, BufferSize);
                 operation.Event = aProgress;
                 return operation.WaitAsync();
             }
@@ -217,7 +217,7 @@ namespace AIO
                                       bool                isOverWrite = false)
             {
                 var sourcePath = remotePath.Select(remote => Path.Combine(RemoteURL, Path.GetFileName(remote))).ToArray();
-                var operation  = AHelper.HTTP.Download(sourcePath, savePath, isOverWrite, TimeOut, BufferSize);
+                var operation  = AHelper.Http.Download(sourcePath, savePath, isOverWrite, TimeOut, BufferSize);
                 operation.Event = aProgress;
                 return operation.WaitAsync();
             }
@@ -235,7 +235,7 @@ namespace AIO
             public string Put(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Put(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Put(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -247,7 +247,7 @@ namespace AIO
             public string Put(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Put(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Put(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -259,7 +259,7 @@ namespace AIO
             public Task<string> PutAsync(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PutAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.PutAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -271,7 +271,7 @@ namespace AIO
             public Task<string> PutAsync(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PutAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.PutAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             #endregion
@@ -286,7 +286,7 @@ namespace AIO
             public string Trace(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Trace(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Trace(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -298,7 +298,7 @@ namespace AIO
             public string Trace(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Trace(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Trace(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -310,7 +310,7 @@ namespace AIO
             public string Trace(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Trace(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Trace(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -321,7 +321,7 @@ namespace AIO
             public Task<string> TraceAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.TraceAsync(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.TraceAsync(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -333,7 +333,7 @@ namespace AIO
             public Task<string> TraceAsync(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.TraceAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.TraceAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -345,7 +345,7 @@ namespace AIO
             public Task<string> TraceAsync(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.TraceAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.TraceAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             #endregion
@@ -360,7 +360,7 @@ namespace AIO
             public string Options(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Options(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Options(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -372,7 +372,7 @@ namespace AIO
             public string Options(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Options(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Options(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -384,7 +384,7 @@ namespace AIO
             public string Options(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Options(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Options(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -395,7 +395,7 @@ namespace AIO
             public Task<string> OptionsAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.OptionsAsync(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.OptionsAsync(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -407,7 +407,7 @@ namespace AIO
             public Task<string> OptionsAsync(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.OptionsAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.OptionsAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -419,7 +419,7 @@ namespace AIO
             public Task<string> OptionsAsync(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.OptionsAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.OptionsAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             #endregion
@@ -434,7 +434,7 @@ namespace AIO
             public string Head(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Head(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Head(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -446,7 +446,7 @@ namespace AIO
             public string Head(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Head(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Head(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -458,7 +458,7 @@ namespace AIO
             public string Head(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Head(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Head(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -469,7 +469,7 @@ namespace AIO
             public Task<string> HeadAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.HeadAsync(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.HeadAsync(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -481,7 +481,7 @@ namespace AIO
             public Task<string> HeadAsync(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.HeadAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.HeadAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -493,7 +493,7 @@ namespace AIO
             public Task<string> HeadAsync(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.HeadAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.HeadAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             #endregion
@@ -508,7 +508,7 @@ namespace AIO
             public string Connect(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Connect(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Connect(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -520,7 +520,7 @@ namespace AIO
             public string Connect(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Connect(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Connect(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -532,7 +532,7 @@ namespace AIO
             public string Connect(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Connect(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Connect(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -543,7 +543,7 @@ namespace AIO
             public Task<string> ConnectAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.ConnectAsync(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.ConnectAsync(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -555,7 +555,7 @@ namespace AIO
             public Task<string> ConnectAsync(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.ConnectAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.ConnectAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -567,7 +567,7 @@ namespace AIO
             public Task<string> ConnectAsync(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.ConnectAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+                return AHelper.Http.ConnectAsync(sourcePath, data, Encoding, TimeOut, Cookie);
             }
 
             #endregion
@@ -578,13 +578,13 @@ namespace AIO
             /// 请求获取特定的内容
             /// </summary>
             /// <returns>服务器返回内容</returns>
-            public string Get() { return AHelper.HTTP.Get(RemoteURL,  Encoding, TimeOut, Cookie); }
+            public string Get() { return AHelper.Http.Get(RemoteURL, Encoding, TimeOut, Cookie); }
 
             /// <summary>
             /// 请求获取特定的内容
             /// </summary>
             /// <returns>服务器返回内容</returns>
-            public Stream GetStream() { return AHelper.HTTP.GetStream(RemoteURL, TimeOut, Cookie); }
+            public Stream GetStream() { return AHelper.Http.GetStream(RemoteURL, TimeOut, Cookie); }
 
             /// <summary>
             /// 请求获取特定的内容
@@ -594,7 +594,7 @@ namespace AIO
             public string Get(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Get(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.Get(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -605,20 +605,20 @@ namespace AIO
             public Stream GetStream(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.GetStream(sourcePath, TimeOut, Cookie);
+                return AHelper.Http.GetStream(sourcePath, TimeOut, Cookie);
             }
 
             /// <summary>
             /// 请求获取特定的内容
             /// </summary>
             /// <returns>服务器返回内容</returns>
-            public Task<string> GetAsync() { return AHelper.HTTP.GetAsync(RemoteURL, Encoding, TimeOut, Cookie); }
+            public Task<string> GetAsync() { return AHelper.Http.GetAsync(RemoteURL, Encoding, TimeOut, Cookie); }
 
             /// <summary>
             /// 请求获取特定的内容
             /// </summary>
             /// <returns>服务器返回内容</returns>
-            public Task<Stream> GetStreamAsync() { return AHelper.HTTP.GetStreamAsync(RemoteURL, TimeOut, Cookie); }
+            public Task<Stream> GetStreamAsync() { return AHelper.Http.GetStreamAsync(RemoteURL, TimeOut, Cookie); }
 
             /// <summary>
             /// 请求获取特定的内容
@@ -628,7 +628,7 @@ namespace AIO
             public Task<string> GetAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.GetAsync(sourcePath, Encoding, TimeOut, Cookie);
+                return AHelper.Http.GetAsync(sourcePath, Encoding, TimeOut, Cookie);
             }
 
             /// <summary>
@@ -639,7 +639,7 @@ namespace AIO
             public Task<Stream> GetStreamAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.GetStreamAsync(sourcePath, TimeOut, Cookie);
+                return AHelper.Http.GetStreamAsync(sourcePath, TimeOut, Cookie);
             }
 
             #endregion
@@ -654,12 +654,12 @@ namespace AIO
             public string Post(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Post(sourcePath, GetOption());
+                return AHelper.Http.Post(sourcePath, GetOption());
             }
 
-            private AHelper.HTTP.Option GetOption()
+            private AHelper.Http.Option GetOption()
             {
-                return new AHelper.HTTP.Option
+                return new AHelper.Http.Option
                 {
                     Encoding    = Encoding,
                     Timeout     = TimeOut,
@@ -677,7 +677,7 @@ namespace AIO
             public string Post(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Post(sourcePath, data, GetOption());
+                return AHelper.Http.Post(sourcePath, data, GetOption());
             }
 
             /// <summary>
@@ -689,7 +689,7 @@ namespace AIO
             public string Post(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.Post(sourcePath, data, GetOption());
+                return AHelper.Http.Post(sourcePath, data, GetOption());
             }
 
             /// <summary>
@@ -700,7 +700,7 @@ namespace AIO
             public Task<string> PostAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostAsync(sourcePath, GetOption());
+                return AHelper.Http.PostAsync(sourcePath, GetOption());
             }
 
             /// <summary>
@@ -712,7 +712,7 @@ namespace AIO
             public Task<string> PostAsync(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostAsync(sourcePath, data, GetOption());
+                return AHelper.Http.PostAsync(sourcePath, data, GetOption());
             }
 
             /// <summary>
@@ -724,7 +724,7 @@ namespace AIO
             public Task<string> PostAsync(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostAsync(sourcePath, data, GetOption());
+                return AHelper.Http.PostAsync(sourcePath, data, GetOption());
             }
 
             /// <summary>
@@ -735,7 +735,7 @@ namespace AIO
             public Stream PostStream(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostStream(sourcePath, GetOption());
+                return AHelper.Http.PostStream(sourcePath, GetOption());
             }
 
             /// <summary>
@@ -747,7 +747,7 @@ namespace AIO
             public Stream PostStream(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostStream(sourcePath, data, GetOption());
+                return AHelper.Http.PostStream(sourcePath, data, GetOption());
             }
 
             /// <summary>
@@ -759,7 +759,7 @@ namespace AIO
             public Stream PostStream(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostStream(sourcePath, data, GetOption());
+                return AHelper.Http.PostStream(sourcePath, data, GetOption());
             }
 
             /// <summary>
@@ -770,7 +770,7 @@ namespace AIO
             public Task<Stream> PostStreamAsync(string remoteRelativePath)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostStreamAsync(sourcePath, GetOption());
+                return AHelper.Http.PostStreamAsync(sourcePath, GetOption());
             }
 
             /// <summary>
@@ -782,7 +782,7 @@ namespace AIO
             public Task<Stream> PostStreamAsync(string remoteRelativePath, byte[] data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostStreamAsync(sourcePath, data, GetOption());
+                return AHelper.Http.PostStreamAsync(sourcePath, data, GetOption());
             }
 
             /// <summary>
@@ -794,7 +794,7 @@ namespace AIO
             public Task<Stream> PostStreamAsync(string remoteRelativePath, string data)
             {
                 var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-                return AHelper.HTTP.PostStreamAsync(sourcePath, data, GetOption());
+                return AHelper.Http.PostStreamAsync(sourcePath, data, GetOption());
             }
 
             #endregion

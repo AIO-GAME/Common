@@ -15,7 +15,7 @@ namespace AIO
     {
         #region Nested type: HTTP
 
-        public partial class HTTP
+        public partial class Http
         {
             /// <summary>
             /// HTTP 下载文件

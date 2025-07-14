@@ -14,7 +14,7 @@ namespace AIO
     {
         #region Nested type: HTTP
 
-        public partial class HTTP
+        public partial class Http
         {
             private static string AutoCommonRequest(
                 string   remoteUrl,
@@ -150,7 +150,7 @@ namespace AIO
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    CS.WriteLine(e.Message);
                     stream?.Close();
                     responseStream?.Close();
                     response?.Close();

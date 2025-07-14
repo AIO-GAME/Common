@@ -12,7 +12,7 @@ namespace AIO
     {
         #region Nested type: HTTP
 
-        public partial class HTTP
+        public partial class Http
         {
             /// <summary>
             /// 请求删除指定的资源

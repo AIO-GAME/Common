@@ -52,17 +52,30 @@ namespace AIO
                 in bool   concat,
                 in int    bufferSize = 4096)
             {
-                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
-                var dir = Path.GetDirectoryName(path);
-                if (!string.IsNullOrEmpty(dir) && !ExistsDir(dir))
-                    Directory.CreateDirectory(dir);
-
-                var mode = concat ? FileMode.Append : FileMode.Create;
-                using (var fs = new FileStream(path, mode, FileAccess.Write, FileShare.None, bufferSize, true))
+                var        mode = concat ? FileMode.Append : FileMode.Create;
+                FileStream fs   = null;
+                try
                 {
-                    fs.WriteAsync(bytes, offset, length).GetAwaiter().GetResult();
-                    return true;
+                    path = path.Replace('\\', Path.AltDirectorySeparatorChar);
+                    var dir = Path.GetDirectoryName(path);
+                    if (!string.IsNullOrEmpty(dir) && !ExistsDir(dir)) Directory.CreateDirectory(dir);
+
+                    fs = new FileStream(path, mode, FileAccess.Write, FileShare.ReadWrite | FileShare.Inheritable, bufferSize, false);
+                    fs.Write(bytes, offset, length);
+                    fs.Flush(true);
                 }
+                catch (Exception e)
+                {
+                    throw new IOException($"Error writing to file '{path}': {e.Message}", e);
+                }
+                finally
+                {
+                    fs?.Close();
+                    fs?.Dispose();
+                    File.SetLastWriteTimeUtc(path, DateTime.Now);
+                }
+
+                return true;
             }
 
             /// <summary>
@@ -74,7 +87,7 @@ namespace AIO
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) return Stream.Null;
-                return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, false);
+                return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Inheritable, bufferSize, false);
             }
 
             /// <summary>
@@ -88,39 +101,43 @@ namespace AIO
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) return Array.Empty<byte>();
+                FileStream fs     = null;
+                byte[]     buffer = null;
                 try
                 {
-                    using (var fsSource = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, true))
+                    fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Inheritable, bufferSize, false);
+                    var length = (int)fs.Length;
+                    buffer = new byte[length];
+                    var offset = 0;
+                    while (offset < length)
                     {
-                        var length = (int)fsSource.Length;
-                        var buffer = new byte[length];
-                        var offset = 0;
+                        var count = System.Math.Min(bufferSize, length - offset);
+                        var n     = fs.ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
+                        if (n == 0) break; // 到达文件末尾
+                        offset += n;
+                    }
 
-                        while (offset < length)
-                        {
-                            var count = System.Math.Min(bufferSize, length - offset);
-                            var n     = fsSource.ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
-                            if (n == 0) break; // 到达文件末尾
-                            offset += n;
-                        }
-
-                        if (length >= 3 && buffer[0] == 0xef && buffer[1] == 0xbb && buffer[2] == 0xbf)
-                        {
-                            var copyLength = buffer.Length - 3;
-                            var dataNew    = new byte[copyLength];
-                            System.Buffer.BlockCopy(buffer, 3, dataNew, 0, copyLength);
-                            return dataNew;
-                        }
-
-                        return buffer;
+                    if (length >= 3 && buffer[0] == 0xef && buffer[1] == 0xbb && buffer[2] == 0xbf)
+                    {
+                        var copyLength = buffer.Length - 3;
+                        var dataNew    = new byte[copyLength];
+                        System.Buffer.BlockCopy(buffer, 3, dataNew, 0, copyLength);
+                        buffer = dataNew;
                     }
                 }
                 catch (Exception ioEx)
                 {
-                    Console.WriteLine(ioEx);
+                    throw new IOException($"Error reading file '{path}': {ioEx.Message}", ioEx);
+                }
+                finally
+                {
+                    fs?.Close();
+                    fs?.Dispose();
+                    File.SetLastWriteTimeUtc(path, DateTime.Now);
                 }
 
-                return Array.Empty<byte>();
+                end: ;
+                return buffer;
             }
         }
 

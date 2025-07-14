@@ -97,7 +97,7 @@ namespace AIO
                 catch (WebException ex)
                 {
 #if DEBUG
-                    Console.WriteLine("{1} FTP GetMD5: {0}", ex.Message, uri);
+                    CS.WriteLine("{1} FTP GetMD5: {0}", ex.Message, uri);
 #endif
                 }
 
@@ -127,7 +127,7 @@ namespace AIO
                 catch (WebException ex)
                 {
 #if DEBUG
-                    Console.WriteLine("{1} GetMD5: {0}", ex.Message, uri);
+                    CS.WriteLine("{1} GetMD5: {0}", ex.Message, uri);
 #endif
                 }
 
@@ -156,7 +156,7 @@ namespace AIO
                 catch (WebException ex)
                 {
 #if DEBUG
-                    Console.WriteLine("{1} GetFileSize: {0}", ex.Message, uri);
+                    CS.WriteLine("{1} GetFileSize: {0}", ex.Message, uri);
 #endif
                     fileSize = -1;
                 }
@@ -188,7 +188,7 @@ namespace AIO
                 }
                 catch (WebException ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    CS.WriteLine(ex.Message);
                     return -1;
                 }
 

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -111,14 +112,15 @@ namespace AIO
         public IProgressInfo Progress => progress;
 
         /// <inheritdoc />
-        public void Begin()
+        public IWait Begin()
         {
-            if (State == EProgressState.Finish) return;
-            if (State != EProgressState.Ready) return;
+            if (State == EProgressState.Finish) return this;
+            if (State != EProgressState.Ready) return this;
             progress.Begin();
             OnBegin();
             progress.OnBegin?.Invoke();
             State = EProgressState.Running;
+            return this;
         }
 
         /// <inheritdoc />
@@ -220,6 +222,18 @@ namespace AIO
             Finish();
         }
 
+        private Task awaiter;
+
+        /// <inheritdoc />
+        public TaskAwaiter GetAwaiter()
+        {
+            if (State == EProgressState.Finish && awaiter != null) return awaiter.GetAwaiter();
+            if (State != EProgressState.Running && awaiter != null) return awaiter.GetAwaiter();
+            awaiter = OnWaitAsync();
+            awaiter.ContinueWith(_ => Finish(), cancellationToken);
+            return awaiter.GetAwaiter();
+        }
+
         /// <inheritdoc />
         public void Wait()
         {
@@ -247,10 +261,7 @@ namespace AIO
         /// <summary>
         /// 迭代器等待
         /// </summary>
-        protected virtual IEnumerator OnWaitCo()
-        {
-            throw new NotImplementedException();
-        }
+        protected virtual IEnumerator OnWaitCo() { throw new NotImplementedException(); }
 
         /// <summary>
         /// 完成
@@ -264,10 +275,7 @@ namespace AIO
         /// <summary>
         /// 异步等待
         /// </summary>
-        protected virtual Task OnWaitAsync()
-        {
-            return Task.CompletedTask;
-        }
+        protected virtual Task OnWaitAsync() { return Task.CompletedTask; }
 
         /// <summary>
         /// 开始
@@ -300,21 +308,12 @@ namespace AIO
         protected virtual void OnDispose() { }
 
         /// <inheritdoc />
-        public sealed override string ToString()
-        {
-            return Report.ToString();
-        }
+        public sealed override string ToString() { return Report.ToString(); }
 
         /// <inheritdoc />
-        public sealed override int GetHashCode()
-        {
-            return 0;
-        }
+        public sealed override int GetHashCode() { return 0; }
 
         /// <inheritdoc />
-        public sealed override bool Equals(object obj)
-        {
-            return false;
-        }
+        public sealed override bool Equals(object obj) { return false; }
     }
 }

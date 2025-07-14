@@ -110,7 +110,7 @@ namespace AIO
             task.Add(Task.Factory.StartNew(() =>
             {
                 var ids = Bean.ReadLen();
-                Console.WriteLine("Load 总数据长度: {0} -> IDS: {1}", Bean.WriteOffset, ids);
+                CS.WriteLine("Load 总数据长度: {0} -> IDS: {1}", Bean.WriteOffset, ids);
                 for (var i = 0; i < ids; i++)
                 {
                     var id = Bean.ReadInt32();
@@ -125,18 +125,18 @@ namespace AIO
                         if (verifyMD5 == md5)
                         {
                             Data[id].Deserialize(buffer);
-                            Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
+                            CS.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
                                               id, startIndex, bufferCount, md5);
                         }
                         else
                         {
-                            Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} != {4} => 数据MD5验证失败",
+                            CS.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} != {4} => 数据MD5验证失败",
                                               id, startIndex, bufferCount, md5, GetMD5(buffer.ToArray()));
                         }
                     }
                     else
                     {
-                        Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} =>  未查询到指定数据ID",
+                        CS.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} =>  未查询到指定数据ID",
                                           id, startIndex, bufferCount, md5);
                     }
 
@@ -180,11 +180,11 @@ namespace AIO
                 root.WriteInt32(root.WriteOffset + 5);
                 root.Write(bytes.ToArray());
 
-                Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
+                CS.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
                                   item.Key, startindex, bytes.Count, md5);
             }
 
-            Console.WriteLine("Save 总数据长度: {0} -> IDS: {1}", root.Count, Data.Count);
+            CS.WriteLine("Save 总数据长度: {0} -> IDS: {1}", root.Count, Data.Count);
             File.WriteAllBytes(TargetPath, root);
         }
 

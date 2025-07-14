@@ -377,6 +377,10 @@
 @cd ..
 @set cur=%25cd%25\Plugins\Editor\
 
+@if not exist %cur% (
+@exit
+)
+
 @set dllname=$(TargetName)
 @if exist %25CUR_DLL%25%25dllname%25.dll (
 @copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
@@ -388,6 +392,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\Editor\
+@cd /d $(SolutionDir)
 @cd ..
 @set cur=%25cd%25\Plugins\Editor\
 

@@ -50,7 +50,7 @@ namespace AIO
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    CS.WriteLine(e);
                 }
 
                 return string.Empty;

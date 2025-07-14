@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -105,7 +106,7 @@ namespace AIO
                 {
                     for (var i = 0; i < str.Length; ++i)
                     {
-                        var c = pstr[i];
+                        var c                             = pstr[i];
                         if (c >= 'A' && c <= 'Z') pstr[i] = (char)('a' + (c - 'A'));
                     }
                 }
@@ -125,7 +126,7 @@ namespace AIO
                 {
                     for (var i = 0; i < str.Length; ++i)
                     {
-                        var c = pstr[i];
+                        var c                             = pstr[i];
                         if (c >= 'a' && c <= 'z') pstr[i] = (char)('A' + (c - 'a'));
                     }
                 }
@@ -142,7 +143,7 @@ namespace AIO
             {
                 fixed (char* pstr = str)
                 {
-                    var c = pstr[idx];
+                    var c                               = pstr[idx];
                     if (c >= 'A' && c <= 'Z') pstr[idx] = (char)('a' + (c - 'a'));
                 }
             }
@@ -158,7 +159,7 @@ namespace AIO
             {
                 fixed (char* pstr = str)
                 {
-                    var c = pstr[idx];
+                    var c                               = pstr[idx];
                     if (c >= 'a' && c <= 'z') pstr[idx] = (char)('a' + (c - 'a'));
                 }
             }
@@ -177,19 +178,15 @@ namespace AIO
         /// <summary>
         ///     比较Null值
         /// </summary>
-        public static string EqualsNull(this string str)
-        {
-            return string.IsNullOrWhiteSpace(str) ? "null" : str;
-        }
-
+        public static string EqualsNull(this string str) { return string.IsNullOrWhiteSpace(str) ? "null" : str; }
 
         /// <summary>
         ///     字符串反转
         /// </summary>
         public static string Reverse(this string str)
         {
-            var a = str.ToCharArray();
-            var l = a.Length;
+            var a                                                = str.ToCharArray();
+            var l                                                = a.Length;
             for (var i = 0; i < l / 2; i++) (a[i], a[l - 1 - i]) = (a[l - 1 - i], a[i]);
 
             return new string(a);
@@ -216,5 +213,14 @@ namespace AIO
             for (var i = 0; i < num; i++) builder.Append(str);
             return builder.ToString();
         }
+
+        /// <summary>
+        /// 正则替换
+        /// </summary>
+        /// <param name="input"> 输入字符串 </param>
+        /// <param name="pattern"> 正则表达式 </param>
+        /// <param name="replacement"> 替换字符串 </param>
+        /// <returns> 替换后的字符串 </returns>
+        public static string RegexReplace(this string input, string pattern, string replacement) { return Regex.Replace(input, pattern, replacement, RegexOptions.IgnoreCase); }
     }
 }

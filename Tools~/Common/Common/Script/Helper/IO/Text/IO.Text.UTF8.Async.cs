@@ -28,7 +28,7 @@ namespace AIO
             /// </summary>
             /// <param name="path">路径</param>
             /// <param name="text">内容</param>
-            /// <param name="concat">Ture:追加 False:覆盖</param>
+            /// <param name="concat">[Ture : 追加] [False : 覆盖]</param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task<bool> WriteUTF8Async(string path, string text, bool concat = false)
             {
@@ -40,7 +40,7 @@ namespace AIO
             /// </summary>
             /// <param name="path">路径</param>
             /// <param name="text">内容</param>
-            /// <param name="concat">Ture:追加 False:覆盖</param>
+            /// <param name="concat">[Ture : 追加] [False : 覆盖]</param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task<bool> WriteUTF8Async(string path, StringBuilder text, bool concat = false)
             {

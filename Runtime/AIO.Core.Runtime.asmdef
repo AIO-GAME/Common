@@ -31,7 +31,12 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.self.package",
+            "name": "com.esotericsoftware.spine.spine-unity",
+            "expression": "",
+            "define": "SUPPORT_SPINE"
+        },
+        {
+            "name": "com.aio.package",
             "expression": "",
             "define": "SUPPORT_AIOPACKAGE"
         },
@@ -56,7 +61,7 @@
             "define": "SUPPORT_TEXTMESHPRO"
         },
         {
-            "name": "com.self.fgui",
+            "name": "com.aio.fgui",
             "expression": "",
             "define": "SUPPORT_FGUI"
         },
