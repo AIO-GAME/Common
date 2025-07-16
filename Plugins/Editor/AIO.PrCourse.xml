@@ -4762,6 +4762,20 @@
             <param name="args">格式化参数</param>
             <returns>结果执行器</returns>
         </member>
+        <member name="M:AIO.PrCmd.GetFileIDAsync(System.String)">
+            <summary>
+            获取文件ID
+            </summary>
+            <param name="path"> 文件路径:NoNull</param>
+            <returns> 文件ID:NoNull</returns>
+        </member>
+        <member name="M:AIO.PrCmd.GetFileID(System.String)">
+            <summary>
+            获取文件ID
+            </summary>
+            <param name="path"> 文件路径:NoNull</param>
+            <returns> 文件ID:NoNull</returns>
+        </member>
         <member name="T:AIO.PrCmd.Del">
             <summary>
             删除 不区分文件与目录

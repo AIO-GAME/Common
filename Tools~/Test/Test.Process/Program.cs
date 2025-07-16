@@ -97,7 +97,7 @@ namespace AIO
 
         private static async void Test1()
         {
-            var handle = AHandle.HTTP.Create("http://172.16.0.135:21203/chat/create-conversation");
+            var handle = AHandle.Http.Create("http://172.16.0.135:21203/chat/create-conversation");
             handle.TimeOut = 10000;
             var stop = new System.Diagnostics.Stopwatch();
             stop.Start();
@@ -108,7 +108,7 @@ namespace AIO
 
             var question = "怎么养成良好的学习习惯";
             var url      = "http://172.16.0.135:21203/chat/query?cId=" + data.data.conversation_id + "&question=" + question;
-            var handle2  = AHandle.HTTP.Create(url);
+            var handle2  = AHandle.Http.Create(url);
             handle2.TimeOut = 10000;
             var stop2 = new System.Diagnostics.Stopwatch();
             stop2.Start();
@@ -128,6 +128,19 @@ namespace AIO
 
         private static async void Test()
         {
+            var p1 = new PropertyData(PropertyType.Attack, 2);
+
+            var p2 = p1.Clone();
+            Console.WriteLine(p2 == p1);
+            Console.WriteLine("-------");
+            if (p2 is PropertyData p3)
+            {
+                Console.WriteLine($"{p1.GetHashCode()} - {p3.GetHashCode()}");
+                Console.WriteLine($"目标:{p1}");
+                Console.WriteLine($"结果:{p3}");
+            }
+
+            return;
             var appid         = "ad3364e0-1f24-4052-9b7a-0a31482a1b64";
             var authorization = "bce-v3/ALTAK-X9eR0WLiq1DOY8sqtNETS/6a9c4a1e39bb687c9ca942891934883c59653d77";
             var host          = "https://qianfan.baidubce.com";
@@ -158,7 +171,7 @@ namespace AIO
             reqData["conversation_id"] = data["conversation_id"];
             reqData["query"]           = "怎么养成良好的学习习惯";
             reqData["stream"]          = false;
-            
+
             var stop2 = new System.Diagnostics.Stopwatch();
             stop2.Start();
             var temp2 = client2.UploadString(host + "/v2/app/conversation/runs", JsonConvert.SerializeObject(reqData));

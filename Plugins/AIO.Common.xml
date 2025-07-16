@@ -1197,6 +1197,15 @@
                 重复N此 复制传入数据
             </summary>
         </member>
+        <member name="M:AIO.ExtendString.RegexReplace(System.String,System.String,System.String)">
+            <summary>
+            正则替换
+            </summary>
+            <param name="input"> 输入字符串 </param>
+            <param name="pattern"> 正则表达式 </param>
+            <param name="replacement"> 替换字符串 </param>
+            <returns> 替换后的字符串 </returns>
+        </member>
         <member name="M:AIO.ExtendString.Filter(System.String,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@)">
             <summary>
                 从字符串中过滤出指定类型的字符，并返回过滤后的字符串
@@ -1489,6 +1498,13 @@
             </summary>
             <param name="value">要进行转换的枚举值。</param>
             <returns>转换后的二进制字符串。</returns>
+        </member>
+        <member name="M:AIO.ExtendString.ToTitleCase(System.String)">
+            <summary>
+            Change the input string to title case
+            </summary>
+            <param name="input">the input string</param>
+            <returns>the input string in title case</returns>
         </member>
         <member name="M:AIO.ExtendString.ToConverULong(System.String)">
             <summary>
@@ -2352,6 +2368,38 @@
             </summary>
             <returns>
                 <see cref="T:AIO.MethodReflectionInfo" />
+            </returns>
+        </member>
+        <member name="T:AIO.EnumHelper`1">
+            <summary>
+            Enum Helpers
+            </summary>
+            <typeparam name="T">
+            The Type Parameter
+            </typeparam>
+        </member>
+        <member name="M:AIO.EnumHelper`1.GetAttribute``2(``1,System.Boolean)">
+            <summary>
+            Get the description of an Enum
+            </summary>
+            <param name="value"> 值 </param>
+            <param name="inherit"> 是否继承</param>
+            <returns> 值的描述字符串 </returns>
+        </member>
+        <member name="M:AIO.EnumHelper`1.GetDescription(`0,System.Boolean)">
+            <summary>
+            Get the description of an Enum
+            </summary>
+            <param name="value"> 值 </param>
+            <param name="inherit"> 是否继承</param>
+            <returns> 值的描述字符串 </returns>
+        </member>
+        <member name="M:AIO.EnumHelper`1.GetEnumList">
+            <summary>
+            Return a list of all the enum values.
+            </summary>
+            <returns>
+            An Enum Object List
             </returns>
         </member>
         <member name="T:AIO.ExtendEnum">
@@ -3605,6 +3653,40 @@
             <summary>
             插入
             </summary>
+        </member>
+        <member name="M:AIO.ExtendIList.MoveUp``1(System.Collections.IList,``0)">
+            <summary>
+            移动项目到列表顶部
+            </summary>
+            <param name="list"></param>
+            <param name="item"></param>
+            <typeparam name="T"></typeparam>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:AIO.ExtendIList.MoveDown``1(System.Collections.IList,``0)">
+            <summary>
+            移动项目到列表底部
+            </summary>
+            <param name="list"></param>
+            <param name="item"></param>
+            <typeparam name="T"></typeparam>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:AIO.ExtendIList.MoveToTop``1(System.Collections.IList,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            移动项目到列表顶部
+            </summary>
+            <param name="list"></param>
+            <param name="items"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:AIO.ExtendIList.MoveToBottom``1(System.Collections.IList,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            移动项目到列表底部
+            </summary>
+            <param name="list"></param>
+            <param name="items"></param>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="M:AIO.ExtendIList.RemoveFirst``1(System.Collections.Generic.IList{``0})">
             <summary>
@@ -5467,75 +5549,67 @@
             <param name="localPath">本地文件</param>
             <param name="iEvent">回调</param>
         </member>
-        <member name="T:AIO.AHandle.HTTP">
+        <member name="T:AIO.AHandle.Http">
             <summary>
             HTTP 处理器
             </summary>
         </member>
-        <member name="M:AIO.AHandle.HTTP.#ctor(System.String)">
+        <member name="M:AIO.AHandle.Http.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
             <param name="remoteURL">远端跟路径</param>
         </member>
-        <member name="P:AIO.AHandle.HTTP.RemoteURL">
+        <member name="P:AIO.AHandle.Http.RemoteURL">
             <summary>
             远端路径
             </summary>
         </member>
-        <member name="P:AIO.AHandle.HTTP.TimeOut">
+        <member name="P:AIO.AHandle.Http.TimeOut">
             <summary>
             超时时间
             </summary>
         </member>
-        <member name="P:AIO.AHandle.HTTP.BufferSize">
+        <member name="P:AIO.AHandle.Http.BufferSize">
             <summary>
             缓存大小
             </summary>
         </member>
-        <member name="P:AIO.AHandle.HTTP.Cookie">
+        <member name="P:AIO.AHandle.Http.Cookie">
             <summary>
             Cookie
             </summary>
         </member>
-        <member name="P:AIO.AHandle.HTTP.ContentType">
+        <member name="P:AIO.AHandle.Http.ContentType">
             <summary>
             内容类型
             </summary>
         </member>
-        <member name="P:AIO.AHandle.HTTP.Encoding">
+        <member name="P:AIO.AHandle.Http.Encoding">
             <summary>
             编码
             </summary>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Dispose">
+        <member name="M:AIO.AHandle.Http.Dispose">
             <summary>
             释放
             </summary>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Create(System.String)">
+        <member name="M:AIO.AHandle.Http.Create(System.String)">
             <summary>
             创建HTTP处理器
             </summary>
             <param name="remoteURL">远端路径</param>
             <returns>处理器</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Delete(System.String)">
+        <member name="M:AIO.AHandle.Http.Delete(System.String)">
             <summary>
             请求删除指定的资源
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Delete(System.String,System.Byte[])">
-            <summary>
-            请求删除指定的资源
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.Delete(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.Delete(System.String,System.Byte[])">
             <summary>
             请求删除指定的资源
             </summary>
@@ -5543,14 +5617,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.DeleteAsync(System.String)">
-            <summary>
-            请求删除指定的资源
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.DeleteAsync(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.Delete(System.String,System.String)">
             <summary>
             请求删除指定的资源
             </summary>
@@ -5558,7 +5625,14 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.DeleteAsync(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.DeleteAsync(System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.DeleteAsync(System.String,System.Byte[])">
             <summary>
             请求删除指定的资源
             </summary>
@@ -5566,7 +5640,15 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Download(System.String,System.String,AIO.IProgressEvent,System.Boolean)">
+        <member name="M:AIO.AHandle.Http.DeleteAsync(System.String,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.Download(System.String,System.String,AIO.IProgressEvent,System.Boolean)">
             <summary>
             下载文件
             </summary>
@@ -5575,7 +5657,7 @@
             <param name="aProgress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Download(System.String,System.Collections.Generic.IEnumerable{System.String},AIO.IProgressEvent,System.Boolean)">
+        <member name="M:AIO.AHandle.Http.Download(System.String,System.Collections.Generic.IEnumerable{System.String},AIO.IProgressEvent,System.Boolean)">
             <summary>
             下载文件
             </summary>
@@ -5584,7 +5666,7 @@
             <param name="aProgress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
         </member>
-        <member name="M:AIO.AHandle.HTTP.DownloadAsync(System.String,System.String,AIO.IProgressEvent,System.Boolean)">
+        <member name="M:AIO.AHandle.Http.DownloadAsync(System.String,System.String,AIO.IProgressEvent,System.Boolean)">
             <summary>
             下载文件
             </summary>
@@ -5593,7 +5675,7 @@
             <param name="aProgress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
         </member>
-        <member name="M:AIO.AHandle.HTTP.DownloadAsync(System.String,System.Collections.Generic.IEnumerable{System.String},AIO.IProgressEvent,System.Boolean)">
+        <member name="M:AIO.AHandle.Http.DownloadAsync(System.String,System.Collections.Generic.IEnumerable{System.String},AIO.IProgressEvent,System.Boolean)">
             <summary>
             下载文件
             </summary>
@@ -5602,7 +5684,7 @@
             <param name="aProgress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Put(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.Put(System.String,System.Byte[])">
             <summary>
             向指定资源位置上传其最新内容
             </summary>
@@ -5610,7 +5692,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Put(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.Put(System.String,System.String)">
             <summary>
             向指定资源位置上传其最新内容
             </summary>
@@ -5618,7 +5700,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.PutAsync(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.PutAsync(System.String,System.Byte[])">
             <summary>
             向指定资源位置上传其最新内容
             </summary>
@@ -5626,7 +5708,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.PutAsync(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.PutAsync(System.String,System.String)">
             <summary>
             向指定资源位置上传其最新内容
             </summary>
@@ -5634,22 +5716,14 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Trace(System.String)">
+        <member name="M:AIO.AHandle.Http.Trace(System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Trace(System.String,System.Byte[])">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.Trace(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.Trace(System.String,System.Byte[])">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -5657,14 +5731,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.TraceAsync(System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.TraceAsync(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.Trace(System.String,System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -5672,7 +5739,14 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.TraceAsync(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.TraceAsync(System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.TraceAsync(System.String,System.Byte[])">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -5680,37 +5754,22 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Options(System.String)">
+        <member name="M:AIO.AHandle.Http.TraceAsync(System.String,System.String)">
             <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.Options(System.String,System.Byte[])">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
+            回显服务器收到的请求
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Options(System.String,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.OptionsAsync(System.String)">
+        <member name="M:AIO.AHandle.Http.Options(System.String)">
             <summary>
             返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.OptionsAsync(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.Options(System.String,System.Byte[])">
             <summary>
             返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
@@ -5718,7 +5777,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.OptionsAsync(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.Options(System.String,System.String)">
             <summary>
             返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
@@ -5726,45 +5785,37 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Head(System.String)">
+        <member name="M:AIO.AHandle.Http.OptionsAsync(System.String)">
             <summary>
-            请求获取特定的资源的响应消息报告
+            返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Head(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.OptionsAsync(System.String,System.Byte[])">
             <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.Head(System.String,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
+            返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.HeadAsync(System.String)">
+        <member name="M:AIO.AHandle.Http.OptionsAsync(System.String,System.String)">
             <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.HeadAsync(System.String,System.Byte[])">
-            <summary>
-            请求获取特定的资源的响应消息报告
+            返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.HeadAsync(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.Head(System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.Head(System.String,System.Byte[])">
             <summary>
             请求获取特定的资源的响应消息报告
             </summary>
@@ -5772,14 +5823,45 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Connect(System.String)">
+        <member name="M:AIO.AHandle.Http.Head(System.String,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.HeadAsync(System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.HeadAsync(System.String,System.Byte[])">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.HeadAsync(System.String,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.Connect(System.String)">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Connect(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.Connect(System.String,System.Byte[])">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
@@ -5787,7 +5869,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Connect(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.Connect(System.String,System.String)">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
@@ -5795,22 +5877,14 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.ConnectAsync(System.String)">
+        <member name="M:AIO.AHandle.Http.ConnectAsync(System.String)">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.ConnectAsync(System.String,System.Byte[])">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.ConnectAsync(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.ConnectAsync(System.String,System.Byte[])">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
@@ -5818,66 +5892,74 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Get">
+        <member name="M:AIO.AHandle.Http.ConnectAsync(System.String,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.Get">
             <summary>
             请求获取特定的内容
             </summary>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.GetStream">
+        <member name="M:AIO.AHandle.Http.GetStream">
             <summary>
             请求获取特定的内容
             </summary>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Get(System.String)">
+        <member name="M:AIO.AHandle.Http.Get(System.String)">
             <summary>
             请求获取特定的内容
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.GetStream(System.String)">
+        <member name="M:AIO.AHandle.Http.GetStream(System.String)">
             <summary>
             请求获取特定的内容
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.GetAsync">
+        <member name="M:AIO.AHandle.Http.GetAsync">
             <summary>
             请求获取特定的内容
             </summary>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.GetStreamAsync">
+        <member name="M:AIO.AHandle.Http.GetStreamAsync">
             <summary>
             请求获取特定的内容
             </summary>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.GetAsync(System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.GetStreamAsync(System.String)">
+        <member name="M:AIO.AHandle.Http.GetAsync(System.String)">
             <summary>
             请求获取特定的内容
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Post(System.String)">
+        <member name="M:AIO.AHandle.Http.GetStreamAsync(System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.Post(System.String)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Post(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.Post(System.String,System.Byte[])">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -5885,7 +5967,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.Post(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.Post(System.String,System.String)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -5893,22 +5975,14 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.PostAsync(System.String)">
+        <member name="M:AIO.AHandle.Http.PostAsync(System.String)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
             <param name="remoteRelativePath">远端相对路径</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.PostAsync(System.String,System.Byte[])">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.PostAsync(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.PostAsync(System.String,System.Byte[])">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -5916,14 +5990,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.PostStream(System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.PostStream(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.PostAsync(System.String,System.String)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -5931,7 +5998,14 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.PostStream(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.PostStream(System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.PostStream(System.String,System.Byte[])">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -5939,14 +6013,7 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.PostStreamAsync(System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AIO.AHandle.HTTP.PostStreamAsync(System.String,System.Byte[])">
+        <member name="M:AIO.AHandle.Http.PostStream(System.String,System.String)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -5954,7 +6021,22 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AIO.AHandle.HTTP.PostStreamAsync(System.String,System.String)">
+        <member name="M:AIO.AHandle.Http.PostStreamAsync(System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.PostStreamAsync(System.String,System.Byte[])">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AIO.AHandle.Http.PostStreamAsync(System.String,System.String)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -6043,6 +6125,9 @@
             <inheritdoc />
         </member>
         <member name="M:AIO.AOperation.WaitAsyncCallBack">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.AOperation.GetAwaiter">
             <inheritdoc />
         </member>
         <member name="M:AIO.AOperation.Wait">
@@ -6423,6 +6508,37 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:AIO.IWait">
+            <summary>
+            进度操作
+            </summary>
+        </member>
+        <member name="M:AIO.IWait.WaitCo">
+            <summary>
+            迭代器等待
+            </summary>
+        </member>
+        <member name="M:AIO.IWait.WaitAsync">
+            <summary>
+            异步等待
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.IWait.Wait">
+            <summary>
+            同步等待
+            </summary>
+        </member>
+        <member name="M:AIO.IWait.WaitAsyncCallBack">
+            <summary>
+            异步回调
+            </summary>
+        </member>
+        <member name="M:AIO.IWait.GetAwaiter">
+            <summary>
+            获取等待器
+            </summary>
+        </member>
         <member name="T:AIO.IProgressOperation">
             <summary>
             进度操作
@@ -6466,27 +6582,6 @@
         <member name="M:AIO.IProgressOperation.Again">
             <summary>
             重新开始
-            </summary>
-        </member>
-        <member name="M:AIO.IProgressOperation.WaitCo">
-            <summary>
-            迭代器等待
-            </summary>
-        </member>
-        <member name="M:AIO.IProgressOperation.WaitAsync">
-            <summary>
-            异步等待
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IProgressOperation.Wait">
-            <summary>
-            同步等待
-            </summary>
-        </member>
-        <member name="M:AIO.IProgressOperation.WaitAsyncCallBack">
-            <summary>
-            异步回调
             </summary>
         </member>
         <member name="T:AIO.IProgressReport">
@@ -6932,6 +7027,21 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
+        <member name="M:AIO.AHelper.IO.SetWinDirIcon(System.String,System.Boolean)">
+            <summary>
+            设置Windows文件夹图标
+            </summary>
+            <param name="exe"> exe文件路径 </param>
+            <param name="absolute"> 是否使用绝对路径 </param>
+        </member>
+        <member name="M:AIO.AHelper.IO.SetWinDirIcon(System.String,System.String,System.Boolean)">
+            <summary>
+            设置Windows文件夹图标
+            </summary>
+            <param name="dir"> 目标文件夹路径 </param>
+            <param name="exe"> exe文件路径 </param>
+            <param name="absolute"> 是否使用绝对路径 </param>
+        </member>
         <member name="M:AIO.AHelper.IO.TryDeleteDir(System.IO.DirectoryInfo@,System.IO.SearchOption@,System.Boolean@)">
             <summary>
             删除文件夹
@@ -7238,6 +7348,13 @@
             可自定义缓冲区大小，计算速度较快
             </summary>
         </member>
+        <member name="M:AIO.AHelper.IO.GetLnkTargetPath(System.String)">
+            <summary>
+            获取.lnk文件的目标路径
+            </summary>
+            <param name="filepath"> .lnk文件的路径</param>
+            <returns> .lnk文件的目标路径</returns>
+        </member>
         <member name="M:AIO.AHelper.IO.MoveFile(System.String,System.String,System.Boolean)">
             <summary>
             移动文件
@@ -7273,6 +7390,15 @@
             <param name="bytes">内容</param>
             <param name="offset">写入内容位置</param>
             <param name="length">长度</param>
+            <param name="concat">true:拼接 | false:覆盖</param>
+            <param name="bufferSize">缓冲区大小</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.WriteAsync(System.String,System.IO.Stream,System.Boolean,System.Int32)">
+            <summary>
+            异步写入 将指定数据从offset开始写入length长度到文件中,是否追加到文件尾
+            </summary>
+            <param name="path">路径</param>
+            <param name="stream">内容</param>
             <param name="concat">true:拼接 | false:覆盖</param>
             <param name="bufferSize">缓冲区大小</param>
         </member>
@@ -7330,6 +7456,14 @@
             </summary>
             <param name="Path">路径</param>
             <param name="Bytes">内容</param>
+            <param name="Concat">true:拼接 | false:覆盖</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.WriteFileAsync(System.String,System.IO.Stream,System.Boolean)">
+            <summary>
+            将数据写入文件,是否追加到文件尾 默认覆盖文件
+            </summary>
+            <param name="Path">路径</param>
+            <param name="Stream">内容</param>
             <param name="Concat">true:拼接 | false:覆盖</param>
         </member>
         <member name="M:AIO.AHelper.IO.ReadFile(System.String@)">
@@ -7539,6 +7673,11 @@
             读取Json文件 编码utf-8
             </summary>
         </member>
+        <member name="M:AIO.AHelper.IO.ReadJsonUTF8Async(System.String)">
+            <summary>
+            读取Json文件 编码utf-8
+            </summary>
+        </member>
         <member name="M:AIO.AHelper.IO.WriteJsonAsync``1(System.String,``0,System.Boolean,System.String)">
             <summary>
             写入Json文件 编码utf-8
@@ -7696,7 +7835,7 @@
             </summary>
             <param name="path">路径</param>
             <param name="text">内容</param>
-            <param name="concat">Ture:追加 False:覆盖</param>
+            <param name="concat">[Ture : 追加] [False : 覆盖]</param>
         </member>
         <member name="M:AIO.AHelper.IO.WriteUTF8Async(System.String,System.Text.StringBuilder,System.Boolean)">
             <summary>
@@ -7704,7 +7843,7 @@
             </summary>
             <param name="path">路径</param>
             <param name="text">内容</param>
-            <param name="concat">Ture:追加 False:覆盖</param>
+            <param name="concat">[Ture : 追加] [False : 覆盖]</param>
         </member>
         <member name="M:AIO.AHelper.IO.WriteUTF8(System.String@,System.String@,System.Boolean@)">
             <summary>
@@ -8321,12 +8460,12 @@
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
-        <member name="T:AIO.AHelper.HTTP">
+        <member name="T:AIO.AHelper.Http">
             <summary>
             HTTP
             </summary>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Connect(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Connect(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
@@ -8337,19 +8476,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Connect(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.Connect(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Connect(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
@@ -8361,18 +8488,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.ConnectAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.ConnectAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Connect(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
@@ -8384,7 +8500,18 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.ConnectAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.ConnectAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AIO.AHelper.Http.ConnectAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             预留给能够将连接改为管道方式的代理服务器
             </summary>
@@ -8396,7 +8523,19 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Delete(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.ConnectAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AIO.AHelper.Http.Delete(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求删除指定的资源
             </summary>
@@ -8407,7 +8546,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Delete(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Delete(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求删除指定的资源
             </summary>
@@ -8419,7 +8558,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Delete(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Delete(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求删除指定的资源
             </summary>
@@ -8431,7 +8570,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.DeleteAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.DeleteAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求删除指定的资源
             </summary>
@@ -8442,7 +8581,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.DeleteAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.DeleteAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求删除指定的资源
             </summary>
@@ -8454,7 +8593,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.DeleteAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.DeleteAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求删除指定的资源
             </summary>
@@ -8466,7 +8605,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.DeleteAsync(System.String,System.String,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.DeleteAsync(System.String,System.String,System.UInt16,System.String)">
             <summary>
             请求删除指定的资源
             </summary>
@@ -8477,7 +8616,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Download(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AIO.AHelper.Http.DownloadAsync(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
@@ -8488,7 +8627,40 @@
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Download(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AIO.AHelper.Http.DownloadAsync(System.Uri,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="localPath">保存路径</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AIO.AHelper.Http.Download(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="localPath">保存路径</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AIO.AHelper.Http.DownloadOperation(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="localPath">保存路径</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AIO.AHelper.Http.Download(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
@@ -8499,7 +8671,7 @@
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Get(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Get(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
@@ -8508,7 +8680,7 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.GetAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
@@ -8517,7 +8689,7 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Get(System.String,AIO.AHelper.HTTP.Format,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Get(System.String,AIO.AHelper.Http.Format,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
@@ -8527,7 +8699,7 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetAsync(System.String,AIO.AHelper.HTTP.Format,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.GetAsync(System.String,AIO.AHelper.Http.Format,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
@@ -8537,7 +8709,7 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetStream(System.String,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.GetStream(System.String,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
@@ -8545,7 +8717,7 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetStreamAsync(System.String,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.GetStreamAsync(System.String,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
@@ -8553,7 +8725,7 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetMD5(System.String,System.UInt16)">
+        <member name="M:AIO.AHelper.Http.GetMD5(System.String,System.UInt16)">
             <summary>
             HTTP 下载文件
             </summary>
@@ -8561,7 +8733,7 @@
             <param name="timeout">超时</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetMD5Async(System.String,System.UInt16)">
+        <member name="M:AIO.AHelper.Http.GetMD5Async(System.String,System.UInt16)">
             <summary>
             HTTP 下载文件
             </summary>
@@ -8569,27 +8741,27 @@
             <param name="timeout">超时</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="T:AIO.AHelper.HTTP.Format">
+        <member name="T:AIO.AHelper.Http.Format">
             <summary>
             编码格式
             </summary>
         </member>
-        <member name="F:AIO.AHelper.HTTP.Format.Json">
+        <member name="F:AIO.AHelper.Http.Format.Json">
             <summary>
             Json
             </summary>
         </member>
-        <member name="F:AIO.AHelper.HTTP.Format.Xml">
+        <member name="F:AIO.AHelper.Http.Format.Xml">
             <summary>
             Xml
             </summary>
         </member>
-        <member name="F:AIO.AHelper.HTTP.Format.Yaml">
+        <member name="F:AIO.AHelper.Http.Format.Yaml">
             <summary>
             Yaml
             </summary>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Get``1(System.String,AIO.AHelper.HTTP.Format,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Get``1(System.String,AIO.AHelper.Http.Format,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
@@ -8599,7 +8771,7 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetAsync``1(System.String,AIO.AHelper.HTTP.Format,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.GetAsync``1(System.String,AIO.AHelper.Http.Format,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
@@ -8609,37 +8781,37 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="T:AIO.AHelper.HTTP.Option">
+        <member name="T:AIO.AHelper.Http.Option">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
         </member>
-        <member name="F:AIO.AHelper.HTTP.Option.ContentType">
+        <member name="F:AIO.AHelper.Http.Option.ContentType">
             <summary>
             默认:application/x-www-form-urlencoded
             </summary>
         </member>
-        <member name="F:AIO.AHelper.HTTP.Option.Cookie">
+        <member name="F:AIO.AHelper.Http.Option.Cookie">
             <summary>
             cookie
             </summary>
         </member>
-        <member name="F:AIO.AHelper.HTTP.Option.Encoding">
+        <member name="F:AIO.AHelper.Http.Option.Encoding">
             <summary>
             编码:默认UTF-8
             </summary>
         </member>
-        <member name="F:AIO.AHelper.HTTP.Option.Timeout">
+        <member name="F:AIO.AHelper.Http.Option.Timeout">
             <summary>
             超时时间
             </summary>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Option.#ctor">
+        <member name="M:AIO.AHelper.Http.Option.#ctor">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Option.#ctor(System.UInt16,System.String,System.Text.Encoding,System.String)">
+        <member name="M:AIO.AHelper.Http.Option.#ctor(System.UInt16,System.String,System.Text.Encoding,System.String)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -8648,7 +8820,7 @@
             <param name="cookie">cookie</param>
             <param name="contentType"></param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Head(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Head(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的资源的响应消息报告
             </summary>
@@ -8659,19 +8831,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Head(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.Head(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Head(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的资源的响应消息报告
             </summary>
@@ -8683,18 +8843,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.HeadAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.HeadAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Head(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的资源的响应消息报告
             </summary>
@@ -8706,7 +8855,18 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.HeadAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.HeadAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AIO.AHelper.Http.HeadAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的资源的响应消息报告
             </summary>
@@ -8718,7 +8878,19 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Options(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.HeadAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AIO.AHelper.Http.Options(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
                 返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
@@ -8729,7 +8901,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Options(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Options(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
                 返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
@@ -8741,7 +8913,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Options(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Options(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
                 返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
@@ -8753,7 +8925,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.OptionsAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.OptionsAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
                 返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
@@ -8764,19 +8936,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.OptionsAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-                返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.OptionsAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.OptionsAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
                 返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
@@ -8788,7 +8948,19 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Post(System.String,System.String,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.OptionsAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+                返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AIO.AHelper.Http.Post(System.String,System.String,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             </summary>
@@ -8796,7 +8968,7 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Post``1(System.String,``0,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.Post``1(System.String,``0,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -8804,7 +8976,7 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Post``1(System.String,System.String,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.Post``1(System.String,System.String,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -8812,7 +8984,7 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Post``2(System.String,``0,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.Post``2(System.String,``0,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -8820,14 +8992,14 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Post(System.String,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.Post(System.String,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             </summary>
             <param name="remoteUrl">远端路径</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Post(System.String,System.Byte[],AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.Post(System.String,System.Byte[],AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -8835,30 +9007,7 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PostStream(System.String,System.String,AIO.AHelper.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.PostStream(System.String,AIO.AHelper.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.PostStream(System.String,System.Byte[],AIO.AHelper.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.PostAsync(System.String,System.String,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.PostStream(System.String,System.String,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             </summary>
@@ -8866,7 +9015,14 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PostAsync``2(System.String,``0,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.PostStream(System.String,AIO.AHelper.Http.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AIO.AHelper.Http.PostStream(System.String,System.Byte[],AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -8874,14 +9030,30 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PostAsync(System.String,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.PostAsync(System.String,System.String,AIO.AHelper.Http.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AIO.AHelper.Http.PostAsync``2(System.String,``0,AIO.AHelper.Http.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AIO.AHelper.Http.PostAsync(System.String,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             </summary>
             <param name="remoteUrl">远端路径</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PostAsync(System.String,System.Byte[],AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.PostAsync(System.String,System.Byte[],AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -8890,7 +9062,7 @@
             <param name="options">选项参数</param>
             <returns>返回内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PostStreamAsync(System.String,System.String,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.PostStreamAsync(System.String,System.String,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             </summary>
@@ -8898,14 +9070,14 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PostStreamAsync(System.String,AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.PostStreamAsync(System.String,AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
             </summary>
             <param name="remoteUrl">远端路径</param>
             <param name="options">选项参数</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PostStreamAsync(System.String,System.Byte[],AIO.AHelper.HTTP.Option)">
+        <member name="M:AIO.AHelper.Http.PostStreamAsync(System.String,System.Byte[],AIO.AHelper.Http.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
@@ -8914,7 +9086,7 @@
             <param name="options">选项参数</param>
             <returns>返回内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Put(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Put(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             向指定资源位置上传其最新内容
             </summary>
@@ -8926,7 +9098,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Put(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Put(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             向指定资源位置上传其最新内容
             </summary>
@@ -8938,7 +9110,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PutAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.PutAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             向指定资源位置上传其最新内容
             </summary>
@@ -8950,7 +9122,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.PutAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.PutAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             向指定资源位置上传其最新内容
             </summary>
@@ -8961,7 +9133,7 @@
             <param name="cookie">cookie</param>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Trace(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Trace(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -8972,7 +9144,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Trace(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Trace(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -8984,7 +9156,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.Trace(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.Trace(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -8996,7 +9168,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.TraceAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.TraceAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -9007,7 +9179,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.TraceAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.TraceAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -9019,7 +9191,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.TraceAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.TraceAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -9031,7 +9203,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.HTTP.TraceAsync(System.String,System.String,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.Http.TraceAsync(System.String,System.String,System.UInt16,System.String)">
             <summary>
             回显服务器收到的请求
             </summary>
@@ -9041,6 +9213,13 @@
             <param name="cookie">cookie</param>
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
+        </member>
+        <member name="M:AIO.AHelper.Http.Check(System.String)">
+            <summary>
+            检测URL是否可用
+            </summary>
+            <param name="uri"> 链接 </param>
+            <returns> True: 可用, False: 不可用 </returns>
         </member>
         <member name="T:AIO.AHelper.Net">
             <summary>
@@ -12593,6 +12772,36 @@
             数据序列化
             </summary>
         </member>
+        <member name="T:AIO.BinData">
+            <summary>
+            二进制数据基类
+            </summary>
+        </member>
+        <member name="M:AIO.BinData.Dispose">
+            <summary>
+            重置数据
+            </summary>
+        </member>
+        <member name="M:AIO.BinData.Deserialize(AIO.IReadData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinData.Serialize(AIO.IWriteData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinData.Clone">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinData.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinData.Parser``1(AIO.IReadData)">
+            <summary>
+            解析数据
+            </summary>
+            <param name="buffer">数据</param>
+            <typeparam name="T"> 数据类型 </typeparam>
+            <returns> 解析后的数据 </returns>
+        </member>
         <member name="T:AIO.IBinDeserialize">
             <summary>
             反序列化
@@ -14729,6 +14938,17 @@
             <summary>
             写入数据
             </summary>
+        </member>
+        <member name="T:AIO.CS">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.CS.ClearIndex(System.Int32)">
+            <summary>
+            清空指定行
+            </summary>
+            <param name="cursor"></param>
         </member>
         <member name="T:AIO.FileCache">
             <summary>
