@@ -226,7 +226,7 @@ namespace AIO.Net
         /// <param name="error">Socket error code</param>
         protected virtual void OnError(SocketError error)
         {
-            Console.WriteLine($"TCP client caught an error with code {error}");
+            CS.WriteLine($"TCP client caught an error with code {error}");
         }
 
         #endregion

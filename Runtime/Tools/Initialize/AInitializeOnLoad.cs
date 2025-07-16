@@ -35,8 +35,8 @@ namespace AIO.UEditor
             if (method.ReflectedType is null) throw new NullReferenceException();
 #if UNITY_EDITOR
             Debug.Log(MethodsPath.TryGetValue(method.MethodHandle.Value, out var tuple)
-                          ? $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()}:{method.Name} () (at {tuple.Item1}:{tuple.Item2})"
-                          : $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()} : {method.Name} ()"
+                          ? $"<color=#F7DC6F>[初始化] {mode} : </color> {method.ReflectedType.ToDetails()}:{method.Name} () (at {tuple.Item1}:{tuple.Item2})"
+                          : $"<color=#F7DC6F>[初始化] {mode} : </color> {method.ReflectedType.ToDetails()} : {method.Name} ()"
                      );
 #endif
         }

@@ -44,8 +44,8 @@ namespace AIO.UEditor
                     url  = ScopeUrl_OpenUpm;
                 }
 
-                var path = System.IO.Path.Combine(Path.Packages, "manifest.json");
-                var manifest = await AHelper.IO.ReadJsonUTF8Async<JObject>(path);
+                var path                                                                                  = System.IO.Path.Combine(Path.Packages, "manifest.json");
+                var manifest                                                                              = await AHelper.IO.ReadJsonUTF8Async<JObject>(path);
                 if (manifest.Value<JObject>("dependencies") is JObject dependencies) dependencies[scopes] = version;
                 if (manifest["scopedRegistries"] is JArray scopedRegistries)
                 {

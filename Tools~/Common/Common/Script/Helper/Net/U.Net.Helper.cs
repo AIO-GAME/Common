@@ -28,7 +28,7 @@ namespace AIO
             public static string UriParamSerialize(in object obj)
             {
                 var properties = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
-                var sb = new StringBuilder();
+                var sb         = new StringBuilder();
                 sb.Append("?");
                 foreach (var p in properties)
                 {
@@ -55,7 +55,7 @@ namespace AIO
 
                 var buffer = new byte[bufferSize];
                 stream.Seek(headerSize, SeekOrigin.Begin);
-                var size = stream.Read(buffer, 0, buffer.Length);
+                var size   = stream.Read(buffer, 0, buffer.Length);
                 var offset = 0;
                 while (size > 0)
                 {
@@ -81,12 +81,12 @@ namespace AIO
                                                              CancellationToken cancellationToken = default)
             {
                 if (cancellationToken == default) cancellationToken = CancellationToken.None;
-                var headerSize = CODE.Length;
+                var headerSize                                      = CODE.Length;
 
                 var buffer = new byte[bufferSize];
                 stream.Seek(headerSize, SeekOrigin.Begin);
                 var offset = 0;
-                var size = await stream.ReadAsync(buffer, 0, bufferSize, cancellationToken);
+                var size   = await stream.ReadAsync(buffer, 0, bufferSize, cancellationToken);
                 while (size > 0)
                 {
                     stream.Seek(offset, SeekOrigin.Begin);
@@ -108,7 +108,7 @@ namespace AIO
                 FileStream outputStream;
                 if (File.Exists(localPath))
                 {
-                    outputStream = new FileStream(localPath, FileMode.Open);
+                    outputStream = new FileStream(localPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
                     var header = new byte[CODE.Length];
                     _ = outputStream.Read(header, 0, header.Length);
                     var resume = !CODE.Where((t, i) => t != header[i]).Any();
@@ -119,45 +119,40 @@ namespace AIO
                     }
 
                     outputStream.Seek(0, SeekOrigin.Begin);
-                    if (outputStream.GetMD5() == remoteMD5Cb.Invoke())
-                    {
-                        outputStream.Dispose();
-                        return outputStream;
-                    }
+                    if (outputStream.GetMD5() == remoteMD5Cb.Invoke()) return outputStream;
 
                     if (isOverWrite)
                     {
                         outputStream.Seek(0, SeekOrigin.Begin);
                         outputStream.Write(CODE, 0, CODE.Length); // 清空数据 准备覆盖
-                        outputStream.Flush();
                         return outputStream;
                     }
 
-                    outputStream.Dispose();
-                    Console.WriteLine($"HTTP Download : Target File Already Exists {localPath}");
+                    CS.WriteLine($"HTTP Download : Target File Already Exists {localPath}");
                     return null;
                 }
 
-                outputStream = new FileStream(localPath, FileMode.Create);
+                outputStream = new FileStream(localPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
                 outputStream.Write(CODE, 0, CODE.Length);
-                outputStream.Flush();
                 return outputStream;
             }
 
             internal static async Task<FileStream> AddFileHeaderAsync(
                 string             localPath,
                 Func<Task<string>> remoteMD5Cb,
-                bool               isOverWrite = false, CancellationToken cancellationToken = default)
+                bool               isOverWrite       = false,
+                CancellationToken  cancellationToken = default)
             {
                 if (cancellationToken == default) cancellationToken = CancellationToken.None;
                 localPath = localPath.Replace('/', '\\');
-                var parent = localPath.Substring(0, localPath.LastIndexOf('\\'));
-                if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
+                var fileinfo = new FileInfo(localPath);
+                var parent   = fileinfo.Directory;
+                if (!parent.Exists) parent.Create();
 
                 FileStream outputStream;
-                if (File.Exists(localPath))
+                if (fileinfo.Exists)
                 {
-                    outputStream = new FileStream(localPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
+                    outputStream = new FileStream(localPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
                     var header = new byte[CODE.Length];
                     _ = await outputStream.ReadAsync(header, 0, header.Length, cancellationToken);
                     var resume = !CODE.Where((t, i) => t != header[i]).Any();
@@ -168,11 +163,10 @@ namespace AIO
                     }
 
                     outputStream.Seek(0, SeekOrigin.Begin);
-                    var localMD5 = await outputStream.GetMD5Async(cancellationToken: cancellationToken);
+                    var localMD5  = await outputStream.GetMD5Async(cancellationToken: cancellationToken);
                     var remoteMD5 = await remoteMD5Cb.Invoke();
                     if (localMD5 == remoteMD5)
                     {
-                        outputStream.Dispose();
                         return outputStream;
                     }
 
@@ -184,12 +178,11 @@ namespace AIO
                         return outputStream;
                     }
 
-                    outputStream.Dispose();
-                    Console.WriteLine($"HTTP Download : Target File Already Exists {localPath}");
+                    CS.WriteLine($"HTTP Download : Target File Already Exists {localPath}");
                     return null;
                 }
 
-                outputStream = new FileStream(localPath, FileMode.CreateNew);
+                outputStream = new FileStream(localPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
                 await outputStream.WriteAsync(CODE, 0, CODE.Length, cancellationToken);
                 await outputStream.FlushAsync(cancellationToken);
                 return outputStream;

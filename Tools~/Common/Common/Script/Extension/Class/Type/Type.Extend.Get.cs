@@ -334,7 +334,7 @@ namespace AIO
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to load types in assembly '{assembly}'.\n{ex}");
+                CS.WriteLine($"Failed to load types in assembly '{assembly}'.\n{ex}");
                 yield break;
             }
 

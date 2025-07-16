@@ -563,6 +563,7 @@
         <Compile Include="Script\Extension\Class\Type\Type.Extend.IS.cs"/>
         <Compile Include="Script\Extension\Class\Type\Type.Extend.Reset.cs"/>
         <Compile Include="Script\Extension\Class\Type\Type.Extend.To.cs"/>
+        <Compile Include="Script\Extension\Enum\EnumHelper.cs" />
         <Compile Include="Script\Extension\Enum\ExtendEnum.cs"/>
         <Compile Include="Script\Extension\Exception\GenericClosingException.cs"/>
         <Compile Include="Script\Extension\Interface\Empty.cs"/>
@@ -591,6 +592,7 @@
         <Compile Include="Script\Extension\Interface\IList\IList.Extend.Get.cs"/>
         <Compile Include="Script\Extension\Interface\IList\IList.Extend.IndexOf.cs"/>
         <Compile Include="Script\Extension\Interface\IList\IList.Extend.Insert.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Move.cs" />
         <Compile Include="Script\Extension\Interface\IList\IList.Extend.Rmove.cs"/>
         <Compile Include="Script\Extension\Interface\IList\IList.Extend.Set.cs"/>
         <Compile Include="Script\Extension\Interface\IList\IList.Extend.Swap.cs"/>
@@ -729,6 +731,7 @@
         <Compile Include="Script\Helper\Exception\AExpNetGetResponseStream.cs"/>
         <Compile Include="Script\Helper\IO\Base\IO.GetDir.cs"/>
         <Compile Include="Script\Helper\IO\Base\IO.GetFile.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Set.cs" />
         <Compile Include="Script\Helper\IO\Base\IO.Try.cs"/>
         <Compile Include="Script\Helper\Net\Client\NetBuffer.cs"/>
         <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs"/>
@@ -889,7 +892,8 @@
         </Compile>
         <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs"/>
         <Compile Include="Script\Tools\Buffer\Ring\BufferRing.Extend.cs"/>
-        <Compile Include="Script\Tools\FileCache.cs"/>
+        <Compile Include="Script\Tools\Console\CS.cs" />
+        <Compile Include="Script\Tools\FileCache.cs" />
         <Compile Include="Script\Tools\Generate\GenerateBuilder.cs" />
         <Compile Include="Script\Tools\Generate\ScriptTextBuilder.cs" />
         <Compile Include="Script\Tools\Handle\Interface\IOperation.cs" />

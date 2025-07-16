@@ -2,6 +2,7 @@
 
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -36,11 +37,22 @@ namespace AIO
             }
 
             /// <summary>
+            /// 读取Json文件 编码utf-8
+            /// </summary>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static async Task<JObject> ReadJsonUTF8Async(string path)
+            {
+                var Content = await ReadUTF8Async(path);
+                return Json.Deserialize(Content);
+            }
+
+            /// <summary>
             /// 写入Json文件 编码utf-8
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task<bool> WriteJsonAsync<T>(
-                string path, T value,
+                string path,
+                T      value,
                 bool   concat  = false,
                 string charset = "utf-8")
             {

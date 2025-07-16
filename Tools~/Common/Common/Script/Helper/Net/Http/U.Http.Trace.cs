@@ -12,7 +12,7 @@ namespace AIO
     {
         #region Nested type: HTTP
 
-        public partial class HTTP
+        public partial class Http
         {
             /// <summary>
             /// 回显服务器收到的请求

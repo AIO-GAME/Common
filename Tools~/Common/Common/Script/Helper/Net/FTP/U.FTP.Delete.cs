@@ -68,7 +68,7 @@ namespace AIO
                 }
                 catch (WebException e)
                 {
-                    Console.WriteLine(e);
+                    CS.WriteLine(e);
                     return false;
                 }
             }

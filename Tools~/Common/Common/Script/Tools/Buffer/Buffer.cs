@@ -47,7 +47,7 @@ namespace AIO
             get => WriteIndex;
             set
             {
-                if (value < ReadIndex) Console.WriteLine($"Set Top invalid top : {value}");
+                if (value < ReadIndex) CS.WriteLine($"Set Top invalid top : {value}");
                 if (value > Capacity) Capacity = value;
                 WriteIndex = value;
             }
@@ -61,7 +61,7 @@ namespace AIO
             get => ReadIndex;
             set
             {
-                if (value < 0 || value > WriteIndex) Console.WriteLine($"Set Offset invalid offset : {value}");
+                if (value < 0 || value > WriteIndex) CS.WriteLine($"Set Offset invalid offset : {value}");
                 ReadIndex = value;
             }
         }

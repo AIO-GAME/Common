@@ -13,7 +13,7 @@ namespace AIO
     {
         #region Nested type: HTTP
 
-        public partial class HTTP
+        public partial class Http
         {
             /// <summary>
             /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
@@ -160,7 +160,8 @@ namespace AIO
             public static async Task<Result> PostAsync<T, Result>(string remoteUrl, T data, Option options = default)
             {
                 options ??= new Option();
-                var result = await PostAsync(remoteUrl, options.Encoding.GetBytes(Json.Serialize(data)), options);
+                var serialize = Json.Serialize(data);
+                var result    = await PostAsync(remoteUrl, options.Encoding.GetBytes(serialize), options);
                 return Json.Deserialize<Result>(result);
             }
 

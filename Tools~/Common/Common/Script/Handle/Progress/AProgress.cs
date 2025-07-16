@@ -102,7 +102,7 @@ namespace AIO
         /// </summary>
         public void Complete()
         {
-            Watch.Stop();
+            Watch?.Stop();
             RemainingTime += DateTime.UtcNow - RecordTime;
             EndTime       =  DateTime.UtcNow;
             LastProgress  =  Progress;

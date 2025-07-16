@@ -78,7 +78,7 @@ namespace AIO
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (array.Count <= 0) return default;
             var idx = array.Count - 1;
-            var r = array[idx];
+            var r   = array[idx];
             array.RemoveAt(idx);
             return r;
         }
@@ -120,7 +120,7 @@ namespace AIO
 
             if (removeFromStart)
             {
-                var startIndex = collection.Count - retainCount;
+                var startIndex    = collection.Count - retainCount;
                 var retainedItems = collection.Skip(startIndex).Take(retainCount).ToList();
 
                 collection.Clear();

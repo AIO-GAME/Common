@@ -189,7 +189,7 @@ namespace AIO
                 catch (WebException ex)
                 {
 #if DEBUG
-                    Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
+                    CS.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
                                       nameof(Check), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
@@ -229,7 +229,7 @@ namespace AIO
                 catch (WebException ex)
                 {
 #if DEBUG
-                    Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
+                    CS.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
                                       nameof(CheckAsync), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;

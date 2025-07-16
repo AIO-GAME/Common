@@ -12,9 +12,9 @@ namespace AIO
 {
     public partial class AHelper
     {
-        #region Nested type: HTTP
+        #region Nested type: Http
 
-        public partial class HTTP
+        public partial class Http
         {
             /// <summary>
             /// HTTP 下载文件
@@ -25,7 +25,70 @@ namespace AIO
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">容量</param>
             /// <exception cref="Exception">异常</exception>
-            public static IProgressOperation Download(
+            public static async Task DownloadAsync(
+                string remoteUrl,
+                string localPath,
+                bool   isOverWrite = false,
+                ushort timeout     = Net.TIMEOUT,
+                int    bufferSize  = Net.BUFFER_SIZE
+            )
+            {
+                var operation = new HttpDownloadOperation(remoteUrl, localPath, isOverWrite, timeout, bufferSize);
+                await operation.Begin();
+            }
+
+            /// <summary>
+            /// HTTP 下载文件
+            /// </summary>
+            /// <param name="remoteUrl">远端路径</param>
+            /// <param name="localPath">保存路径</param>
+            /// <param name="isOverWrite">覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">容量</param>
+            /// <exception cref="Exception">异常</exception>
+            public static async Task DownloadAsync(
+                Uri    remoteUrl,
+                string localPath,
+                bool   isOverWrite = false,
+                ushort timeout     = Net.TIMEOUT,
+                int    bufferSize  = Net.BUFFER_SIZE
+            )
+            {
+                var operation = new HttpDownloadOperation(remoteUrl.ToString(), localPath, isOverWrite, timeout, bufferSize);
+                await operation.Begin();
+            }
+
+            /// <summary>
+            /// HTTP 下载文件
+            /// </summary>
+            /// <param name="remoteUrl">远端路径</param>
+            /// <param name="localPath">保存路径</param>
+            /// <param name="isOverWrite">覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">容量</param>
+            /// <exception cref="Exception">异常</exception>
+            public static void Download(
+                string remoteUrl,
+                string localPath,
+                bool   isOverWrite = false,
+                ushort timeout     = Net.TIMEOUT,
+                int    bufferSize  = Net.BUFFER_SIZE
+            )
+            {
+                var operation = new HttpDownloadOperation(remoteUrl, localPath, isOverWrite, timeout, bufferSize);
+                operation.Begin().Wait();
+            }
+
+            /// <summary>
+            /// HTTP 下载文件
+            /// </summary>
+            /// <param name="remoteUrl">远端路径</param>
+            /// <param name="localPath">保存路径</param>
+            /// <param name="isOverWrite">覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">容量</param>
+            /// <exception cref="Exception">异常</exception>
+            public static IProgressOperation DownloadOperation(
                 string remoteUrl,
                 string localPath,
                 bool   isOverWrite = false,
@@ -92,8 +155,8 @@ namespace AIO
                     var temp = outputStream.Position - Net.CODE.Length;
                     if (temp > 0) request.AddRange(temp);
 
-                    HttpWebResponse response = null;
-                    Stream responseStream = null;
+                    HttpWebResponse response       = null;
+                    Stream          responseStream = null;
                     try
                     {
                         response = (HttpWebResponse)await request.GetResponseAsync();
@@ -106,7 +169,7 @@ namespace AIO
                         responseStream = response.GetResponseStream();
                         if (responseStream is null) throw new AExpNetGetResponseStream("HTTP", response);
 
-                        var buffer = new byte[BufferSize];
+                        var buffer    = new byte[BufferSize];
                         var readCount = await responseStream.ReadAsync(buffer, 0, BufferSize, cancellationToken);
                         while (readCount > 0)
                             if (State == EProgressState.Running)
@@ -122,6 +185,7 @@ namespace AIO
                             }
 
                         await Net.RemoveFileHeaderAsync(outputStream, cancellationToken: cancellationToken);
+                        await outputStream.FlushAsync(cancellationToken);
                         responseStream.Close();
                         outputStream.Close();
                         response.Close();
@@ -135,6 +199,10 @@ namespace AIO
                         State = EProgressState.Fail;
                         Event.OnError?.Invoke(ex);
                     }
+
+                    responseStream?.Dispose();
+                    outputStream?.Dispose();
+                    response?.Dispose();
                 }
 
                 protected override void OnWait()
@@ -157,8 +225,8 @@ namespace AIO
                     var temp = outputStream.Position - Net.CODE.Length;
                     if (temp > 0) request.AddRange(temp);
 
-                    HttpWebResponse response = null;
-                    Stream responseStream = null;
+                    HttpWebResponse response       = null;
+                    Stream          responseStream = null;
                     try
                     {
                         response = (HttpWebResponse)request.GetResponse();
@@ -200,12 +268,13 @@ namespace AIO
                         State = EProgressState.Fail;
                         Event.OnError?.Invoke(ex);
                     }
+
+                    responseStream?.Dispose();
+                    outputStream?.Dispose();
+                    response?.Dispose();
                 }
 
-                protected override void OnDispose()
-                {
-                    request.Abort();
-                }
+                protected override void OnDispose() { request?.Abort(); }
             }
 
             #endregion

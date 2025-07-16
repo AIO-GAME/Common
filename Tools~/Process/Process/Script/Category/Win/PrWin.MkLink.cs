@@ -66,7 +66,7 @@
             /// <returns>执行器</returns>
             public static IExecutor Hard(in string target, in string source)
             {
-                var messages = string.Format("{0} /H \"{1}\" \"{2}\"", CMD_Mklink, target.Replace('/', '\\'), source.Replace('/', '\\'));
+                var messages = $"{CMD_Mklink} /H \"{target.Replace('/', '\\')}\" \"{source.Replace('/', '\\')}\"";
                 return Create().Input(messages);
             }
         }

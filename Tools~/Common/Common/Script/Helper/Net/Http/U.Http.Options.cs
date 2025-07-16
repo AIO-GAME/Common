@@ -12,7 +12,7 @@ namespace AIO
     {
         #region Nested type: HTTP
 
-        public partial class HTTP
+        public partial class Http
         {
             /// <summary>
             ///     返回服务器正对特定资源所支持的HTTP请求方法

@@ -113,7 +113,7 @@ namespace AIO
         {
             if (MailMessage.To.Count == 0)
             {
-                Console.WriteLine("Warning : 当前目标发送人数为0");
+                CS.WriteLine("Warning : 当前目标发送人数为0");
                 return;
             }
 

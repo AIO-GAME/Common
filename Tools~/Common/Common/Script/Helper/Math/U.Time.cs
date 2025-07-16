@@ -50,32 +50,24 @@ namespace AIO
             /// <summary>
             /// 获取当前时间 文字格式
             /// </summary>
-            public static string GetCurrTimeStr(in string format = "yyyy-MM-dd HH:mm:ss")
-            {
-                return DateTime.Now.ToString(format);
-            }
+            public static string GetCurrTimeStr(in string format = "yyyy-MM-dd HH:mm:ss") { return DateTime.Now.ToString(format); }
 
             /// <summary>
             /// 获取当前时间搓
             /// </summary>
-            public static long GetCurrTime(in ESecondUnit unit = ESecondUnit.MILLISCOND)
-            {
-                return Normalize(DateTime.Now, unit);
-            }
+            public static long GetCurrTime(in ESecondUnit unit = ESecondUnit.MILLISCOND) { return Normalize(DateTime.Now, unit); }
 
             /// <summary>
             /// 获取时间搓
             /// </summary>
-            public static long GetDateTime(in string format, in ESecondUnit unit = ESecondUnit.MILLISCOND)
-            {
-                return Normalize(Convert.ToDateTime(format), unit);
-            }
+            public static long GetDateTime(in string format, in ESecondUnit unit = ESecondUnit.MILLISCOND) { return Normalize(Convert.ToDateTime(format), unit); }
 
             /// <summary>
             /// 格式化时间，参数：格林威治时间，格式化格式（具体见文件末尾）
             /// </summary>
-            public static string Format(in long     time, in string format = "yyyy-MM-dd 00:00:00",
-                                        ESecondUnit unit = ESecondUnit.MILLISCOND)
+            public static string Format(in long     time,
+                                        in string   format = "yyyy-MM-dd 00:00:00",
+                                        ESecondUnit unit   = ESecondUnit.MILLISCOND)
             {
                 return TimeZoneInfo.ConvertTimeToUtc(GetDateTime(time, unit)).ToString(format);
             }
@@ -132,24 +124,22 @@ namespace AIO
             /// </summary>
             public static long Normalize(in DateTime date, in ESecondUnit unit = ESecondUnit.MILLISCOND)
             {
+                var temp = date - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
                 switch (unit)
                 {
-                    case ESecondUnit.SECOND:      return date.Ticks / 10000000;
-                    case ESecondUnit.MILLISCOND:  return date.Ticks / 10000;
-                    case ESecondUnit.MICROSECOND: return date.Ticks / 10;
-                    case ESecondUnit.NANOSECOND:  return date.Ticks * 100;
+                    case ESecondUnit.SECOND:      return temp.Ticks / 10000000;
+                    case ESecondUnit.MILLISCOND:  return temp.Ticks / 10000;
+                    case ESecondUnit.MICROSECOND: return temp.Ticks / 100;
+                    case ESecondUnit.NANOSECOND:  return temp.Ticks * 100;
                     case ESecondUnit.NANOSECOND_100:
-                    default: return date.Ticks;
+                    default: return temp.Ticks;
                 }
             }
 
             /// <summary>
             /// 获取当天差距 时间信息
             /// </summary>
-            public static long GetCurrDateToDay(in int space = 0, in ESecondUnit unit = ESecondUnit.MILLISCOND)
-            {
-                return Normalize(DateTime.Today.AddDays(space), unit);
-            }
+            public static long GetCurrDateToDay(in int space = 0, in ESecondUnit unit = ESecondUnit.MILLISCOND) { return Normalize(DateTime.Today.AddDays(space), unit); }
 
             /// <summary>
             /// 获取开始时间
@@ -229,7 +219,7 @@ namespace AIO
                 in long        time,
                 in ESecondUnit unit = ESecondUnit.MILLISCOND)
             {
-                var buff = new StringBuilder();
+                var buff  = new StringBuilder();
                 var Times = GetTimeSpan(time, unit);
 
                 if (Times.Days < 10) buff.Append('0');
@@ -259,15 +249,15 @@ namespace AIO
                 time = (GetCurrTime(unit) - time) / Unit.Time.GetSencondUnit(unit); //单位归一化
 
                 var dayUnit = Unit.Time.GetDayUnit(unit);
-                var day = time / dayUnit;
+                var day     = time / dayUnit;
                 time %= dayUnit;
 
                 var hourUnit = Unit.Time.GetHourUnit(unit);
-                var hour = time / hourUnit;
+                var hour     = time / hourUnit;
                 time %= hourUnit;
 
                 var minUnit = Unit.Time.GetMinUnit(unit);
-                var min = time / minUnit;
+                var min     = time / minUnit;
                 time %= minUnit; //秒
 
                 var buff = new StringBuilder();
@@ -312,7 +302,7 @@ namespace AIO
                 in string writeDate,
                 in int    n)
             {
-                var dateTime = Convert.ToDateTime(today);
+                var dateTime  = Convert.ToDateTime(today);
                 var WriteDate = Convert.ToDateTime(writeDate).AddDays(n);
                 return dateTime < WriteDate;
             }
@@ -357,10 +347,7 @@ namespace AIO
             /// <summary>
             /// 与当前时间比较 如果小于当前时间为Ture
             /// </summary>
-            public static bool CompareNowTime(in DateTime dateTime)
-            {
-                return DateTime.Now > dateTime;
-            }
+            public static bool CompareNowTime(in DateTime dateTime) { return DateTime.Now > dateTime; }
 
             /// <summary>
             /// 与当前时间比较 如果小于当前时间为Ture
@@ -568,7 +555,6 @@ namespace AIO
     ToShortTimeString 将此实例的值转换为其等效的短时间字符串表示形式。
     ToShortDateString 将此实例的值转换为其等效的短日期字符串表示形式。
  */
-
 
 //  TimeSpan ToString formmat
 //  c: 00:00:00

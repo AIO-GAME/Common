@@ -203,7 +203,7 @@ namespace AIO
         {
             if (!debug) return;
             if (!string.IsNullOrEmpty(label)) message = $"[{label}] {message}";
-            Console.WriteLine(message + "\n");
+            CS.WriteLine(message + "\n");
         }
     }
 }

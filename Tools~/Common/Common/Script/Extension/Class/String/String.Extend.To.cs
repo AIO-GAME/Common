@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Globalization;
 
 #endregion
 
@@ -13,29 +14,31 @@ namespace AIO
         /// </summary>
         /// <param name="value">要进行转换的整数值。</param>
         /// <returns>转换后的二进制字符串。</returns>
-        public static string ToBinaryString(this int value)
-        {
-            return Convert.ToString(value, 2).PadLeft(8, '0');
-        }
+        public static string ToBinaryString(this int value) { return Convert.ToString(value, 2).PadLeft(8, '0'); }
 
         /// <summary>
         ///     将长整型类型的值转换为指定长度的二进制字符串。如果二进制字符串长度小于指定长度，则在左侧使用字符 '0' 进行填充。
         /// </summary>
         /// <param name="value">要进行转换的长整型值。</param>
         /// <returns>转换后的二进制字符串。</returns>
-        public static string ToBinaryString(this long value)
-        {
-            return Convert.ToString(value, 2).PadLeft(16, '0');
-        }
+        public static string ToBinaryString(this long value) { return Convert.ToString(value, 2).PadLeft(16, '0'); }
 
         /// <summary>
         ///     将枚举类型的值转换为指定长度的二进制字符串。如果二进制字符串长度小于指定长度，则在左侧使用字符 '0' 进行填充。
         /// </summary>
         /// <param name="value">要进行转换的枚举值。</param>
         /// <returns>转换后的二进制字符串。</returns>
-        public static string ToBinaryString(this Enum value)
+        public static string ToBinaryString(this Enum value) { return Convert.ToString(Convert.ToInt64(value), 2).PadLeft(16, '0'); }
+
+        /// <summary>
+        /// Change the input string to title case
+        /// </summary>
+        /// <param name="input">the input string</param>
+        /// <returns>the input string in title case</returns>
+        public static string ToTitleCase(this string input)
         {
-            return Convert.ToString(Convert.ToInt64(value), 2).PadLeft(16, '0');
+            var textInfo = new CultureInfo(CultureInfo.CurrentCulture.Name, false).TextInfo;
+            return textInfo.ToTitleCase(input.ToLower());
         }
     }
 }

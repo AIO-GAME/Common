@@ -264,7 +264,7 @@ namespace AIO
                         catch (Exception e)
                         {
                             // 如果发生异常，则打印错误信息并继续执行
-                            Console.WriteLine($"Failed to reset field {field.Name}: {e.Message}");
+                            CS.WriteLine($"Failed to reset field {field.Name}: {e.Message}");
                         }
         }
 
@@ -299,7 +299,7 @@ namespace AIO
                     catch (Exception e)
                     {
                         // 如果发生异常，则打印错误信息并继续执行
-                        Console.WriteLine($"Failed to reset field {field.Name}: {e.Message}");
+                        CS.WriteLine($"Failed to reset field {field.Name}: {e.Message}");
                     }
         }
 
@@ -325,7 +325,7 @@ namespace AIO
                     catch (Exception e)
                     {
                         // 如果发生异常，则打印错误信息并继续执行
-                        Console.WriteLine($"Failed to reset property {prop.Name}: {e.Message}");
+                        CS.WriteLine($"Failed to reset property {prop.Name}: {e.Message}");
                     }
         }
 
@@ -350,7 +350,7 @@ namespace AIO
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine($"Failed to reset property {prop.Name}: {e.Message}");
+                            CS.WriteLine($"Failed to reset property {prop.Name}: {e.Message}");
                         }
         }
     }
