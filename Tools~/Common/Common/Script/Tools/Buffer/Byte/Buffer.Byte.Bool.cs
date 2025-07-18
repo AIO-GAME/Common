@@ -6,41 +6,58 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public partial class BufferByte
+    partial class BufferByte : IWriteBool, IReadBool
     {
-        #region IReadData Members
-
         /// <inheritdoc/> 
-        public bool ReadBool()
-        {
-            return Arrays[ReadIndex++] != 0;
-        }
+        public bool ReadBool() => Arrays[ReadIndex++] != 0;
 
-        /// <inheritdoc/> 
-        public bool[] ReadBoolArray(bool reverse = false)
-        {
-            return Arrays.GetBoolArray(ref ReadIndex, reverse);
-        }
-
-        #endregion
-
-        #region IWriteData Members
-
-        /// <inheritdoc/> 
+        /// <inheritdoc/>
         public void WriteBool(bool b)
         {
             AutomaticExpansion(1);
             Arrays[WriteIndex++] = (byte)(b ? 1 : 0);
         }
 
-        /// <inheritdoc/> 
+        /// <inheritdoc/>
         public void WriteBoolArray(ICollection<bool> value, bool reverse = false)
         {
             WriteLen(value.Count);
             AutomaticExpansion(value.Count);
-            Arrays.SetBoolArray(ref WriteIndex, value, reverse);
+            if (reverse)
+            {
+                var j                                   = WriteIndex;
+                foreach (var item in value) Arrays[j++] = (byte)(item ? 1 : 0);
+            }
+            else
+            {
+                var j                                   = WriteIndex + value.Count - 1;
+                foreach (var item in value) Arrays[j--] = (byte)(item ? 1 : 0);
+            }
+
+            WriteIndex += value.Count;
         }
 
-        #endregion
+        /// <inheritdoc/>
+        public bool[] ReadBoolArray(bool reverse = false)
+        {
+            var len   = ReadLen();
+            var array = new bool[len];
+            if (reverse)
+            {
+                for (var i = 0; i < len; i++)
+                {
+                    array[i] = Arrays[ReadIndex++] != 0;
+                }
+            }
+            else
+            {
+                for (var i = len - 1; i >= 0; i--)
+                {
+                    array[i] = Arrays[ReadIndex++] != 0;
+                }
+            }
+
+            return array;
+        }
     }
 }

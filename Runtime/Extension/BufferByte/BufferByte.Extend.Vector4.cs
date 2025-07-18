@@ -23,13 +23,13 @@ namespace AIO.UEngine
             buffer.SetFloat(ref index, value.w, all, reverse);
         }
 
-        public static Vector4 ReadVector4(this BufferByte buffer, in bool all = false, in bool reverse = false)
+        public static Vector4 ReadVector4(this BufferByte buffer, in bool reverse = false)
         {
             return new Vector4(
-                               buffer.ReadFloat(all, reverse),
-                               buffer.ReadFloat(all, reverse),
-                               buffer.ReadFloat(all, reverse),
-                               buffer.ReadFloat(all, reverse));
+                               buffer.ReadFloat(reverse),
+                               buffer.ReadFloat(reverse),
+                               buffer.ReadFloat(reverse),
+                               buffer.ReadFloat(reverse));
         }
 
         public static Vector4 GetVector4(this IList<byte> array,
@@ -49,10 +49,10 @@ namespace AIO.UEngine
                                         in   bool       all     = false,
                                         in   bool       reverse = false)
         {
-            buffer.WriteFloat(value.x, all, reverse);
-            buffer.WriteFloat(value.y, all, reverse);
-            buffer.WriteFloat(value.z, all, reverse);
-            buffer.WriteFloat(value.w, all, reverse);
+            buffer.WriteFloat(value.x, reverse);
+            buffer.WriteFloat(value.y, reverse);
+            buffer.WriteFloat(value.z, reverse);
+            buffer.WriteFloat(value.w, reverse);
         }
 
         #endregion

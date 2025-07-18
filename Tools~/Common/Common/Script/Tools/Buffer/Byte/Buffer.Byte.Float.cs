@@ -9,40 +9,41 @@ using System.Text;
 
 namespace AIO
 {
-    public partial class BufferByte
+    partial class BufferByte : IWriteFloat, IReadFloat
     {
-        #region IReadData Members
+        /// <inheritdoc/> 
+        public float ReadFloat(bool reverse = false) { return Arrays.GetFloat(ref ReadIndex, true, reverse); }
 
         /// <inheritdoc/> 
-        public float ReadFloat(bool all = false, bool reverse = false)
+        public void WriteFloat(float value, bool reverse = false)
         {
-            return Arrays.GetFloat(ref ReadIndex, all, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public float[] ReadFloatArray(bool all, bool reverse = false)
-        {
-            return Arrays.GetFloatArray(ref ReadIndex, all, reverse);
-        }
-
-        #endregion
-
-        #region IWriteData Members
-
-        /// <inheritdoc/> 
-        public void WriteFloat(float value, bool all = false, bool reverse = false)
-        {
-            var bytes = all ? Encoding.UTF8.GetBytes(value.ToString(NumberFormatInfo.CurrentInfo)) : BitConverter.GetBytes(value);
+            var bytes = Encoding.UTF8.GetBytes(value.ToString(NumberFormatInfo.CurrentInfo));
             WriteByteArray(bytes, reverse);
         }
 
-        /// <inheritdoc/> 
-        public void WriteFloatArray(ICollection<float> value, bool all, bool reverse = false)
+        /// <inheritdoc/>
+        public float[] ReadFloatArray(bool reverse = false)
         {
-            WriteLen(value.Count);
-            foreach (var item in value) WriteFloat(item, all, reverse);
+            var len    = ReadLen();
+            var floats = new float[len];
+            for (var i = 0; i < len; i++)
+            {
+                var bytes = Arrays.GetByteArray(ref ReadIndex, reverse);
+                floats[i] = float.Parse(Encoding.UTF8.GetString(bytes), NumberFormatInfo.CurrentInfo);
+            }
+
+            return floats;
         }
 
-        #endregion
+        /// <inheritdoc/>
+        public void WriteFloatArray(ICollection<float> value, bool reverse = false)
+        {
+            WriteLen(value.Count);
+            foreach (var item in value)
+            {
+                var bytes = Encoding.UTF8.GetBytes(item.ToString(NumberFormatInfo.CurrentInfo));
+                WriteByteArray(bytes, reverse);
+            }
+        }
     }
 }

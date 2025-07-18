@@ -1,30 +1,11 @@
-﻿#region
-
-using System.Collections.Generic;
-
-#endregion
+﻿using System.Collections.Generic;
 
 namespace AIO
 {
-    public partial class BufferByte
+    partial class BufferByte : IWriteDecimal, IReadDecimal
     {
-        #region IReadData Members
-
         /// <inheritdoc/> 
-        public decimal ReadDecimal(bool reverse = false)
-        {
-            return Arrays.GetDecimal(ref ReadIndex, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public decimal[] ReadDecimalArray(bool reverse = false)
-        {
-            return Arrays.GetDecimalArray(ref ReadIndex, reverse);
-        }
-
-        #endregion
-
-        #region IWriteData Members
+        public decimal ReadDecimal(bool reverse = false) { return Arrays.GetDecimal(ref ReadIndex, reverse); }
 
         /// <inheritdoc/> 
         public void WriteDecimal(decimal value, bool reverse = false)
@@ -32,16 +13,30 @@ namespace AIO
             var array = decimal.GetBits(value);
             WriteLen(array.Length);
             AutomaticExpansion(array.Length * 4);
-            foreach (var item in array) Arrays.SetInt32(ref WriteIndex, item, reverse);
+            foreach (var item in array) WriteInt32(item, reverse);
         }
 
-        /// <inheritdoc/> 
+        /// <inheritdoc/>
+        public decimal[] ReadDecimalArray(bool reverse = false)
+        {
+            var len   = ReadLen();
+            var array = new decimal[len];
+            for (var i = 0; i < len; i++)
+            {
+                array[i] = ReadDecimal(reverse);
+            }
+
+            return array;
+        }
+
+        /// <inheritdoc/>
         public void WriteDecimalArray(ICollection<decimal> value, bool reverse = false)
         {
             WriteLen(value.Count);
-            foreach (var item in value) WriteDecimal(item, reverse);
+            foreach (var item in value)
+            {
+                WriteDecimal(item, reverse);
+            }
         }
-
-        #endregion
     }
 }

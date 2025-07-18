@@ -7,10 +7,8 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public partial class BufferByte
+    partial class BufferByte : IWriteLength, IReadLength
     {
-        #region IReadData Members
-
         /// <inheritdoc/> 
         public int ReadLen()
         {
@@ -28,16 +26,6 @@ namespace AIO
                 return ReadByte() & 0x7F;
             }
         }
-
-        /// <inheritdoc/> 
-        public int[] ReadLenArray()
-        {
-            return Arrays.GetLenArray(ref ReadIndex);
-        }
-
-        #endregion
-
-        #region IWriteData Members
 
         /// <inheritdoc/> 
         public void WriteLen(int value)
@@ -95,13 +83,6 @@ namespace AIO
             }
         }
 
-        /// <inheritdoc/> 
-        public void WriteLenArray(ICollection<int> value)
-        {
-            WriteLen(value.Count);
-            foreach (var item in value) WriteLen(item);
-        }
 
-        #endregion
     }
 }

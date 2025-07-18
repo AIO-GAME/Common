@@ -130,15 +130,13 @@ namespace AIO
         {
             var p1 = new PropertyData(PropertyType.Attack, 2);
 
-            var p2 = p1.Clone();
-            Console.WriteLine(p2 == p1);
-            Console.WriteLine("-------");
-            if (p2 is PropertyData p3)
+            var p2 = new Dictionary<string, PropertyData>
             {
-                Console.WriteLine($"{p1.GetHashCode()} - {p3.GetHashCode()}");
-                Console.WriteLine($"目标:{p1}");
-                Console.WriteLine($"结果:{p3}");
-            }
+                { "p1", p1 },
+                { "p2", new PropertyData(PropertyType.Attack, 2) }
+            };
+
+
 
             return;
             var appid         = "ad3364e0-1f24-4052-9b7a-0a31482a1b64";

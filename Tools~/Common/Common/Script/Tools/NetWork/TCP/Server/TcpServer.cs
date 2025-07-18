@@ -381,7 +381,7 @@ namespace AIO.Net
         public bool Multicast(string text)
         {
             var data = new BufferByte();
-            data.WriteStringUTF8(text);
+            data.WriteString(text);
             return Multicast(data);
         }
 

@@ -10,22 +10,22 @@ namespace AIO
     /// 游戏数据
     /// </summary>
     public abstract class GBean
-        : IBinDeserialize,
-          IBinSerialize,
+        : IJsonDeserialize,
+          IJsonSerialize,
           IReset,
           IDisposable
     {
         #region IBinDeserialize Members
 
         /// <inheritdoc/>
-        public abstract void Deserialize(IReadData buffer);
+        public abstract void Deserialize(IReadJsonData buffer);
 
         #endregion
 
         #region IBinSerialize Members
 
         /// <inheritdoc/>
-        public abstract void Serialize(IWriteData buffer);
+        public abstract void Serialize(IWriteJsonData buffer);
 
         #endregion
 

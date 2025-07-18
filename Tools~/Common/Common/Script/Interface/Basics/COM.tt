@@ -1,0 +1,111 @@
+<#@ template language="C#" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+using System;
+using System.Collections.Generic;
+
+namespace AIO
+{
+    #region Read
+<#
+    var types = new List<string>()
+    {
+        "bool", "byte", "sbyte", "char",
+        "Int16", "Int32", "Int64",
+        "float", "double", "decimal",
+        "UInt16", "UInt32", "UInt64",
+    };
+
+    var reverse = new List<string>()
+    {
+        "Int16", "Int32", "Int64", "char",
+        "float", "double", "decimal",
+        "UInt16", "UInt32", "UInt64",
+    };
+
+    var list = new List<string>()
+    {
+        "bool", "byte", "sbyte", "char",
+        "Int16", "Int32", "Int64",
+        "float", "double", "decimal",
+        "UInt16", "UInt32", "UInt64",
+    };
+
+    var reverseStr = "bool reverse = false";
+    foreach (var type in types)
+    {
+        var name = type.Substring(0, 1).ToUpper() + type.Substring(1);
+        var hasReverse = reverse.Contains(type);
+        var hasList = list.Contains(type);
+#>
+
+    /// <summary>
+    /// 读取 <see cref="<#= type #>"/>
+    /// </summary>
+    public partial interface IRead<#= name #>
+    {
+        /// <summary>
+        /// 读取 <see cref="<#= type #>"/>
+        /// </summary><#= hasReverse ? "\n        /// <param name=\"reverse\">是否反转</param>" : "" #>
+        <#= type #> Read<#= name #>(<#= hasReverse ? reverseStr : "" #>);
+<#
+        if (hasList)
+        {
+#>
+
+        /// <summary>
+        /// 读取 <see cref="<#= type #>"/> 数组
+        /// </summary>
+        /// <param name="reverse"> 是否反转</param>
+        /// <returns> <see cref="<#= type #>"/> 数组</returns>
+        <#= type #>[] Read<#= name #>Array(bool reverse = false);
+
+<#
+        }
+#>
+    }
+<#
+    }
+#>
+    #endregion
+
+    #region Write
+<#
+    foreach (var type in types)
+    {
+        var name = type.Substring(0, 1).ToUpper() + type.Substring(1);
+        var hasReverse = reverse.Contains(type);
+        var hasList = list.Contains(type);
+#>
+
+    /// <summary>
+    /// 写入 <see cref="<#= type #>"/>
+    /// </summary>
+    public partial interface IWrite<#= name #>
+    {
+        /// <summary>
+        /// 写入 <see cref="<#= type #>"/>
+        /// </summary><#= hasReverse ? "\n        /// <param name=\"reverse\">是否反转</param>" : "" #>
+        /// <param name="value"><see cref="<#= type #>"/></param>
+        void Write<#= name #>(<#= type #> value<#= hasReverse ? ", " + reverseStr : "" #>);
+<#
+        if (hasList)
+        {
+#>
+
+        /// <summary>
+        /// 写入 <see cref="<#= type #>"/> 数组
+        /// </summary>
+        /// <param name="value"><see cref="<#= type #>"/>数组</param>
+        /// <param name="reverse">是否反转</param>
+        void Write<#= name #>Array(ICollection<<#= type #>> value, bool reverse = false);
+<#
+        }
+#>
+
+}
+<#
+    }
+#>
+    #endregion
+}

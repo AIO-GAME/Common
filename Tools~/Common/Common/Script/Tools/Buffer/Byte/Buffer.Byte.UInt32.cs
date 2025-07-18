@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public partial class BufferByte
+    partial class BufferByte : IWriteUInt32, IReadUInt32
     {
         #region IReadData Members
 

@@ -6,40 +6,22 @@ using System.Text;
 
 namespace AIO
 {
-    public partial class BufferByte
+    partial class BufferByte : IWriteString, IReadString
     {
+        /// <inheritdoc cref="IReadString.Encoding" />
+        public Encoding Encoding { get; set; } = Encoding.UTF8;
+
         #region IReadData Members
 
         /// <inheritdoc/> 
-        public string ReadString(Encoding encoding = null, bool reverse = false)
-        {
-            return Arrays.GetString(ref ReadIndex, encoding, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public string ReadStringUTF8(bool reverse = false)
-        {
-            return Arrays.GetString(ref ReadIndex, Encoding.UTF8, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public string ReadStringASCII(bool reverse = false)
-        {
-            return Arrays.GetString(ref ReadIndex, Encoding.ASCII, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public string ReadStringUnicode(bool reverse = false)
-        {
-            return Arrays.GetString(ref ReadIndex, Encoding.Unicode, reverse);
-        }
+        public string ReadString(bool reverse = false) { return Arrays.GetString(ref ReadIndex, Encoding, reverse); }
 
         #endregion
 
         #region IWriteData Members
 
         /// <inheritdoc/> 
-        public void WriteString(string value, Encoding encoding = null, bool reverse = false)
+        public void WriteString(string value, bool reverse = false)
         {
             if (value == null)
             {
@@ -53,11 +35,11 @@ namespace AIO
                 return;
             }
 
-            WriteByteArray((encoding ?? Encoding.Default).GetBytes(value), reverse);
+            WriteByteArray(Encoding.GetBytes(value), reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteString(StringBuilder value, Encoding encoding = null, bool reverse = false)
+        public void WriteString(StringBuilder value, bool reverse = false)
         {
             if (value == null)
             {
@@ -71,43 +53,7 @@ namespace AIO
                 return;
             }
 
-            WriteByteArray((encoding ?? Encoding.Default).GetBytes(value.ToString()), reverse);
-        }
-
-        /// <inheritdoc/> 
-        public void WriteStringUTF8(string value, bool reverse = false)
-        {
-            WriteString(value, Encoding.UTF8, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public void WriteStringUTF8(StringBuilder value, bool reverse = false)
-        {
-            WriteString(value, Encoding.UTF8, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public void WriteStringASCII(string value, bool reverse = false)
-        {
-            WriteString(value, Encoding.ASCII, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public void WriteStringASCII(StringBuilder value, bool reverse = false)
-        {
-            WriteString(value, Encoding.ASCII, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public void WriteStringUnicode(string value, bool reverse = false)
-        {
-            WriteString(value, Encoding.Unicode, reverse);
-        }
-
-        /// <inheritdoc/> 
-        public void WriteStringUnicode(StringBuilder value, bool reverse = false)
-        {
-            WriteString(value, Encoding.Unicode, reverse);
+            WriteByteArray(Encoding.GetBytes(value.ToString()), reverse);
         }
 
         #endregion

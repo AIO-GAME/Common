@@ -1,17 +1,11 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
-#endregion
+using System.Linq;
 
 namespace AIO
 {
-    public partial class BufferByte
+    partial class BufferByte : IWriteChar, IReadChar
     {
-        #region IReadData Members
-
         /// <inheritdoc/> 
         public char ReadChar(bool reverse = false)
         {
@@ -20,49 +14,34 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public char[] ReadCharArray(bool reverse = false)
-        {
-            var str = Arrays.GetString(ref ReadIndex, Encoding.UTF8, reverse);
-            if (str == null) return null;
-            if (str.Length == 0) return Array.Empty<char>();
-            return str.ToCharArray();
-        }
-
-        #endregion
-
-        #region IWriteData Members
-
-        /// <inheritdoc/> 
         public void WriteChar(char value, bool reverse = false)
         {
             var bytes = BitConverter.GetBytes(value);
-            AutomaticExpansion(bytes.Length + 4);
-            Arrays.SetByteArray(ref WriteIndex, bytes, reverse);
+            WriteByteArray(bytes);
         }
 
-        /// <inheritdoc/> 
+        /// <inheritdoc/>
         public void WriteCharArray(ICollection<char> value, bool reverse = false)
         {
-            AutomaticExpansion(4);
-            if (value == null)
+            WriteLen(value.Count);
+            foreach (var itemBytes in value)
             {
-                Arrays.SetLen(ref WriteIndex, -1);
-                return;
+                WriteByteArray(BitConverter.GetBytes(itemBytes), reverse);
             }
-
-            if (value.Count <= 0)
-            {
-                Arrays.SetLen(ref WriteIndex, 0);
-                return;
-            }
-
-            var str = new StringBuilder();
-            foreach (var c in value) str.Append(c);
-            var bytes = Encoding.UTF8.GetBytes(str.ToString());
-            AutomaticExpansion(bytes.Length);
-            Arrays.SetByteArray(ref WriteIndex, bytes, reverse);
         }
 
-        #endregion
+        /// <inheritdoc/>
+        public char[] ReadCharArray(bool reverse = false)
+        {
+            var len = ReadLen();
+            var chars = new char[len];
+            for (var i = 0; i < len; i++)
+            {
+                var bytes = Arrays.GetByteArray(ref ReadIndex, reverse);
+                chars[i] = BitConverter.ToChar(bytes, 0);
+            }
+
+            return chars;
+        }
     }
 }

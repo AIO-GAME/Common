@@ -760,75 +760,45 @@
         <Compile Include="Script\Helper\Net\U.Net.Helper.cs"/>
         <Compile Include="Script\Helper\Reflect\U.Reflect.cs"/>
         <Compile Include="Script\Helper\Time\UTimeStamp.cs"/>
-        <Compile Include="Script\Interface\Disposable\LockDisposable.cs"/>
-        <Compile Include="Script\Interface\ILoad.cs"/>
-        <Compile Include="Script\Interface\ISave.cs"/>
-        <Compile Include="Script\Interface\Read\IReadBool.cs"/>
-        <Compile Include="Script\Interface\Read\IReadByte.cs"/>
-        <Compile Include="Script\Interface\Read\IReadChar.cs"/>
-        <Compile Include="Script\Interface\Read\IReadData.cs"/>
-        <Compile Include="Script\Interface\Read\IReadDecimal.cs"/>
-        <Compile Include="Script\Interface\Read\IReadDouble.cs"/>
-        <Compile Include="Script\Interface\Read\IReadEnum.cs"/>
-        <Compile Include="Script\Interface\Read\IReadFloat.cs"/>
-        <Compile Include="Script\Interface\Read\IReadICollection.cs"/>
-        <Compile Include="Script\Interface\Read\IReadIDictionary.cs"/>
-        <Compile Include="Script\Interface\Read\IReadIList.cs"/>
-        <Compile Include="Script\Interface\Read\IReadInt16.cs"/>
-        <Compile Include="Script\Interface\Read\IReadInt32.cs"/>
-        <Compile Include="Script\Interface\Read\IReadInt64.cs"/>
-        <Compile Include="Script\Interface\Read\IReadJson.cs"/>
-        <Compile Include="Script\Interface\Read\IReadLength.cs"/>
-        <Compile Include="Script\Interface\Read\IReadSByte.cs"/>
-        <Compile Include="Script\Interface\Read\IReadString.cs"/>
-        <Compile Include="Script\Interface\Read\IReadUInt16.cs"/>
-        <Compile Include="Script\Interface\Read\IReadUInt32.cs"/>
-        <Compile Include="Script\Interface\Read\IReadUInt64.cs"/>
-        <Compile Include="Script\Interface\Storage\IBinData.cs"/>
-        <Compile Include="Script\Interface\Storage\IBinDeserialize.cs"/>
-        <Compile Include="Script\Interface\Storage\IBinSerialize.cs"/>
-        <Compile Include="Script\Interface\Storage\IBinStorage.cs"/>
-        <Compile Include="Script\Interface\Storage\IDeserialize.cs"/>
-        <Compile Include="Script\Interface\Storage\IReset.cs"/>
-        <Compile Include="Script\Interface\Storage\ISerialize.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteBool.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteByte.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteChar.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteData.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteDecimal.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteDouble.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteEnum.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteFloat.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteICollection.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteIDictionary.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteIList.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteInt16.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteInt32.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteInt64.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteJson.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteLength.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteSByte.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteString.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteUInt16.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteUInt32.cs"/>
-        <Compile Include="Script\Interface\Write\IWriteUInt64.cs"/>
+        <Compile Include="Script\Interface\Basics\COM.cs">
+          <AutoGen>True</AutoGen>
+          <DesignTime>True</DesignTime>
+          <DependentUpon>COM.tt</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Interface\Basics\Read\IReadBasics.cs" />
+        <Compile Include="Script\Interface\Basics\Read\IReadEnum.cs" />
+        <Compile Include="Script\Interface\Basics\Read\IReadLength.cs" />
+        <Compile Include="Script\Interface\Basics\Read\IReadString.cs" />
+        <Compile Include="Script\Interface\Basics\Write\IWriteBasics.cs" />
+        <Compile Include="Script\Interface\Basics\Write\IWriteEnum.cs" />
+        <Compile Include="Script\Interface\Basics\Write\IWriteLength.cs" />
+        <Compile Include="Script\Interface\Basics\Write\IWriteString.cs" />
+        <Compile Include="Script\Interface\Disposable\LockDisposable.cs" />
+        <Compile Include="Script\Interface\ILoad.cs" />
+        <Compile Include="Script\Interface\ISave.cs" />
+        <Compile Include="Script\Interface\Json\IJsonData.cs" />
+        <Compile Include="Script\Interface\Json\IJsonDeserialize.cs" />
+        <Compile Include="Script\Interface\Json\IJsonSerialize.cs" />
+        <Compile Include="Script\Interface\Json\IReadJsonData.cs" />
+        <Compile Include="Script\Interface\Json\IReset.cs" />
+        <Compile Include="Script\Interface\Json\IWriteJsonData.cs" />
         <Compile Include="Script\Tools\Action\Action.Generated.cs">
           <AutoGen>True</AutoGen>
           <DesignTime>True</DesignTime>
           <DependentUpon>Action.Generated.tt</DependentUpon>
         </Compile>
-        <Compile Include="Script\Tools\Array\DisplayList.cs"/>
-        <Compile Include="Script\Tools\Array\PageDictionary.cs"/>
-        <Compile Include="Script\Tools\Array\PageList.cs"/>
-        <Compile Include="Script\Tools\Bean\GBean.cs"/>
-        <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs"/>
-        <Compile Include="Script\Tools\Bean\GBeanSystem.cs"/>
-        <Compile Include="Script\Tools\Buffer\Buffer.cs"/>
-        <Compile Include="Script\Tools\Buffer\Buffer.Extend.cs"/>
-        <Compile Include="Script\Tools\Buffer\Buffer.Generics.cs"/>
-        <Compile Include="Script\Tools\Buffer\Buffer.ICloneable.cs"/>
-        <Compile Include="Script\Tools\Buffer\Buffer.IEqualityComparer.cs"/>
-        <Compile Include="Script\Tools\Buffer\Buffer.IList.cs"/>
+        <Compile Include="Script\Tools\Array\DisplayList.cs" />
+        <Compile Include="Script\Tools\Array\PageDictionary.cs" />
+        <Compile Include="Script\Tools\Array\PageList.cs" />
+        <Compile Include="Script\Tools\Bean\GBean.cs" />
+        <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
+        <Compile Include="Script\Tools\Bean\GBeanSystem.cs" />
+        <Compile Include="Script\Tools\Buffer\Buffer.cs" />
+        <Compile Include="Script\Tools\Buffer\Buffer.Extend.cs" />
+        <Compile Include="Script\Tools\Buffer\Buffer.Generics.cs" />
+        <Compile Include="Script\Tools\Buffer\Buffer.ICloneable.cs" />
+        <Compile Include="Script\Tools\Buffer\Buffer.IEqualityComparer.cs" />
+        <Compile Include="Script\Tools\Buffer\Buffer.IList.cs" />
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Bool.cs">
             <DependentUpon>Buffer.Byte.cs</DependentUpon>
         </Compile>
@@ -838,7 +808,7 @@
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Char.cs">
             <DependentUpon>Buffer.Byte.cs</DependentUpon>
         </Compile>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.cs" />
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Decimal.cs">
             <DependentUpon>Buffer.Byte.cs</DependentUpon>
         </Compile>
@@ -851,15 +821,6 @@
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Float.cs">
             <DependentUpon>Buffer.Byte.cs</DependentUpon>
         </Compile>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.ICollection.cs">
-            <DependentUpon>Buffer.Byte.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IDictionary.cs">
-            <DependentUpon>Buffer.Byte.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IList.cs">
-            <DependentUpon>Buffer.Byte.cs</DependentUpon>
-        </Compile>
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int16.cs">
             <DependentUpon>Buffer.Byte.cs</DependentUpon>
         </Compile>
@@ -869,9 +830,7 @@
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int64.cs">
             <DependentUpon>Buffer.Byte.cs</DependentUpon>
         </Compile>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Json.cs">
-            <DependentUpon>Buffer.Byte.cs</DependentUpon>
-        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\JsonBuffer.cs" />
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Len.cs">
             <DependentUpon>Buffer.Byte.cs</DependentUpon>
         </Compile>
@@ -890,8 +849,8 @@
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt64.cs">
             <DependentUpon>Buffer.Byte.cs</DependentUpon>
         </Compile>
-        <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs"/>
-        <Compile Include="Script\Tools\Buffer\Ring\BufferRing.Extend.cs"/>
+        <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs" />
+        <Compile Include="Script\Tools\Buffer\Ring\BufferRing.Extend.cs" />
         <Compile Include="Script\Tools\Console\CS.cs" />
         <Compile Include="Script\Tools\FileCache.cs" />
         <Compile Include="Script\Tools\Generate\GenerateBuilder.cs" />
@@ -1136,8 +1095,12 @@
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>Stream.Extend.Encrypt.Generated.cs</LastGenOutput>
         </Content>
-        <Content Include="Script\Helper\Net\FTP\FTP.md"/>
-        <Content Include="Script\Helper\Net\Http\HTTP.md"/>
+        <Content Include="Script\Helper\Net\FTP\FTP.md" />
+        <Content Include="Script\Helper\Net\Http\HTTP.md" />
+        <Content Include="Script\Interface\Basics\COM.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>COM.cs</LastGenOutput>
+        </Content>
         <Content Include="Script\Tools\Action\Action.Generated.tt">
           <Generator>TextTemplatingFileGenerator</Generator>
           <LastGenOutput>Action.Generated.cs</LastGenOutput>

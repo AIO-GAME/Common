@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -52,7 +53,7 @@ namespace AIO
         private static string GetMD5(in byte[] buffer)
         {
             var MD5Crypto = new MD5CryptoServiceProvider();
-            var Builder = new StringBuilder();
+            var Builder   = new StringBuilder();
 
             var retVal = MD5Crypto.ComputeHash(buffer);
             foreach (var item in MD5Crypto.ComputeHash(buffer))
@@ -68,7 +69,7 @@ namespace AIO
         {
             TargetPath = targetPath;
             var attributeType = typeof(GBeanRegisterAttribute);
-            var gBeanType = typeof(GBean);
+            var gBeanType     = typeof(GBean);
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             foreach (var type in assembly.GetTypes())
             {
@@ -85,9 +86,9 @@ namespace AIO
                         else
                         {
                             throw new Exception(string.Format(
-                                                    "GBean 出现重复 ID !!! 请检查 Info => ID : {0} | Current Type Name : {1} | Exist Type Name : {2}",
-                                                    gBean.ID, type.FullName, Data[gBean.ID].GetType().FullName
-                                                ));
+                                                              "GBean 出现重复 ID !!! 请检查 Info => ID : {0} | Current Type Name : {1} | Exist Type Name : {2}",
+                                                              gBean.ID, type.FullName, Data[gBean.ID].GetType().FullName
+                                                             ));
                         }
                     }
             }
@@ -104,7 +105,7 @@ namespace AIO
                 return Task.CompletedTask;
             }
 
-            Bean = new BufferByte(File.ReadAllBytes(TargetPath));
+            Bean = new BufferJsonDataData(TargetPath);
 
             var task = new List<Task>();
             task.Add(Task.Factory.StartNew(() =>
@@ -113,31 +114,31 @@ namespace AIO
                 CS.WriteLine("Load 总数据长度: {0} -> IDS: {1}", Bean.WriteOffset, ids);
                 for (var i = 0; i < ids; i++)
                 {
-                    var id = Bean.ReadInt32();
-                    var md5 = Bean.ReadStringUTF8();
+                    var id          = Bean.ReadInt32();
+                    var md5         = Bean.ReadString();
                     var bufferCount = Bean.ReadLen();
-                    var startIndex = Bean.ReadInt32();
+                    var startIndex  = Bean.ReadInt32();
 
                     if (Data.ContainsKey(id))
                     {
-                        var buffer = Bean.Read(startIndex, bufferCount);
+                        var buffer    = Bean.Read(startIndex, bufferCount);
                         var verifyMD5 = GetMD5(buffer);
                         if (verifyMD5 == md5)
                         {
-                            Data[id].Deserialize(buffer);
+                            Data[id].Deserialize(new BufferJsonDataData(buffer));
                             CS.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
-                                              id, startIndex, bufferCount, md5);
+                                         id, startIndex, bufferCount, md5);
                         }
                         else
                         {
                             CS.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} != {4} => 数据MD5验证失败",
-                                              id, startIndex, bufferCount, md5, GetMD5(buffer.ToArray()));
+                                         id, startIndex, bufferCount, md5, GetMD5(buffer.ToArray()));
                         }
                     }
                     else
                     {
                         CS.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} =>  未查询到指定数据ID",
-                                          id, startIndex, bufferCount, md5);
+                                     id, startIndex, bufferCount, md5);
                     }
 
                     Bean.Skip(bufferCount);
@@ -164,8 +165,8 @@ namespace AIO
         /// </summary>
         public static void Save()
         {
-            var root = new BufferByte();
-            var bytes = new BufferByte();
+            var root  = new BufferJsonDataData();
+            var bytes = new BufferJsonDataData();
             root.WriteLen(Data.Count);
             foreach (var item in Data)
             {
@@ -174,14 +175,14 @@ namespace AIO
                 var md5 = GetMD5(bytes);
 
                 root.WriteInt32(item.Key);
-                root.WriteStringUTF8(md5);
+                root.WriteString(md5);
                 root.WriteLen(bytes.Count);
                 var startindex = root.WriteOffset + 5;
                 root.WriteInt32(root.WriteOffset + 5);
                 root.Write(bytes.ToArray());
 
                 CS.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
-                                  item.Key, startindex, bytes.Count, md5);
+                             item.Key, startindex, bytes.Count, md5);
             }
 
             CS.WriteLine("Save 总数据长度: {0} -> IDS: {1}", root.Count, Data.Count);

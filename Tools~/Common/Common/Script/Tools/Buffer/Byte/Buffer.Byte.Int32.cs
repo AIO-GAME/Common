@@ -6,25 +6,14 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public partial class BufferByte
+    partial class BufferByte : IWriteInt32, IReadInt32
     {
-        #region IReadData Members
+        /// <inheritdoc/> 
+        public int ReadInt32(bool reverse = false) { return Arrays.GetInt32(ref ReadIndex, reverse); }
 
         /// <inheritdoc/> 
-        public int ReadInt32(bool reverse = false)
-        {
-            return Arrays.GetInt32(ref ReadIndex, reverse);
-        }
+        public int[] ReadInt32Array(bool reverse = false) { return Arrays.GetInt32Array(ref ReadIndex, reverse); }
 
-        /// <inheritdoc/> 
-        public int[] ReadInt32Array(bool reverse = false)
-        {
-            return Arrays.GetInt32Array(ref ReadIndex, reverse);
-        }
-
-        #endregion
-
-        #region IWriteData Members
 
         /// <inheritdoc/> 
         public void WriteInt32(int value, bool reverse = false)
@@ -40,7 +29,5 @@ namespace AIO
             AutomaticExpansion(value.Count * 4);
             foreach (var item in value) Arrays.SetInt32(ref WriteIndex, item, reverse);
         }
-
-        #endregion
     }
 }

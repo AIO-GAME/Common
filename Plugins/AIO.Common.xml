@@ -12277,6 +12277,626 @@
             <param name="text">Text to append as a span of characters</param>
             <returns>Count of append bytes</returns>
         </member>
+        <member name="T:AIO.IReadBool">
+            <summary>
+            读取 <see cref="T:System.Boolean"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadBool.ReadBool">
+            <summary>
+            读取 <see cref="T:System.Boolean"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadBool.ReadBoolArray(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Boolean"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Boolean"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadByte">
+            <summary>
+            读取 <see cref="T:System.Byte"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadByte.ReadByte">
+            <summary>
+            读取 <see cref="T:System.Byte"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadByte.ReadByteArray(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Byte"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Byte"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadSbyte">
+            <summary>
+            读取 <see cref="T:System.SByte"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadSbyte.ReadSbyte">
+            <summary>
+            读取 <see cref="T:System.SByte"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadSbyte.ReadSbyteArray(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.SByte"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.SByte"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadChar">
+            <summary>
+            读取 <see cref="T:System.Char"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadChar.ReadChar(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Char"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadChar.ReadCharArray(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Char"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Char"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadInt16">
+            <summary>
+            读取 <see cref="T:System.Int16"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadInt16.ReadInt16(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Int16"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadInt16.ReadInt16Array(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Int16"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Int16"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadInt32">
+            <summary>
+            读取 <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadInt32.ReadInt32(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Int32"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadInt32.ReadInt32Array(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Int32"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Int32"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadInt64">
+            <summary>
+            读取 <see cref="T:System.Int64"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadInt64.ReadInt64(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Int64"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadInt64.ReadInt64Array(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Int64"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Int64"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadFloat">
+            <summary>
+            读取 <see cref="T:System.Single"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadFloat.ReadFloat(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Single"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadFloat.ReadFloatArray(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Single"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Single"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadDouble">
+            <summary>
+            读取 <see cref="T:System.Double"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadDouble.ReadDouble(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Double"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadDouble.ReadDoubleArray(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Double"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Double"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadDecimal">
+            <summary>
+            读取 <see cref="T:System.Decimal"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadDecimal.ReadDecimal(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Decimal"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadDecimal.ReadDecimalArray(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.Decimal"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.Decimal"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadUInt16">
+            <summary>
+            读取 <see cref="T:System.UInt16"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadUInt16.ReadUInt16(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.UInt16"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadUInt16.ReadUInt16Array(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.UInt16"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.UInt16"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadUInt32">
+            <summary>
+            读取 <see cref="T:System.UInt32"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadUInt32.ReadUInt32(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.UInt32"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadUInt32.ReadUInt32Array(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.UInt32"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.UInt32"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IReadUInt64">
+            <summary>
+            读取 <see cref="T:System.UInt64"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IReadUInt64.ReadUInt64(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.UInt64"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IReadUInt64.ReadUInt64Array(System.Boolean)">
+            <summary>
+            读取 <see cref="T:System.UInt64"/> 数组
+            </summary>
+            <param name="reverse"> 是否反转</param>
+            <returns> <see cref="T:System.UInt64"/> 数组</returns>
+        </member>
+        <member name="T:AIO.IWriteBool">
+            <summary>
+            写入 <see cref="T:System.Boolean"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteBool.WriteBool(System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Boolean"/>
+            </summary>
+            <param name="value"><see cref="T:System.Boolean"/></param>
+        </member>
+        <member name="M:AIO.IWriteBool.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Boolean"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Boolean"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteByte">
+            <summary>
+            写入 <see cref="T:System.Byte"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteByte.WriteByte(System.Byte)">
+            <summary>
+            写入 <see cref="T:System.Byte"/>
+            </summary>
+            <param name="value"><see cref="T:System.Byte"/></param>
+        </member>
+        <member name="M:AIO.IWriteByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Byte"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Byte"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteSbyte">
+            <summary>
+            写入 <see cref="T:System.SByte"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteSbyte.WriteSbyte(System.SByte)">
+            <summary>
+            写入 <see cref="T:System.SByte"/>
+            </summary>
+            <param name="value"><see cref="T:System.SByte"/></param>
+        </member>
+        <member name="M:AIO.IWriteSbyte.WriteSbyteArray(System.Collections.Generic.ICollection{System.SByte},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.SByte"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.SByte"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteChar">
+            <summary>
+            写入 <see cref="T:System.Char"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteChar.WriteChar(System.Char,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Char"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.Char"/></param>
+        </member>
+        <member name="M:AIO.IWriteChar.WriteCharArray(System.Collections.Generic.ICollection{System.Char},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Char"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Char"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteInt16">
+            <summary>
+            写入 <see cref="T:System.Int16"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt16.WriteInt16(System.Int16,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Int16"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.Int16"/></param>
+        </member>
+        <member name="M:AIO.IWriteInt16.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Int16"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Int16"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteInt32">
+            <summary>
+            写入 <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt32.WriteInt32(System.Int32,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Int32"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.Int32"/></param>
+        </member>
+        <member name="M:AIO.IWriteInt32.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Int32"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Int32"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteInt64">
+            <summary>
+            写入 <see cref="T:System.Int64"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt64.WriteInt64(System.Int64,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Int64"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.Int64"/></param>
+        </member>
+        <member name="M:AIO.IWriteInt64.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Int64"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Int64"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteFloat">
+            <summary>
+            写入 <see cref="T:System.Single"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteFloat.WriteFloat(System.Single,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Single"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.Single"/></param>
+        </member>
+        <member name="M:AIO.IWriteFloat.WriteFloatArray(System.Collections.Generic.ICollection{System.Single},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Single"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Single"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteDouble">
+            <summary>
+            写入 <see cref="T:System.Double"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteDouble.WriteDouble(System.Double,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Double"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.Double"/></param>
+        </member>
+        <member name="M:AIO.IWriteDouble.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Double"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Double"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteDecimal">
+            <summary>
+            写入 <see cref="T:System.Decimal"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteDecimal.WriteDecimal(System.Decimal,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Decimal"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.Decimal"/></param>
+        </member>
+        <member name="M:AIO.IWriteDecimal.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.Decimal"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.Decimal"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteUInt16">
+            <summary>
+            写入 <see cref="T:System.UInt16"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt16.WriteUInt16(System.UInt16,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.UInt16"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.UInt16"/></param>
+        </member>
+        <member name="M:AIO.IWriteUInt16.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.UInt16"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.UInt16"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteUInt32">
+            <summary>
+            写入 <see cref="T:System.UInt32"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt32.WriteUInt32(System.UInt32,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.UInt32"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.UInt32"/></param>
+        </member>
+        <member name="M:AIO.IWriteUInt32.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.UInt32"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.UInt32"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteUInt64">
+            <summary>
+            写入 <see cref="T:System.UInt64"/>
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt64.WriteUInt64(System.UInt64,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.UInt64"/>
+            </summary>
+            <param name="reverse">是否反转</param>
+            <param name="value"><see cref="T:System.UInt64"/></param>
+        </member>
+        <member name="M:AIO.IWriteUInt64.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64},System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.UInt64"/> 数组
+            </summary>
+            <param name="value"><see cref="T:System.UInt64"/>数组</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IReadBasics">
+            <summary>
+            数据读取接口
+            </summary>
+        </member>
+        <member name="P:AIO.IReadBasics.Count">
+            <summary>
+            可读数据长度
+            </summary>
+        </member>
+        <member name="M:AIO.IReadBasics.CheckSize(System.Int32)">
+            <summary>
+            检查是否有指定数据长度
+            </summary>
+            <param name="count">长度</param>
+            <returns>Ture:满足 False:不满足</returns>
+        </member>
+        <member name="M:AIO.IReadBasics.Skip(System.Int32)">
+            <summary>
+            跳过读取指定长度
+            </summary>
+            <param name="count">长度</param>
+        </member>
+        <member name="T:AIO.IReadEnum">
+            <summary>
+            IReadEnum
+            </summary>
+        </member>
+        <member name="M:AIO.IReadEnum.ReadEnum``1">
+            <summary>
+            读取枚举值
+            </summary>
+            <typeparam name="T"> 枚举类型</typeparam>
+            <returns>枚举值</returns>
+        </member>
+        <member name="T:AIO.IReadLength">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadLength.ReadLen">
+            <summary>
+            读取一个长度 0至512M
+            </summary>
+            原理 : 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="T:AIO.IReadString">
+            <summary>
+            读取 数据 String
+            </summary>
+        </member>
+        <member name="P:AIO.IReadString.Encoding">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="M:AIO.IReadString.ReadString(System.Boolean)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:AIO.IWriteBasics">
+            <summary>
+            写入数据
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteEnum">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteEnum.WriteEnum(System.Enum)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteLength">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.Byte)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.SByte)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.UInt16)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.Int16)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.Int32)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="T:AIO.IWriteString">
+            <summary>
+            写入数据 <see cref="T:System.String"/>
+            </summary>
+        </member>
+        <member name="P:AIO.IWriteString.Encoding">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteString.WriteString(System.String,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.String"/>
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWriteString.WriteString(System.Text.StringBuilder,System.Boolean)">
+            <summary>
+            写入 <see cref="T:System.String"/>
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
         <member name="T:AIO.LockDisposable">
             <summary>
             Disposable lock class performs exit action on dispose operation.
@@ -12342,505 +12962,73 @@
             保存文件
             </summary>
         </member>
-        <member name="T:AIO.IReadBool">
-            <summary>
-            读取Bool
-            </summary>
-        </member>
-        <member name="M:AIO.IReadBool.ReadBool">
-            <summary>
-            读取 Bool 数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IReadBool.ReadBoolArray(System.Boolean)">
-            <summary>
-            读取 Bool数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>Bool数组</returns>
-        </member>
-        <member name="T:AIO.IReadByte">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadByte.ReadByte">
-            <summary>
-            读取 Byte 数据类型
-            </summary>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadByte.ReadByteArray(System.Boolean)">
-            <summary>
-            读取 Byte 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadChar">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadChar.ReadChar(System.Boolean)">
-            <summary>
-            读取 Char 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadChar.ReadCharArray(System.Boolean)">
-            <summary>
-            读取 Char 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadData">
-            <summary>
-            数据读取接口
-            </summary>
-        </member>
-        <member name="P:AIO.IReadData.Count">
-            <summary>
-            可读数据长度
-            </summary>
-        </member>
-        <member name="M:AIO.IReadData.ReadData``1">
-            <summary>
-            读取数据
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
-        </member>
-        <member name="M:AIO.IReadData.ReadDataArray``1(System.Collections.Generic.ICollection{``0})">
-            <summary>
-            读取数据
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
-        </member>
-        <member name="M:AIO.IReadData.CheckSize(System.Int32)">
-            <summary>
-            检查是否有指定数据长度
-            </summary>
-            <param name="count">长度</param>
-            <returns>Ture:满足 False:不满足</returns>
-        </member>
-        <member name="M:AIO.IReadData.Skip(System.Int32)">
-            <summary>
-            跳过读取指定长度
-            </summary>
-            <param name="count">长度</param>
-        </member>
-        <member name="T:AIO.IReadDecimal">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadDecimal.ReadDecimal(System.Boolean)">
-            <summary>
-            读取 Decimal 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadDecimal.ReadDecimalArray(System.Boolean)">
-            <summary>
-            读取 Decimal 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadDouble">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadDouble.ReadDouble(System.Boolean,System.Boolean)">
-            <summary>
-            读取 Double 数据类型
-            </summary>
-            <param name="all">全部</param>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadDouble.ReadDoubleArray(System.Boolean,System.Boolean)">
-            <summary>
-            读取 Double 数组 数据类型
-            </summary>
-            <param name="all">全部</param>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadEnum">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadEnum.ReadEnum``1">
-            <summary>
-            读取 枚举 数据类型
-            </summary>
-            <typeparam name="T">枚举类型</typeparam>
-            <returns>枚举值</returns>
-        </member>
-        <member name="M:AIO.IReadEnum.ReadEnumArray``1">
-            <summary>
-            读取 枚举数组 数据类型
-            </summary>
-            <typeparam name="T">枚举类型</typeparam>
-            <returns>枚举值数组</returns>
-        </member>
-        <member name="T:AIO.IReadFloat">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadFloat.ReadFloatArray(System.Boolean,System.Boolean)">
-            <summary>
-            读取 Float 数组 数据类型
-            </summary>
-            <param name="all"></param>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadFloat.ReadFloat(System.Boolean,System.Boolean)">
-            <summary>
-            读取 Float 数据类型
-            </summary>
-            <param name="all">全部</param>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadICollection">
-            <summary>
-            读取字典
-            </summary>
-        </member>
-        <member name="M:AIO.IReadICollection.ReadCollection``1(System.Collections.Generic.ICollection{``0})">
-            <summary>
-            读取字典
-            </summary>
-        </member>
-        <member name="T:AIO.IReadIDictionary">
-            <summary>
-            读取字典
-            </summary>
-        </member>
-        <member name="M:AIO.IReadIDictionary.ReadDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            读取字典
-            </summary>
-        </member>
-        <member name="T:AIO.IReadIList">
-            <summary>
-            读取字典
-            </summary>
-        </member>
-        <member name="M:AIO.IReadIList.ReadList``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            读取字典
-            </summary>
-        </member>
-        <member name="T:AIO.IReadInt16">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadInt16.ReadInt16(System.Boolean)">
-            <summary>
-            读取 Int16 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadInt16.ReadInt16Array(System.Boolean)">
-            <summary>
-            读取 Int16 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadInt32">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadInt32.ReadInt32(System.Boolean)">
-            <summary>
-            读取 Int32 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadInt32.ReadInt32Array(System.Boolean)">
-            <summary>
-            读取 Int32 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadInt64">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadInt64.ReadInt64(System.Boolean)">
-            <summary>
-            读取 Int64 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadInt64.ReadInt64Array(System.Boolean)">
-            <summary>
-            读取 Int64 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadJson">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadJson.ReadJson``1(System.Text.Encoding,System.Boolean)">
-            <summary>
-            读取Json数据
-            </summary>
-            <param name="encoding">字符串编码</param>
-            <param name="reverse">反转</param>
-            <typeparam name="T">数据泛型</typeparam>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadJson.ReadJsonUTF8``1(System.Boolean)">
-            <summary>
-            读取Json数据
-            </summary>
-            <param name="reverse">反转</param>
-            <typeparam name="T">数据泛型</typeparam>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadJson.ReadJsonASCII``1(System.Boolean)">
-            <summary>
-            读取Json数据
-            </summary>
-            <param name="reverse">反转</param>
-            <typeparam name="T">数据泛型</typeparam>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadJson.ReadJsonUnicode``1(System.Boolean)">
-            <summary>
-            读取Json数据
-            </summary>
-            <param name="reverse">反转</param>
-            <typeparam name="T">数据泛型</typeparam>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadLength">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadLength.ReadLen">
-            <summary>
-            读取一个长度 0至512M
-            </summary>
-            原理 : 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IReadLength.ReadLenArray">
-            <summary>
-            读取一个长度数组
-            </summary>
-            <returns>返回数组</returns>
-        </member>
-        <member name="T:AIO.IReadSByte">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadSByte.ReadSByte">
-            <summary>
-            读取 SByte 数据类型
-            </summary>
-            <returns>返回数组</returns>
-        </member>
-        <member name="M:AIO.IReadSByte.ReadSByteArray(System.Boolean)">
-            <summary>
-            读取 Sbyte 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>返回数组</returns>
-        </member>
-        <member name="T:AIO.IReadString">
-            <summary>
-            读取 数据 String
-            </summary>
-        </member>
-        <member name="M:AIO.IReadString.ReadStringUTF8(System.Boolean)">
-            <summary>
-            读取字符串
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>字符串</returns>
-        </member>
-        <member name="M:AIO.IReadString.ReadStringASCII(System.Boolean)">
-            <summary>
-            读取字符串
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>字符串</returns>
-        </member>
-        <member name="M:AIO.IReadString.ReadStringUnicode(System.Boolean)">
-            <summary>
-            读取字符串
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>字符串</returns>
-        </member>
-        <member name="M:AIO.IReadString.ReadString(System.Text.Encoding,System.Boolean)">
-            <summary>
-            读取字符串
-            </summary>
-            <param name="encoding">编码</param>
-            <param name="reverse">是否反转</param>
-            <returns>字符串</returns>
-        </member>
-        <member name="T:AIO.IReadUInt16">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadUInt16.ReadUInt16(System.Boolean)">
-            <summary>
-            读取 UInt16 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadUInt16.ReadUInt16Array(System.Boolean)">
-            <summary>
-            读取 UInt16 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadUInt32">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadUInt32.ReadUInt32(System.Boolean)">
-            <summary>
-            读取 UInt32 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadUInt32.ReadUInt32Array(System.Boolean)">
-            <summary>
-            读取 UInt32 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IReadUInt64">
-            <summary>
-            读取数据
-            </summary>
-        </member>
-        <member name="M:AIO.IReadUInt64.ReadUInt64(System.Boolean)">
-            <summary>
-            读取 UInt64 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="M:AIO.IReadUInt64.ReadUInt64Array(System.Boolean)">
-            <summary>
-            读取 UInt64 数组 数据类型
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>数据值</returns>
-        </member>
-        <member name="T:AIO.IBinData">
+        <member name="T:AIO.IJsonData">
             <summary>
             数据序列化
             </summary>
         </member>
-        <member name="T:AIO.BinData">
+        <member name="T:AIO.JsonData">
             <summary>
             二进制数据基类
             </summary>
         </member>
-        <member name="M:AIO.BinData.Dispose">
+        <member name="M:AIO.JsonData.Dispose">
             <summary>
             重置数据
             </summary>
         </member>
-        <member name="M:AIO.BinData.Deserialize(AIO.IReadData)">
+        <member name="M:AIO.JsonData.Deserialize(AIO.IReadJsonData)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinData.Serialize(AIO.IWriteData)">
+        <member name="M:AIO.JsonData.Serialize(AIO.IWriteJsonData)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinData.Clone">
+        <member name="M:AIO.JsonData.Clone">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinData.Reset">
+        <member name="M:AIO.JsonData.Reset">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinData.Parser``1(AIO.IReadData)">
-            <summary>
-            解析数据
-            </summary>
-            <param name="buffer">数据</param>
-            <typeparam name="T"> 数据类型 </typeparam>
-            <returns> 解析后的数据 </returns>
-        </member>
-        <member name="T:AIO.IBinDeserialize">
+        <member name="T:AIO.IJsonDeserialize">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:AIO.IBinDeserialize.Deserialize(AIO.IReadData)">
+        <member name="M:AIO.IJsonDeserialize.Deserialize(AIO.IReadJsonData)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="T:AIO.IBinSerialize">
+        <member name="T:AIO.IJsonSerialize">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:AIO.IBinSerialize.Serialize(AIO.IWriteData)">
+        <member name="M:AIO.IJsonSerialize.Serialize(AIO.IWriteJsonData)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="T:AIO.IBinStorage">
+        <member name="T:AIO.IReadJsonData">
             <summary>
-            二进制数据存储
+            读取数据
             </summary>
         </member>
-        <member name="P:AIO.IBinStorage.Data">
+        <member name="M:AIO.IReadJsonData.ReadData``1(System.Boolean)">
             <summary>
-            数据
+            读取 Json 数据
             </summary>
+            <param name="reverse">反转</param>
+            <typeparam name="T">数据泛型</typeparam>
+            <returns>数据值</returns>
         </member>
-        <member name="T:AIO.IDeserialize">
+        <member name="M:AIO.IReadJsonData.ReadData``1(``0@,System.Boolean)">
             <summary>
-            反序列化
+            读取 Json 数据
             </summary>
-        </member>
-        <member name="M:AIO.IDeserialize.Deserialize">
-            <summary>
-            反序列化
-            </summary>
+            <param name="value"> 输出值</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">数据泛型</typeparam>
         </member>
         <member name="T:AIO.IReset">
             <summary>
@@ -12852,428 +13040,18 @@
             重置
             </summary>
         </member>
-        <member name="T:AIO.ISerialize">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.ISerialize.Serialize">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteBool">
+        <member name="T:AIO.IWriteJsonData">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteBool.WriteBool(System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteBool.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="T:AIO.IWriteByte">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteByte.WriteByte(System.Byte)">
-            <summary>
-            写入指定数据类型
-            </summary>
-            <param name="value"></param>
-        </member>
-        <member name="M:AIO.IWriteByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="T:AIO.IWriteChar">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteChar.WriteChar(System.Char,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteChar.WriteCharArray(System.Collections.Generic.ICollection{System.Char},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteData">
-            <summary>
-            写入数据
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteData.WriteData``1(``0)">
-            <summary>
-            写入二进制数据
-            </summary>
-            <param name="buffer">数据</param>
-        </member>
-        <member name="M:AIO.IWriteData.WriteDataArray``1(System.Collections.Generic.ICollection{``0})">
-            <summary>
-            读取数据
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
-        </member>
-        <member name="T:AIO.IWriteDecimal">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteDecimal.WriteDecimal(System.Decimal,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteDecimal.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteDouble">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteDouble.WriteDouble(System.Double,System.Boolean,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteDouble.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double},System.Boolean,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteEnum">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteEnum.WriteEnum``1(``0)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteEnum.WriteEnumArray``1(System.Collections.Generic.ICollection{``0})">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteFloat">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteFloat.WriteFloat(System.Single,System.Boolean,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteFloat.WriteFloatArray(System.Collections.Generic.ICollection{System.Single},System.Boolean,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteICollection">
-            <summary>
-            写入字典
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteICollection.WriteCollection``1(System.Collections.Generic.ICollection{``0})">
-            <summary>
-            写入字典
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteIDictionary">
-            <summary>
-            写入字典
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteIDictionary.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            写入字典
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteIList">
-            <summary>
-            写入字典
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteIList.WriteList``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            写入字典
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteInt16">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteInt16.WriteInt16(System.Int16,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteInt16.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteInt32">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteInt32.WriteInt32(System.Int32,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteInt32.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteInt64">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteInt64.WriteInt64(System.Int64,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteInt64.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteJson">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteJson.WriteJson``1(``0,System.Text.Encoding,System.Boolean)">
-            <summary>
-            写入Json数据
-            </summary>
-            <param name="value">输入源</param>
-            <param name="encoding">编码</param>
-            <param name="reverse">反转</param>
-            <typeparam name="T">泛型</typeparam>
-        </member>
-        <member name="M:AIO.IWriteJson.WriteJsonUTF8``1(``0,System.Boolean)">
+        <member name="M:AIO.IWriteJsonData.WriteData``1(``0,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
             <param name="value">输入源</param>
             <param name="reverse">反转</param>
             <typeparam name="T">泛型</typeparam>
-        </member>
-        <member name="M:AIO.IWriteJson.WriteJsonASCII``1(``0,System.Boolean)">
-            <summary>
-            写入Json数据
-            </summary>
-            <param name="value">输入源</param>
-            <param name="reverse">反转</param>
-            <typeparam name="T">泛型</typeparam>
-        </member>
-        <member name="M:AIO.IWriteJson.WriteJsonUnicode``1(``0,System.Boolean)">
-            <summary>
-            写入Json数据
-            </summary>
-            <param name="value">输入源</param>
-            <param name="reverse">反转</param>
-            <typeparam name="T">泛型</typeparam>
-        </member>
-        <member name="T:AIO.IWriteLength">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.Byte)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.SByte)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.UInt16)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.Int16)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.Int32)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWriteLength.WriteLenArray(System.Collections.Generic.ICollection{System.Int32})">
-            <summary>
-            写入Sbyte数组
-            </summary>
-            <param name="value">输入源</param>
-        </member>
-        <member name="T:AIO.IWriteSByte">
-            <summary>
-            写入数据 SByte Array
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteSByte.WriteSByte(System.SByte)">
-            <summary>
-            写入Sbyte数组
-            </summary>
-            <param name="value">输入源</param>
-        </member>
-        <member name="M:AIO.IWriteSByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte},System.Boolean)">
-            <summary>
-            写入Sbyte数组
-            </summary>
-            <param name="value">输入源</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="T:AIO.IWriteString">
-            <summary>
-            写入数据 String
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteString.WriteString(System.String,System.Text.Encoding,System.Boolean)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="encoding">编码</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWriteString.WriteString(System.Text.StringBuilder,System.Text.Encoding,System.Boolean)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="encoding">编码</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWriteString.WriteStringUTF8(System.String,System.Boolean)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWriteString.WriteStringUTF8(System.Text.StringBuilder,System.Boolean)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWriteString.WriteStringASCII(System.String,System.Boolean)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWriteString.WriteStringASCII(System.Text.StringBuilder,System.Boolean)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWriteString.WriteStringUnicode(System.String,System.Boolean)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWriteString.WriteStringUnicode(System.Text.StringBuilder,System.Boolean)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="T:AIO.IWriteUInt16">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteUInt16.WriteUInt16(System.UInt16,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteUInt16.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteUInt32">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteUInt32.WriteUInt32(System.UInt32,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteUInt32.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="T:AIO.IWriteUInt64">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteUInt64.WriteUInt64(System.UInt64,System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
-        </member>
-        <member name="M:AIO.IWriteUInt64.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64},System.Boolean)">
-            <summary>
-            写入指定数据类型
-            </summary>
         </member>
         <member name="T:AIO.ActionAsync">
             <summary>
@@ -14134,10 +13912,10 @@
             游戏数据
             </summary>
         </member>
-        <member name="M:AIO.GBean.Deserialize(AIO.IReadData)">
+        <member name="M:AIO.GBean.Deserialize(AIO.IReadJsonData)">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.GBean.Serialize(AIO.IWriteData)">
+        <member name="M:AIO.GBean.Serialize(AIO.IWriteJsonData)">
             <inheritdoc/>
         </member>
         <member name="M:AIO.GBean.Dispose">
@@ -14495,23 +14273,23 @@
         <member name="M:AIO.BufferByte.ReadBool">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.WriteBool(System.Boolean)">
-            <inheritdoc/> 
+            <inheritdoc/>
         </member>
         <member name="M:AIO.BufferByte.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean},System.Boolean)">
-            <inheritdoc/> 
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean)">
+            <inheritdoc/>
         </member>
         <member name="M:AIO.BufferByte.ReadByte">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.WriteByte(System.Byte)">
             <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean)">
+            <inheritdoc/>
         </member>
         <member name="M:AIO.BufferByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte},System.Boolean)">
             <inheritdoc/> 
@@ -14519,14 +14297,14 @@
         <member name="M:AIO.BufferByte.ReadChar(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadCharArray(System.Boolean)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.WriteChar(System.Char,System.Boolean)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.WriteCharArray(System.Collections.Generic.ICollection{System.Char},System.Boolean)">
-            <inheritdoc/> 
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.ReadCharArray(System.Boolean)">
+            <inheritdoc/>
         </member>
         <member name="M:AIO.BufferByte.#ctor">
             <inheritdoc/>
@@ -14537,32 +14315,10 @@
         <member name="M:AIO.BufferByte.#ctor(System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.ReadData``1">
+        <member name="M:AIO.BufferByte.#ctor(System.IO.FileSystemInfo)">
             <summary>
-            读取数据
+            构造函数
             </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
-        </member>
-        <member name="M:AIO.BufferByte.ReadDataArray``1(System.Collections.Generic.ICollection{``0})">
-            <summary>
-            读取数据
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
-        </member>
-        <member name="M:AIO.BufferByte.WriteData``1(``0)">
-            <summary>
-            写入二进制数据
-            </summary>
-            <param name="buffer">数据</param>
-        </member>
-        <member name="M:AIO.BufferByte.WriteDataArray``1(System.Collections.Generic.ICollection{``0})">
-            <summary>
-            读取数据
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
         </member>
         <member name="M:AIO.BufferByte.Write(AIO.Buffer{System.Byte})">
             <inheritdoc />
@@ -14590,68 +14346,44 @@
         <member name="M:AIO.BufferByte.ReadDecimal(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.WriteDecimal(System.Decimal,System.Boolean)">
             <inheritdoc/> 
         </member>
+        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean)">
+            <inheritdoc/>
+        </member>
         <member name="M:AIO.BufferByte.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal},System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean,System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.BufferByte.WriteDouble(System.Double,System.Boolean)">
+            <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.ReadDoubleArray(System.Boolean,System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.BufferByte.ReadDoubleArray(System.Boolean)">
+            <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.WriteDouble(System.Double,System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double},System.Boolean,System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double},System.Boolean)">
+            <inheritdoc/>
         </member>
         <member name="M:AIO.BufferByte.ReadEnum``1">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadEnumArray``1">
+        <member name="M:AIO.BufferByte.WriteEnum(System.Enum)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteEnum``1(``0)">
+        <member name="M:AIO.BufferByte.ReadFloat(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteEnumArray``1(System.Collections.Generic.ICollection{``0})">
+        <member name="M:AIO.BufferByte.WriteFloat(System.Single,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadFloat(System.Boolean,System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean)">
+            <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteFloat(System.Single,System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single},System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadCollection``1(System.Collections.Generic.ICollection{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.WriteCollection``1(System.Collections.Generic.ICollection{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.ReadDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.ReadList``1(System.Collections.Generic.IList{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.WriteList``1(System.Collections.Generic.IList{``0})">
-            <inheritdoc />
+        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single},System.Boolean)">
+            <inheritdoc/>
         </member>
         <member name="M:AIO.BufferByte.ReadInt16(System.Boolean)">
             <inheritdoc/> 
@@ -14689,34 +14421,7 @@
         <member name="M:AIO.BufferByte.WriteInt64(System.Int64,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJson``1(System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadJsonUTF8``1(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadJsonASCII``1(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadJsonUnicode``1(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteJson``1(``0,System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteJsonASCII``1(``0,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0,System.Boolean)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.ReadLen">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadLenArray">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.WriteLen(System.Int32)">
@@ -14734,55 +14439,28 @@
         <member name="M:AIO.BufferByte.WriteLen(System.SByte)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteLenArray(System.Collections.Generic.ICollection{System.Int32})">
+        <member name="M:AIO.BufferByte.ReadSbyte">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadSByte">
+        <member name="M:AIO.BufferByte.ReadSbyteArray(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadSByteArray(System.Boolean)">
+        <member name="M:AIO.BufferByte.WriteSbyte(System.SByte)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteSByte(System.SByte)">
+        <member name="M:AIO.BufferByte.WriteSbyteArray(System.Collections.Generic.ICollection{System.SByte},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte},System.Boolean)">
+        <member name="P:AIO.BufferByte.Encoding">
+            <inheritdoc cref="P:AIO.IReadString.Encoding" />
+        </member>
+        <member name="M:AIO.BufferByte.ReadString(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadString(System.Text.Encoding,System.Boolean)">
+        <member name="M:AIO.BufferByte.WriteString(System.String,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadStringUTF8(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadStringASCII(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadStringUnicode(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteString(System.String,System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteString(System.Text.StringBuilder,System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringUTF8(System.String,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringUTF8(System.Text.StringBuilder,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringASCII(System.String,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringASCII(System.Text.StringBuilder,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringUnicode(System.String,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringUnicode(System.Text.StringBuilder,System.Boolean)">
+        <member name="M:AIO.BufferByte.WriteString(System.Text.StringBuilder,System.Boolean)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadUInt16(System.Boolean)">
@@ -14820,6 +14498,55 @@
         </member>
         <member name="M:AIO.BufferByte.WriteUInt64(System.UInt64,System.Boolean)">
             <inheritdoc/> 
+        </member>
+        <member name="T:AIO.BufferJsonDataData">
+            <summary>
+            Json 缓冲区
+            </summary>
+        </member>
+        <member name="M:AIO.BufferJsonDataData.#ctor">
+            <summary>
+            Json 缓冲区
+            </summary>
+        </member>
+        <member name="M:AIO.BufferJsonDataData.#ctor(System.Int32)">
+            <summary>
+            Json 缓冲区
+            </summary>
+        </member>
+        <member name="M:AIO.BufferJsonDataData.#ctor(System.Byte[])">
+            <summary>
+            Json 缓冲区
+            </summary>
+        </member>
+        <member name="M:AIO.BufferJsonDataData.#ctor(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Json 缓冲区
+            </summary>
+        </member>
+        <member name="M:AIO.BufferJsonDataData.#ctor(System.String)">
+            <summary>
+            Json 缓冲区
+            </summary>
+        </member>
+        <member name="M:AIO.BufferJsonDataData.#ctor(System.IO.FileSystemInfo)">
+            <summary>
+            Json 缓冲区
+            </summary>
+        </member>
+        <member name="P:AIO.BufferJsonDataData.JSONNormalSettings">
+            <summary>
+            Json 默认设置
+            </summary>
+        </member>
+        <member name="M:AIO.BufferJsonDataData.ReadData``1(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferJsonDataData.ReadData``1(``0@,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferJsonDataData.WriteData``1(``0,System.Boolean)">
+            <inheritdoc/>
         </member>
         <member name="T:AIO.BufferRing`1">
             <summary>
@@ -21007,808 +20734,6 @@
         <member name="M:AIO.Singleton`1.ReleaseInstance">
             <summary>
             释放实例
-            </summary>
-        </member>
-        <member name="T:AIO.BinDictionary`2">
-            <summary>
-            数据字典
-            </summary>
-            <typeparam name="K">Key泛型</typeparam>
-            <typeparam name="V">Value泛型</typeparam>
-        </member>
-        <member name="M:AIO.BinDictionary`2.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="P:AIO.BinDictionary`2.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinDictionary`2.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Deserialize(AIO.IReadData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Serialize(AIO.IWriteData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Reset">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Clone">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Clear">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.Count">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.IsReadOnly">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.ContainsKey(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Add(`0,`1)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Remove(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.TryGetValue(`0,`1@)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.Item(`0)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.Keys">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.Values">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.BinHashSet`1">
-            <summary>
-            列表存储
-            </summary>
-        </member>
-        <member name="M:AIO.BinHashSet`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="P:AIO.BinHashSet`1.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Dispose">
-            <summary>
-            执行与释放或重置非托管资源关联的应用程序定义的任务
-            </summary>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Deserialize(AIO.IReadData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinHashSet`1.Serialize(AIO.IWriteData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinHashSet`1.Reset">
-            <summary>
-            重置
-            </summary>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Clone">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinHashSet`1.OnDeserialization(System.Object)">
-            <summary>在整个对象图形已经反序列化时运行。</summary>
-            <param name="sender">
-              启动回调的对象。
-               当前未实现该参数的功能。
-            </param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-              使用将目标对象序列化所需的数据填充 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
-            </summary>
-            <param name="info">
-              要填充数据的 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
-            </param>
-            <param name="context">
-              此序列化的目标（请参见 <see cref="T:System.Runtime.Serialization.StreamingContext" />）。
-            </param>
-            <exception cref="T:System.Security.SecurityException">
-              调用方没有所要求的权限。
-            </exception>
-        </member>
-        <member name="M:AIO.BinHashSet`1.GetEnumerator">
-            <summary>返回一个循环访问集合的枚举器。</summary>
-            <returns>用于循环访问集合的枚举数。</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>返回循环访问集合的枚举数。</summary>
-            <returns>
-              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
-            </returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Add(`0)">
-            <summary>
-              将某项添加到 <see cref="T:System.Collections.Generic.ICollection`1" /> 中。
-            </summary>
-            <param name="item">
-              要添加到 <see cref="T:System.Collections.Generic.ICollection`1" /> 的对象。
-            </param>
-            <exception cref="T:System.NotSupportedException">
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
-            </exception>
-        </member>
-        <member name="M:AIO.BinHashSet`1.UnionWith(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            对该集合进行与另一个IEnumerable (T)对象的并集运算；
-            </summary>
-            <param name="other">另一个集合</param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            对该集合进行与另一个IEnumerable (T)对象的交集运算；
-            </summary>
-            <param name="other">另一个集合</param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            将该集合中与其他集合重复的元素移除；
-            </summary>
-            <param name="other">另一个集合</param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            将该集合变换成只包含在该集合或者另一个集合中而不同时属于两个集合的元素；
-            </summary>
-            <param name="other">另一个集合</param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否是另一个集合的子集；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否是另一个集合的超集；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否是另一个集合的真超集；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否是另一个集合的真子集；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Overlaps(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否与另一个集合存在共同的元素；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.SetEquals(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否与另一个集合有完全相同的元素，且仅有这些元素。
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.AIO#ISet{T}#Add(`0)">
-            <summary>
-            将ITEM添加到集合中，如果已存在，则返回false；
-            </summary>
-            <param name="item">要添加的元素</param>
-            <returns>Ture:不存在 False:已存在</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Clear">
-            <summary>
-              从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中移除所有项。
-            </summary>
-            <exception cref="T:System.NotSupportedException">
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
-            </exception>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Contains(`0)">
-            <summary>
-              确定 <see cref="T:System.Collections.Generic.ICollection`1" /> 是否包含特定值。
-            </summary>
-            <param name="item">
-              要在 <see cref="T:System.Collections.Generic.ICollection`1" /> 中定位的对象。
-            </param>
-            <returns>
-              如果在 <see langword="true" /> 中找到 <paramref name="item" />，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
-            </returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.CopyTo(`0[],System.Int32)">
-            <summary>
-              从特定的 <see cref="T:System.Collections.Generic.ICollection`1" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
-            </summary>
-            <param name="array">
-              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.Generic.ICollection`1" /> 复制的元素的目标。
-              <see cref="T:System.Array" /> 必须具有从零开始的索引。
-            </param>
-            <param name="arrayIndex">
-              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
-            </param>
-            <exception cref="T:System.ArgumentNullException">
-              <paramref name="array" /> 为 <see langword="null" />。
-            </exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-              <paramref name="arrayIndex" /> 小于 0。
-            </exception>
-            <exception cref="T:System.ArgumentException">
-              源中的元素数目 <see cref="T:System.Collections.Generic.ICollection`1" /> 大于从的可用空间 <paramref name="arrayIndex" /> 目标从头到尾 <paramref name="array" />。
-            </exception>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Remove(`0)">
-            <summary>
-              从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中移除特定对象的第一个匹配项。
-            </summary>
-            <param name="item">
-              要从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中删除的对象。
-            </param>
-            <returns>
-              如果从 <see langword="true" /> 中成功移除 <paramref name="item" />，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
-               如果在原始 <see langword="false" /> 中没有找到 <paramref name="item" />，该方法也会返回 <see cref="T:System.Collections.Generic.ICollection`1" />。
-            </returns>
-            <exception cref="T:System.NotSupportedException">
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
-            </exception>
-        </member>
-        <member name="P:AIO.BinHashSet`1.Count">
-            <summary>
-              获取 <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
-            </summary>
-            <returns>
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
-            </returns>
-        </member>
-        <member name="P:AIO.BinHashSet`1.IsReadOnly">
-            <summary>
-              获取一个值，该值指示 <see cref="T:System.Collections.Generic.ICollection`1" /> 是否为只读。
-            </summary>
-            <returns>
-              如果 <see langword="true" /> 是只读的，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
-            </returns>
-        </member>
-        <member name="T:AIO.BinList`1">
-            <summary>
-            列表存储
-            </summary>
-        </member>
-        <member name="M:AIO.BinList`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="P:AIO.BinList`1.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinList`1.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Reset">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Deserialize(AIO.IReadData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Serialize(AIO.IWriteData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Clone">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.CopyTo(System.Array,System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinList`1.SyncRoot">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinList`1.IsSynchronized">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Add(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Clear">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Contains(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.CopyTo(`0[],System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Remove(`0)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinList`1.Count">
-            <summary>
-              获取 <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
-            </summary>
-            <returns>
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
-            </returns>
-        </member>
-        <member name="P:AIO.BinList`1.IsReadOnly">
-            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.IsReadOnly" />
-        </member>
-        <member name="M:AIO.BinList`1.IndexOf(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Insert(System.Int32,`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.RemoveAt(System.Int32)">
-            <inheritdoc cref="M:System.Collections.Generic.IList`1.RemoveAt(System.Int32)" />
-        </member>
-        <member name="P:AIO.BinList`1.Item(System.Int32)">
-            <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
-        </member>
-        <member name="T:AIO.BinQueue`1">
-            <summary>
-            数据队列
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:AIO.BinQueue`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="P:AIO.BinQueue`1.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Dispose">
-            <summary>
-            执行与释放或重置非托管资源关联的应用程序定义的任务。
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Deserialize(AIO.IReadData)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Serialize(AIO.IWriteData)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Reset">
-            <summary>
-            重置
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Clone">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinQueue`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>返回循环访问集合的枚举数。</summary>
-            <returns>
-              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
-            </returns>
-        </member>
-        <member name="M:AIO.BinQueue`1.CopyTo(System.Array,System.Int32)">
-            <summary>
-              从特定的 <see cref="T:System.Collections.ICollection" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
-            </summary>
-            <param name="array">
-              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.ICollection" /> 复制的元素的目标。
-              <see cref="T:System.Array" /> 必须具有从零开始的索引。
-            </param>
-            <param name="index">
-              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
-            </param>
-            <exception cref="T:System.ArgumentNullException">
-              <paramref name="array" /> 为 <see langword="null" />。
-            </exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-              <paramref name="index" /> 小于零。
-            </exception>
-            <exception cref="T:System.ArgumentException">
-              <paramref name="array" /> 是多维的。
-              - 或 -
-              源中的元素数目 <see cref="T:System.Collections.ICollection" /> 大于从的可用空间 <paramref name="index" /> 目标从头到尾 <paramref name="array" />。
-              - 或 -
-              无法自动将源 <see cref="T:System.Collections.ICollection" /> 的类型转换为目标 <paramref name="array" /> 的类型。
-            </exception>
-        </member>
-        <member name="P:AIO.BinQueue`1.System#Collections#ICollection#Count">
-            <summary>
-              获取 <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
-            </summary>
-            <returns>
-              <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
-            </returns>
-        </member>
-        <member name="P:AIO.BinQueue`1.SyncRoot">
-            <summary>
-              获取可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
-            </summary>
-            <returns>
-              可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
-            </returns>
-        </member>
-        <member name="P:AIO.BinQueue`1.IsSynchronized">
-            <summary>
-              获取一个值，该值指示是否同步对 <see cref="T:System.Collections.ICollection" /> 的访问（线程安全）。
-            </summary>
-            <returns>
-              如果对 <see langword="true" /> 的访问是同步的（线程安全），则为 <see cref="T:System.Collections.ICollection" />；否则为 <see langword="false" />。
-            </returns>
-        </member>
-        <member name="M:AIO.BinQueue`1.GetEnumerator">
-            <summary>返回一个循环访问集合的枚举器。</summary>
-            <returns>用于循环访问集合的枚举数。</returns>
-        </member>
-        <member name="P:AIO.BinQueue`1.System#Collections#Generic#IReadOnlyCollection{T}#Count">
-            <summary>获取集合中的元素数。</summary>
-            <returns>集合中的元素数。</returns>
-        </member>
-        <member name="T:AIO.BinSortedList`2">
-            <summary>
-            数据字典
-            </summary>
-            <typeparam name="TKey">Key泛型</typeparam>
-            <typeparam name="TValue">Value泛型</typeparam>
-        </member>
-        <member name="M:AIO.BinSortedList`2.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="P:AIO.BinSortedList`2.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinSortedList`2.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Deserialize(AIO.IReadData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Serialize(AIO.IWriteData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Reset">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Clone">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.CopyTo(System.Array,System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.SyncRoot">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.IsSynchronized">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Clear">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.Count">
-            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.Count" />
-        </member>
-        <member name="P:AIO.BinSortedList`2.IsReadOnly">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.ContainsKey(`0)">
-            <inheritdoc cref="M:System.Collections.Generic.IDictionary`2.ContainsKey(`0)" />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Add(`0,`1)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Remove(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.TryGetValue(`0,`1@)">
-            <inheritdoc cref="M:System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)" />
-        </member>
-        <member name="P:AIO.BinSortedList`2.Item(`0)">
-            <inheritdoc cref="P:System.Collections.Generic.IDictionary`2.Item(`0)" />
-        </member>
-        <member name="P:AIO.BinSortedList`2.Keys">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.Values">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.System#Collections#Generic#IReadOnlyDictionary{TKey,TValue}#Keys">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.System#Collections#Generic#IReadOnlyDictionary{TKey,TValue}#Values">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.BinStack`1">
-            <summary>
-            数据队列
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:AIO.BinStack`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="P:AIO.BinStack`1.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Dispose">
-            <summary>
-            执行与释放或重置非托管资源关联的应用程序定义的任务。
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Deserialize(AIO.IReadData)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Serialize(AIO.IWriteData)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Reset">
-            <summary>
-            重置
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Clone">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinStack`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>返回循环访问集合的枚举数。</summary>
-            <returns>
-              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
-            </returns>
-        </member>
-        <member name="M:AIO.BinStack`1.CopyTo(System.Array,System.Int32)">
-            <summary>
-              从特定的 <see cref="T:System.Collections.ICollection" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
-            </summary>
-            <param name="array">
-              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.ICollection" /> 复制的元素的目标。
-              <see cref="T:System.Array" /> 必须具有从零开始的索引。
-            </param>
-            <param name="index">
-              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
-            </param>
-            <exception cref="T:System.ArgumentNullException">
-              <paramref name="array" /> 为 <see langword="null" />。
-            </exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-              <paramref name="index" /> 小于零。
-            </exception>
-            <exception cref="T:System.ArgumentException">
-              <paramref name="array" /> 是多维的。
-              - 或 -
-              源中的元素数目 <see cref="T:System.Collections.ICollection" /> 大于从的可用空间 <paramref name="index" /> 目标从头到尾 <paramref name="array" />。
-              - 或 -
-              无法自动将源 <see cref="T:System.Collections.ICollection" /> 的类型转换为目标 <paramref name="array" /> 的类型。
-            </exception>
-        </member>
-        <member name="P:AIO.BinStack`1.System#Collections#ICollection#Count">
-            <summary>
-              获取 <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
-            </summary>
-            <returns>
-              <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
-            </returns>
-        </member>
-        <member name="P:AIO.BinStack`1.SyncRoot">
-            <summary>
-              获取可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
-            </summary>
-            <returns>
-              可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
-            </returns>
-        </member>
-        <member name="P:AIO.BinStack`1.IsSynchronized">
-            <summary>
-              获取一个值，该值指示是否同步对 <see cref="T:System.Collections.ICollection" /> 的访问（线程安全）。
-            </summary>
-            <returns>
-              如果对 <see langword="true" /> 的访问是同步的（线程安全），则为 <see cref="T:System.Collections.ICollection" />；否则为 <see langword="false" />。
-            </returns>
-        </member>
-        <member name="M:AIO.BinStack`1.GetEnumerator">
-            <summary>返回一个循环访问集合的枚举器。</summary>
-            <returns>用于循环访问集合的枚举数。</returns>
-        </member>
-        <member name="P:AIO.BinStack`1.System#Collections#Generic#IReadOnlyCollection{T}#Count">
-            <summary>获取集合中的元素数。</summary>
-            <returns>集合中的元素数。</returns>
-        </member>
-        <member name="T:AIO.Storage">
-            <summary>
-            数据存储
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.#ctor">
-            <summary>
-            数据存储
-            </summary>
-        </member>
-        <member name="P:AIO.Storage.Buffer">
-            <summary>
-            字节数据
-            </summary>
-        </member>
-        <member name="P:AIO.Storage.Data">
-            <summary>
-            数据有效长度 需要调动序列化 Serialize
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.Deserialize">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.Dispose">
-            <summary>
-            执行与释放或重置非托管资源关联的应用程序定义的任务
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.Reset">
-            <summary>
-            重置数据
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.Serialize">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.OnDeserialize(AIO.IReadData)">
-            <summary>
-            反序列化
-            </summary>
-            <param name="buffer">读取接口 如果长度等于0则说明没有数据</param>
-        </member>
-        <member name="M:AIO.Storage.OnSerialize(AIO.IWriteData)">
-            <summary>
-            序列化
-            </summary>
-            <param name="buffer">存储接口</param>
-        </member>
-        <member name="M:AIO.Storage.OnReset">
-            <summary>
-            重置数据
-            </summary>
-        </member>
-        <member name="P:AIO.Storage.Count">
-            <summary>
-            数据有效长度 需要调动序列化 Serialize
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.AddBin(AIO.IBinData)">
-            <summary>
-            添加数据bin
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.ClearBin">
-            <summary>
-            清空数据Bin
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.ContainBin(AIO.IBinData)">
-            <summary>
-            判断是否存在数据
-            </summary>
-            <param name="item">数据</param>
-            <returns>Ture存在 False不存在</returns>
-        </member>
-        <member name="M:AIO.Storage.IndexOfBin(AIO.IBinData)">
-            <summary>
-            获取当前数据的下标
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.InsertBin(System.Int32,AIO.IBinData)">
-            <summary>
-            插入
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.RemoveBin(AIO.IBinData)">
-            <summary>
-            移除指定数据
-            </summary>
-        </member>
-        <member name="T:AIO.StorageFile">
-            <summary>
-            数据文件
-            </summary>
-        </member>
-        <member name="F:AIO.StorageFile.Path">
-            <summary>
-            保存读取路径
-            </summary>
-        </member>
-        <member name="M:AIO.StorageFile.#ctor(System.String@)">
-            <summary>
-            数据存储
-            </summary>
-            <param name="path">存储读取路径</param>
-        </member>
-        <member name="M:AIO.StorageFile.Load">
-            <summary>
-            加载
-            </summary>
-        </member>
-        <member name="M:AIO.StorageFile.Save">
-            <summary>
-            保存文件
             </summary>
         </member>
         <member name="T:AIO.Version">

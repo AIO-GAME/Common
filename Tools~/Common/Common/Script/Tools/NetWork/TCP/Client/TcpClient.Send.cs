@@ -180,7 +180,7 @@ namespace AIO.Net
         public long Send(string text)
         {
             var data = new BufferByte();
-            data.WriteStringUTF8(text);
+            data.WriteString(text);
             return Send(data.ToArray());
         }
 
@@ -259,7 +259,7 @@ namespace AIO.Net
         public bool SendAsync(string text)
         {
             var buffer = new BufferByte();
-            buffer.WriteStringUTF8(text);
+            buffer.WriteString(text);
             return SendAsync(buffer.ToArray());
         }
 

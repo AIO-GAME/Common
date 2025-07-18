@@ -69,21 +69,20 @@ namespace AIO.UEngine
             buffer.SetFloat(ref index, value.z, all, reverse);
         }
 
-        public static Vector3 ReadVector3(this BufferByte buffer, in bool all = false, in bool reverse = false)
+        public static Vector3 ReadVector3(this BufferByte buffer, in bool reverse = false)
         {
-            return new Vector3(buffer.ReadFloat(all, reverse),
-                               buffer.ReadFloat(all, reverse),
-                               buffer.ReadFloat(all, reverse));
+            return new Vector3(buffer.ReadFloat(reverse),
+                               buffer.ReadFloat(reverse),
+                               buffer.ReadFloat(reverse));
         }
 
         public static void WriteVector3(this BufferByte buffer,
                                         in   Vector3    value,
-                                        in   bool       all     = false,
                                         in   bool       reverse = false)
         {
-            buffer.WriteFloat(value.x, all, reverse);
-            buffer.WriteFloat(value.y, all, reverse);
-            buffer.WriteFloat(value.z, all, reverse);
+            buffer.WriteFloat(value.x, reverse);
+            buffer.WriteFloat(value.y, reverse);
+            buffer.WriteFloat(value.z, reverse);
         }
 
         #endregion
