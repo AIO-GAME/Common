@@ -192,6 +192,16 @@
         <Compile Include="Plugins\Pooled\QueueDebugView.cs"/>
         <Compile Include="Plugins\Pooled\StackDebugView.cs"/>
         <Compile Include="Plugins\Pooled\ThrowHelper.cs"/>
+        <Compile Include="Plugins\PY4N\Data\NameDB.cs" />
+        <Compile Include="Plugins\PY4N\Data\PinyinDB.cs" />
+        <Compile Include="Plugins\PY4N\Exception\PinyinException.cs" />
+        <Compile Include="Plugins\PY4N\Exception\UnsupportedUnicodeException.cs" />
+        <Compile Include="Plugins\PY4N\Name4Net.cs" />
+        <Compile Include="Plugins\PY4N\Pinyin4Name.cs" />
+        <Compile Include="Plugins\PY4N\Pinyin4Net.cs" />
+        <Compile Include="Plugins\PY4N\PinyinFormat.cs" />
+        <Compile Include="Plugins\PY4N\PinyinItem.cs" />
+        <Compile Include="Plugins\PY4N\PinyinUtil.cs" />
         <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\AnchorAlias.cs"/>
         <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Comment.cs"/>
         <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentEnd.cs"/>
@@ -733,6 +743,7 @@
         <Compile Include="Script\Helper\IO\Base\IO.GetFile.cs"/>
         <Compile Include="Script\Helper\IO\Base\IO.Set.cs" />
         <Compile Include="Script\Helper\IO\Base\IO.Try.cs"/>
+        <Compile Include="Script\Helper\Math\U.Random.String.cs" />
         <Compile Include="Script\Helper\Net\Client\NetBuffer.cs"/>
         <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs"/>
         <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs"/>

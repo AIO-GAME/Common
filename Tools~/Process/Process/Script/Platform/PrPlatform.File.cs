@@ -7,6 +7,7 @@
 #region
 
 using System;
+using System.IO;
 
 #endregion
 
@@ -24,6 +25,28 @@ namespace AIO
         /// </summary>
         public static class File
         {
+            /// <summary>
+            /// 删除
+            /// </summary>
+            /// <exception cref="NotImplementedException">未实现</exception>
+            /// <returns><see cref="IExecutor"/>执行器</returns>
+            public static IExecutor Del(FileSystemInfo target)
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Win32NT:
+                    case PlatformID.Win32S:
+                    case PlatformID.Win32Windows:
+                    case PlatformID.WinCE:
+                        return PrCmd.Del.ALL(target.FullName);
+                    case PlatformID.MacOSX:
+                    case PlatformID.Unix:
+                        return PrMac.Rm.File(target.FullName);
+                    case PlatformID.Xbox:
+                    default: throw new NotImplementedException();
+                }
+            }
+
             /// <summary>
             /// 删除
             /// </summary>

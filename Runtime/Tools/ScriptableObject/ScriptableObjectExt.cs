@@ -7,7 +7,8 @@ using UnityEngine;
 namespace AIO
 {
     [Serializable]
-    public class ScriptableObject<T> : ScriptableObject where T : ScriptableObject<T>
+    public class ScriptableObject<T> : ScriptableObject
+    where T : ScriptableObject<T>
     {
 #if UNITY_EDITOR
         private static T instance;
@@ -20,17 +21,31 @@ namespace AIO
 #if UNITY_EDITOR
             if (!instance)
             {
-                foreach (var item in AssetDatabase
-                                     .FindAssets($"t:{typeof(T).Name}", new[] { "Assets", })
-                                     .Select(AssetDatabase.GUIDToAssetPath)
-                                     .Select(AssetDatabase.LoadAssetAtPath<T>)
-                                     .Where(item => item))
+                var dirinfo = new DirectoryInfo(Application.dataPath);
+                foreach (var info in dirinfo.GetFiles("*.asset", SearchOption.AllDirectories))
                 {
-                    instance = item;
-                    break;
+                    if (info.Name == $"{typeof(T).Name}.asset")
+                    {
+                        var assetPath = info.FullName.Replace(Application.dataPath, "Assets");
+                        instance = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+                        if (instance != null) break;
+                    }
                 }
 
-                if (!instance)
+                if (instance == null)
+                {
+                    foreach (var item in AssetDatabase.
+                                         FindAssets($"t:{typeof(T).Name}", new[] { "Assets", }).
+                                         Select(AssetDatabase.GUIDToAssetPath).
+                                         Select(AssetDatabase.LoadAssetAtPath<T>).
+                                         Where(item => item))
+                    {
+                        instance = item;
+                        if (instance != null) break;
+                    }
+                }
+
+                if (instance == null)
                 {
                     instance = CreateInstance<T>();
                     var resourcesDir = Path.Combine(Application.dataPath, "Resources");
@@ -40,7 +55,7 @@ namespace AIO
                 }
             }
 
-            if (!instance) throw new Exception($"Not found {typeof(T).Name}.asset ! Please create it !");
+            if (instance == null) throw new Exception($"Not found {typeof(T).Name}.asset ! Please create it !");
             return instance;
 #else
             return GetResource();

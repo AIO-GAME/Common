@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using Newtonsoft.Json;
+using AIO.PY4N;
 
 namespace AIO
 {
@@ -128,14 +129,15 @@ namespace AIO
 
         private static async void Test()
         {
-            var p1 = new PropertyData(PropertyType.Attack, 2);
-
-            var p2 = new Dictionary<string, PropertyData>
+            for (int i = 0; i < 100; i++)
             {
-                { "p1", p1 },
-                { "p2", new PropertyData(PropertyType.Attack, 2) }
-            };
-
+                var isMale  = AHelper.Random.RandBool();
+                var useRare = AHelper.Random.RandBool();
+                var maxLen  = AHelper.Random.RandInt32(2, 5);
+                var name    = AHelper.Random.RandomChineseName(isMale: isMale, useRare: useRare, maxLen: maxLen);
+                var py      = Pinyin4Net.GetPinyin(name, PinyinFormat.WITH_TONE_MARK);
+                Console.WriteLine($"{(isMale ? "男" : "女")} | [{name} : {py}]");
+            }
 
 
             return;

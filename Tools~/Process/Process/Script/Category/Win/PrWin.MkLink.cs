@@ -1,4 +1,6 @@
-﻿namespace AIO
+﻿using System.IO;
+
+namespace AIO
 {
     public partial class PrCmd
     {
@@ -30,7 +32,31 @@
             /// <returns>执行器</returns>
             public static IExecutor Directory(in string target, in string source)
             {
-                var messages = string.Format("{0} /D /J \"{1}\" \"{2}\"", CMD_Mklink, target.Replace('/', '\\'), source.Replace('/', '\\'));
+                var messages = $"{CMD_Mklink} /D /J \"{target.Replace('/', '\\')}\" \"{source.Replace('/', '\\')}\"";
+                return Create().Input(messages);
+            }
+
+            /// <summary>
+            /// 符号链接 目录
+            /// </summary>
+            /// <param name="target">链接目标路径</param>
+            /// <param name="source">链接源路径</param>
+            /// <returns>执行器</returns>
+            public static IExecutor Directory(in DirectoryInfo target, in DirectoryInfo source)
+            {
+                var messages = $"{CMD_Mklink} /D /J \"{target.FullName}\" \"{source.FullName}\"";
+                return Create().Input(messages);
+            }
+
+            /// <summary>
+            /// 硬链接 目录
+            /// </summary>
+            /// <param name="target">链接目标路径</param>
+            /// <param name="source">链接源路径</param>
+            /// <returns>执行器</returns>
+            public static IExecutor HardDirectory(in DirectoryInfo target, in DirectoryInfo source)
+            {
+                var messages = $"{CMD_Mklink} /H /J \"{target.FullName}\" \"{source.FullName}\"";
                 return Create().Input(messages);
             }
 
@@ -42,7 +68,7 @@
             /// <returns>执行器</returns>
             public static IExecutor HardDirectory(in string target, in string source)
             {
-                var messages = string.Format("{0} /H /J \"{1}\" \"{2}\"", CMD_Mklink, target.Replace('/', '\\'), source.Replace('/', '\\'));
+                var messages = $"{CMD_Mklink} /H /J \"{target.Replace('/', '\\')}\" \"{source.Replace('/', '\\')}\"";
                 return Create().Input(messages);
             }
 
@@ -54,7 +80,7 @@
             /// <returns>执行器</returns>
             public static IExecutor Symbolic(in string target, in string source)
             {
-                var messages = string.Format("{0} /D \"{1}\" \"{2}\"", CMD_Mklink, target.Replace('/', '\\'), source.Replace('/', '\\'));
+                var messages = $"{CMD_Mklink} /D \"{target.Replace('/', '\\')}\" \"{source.Replace('/', '\\')}\"";
                 return Create().Input(messages);
             }
 

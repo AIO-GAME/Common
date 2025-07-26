@@ -4881,6 +4881,22 @@
             <param name="source">链接源路径</param>
             <returns>执行器</returns>
         </member>
+        <member name="M:AIO.PrCmd.MkLink.Directory(System.IO.DirectoryInfo@,System.IO.DirectoryInfo@)">
+            <summary>
+            符号链接 目录
+            </summary>
+            <param name="target">链接目标路径</param>
+            <param name="source">链接源路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.MkLink.HardDirectory(System.IO.DirectoryInfo@,System.IO.DirectoryInfo@)">
+            <summary>
+            硬链接 目录
+            </summary>
+            <param name="target">链接目标路径</param>
+            <param name="source">链接源路径</param>
+            <returns>执行器</returns>
+        </member>
         <member name="M:AIO.PrCmd.MkLink.HardDirectory(System.String@,System.String@)">
             <summary>
             硬链接 目录
@@ -6429,6 +6445,13 @@
             <summary>
             文件
             </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.File.Del(System.IO.FileSystemInfo)">
+            <summary>
+            删除
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.File.Del(System.String)">
             <summary>

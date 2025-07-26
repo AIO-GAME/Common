@@ -9,26 +9,23 @@ using System.Linq;
 
 namespace AIO
 {
-    public partial class AHelper
+    partial class AHelper
     {
         #region Nested type: Random
 
         /// <summary>
         /// 随机数工具类
         /// </summary>
-        public class Random
+        public partial class Random
         {
             private static System.Random random;
 
-            static Random()
-            {
-                random = new System.Random(System.Guid.NewGuid().GetHashCode());
-            }
+            static Random() { random = new System.Random(System.Guid.NewGuid().GetHashCode()); }
 
             #region Rand Double
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             public static double RandDouble()
@@ -43,7 +40,7 @@ namespace AIO
             #region Next
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="minValue"></param>
             /// <param name="maxValue"></param>
@@ -63,33 +60,24 @@ namespace AIO
             /// <summary>
             /// 刷新随机种子
             /// </summary>
-            public static void Refresh()
-            {
-                random = new System.Random(System.Guid.NewGuid().GetHashCode());
-            }
+            public static void Refresh() { random = new System.Random(System.Guid.NewGuid().GetHashCode()); }
 
             /// <summary>
             /// 刷新随机种子
             /// </summary>
-            public static void Refresh(in System.Random randomValue)
-            {
-                random = randomValue;
-            }
+            public static void Refresh(in System.Random randomValue) { random = randomValue; }
 
             /// <summary>
             /// 刷新随机种子
             /// </summary>
-            public static void Refresh(in int seed)
-            {
-                random = new System.Random(seed);
-            }
+            public static void Refresh(in int seed) { random = new System.Random(seed); }
 
             #endregion
 
             #region Rand Array
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <param name="array"></param>
@@ -99,18 +87,17 @@ namespace AIO
             {
                 var arr = new T[count];
                 while (count >= 0)
-                    foreach (var item in array)
-                        if (random.Next(0, 2) == 0)
-                        {
-                            arr[--count] = item;
-                            if (count == 0) return arr;
-                        }
+                    foreach (var item in array.Where(item => random.Next(0, 2) == 0))
+                    {
+                        arr[--count] = item;
+                        if (count == 0) return arr;
+                    }
 
                 return arr;
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <param name="array"></param>
@@ -118,7 +105,7 @@ namespace AIO
             /// <returns></returns>
             public static T[] RandArray<T>(in int count, in IList<T> array)
             {
-                var arr = new T[count];
+                var arr                                     = new T[count];
                 for (var i = 0; i < arr.Length; i++) arr[i] = array[random.Next(0, array.Count)];
                 return arr;
             }
@@ -131,13 +118,13 @@ namespace AIO
             {
                 if (upper > array.Count) upper = array.Count;
                 if (lower >= upper) throw new ArgumentException("lower value should less upper value");
-                var arr = new T[count];
+                var arr                                     = new T[count];
                 for (var i = 0; i < arr.Length; i++) arr[i] = array[random.Next(lower, upper)];
                 return arr;
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <param name="array"></param>
@@ -150,12 +137,11 @@ namespace AIO
                 var arr = new Dictionary<T1, T2>(array);
                 if (arr.Count == 0 || count >= arr.Count) return arr;
                 while (count < arr.Count)
-                    foreach (var item in array)
-                        if (random.Next(0, 2) == 0 && arr.ContainsKey(item.Key))
-                        {
-                            arr.Remove(item.Key);
-                            if (count >= arr.Count) return arr;
-                        }
+                    foreach (var item in array.Where(item => random.Next(0, 2) == 0 && arr.ContainsKey(item.Key)))
+                    {
+                        arr.Remove(item.Key);
+                        if (count >= arr.Count) return arr;
+                    }
 
                 return arr;
             }
@@ -165,18 +151,15 @@ namespace AIO
             #region Rand Array Value
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="array"></param>
             /// <typeparam name="T"></typeparam>
             /// <returns></returns>
-            public static T RandArrayValue<T>(in IList<T> array)
-            {
-                return array[RandInt32(0, array.Count)];
-            }
+            public static T RandArrayValue<T>(in IList<T> array) { return array[RandInt32(0, array.Count)]; }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="array"></param>
             /// <typeparam name="T"></typeparam>
@@ -192,29 +175,25 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// 随机获取字典中的一个键值对
             /// </summary>
-            /// <param name="array"></param>
-            /// <typeparam name="T1"></typeparam>
-            /// <typeparam name="T2"></typeparam>
-            /// <returns></returns>
-            /// <exception cref="SystemException"></exception>
+            /// <param name="array"> 要获取值的字典</param>
+            /// <typeparam name="T1"> 键的类型</typeparam>
+            /// <typeparam name="T2"> 值的类型</typeparam>
+            /// <returns> 返回字典中的一个键值对</returns>
+            /// <exception cref="SystemException"> 如果字典为空或没有可用的键值对，则抛出此异常</exception>
             public static KeyValuePair<T1, T2> RandArrayValue<T1, T2>(in IDictionary<T1, T2> array)
             {
                 var value = random.Next(0, array.Count);
-                foreach (var item in array)
-                    if (--value == 0)
-                        return item;
-                throw new SystemException(); //此语句不会执行 因为不会等于0的情况还未返回
+                foreach (var item in array.Where(item => --value == 0))
+                    return item;
+                return array.FirstOrDefault(); // 如果没有找到，返回第一个键值对
             }
 
             /// <param name="array"></param>
             /// <param name="lower">下限-包含</param>
             /// <param name="upper">上限-不包含</param>
-            public static T RandArrayValue<T>(in IList<T> array, in int lower, in int upper)
-            {
-                return array[random.Next(lower, array.Count < upper ? array.Count : upper)];
-            }
+            public static T RandArrayValue<T>(in IList<T> array, in int lower, in int upper) { return array[random.Next(lower, array.Count < upper ? array.Count : upper)]; }
 
             /// <param name="array"></param>
             /// <param name="lower">下限-包含</param>
@@ -224,29 +203,28 @@ namespace AIO
                 if (upper > array.Count) upper = array.Count;
                 if (lower >= upper) throw new ArgumentException("lower value should less upper value");
                 var value = random.Next(lower, upper);
-                foreach (var item in array)
-                    if (--value == 0)
-                        return item;
+                foreach (var item in array.Where(item => --value == 0))
+                    return item;
                 throw new SystemException(); //此语句不会执行 因为不会等于0的情况还未返回
             }
 
             /// <param name="array"></param>
             /// <param name="lower">下限-包含</param>
             /// <param name="upper">上限-不包含</param>
-            public static KeyValuePair<T1, T2> RandArrayValue<T1, T2>(in IDictionary<T1, T2> array, in int lower,
+            public static KeyValuePair<T1, T2> RandArrayValue<T1, T2>(in IDictionary<T1, T2> array,
+                                                                      in int                 lower,
                                                                       int                    upper)
             {
                 if (upper > array.Count) upper = array.Count;
                 if (lower >= upper) throw new ArgumentException("lower value should less upper value");
                 var value = random.Next(lower, upper);
-                foreach (var item in array)
-                    if (--value == 0)
-                        return item;
+                foreach (var item in array.Where(item => --value == 0))
+                    return item;
                 throw new SystemException(); //此语句不会执行 因为不会等于0的情况还未返回
             }
 
             /// <summary>
-            /// 随机权重 
+            /// 随机权重
             /// </summary>
             /// <param name="weights">传入数组的总和 应为1</param>
             public static int RandArrayWeight(in IList<float> weights)
@@ -285,22 +263,19 @@ namespace AIO
             #region Rand Bool
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
-            public static bool RandBool()
-            {
-                return random.Next(0, 2) == 0;
-            }
+            public static bool RandBool() { return random.Next(0, 2) == 0; }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <returns></returns>
             public static bool[] RandBoolArray(in int count)
             {
-                var arr = new bool[count];
+                var arr                                = new bool[count];
                 for (var i = 0; i < count; i++) arr[i] = random.Next(0, 2) == 0;
                 return arr;
             }
@@ -310,23 +285,17 @@ namespace AIO
             #region Rand Byte
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
-            public static byte RandByte()
-            {
-                return (byte)random.Next(0, 256);
-            }
+            public static byte RandByte() { return (byte)random.Next(0, 256); }
 
             /// <param name="lower">下限-包含</param>
             /// <param name="upper">上限-不包含</param>
-            public static byte RandBytes(in byte lower, in int upper)
-            {
-                return (byte)random.Next(lower, byte.MaxValue < upper ? byte.MaxValue : upper);
-            }
+            public static byte RandBytes(in byte lower, in int upper) { return (byte)random.Next(lower, byte.MaxValue < upper ? byte.MaxValue : upper); }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <returns></returns>
@@ -338,7 +307,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <param name="min"></param>
@@ -350,7 +319,7 @@ namespace AIO
                 if (min < byte.MinValue) throw new ArgumentException("min value should less byte.MinValue value");
                 if (max > byte.MaxValue + 1) throw new ArgumentException("lower value should less upper value");
 
-                var arr = new byte[count];
+                var arr                                     = new byte[count];
                 for (var i = 0; i < arr.Length; i++) arr[i] = (byte)random.Next(min, max);
 
                 return arr;
@@ -361,16 +330,13 @@ namespace AIO
             #region Rand SByte
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
-            public static sbyte RandSByte()
-            {
-                return (sbyte)random.Next(sbyte.MinValue, sbyte.MaxValue);
-            }
+            public static sbyte RandSByte() { return (sbyte)random.Next(sbyte.MinValue, sbyte.MaxValue); }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <returns></returns>
@@ -383,7 +349,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <param name="lower"></param>
@@ -402,7 +368,7 @@ namespace AIO
             #region Rand UInt16
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             public static ushort RandUInt16()
@@ -414,13 +380,10 @@ namespace AIO
 
             /// <param name="lower">下限-包含</param>
             /// <param name="upper">上限-不包含</param>
-            public static ushort RandUInt16(in ushort lower, in int upper)
-            {
-                return (ushort)random.Next(lower, ushort.MaxValue < upper ? ushort.MaxValue : upper);
-            }
+            public static ushort RandUInt16(in ushort lower, in int upper) { return (ushort)random.Next(lower, ushort.MaxValue < upper ? ushort.MaxValue : upper); }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <returns></returns>
@@ -428,7 +391,7 @@ namespace AIO
             {
                 var bytes = new byte[2 * count];
                 random.NextBytes(bytes);
-                var array = new ushort[count];
+                var array                                                                  = new ushort[count];
                 for (int i = 0, index = 0; i < bytes.Length; i += 2, index++) array[index] = BitConverter.ToUInt16(bytes, i);
 
                 return array;
@@ -451,7 +414,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             public static uint RandUInt32()
@@ -462,7 +425,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <returns></returns>
@@ -470,7 +433,7 @@ namespace AIO
             {
                 var bytes = new byte[4 * count];
                 random.NextBytes(bytes);
-                var array = new uint[count];
+                var array                                                                  = new uint[count];
                 for (int i = 0, index = 0; i < bytes.Length; i += 4, index++) array[index] = BitConverter.ToUInt32(bytes, i);
 
                 return array;
@@ -493,7 +456,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             public static ulong RandUInt64()
@@ -504,7 +467,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <returns></returns>
@@ -512,7 +475,7 @@ namespace AIO
             {
                 var bytes = new byte[8 * count];
                 random.NextBytes(bytes);
-                var array = new ulong[count];
+                var array                                                                  = new ulong[count];
                 for (int i = 0, index = 0; i < bytes.Length; i += 8, index++) array[index] = BitConverter.ToUInt64(bytes, i);
 
                 return array;
@@ -524,13 +487,10 @@ namespace AIO
 
             /// <param name="lower">下限-包含</param>
             /// <param name="upper">上限-不包含</param>
-            public static short RandInt16(in short lower, in int upper)
-            {
-                return (short)random.Next(lower, short.MaxValue < upper ? short.MaxValue : upper);
-            }
+            public static short RandInt16(in short lower, in int upper) { return (short)random.Next(lower, short.MaxValue < upper ? short.MaxValue : upper); }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             public static short RandInt16()
@@ -541,7 +501,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <returns></returns>
@@ -549,7 +509,7 @@ namespace AIO
             {
                 var bytes = new byte[2 * count];
                 random.NextBytes(bytes);
-                var array = new short[count];
+                var array                                                                  = new short[count];
                 for (int i = 0, index = 0; i < bytes.Length; i += 2, index++) array[index] = BitConverter.ToInt16(bytes, i);
 
                 return array;
@@ -560,20 +520,14 @@ namespace AIO
             #region Rand Int32
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
-            public static int RandInt32()
-            {
-                return random.Next();
-            }
+            public static int RandInt32() { return random.Next(); }
 
             /// <param name="lower">下限-包含</param>
             /// <param name="upper">上限-不包含</param>
-            public static int RandInt32(in int lower, in int upper)
-            {
-                return random.Next(lower, upper);
-            }
+            public static int RandInt32(in int lower, in int upper) { return random.Next(lower, upper); }
 
             /// <param name="count"></param>
             /// <param name="minValue">下限-包含</param>
@@ -591,7 +545,7 @@ namespace AIO
                 {
                     if (maxValue - minValue < count)
                         throw new ArgumentException(
-                            "The assignable interval must be greater than the number of targets");
+                                                    "The assignable interval must be greater than the number of targets");
                     var hashtable = new Hashtable();
                     while (hashtable.Count < count)
                     {
@@ -608,7 +562,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="weights"></param>
             /// <returns></returns>
@@ -616,7 +570,7 @@ namespace AIO
             {
                 if (weights.Count <= 1) return weights.Count - 1;
 
-                var sum = weights.Sum();
+                var sum         = weights.Sum();
                 var number_rand = random.Next(0, sum + 1);
                 for (int i = 0, sum_temp = 0; i < weights.Count; i++)
                 {
@@ -628,7 +582,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="weights"></param>
             /// <param name="weightRandomMinVal"></param>
@@ -637,7 +591,7 @@ namespace AIO
             {
                 if (weights.Count <= 1) return weights.Count - 1;
 
-                var sum = weights.Sum();
+                var sum         = weights.Sum();
                 var number_rand = random.Next(0, System.Math.Max(sum, weightRandomMinVal));
                 for (int i = 0, sum_temp = 0; i < weights.Count; i++)
                 {
@@ -653,7 +607,7 @@ namespace AIO
             #region Rand Int64
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             public static long RandInt64()
@@ -676,7 +630,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="count"></param>
             /// <returns></returns>
@@ -684,7 +638,7 @@ namespace AIO
             {
                 var bytes = new byte[8 * count];
                 random.NextBytes(bytes);
-                var array = new long[count];
+                var array                                                                  = new long[count];
                 for (int i = 0, index = 0; i < bytes.Length; i += 8, index++) array[index] = BitConverter.ToInt64(bytes, i);
 
                 return array;
