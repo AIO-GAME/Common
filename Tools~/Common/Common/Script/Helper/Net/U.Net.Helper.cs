@@ -100,15 +100,28 @@ namespace AIO
                 await stream.FlushAsync(cancellationToken);
             }
 
-            internal static FileStream AddFileHeader(string localPath, Func<string> remoteMD5Cb, bool isOverWrite = false)
+            internal static FileStream AddFileHeader(
+                string       localPath,
+                Func<string> remoteMD5Cb,
+                bool         isOverWrite = false
+            ) => AddFileHeader(new FileInfo(localPath), remoteMD5Cb, isOverWrite);
+
+            internal static Task<FileStream> AddFileHeaderAsync(
+                string             localPath,
+                Func<Task<string>> remoteMD5Cb,
+                bool               isOverWrite       = false,
+                CancellationToken  cancellationToken = default
+            ) => AddFileHeaderAsync(new FileInfo(localPath), remoteMD5Cb, isOverWrite, cancellationToken);
+
+            internal static FileStream AddFileHeader(FileInfo fileinfo, Func<string> remoteMD5Cb, bool isOverWrite = false)
             {
-                var parent = localPath.Substring(0, localPath.LastIndexOf('\\'));
-                if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
+                var parent = fileinfo.Directory;
+                if (!parent.Exists) parent.Create();
 
                 FileStream outputStream;
-                if (File.Exists(localPath))
+                if (fileinfo.Exists)
                 {
-                    outputStream = new FileStream(localPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
+                    outputStream = new FileStream(fileinfo.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
                     var header = new byte[CODE.Length];
                     _ = outputStream.Read(header, 0, header.Length);
                     var resume = !CODE.Where((t, i) => t != header[i]).Any();
@@ -128,31 +141,31 @@ namespace AIO
                         return outputStream;
                     }
 
-                    CS.WriteLine($"HTTP Download : Target File Already Exists {localPath}");
+                    CS.WriteLine($"HTTP Download : Target File Already Exists {fileinfo.FullName}");
                     return null;
                 }
 
-                outputStream = new FileStream(localPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
+                outputStream = new FileStream(fileinfo.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
                 outputStream.Write(CODE, 0, CODE.Length);
                 return outputStream;
             }
 
             internal static async Task<FileStream> AddFileHeaderAsync(
-                string             localPath,
+                FileInfo           fileinfo,
                 Func<Task<string>> remoteMD5Cb,
                 bool               isOverWrite       = false,
                 CancellationToken  cancellationToken = default)
             {
                 if (cancellationToken == default) cancellationToken = CancellationToken.None;
-                localPath = localPath.Replace('/', '\\');
-                var fileinfo = new FileInfo(localPath);
-                var parent   = fileinfo.Directory;
+
+                var parent = fileinfo.Directory;
                 if (!parent.Exists) parent.Create();
 
                 FileStream outputStream;
                 if (fileinfo.Exists)
                 {
-                    outputStream = new FileStream(localPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
+                    fileinfo.Attributes |= FileAttributes.Normal; // 清除只读属性
+                    outputStream        =  new FileStream(fileinfo.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
                     var header = new byte[CODE.Length];
                     _ = await outputStream.ReadAsync(header, 0, header.Length, cancellationToken);
                     var resume = !CODE.Where((t, i) => t != header[i]).Any();
@@ -178,11 +191,11 @@ namespace AIO
                         return outputStream;
                     }
 
-                    CS.WriteLine($"HTTP Download : Target File Already Exists {localPath}");
+                    CS.WriteLine($"HTTP Download : Target File Already Exists {fileinfo.FullName}");
                     return null;
                 }
 
-                outputStream = new FileStream(localPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
+                outputStream = new FileStream(fileinfo.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
                 await outputStream.WriteAsync(CODE, 0, CODE.Length, cancellationToken);
                 await outputStream.FlushAsync(cancellationToken);
                 return outputStream;

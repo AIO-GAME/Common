@@ -19,7 +19,7 @@ namespace AIO
         /// <summary>
         /// 实例
         /// </summary>
-        protected static T Instance
+        protected static T Inst
         {
             get
             {

@@ -73,3 +73,6 @@ TestResult.xml
 
 # FAKE - F# Make
 .fake/
+
+!*.sln
+!*.csproj

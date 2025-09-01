@@ -13,6 +13,11 @@ namespace AIO.UEditor
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     public sealed class LnkToolsAttribute : Attribute
     {
+        /// <summary>
+        /// 快捷工具，仅可标记静态函数
+        /// </summary>
+        /// <param name="mode">Unity 启动模式</param>
+        /// <param name="priority">工具优先级（越小越靠前）</param>
         public LnkToolsAttribute(
             ELnkToolsMode mode     = ELnkToolsMode.AllMode,
             int           priority = int.MaxValue)
@@ -21,6 +26,12 @@ namespace AIO.UEditor
             Priority = priority;
         }
 
+        /// <summary>
+        /// 快捷工具，仅可标记静态函数
+        /// </summary>
+        /// <param name="text">工具名称</param>
+        /// <param name="mode">快捷工具触发类型</param>
+        /// <param name="priority">工具优先级（越小越靠前）</param>
         public LnkToolsAttribute(string        text,
                                  ELnkToolsMode mode     = ELnkToolsMode.AllMode,
                                  int           priority = int.MaxValue)
@@ -30,6 +41,13 @@ namespace AIO.UEditor
             Priority = priority;
         }
 
+        /// <summary>
+        /// 快捷工具，仅可标记静态函数
+        /// </summary>
+        /// <param name="tooltip">工具提示</param>
+        /// <param name="text">工具名称</param>
+        /// <param name="mode">快捷工具触发类型</param>
+        /// <param name="priority">工具优先级（越小越靠前）</param>
         public LnkToolsAttribute(string        text,
                                  string        tooltip,
                                  ELnkToolsMode mode     = ELnkToolsMode.AllMode,
@@ -99,6 +117,7 @@ namespace AIO.UEditor
 
         [InspectorName("Scene 窗口")]
         SceneView,
+
         // GameView,
     }
 

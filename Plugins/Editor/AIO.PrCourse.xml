@@ -6440,6 +6440,9 @@
             <summary>
             命令 无需判断平台
             </summary>
+            <summary>
+            命令 无需判断平台
+            </summary>
         </member>
         <member name="T:AIO.PrPlatform.File">
             <summary>
@@ -6855,6 +6858,39 @@
             </summary>
         </member>
         <member name="M:AIO.PrPlatform.Open.Path(System.String)">
+            <summary>
+            目标路径
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="T:AIO.PrPlatform.Python">
+            <summary>
+            打开路径
+            </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.Python.Run(System.IO.FileSystemInfo,System.IO.DirectoryInfo,System.String[])">
+            <summary>
+            目标路径
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Python.Run(System.String,System.IO.DirectoryInfo,System.String[])">
+            <summary>
+            目标路径
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Python.Run(System.IO.FileInfo,System.String[])">
+            <summary>
+            目标路径
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Python.Run(System.String,System.String[])">
             <summary>
             目标路径
             </summary>

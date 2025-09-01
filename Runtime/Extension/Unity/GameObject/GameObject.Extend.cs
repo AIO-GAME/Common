@@ -145,6 +145,13 @@ namespace AIO.UEngine
         {
             Destroy(obj.GetComponent<T>());
         }
+        
+        public static void TryRemoveComponent<T>(this GameObject obj)
+        where T : Component
+        {
+            var comp = obj.GetComponent<T>();
+            if (comp != null) Destroy(comp);
+        }
 
         public static void RemoveComponent(this GameObject obj, in string comp) { Destroy(obj.GetComponent(comp)); }
 

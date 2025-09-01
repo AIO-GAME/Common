@@ -28,6 +28,11 @@
         /// <summary>
         /// 每秒下载速度
         /// </summary>
+        string SpeedStr { get; }
+
+        /// <summary>
+        /// 每秒下载速度
+        /// </summary>
         long Speed { get; }
 
         /// <summary>

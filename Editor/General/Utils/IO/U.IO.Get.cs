@@ -28,7 +28,7 @@ namespace AIO.UEditor
             public static T[] GetScriptableObjects<T>(params string[] folder)
             where T : ScriptableObject
             {
-                var pattern = $"t:{typeof(T).Name}";
+                var pattern                                      = $"t:{typeof(T).Name}";
                 if (folder is null || folder.Length == 0) folder = new[] { "Assets" };
                 return AssetDatabase.FindAssets(pattern, folder).Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<T>).Where(value => value != null).ToArray();
             }
@@ -115,20 +115,14 @@ namespace AIO.UEditor
             /// </summary>
             /// <param name="folder">文件夹</param>
             /// <returns>预制件数组</returns>
-            public static IEnumerable<GameObject> GetAssetPrefabs(params string[] folder)
-            {
-                return GetAssetsRes<GameObject>("t:Prefab", folder);
-            }
+            public static IEnumerable<GameObject> GetAssetPrefabs(params string[] folder) { return GetAssetsRes<GameObject>("t:Prefab", folder); }
 
             /// <summary>
             /// 获取指定文件夹下的音频文件
             /// </summary>
             /// <param name="folder">文件夹</param>
             /// <returns>预制件数组</returns>
-            public static IEnumerable<AnimationClip> GetAssetClips(params string[] folder)
-            {
-                return GetAssetsRes<AnimationClip>("t:Animation", folder);
-            }
+            public static IEnumerable<AnimationClip> GetAssetClips(params string[] folder) { return GetAssetsRes<AnimationClip>("t:Animation", folder); }
 
             /// <summary>
             /// 获取指定文件夹下的音频文件
@@ -160,10 +154,7 @@ namespace AIO.UEditor
             /// </summary>
             /// <param name="folders">文件夹</param>
             /// <returns>预制件数组</returns>
-            public static IEnumerable<string> GetAssetPrefabsPath(params string[] folders)
-            {
-                return GetAssetsPath("t:Prefab", folders);
-            }
+            public static IEnumerable<string> GetAssetPrefabsPath(params string[] folders) { return GetAssetsPath("t:Prefab", folders); }
 
             /// <summary>
             /// 获取预制件资源路径

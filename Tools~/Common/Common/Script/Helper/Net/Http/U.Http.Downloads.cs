@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,13 +22,75 @@ namespace AIO
             /// HTTP 下载文件
             /// </summary>
             /// <param name="remoteUrls">远端路径</param>
+            /// <param name="localPath">保存路径</param>
+            /// <param name="isOverWrite">覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">容量</param>
+            /// <exception cref="Exception">异常</exception>
+            public static Task DownloadAsync(
+                IEnumerable<string> remoteUrls,
+                string              localPath,
+                bool                isOverWrite = false,
+                ushort              timeout     = Net.TIMEOUT,
+                int                 bufferSize  = Net.BUFFER_SIZE
+            )
+            {
+                var operation = new HttpDownloadsOperation(remoteUrls, new FileInfo(localPath), isOverWrite, timeout, bufferSize);
+                return operation.Begin().WaitAsync();
+            }
+
+            /// <summary>
+            /// HTTP 下载文件
+            /// </summary>
+            /// <param name="remoteUrls">远端路径</param>
+            /// <param name="localPath">保存路径</param>
+            /// <param name="isOverWrite">覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">容量</param>
+            /// <exception cref="Exception">异常</exception>
+            public static Task DownloadAsync(
+                IEnumerable<string> remoteUrls,
+                FileSystemInfo      localPath,
+                bool                isOverWrite = false,
+                ushort              timeout     = Net.TIMEOUT,
+                int                 bufferSize  = Net.BUFFER_SIZE
+            )
+            {
+                var operation = new HttpDownloadsOperation(remoteUrls, localPath, isOverWrite, timeout, bufferSize);
+                return operation.Begin().WaitAsync();
+            }
+
+            /// <summary>
+            /// HTTP 下载文件
+            /// </summary>
+            /// <param name="remoteUrls">远端路径</param>
             /// <param name="localPath">保存根路径</param>
             /// <param name="isOverWrite">覆盖</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">容量</param>
             /// <exception cref="Exception">异常</exception>
             public static IProgressOperation Download(
-                IEnumerable<string> remoteUrls, string localPath,
+                IEnumerable<string> remoteUrls,
+                string              localPath,
+                bool                isOverWrite = false,
+                ushort              timeout     = Net.TIMEOUT,
+                int                 bufferSize  = Net.BUFFER_SIZE)
+            {
+                return new HttpDownloadsOperation(remoteUrls, new FileInfo(localPath), isOverWrite, timeout, bufferSize);
+            }
+
+            /// <summary>
+            /// HTTP 下载文件
+            /// </summary>
+            /// <param name="remoteUrls">远端路径</param>
+            /// <param name="localPath">保存根路径</param>
+            /// <param name="isOverWrite">覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">容量</param>
+            /// <exception cref="Exception">异常</exception>
+            public static IProgressOperation Download(
+                IEnumerable<string> remoteUrls,
+                FileSystemInfo      localPath,
                 bool                isOverWrite = false,
                 ushort              timeout     = Net.TIMEOUT,
                 int                 bufferSize  = Net.BUFFER_SIZE)
@@ -41,7 +104,7 @@ namespace AIO
             {
                 public HttpDownloadsOperation(
                     IEnumerable<string> remoteUrls,
-                    string              localPath,
+                    FileSystemInfo      localPath,
                     bool                isOverWrite = false,
                     ushort              timeout     = Net.TIMEOUT,
                     int                 bufferSize  = Net.BUFFER_SIZE)
@@ -67,7 +130,7 @@ namespace AIO
                 }
 
                 private List<string>                        Remote           { get; }
-                private string                              LocalPath        { get; }
+                private FileSystemInfo                      LocalPath        { get; }
                 private bool                                IsOverWrite      { get; }
                 private ushort                              Timeout          { get; }
                 private int                                 BufferSize       { get; }
@@ -94,7 +157,7 @@ namespace AIO
                         while (State == EProgressState.Pause) Thread.Sleep(100);
                         try
                         {
-                            var local = Path.Combine(LocalPath, Path.GetFileName(remote));
+                            var local        = Path.Combine(LocalPath.FullName, Path.GetFileName(remote));
                             var outputStream = Net.AddFileHeader(local, () => GetMD5(remote), IsOverWrite);
                             if (outputStream is null)
                             {
@@ -195,7 +258,7 @@ namespace AIO
                         if (fileStreams.ContainsKey(remote)) continue;
                         try
                         {
-                            var local = Path.Combine(LocalPath, Path.GetFileName(remote));
+                            var local = Path.Combine(LocalPath.FullName, Path.GetFileName(remote));
                             var outputStream = await Net.AddFileHeaderAsync(local, () => GetMD5Async(remote), IsOverWrite,
                                                                             cancellationToken);
                             if (outputStream is null)

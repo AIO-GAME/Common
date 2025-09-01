@@ -8717,6 +8717,11 @@
             <typeparam name="T"></typeparam>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
+        <member name="M:AIO.AHelper.Random.RandEnum``1">
+            <summary>
+            随机获取枚举值
+            </summary>
+        </member>
         <member name="T:AIO.AHelper.FTP">
             <summary>
             FTP

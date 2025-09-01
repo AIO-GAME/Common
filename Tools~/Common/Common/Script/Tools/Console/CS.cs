@@ -109,15 +109,20 @@ namespace AIO
         public static void WriteLineInfo(string message, ConsoleColor color) { WriteLine(color, message); }
         public static void WriteLineInfo(object message, ConsoleColor color) { WriteLine(color, message); }
 
-        private static readonly string content = new string(' ', Console.BufferWidth);
+        private static readonly string content = new string(' ', Console.BufferWidth - 1);
 
-        public static void WriteLineCursor(string message, ConsoleColor color = ConsoleColor.White)
+        public static void WriteLineCursor(string message, ConsoleColor color = ConsoleColor.White, bool fill = false)
         {
-            var currentLineCursor = Console.CursorTop <= 1 ? Console.BufferHeight : Console.CursorTop - 1; //获取当前光标所在行的位置
-            Console.SetCursorPosition(0, currentLineCursor);                                               //将光标至于当前行的开始位置
-            Console.Write(content);                                                                        //用空格将当前行填满，相当于清除当前行
-            Console.SetCursorPosition(0, currentLineCursor - 1);                                           //将光标恢复至开始时的位置
-            WriteLine(color, message);                                                                     //输出新的内容
+            // 如果光标已到达或超过缓冲区底部，则扩展缓冲区
+            if (Console.CursorTop + 1 >= Console.BufferHeight)
+            { // 增加缓冲区高度，至少加1行，避免越界
+                Console.BufferHeight = Console.CursorTop + 2;
+            }
+
+            Console.SetCursorPosition(0, Console.CursorTop);     //将光标至于当前行的开始位置
+            Console.Write(content);                              //用空格将当前行填满，相当于清除当前行
+            Console.SetCursorPosition(0, Console.CursorTop - 1); //将光标恢复至开始时的位置
+            WriteLine(color, message, fill: fill);               //输出新的内容
         }
 
         public static void WriteLineCursor(string message, int cursor, ConsoleColor color = ConsoleColor.White)

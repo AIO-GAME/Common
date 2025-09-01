@@ -18,6 +18,31 @@ namespace AIO
     /// </summary>
     public partial class PrPlatform
     {
+        /// <summary>
+        /// 设置属性
+        /// </summary>
+        /// <exception cref="NotImplementedException">未实现</exception>
+        /// <returns><see cref="IExecutor"/>执行器</returns>
+        public static IExecutor SetPermission(string target, string args)
+        {
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.Win32NT:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                case PlatformID.WinCE:
+                {
+                    return PrWin.Create("attrib", "{1} \"{0}\"", target, args);
+                }
+                case PlatformID.MacOSX:
+                case PlatformID.Unix:
+                {
+                    return PrMac.Chmod.Set(target, args);
+                }
+                default: throw new NotImplementedException();
+            }
+        }
+
         #region Nested type: File
 
         /// <summary>

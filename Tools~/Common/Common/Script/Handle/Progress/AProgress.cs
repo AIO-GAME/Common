@@ -146,16 +146,10 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public sealed override bool Equals(object obj)
-        {
-            return false;
-        }
+        public sealed override bool Equals(object obj) { return false; }
 
         /// <inheritdoc />
-        public sealed override int GetHashCode()
-        {
-            return 0;
-        }
+        public sealed override int GetHashCode() { return 0; }
     }
 
     public partial class AProgress : IProgressEvent
@@ -203,6 +197,9 @@ namespace AIO
         public long Speed { get; private set; }
 
         /// <inheritdoc />
+        public string SpeedStr => Speed.ToConverseStringFileSize();
+
+        /// <inheritdoc />
         public string CurrentInfo { get; internal set; }
 
         /// <inheritdoc />
@@ -234,10 +231,7 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        string IProgressInfo.ToString()
-        {
-            return $"{Progress}% [{CurrentStr}/{TotalStr}] {CurrentInfo} {Speed.ToConverseStringFileSize()}/s";
-        }
+        string IProgressInfo.ToString() { return $"{Progress}% [{CurrentStr}/{TotalStr}] {CurrentInfo} {SpeedStr}/s"; }
 
         #endregion
     }
@@ -298,10 +292,10 @@ namespace AIO
             str.AppendLine($"{nameof(State),-16} : {State}");
             str.AppendLine($"{nameof(AverageSpeed),-16} : {AverageSpeed.ToConverseStringFileSize()}/s");
             str.AppendLine(
-                $"{"From To Time",-16} : [{StartTime:yyyy-MM-dd HH:mm:ss} - {EndTime:yyyy-MM-dd HH:mm:ss}] {RemainingTime:d\\.hh\\:mm\\:ss}");
+                           $"{"From To Time",-16} : [{StartTime:yyyy-MM-dd HH:mm:ss} - {EndTime:yyyy-MM-dd HH:mm:ss}] {RemainingTime:d\\.hh\\:mm\\:ss}");
             str.AppendLine($"{"From To Progress",-16} : [{StartProgress}% - {LastProgress}%] {VirtualProgress}%");
             str.AppendLine(
-                $"{"From To Value",-16} : [{StartValue.ToConverseStringFileSize()} - {EndValue.ToConverseStringFileSize()}] {VirtualValue.ToConverseStringFileSize()}");
+                           $"{"From To Value",-16} : [{StartValue.ToConverseStringFileSize()} - {EndValue.ToConverseStringFileSize()}] {VirtualValue.ToConverseStringFileSize()}");
             return str.ToString();
         }
 

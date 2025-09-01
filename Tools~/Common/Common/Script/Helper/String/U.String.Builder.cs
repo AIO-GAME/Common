@@ -9,8 +9,6 @@ namespace AIO
 {
     public partial class AHelper
     {
-        #region Nested type: String
-
         public partial class String
         {
             [ThreadStatic]
@@ -124,8 +122,17 @@ namespace AIO
                 if (index == -1) return str;
                 return str.Remove(index); //"assets/config/test.unity3d" --> "assets/config/test"
             }
-        }
 
-        #endregion
+            /// <summary>
+            /// 只允许中文，英文，数字和普通符号
+            /// </summary>
+            /// <param name="text"> 输入文本 </param>
+            /// <returns> 过滤后的文本 </returns>
+            public static string RemoveInvalidCharacters(string text)
+            {
+                var content = @"[^\u4e00-\u9fa5a-zA-Z0-9\-_.!@#$%^&*()_+=<>?]";
+                return Regex.Replace(text, content, string.Empty);
+            }
+        }
     }
 }

@@ -353,6 +353,7 @@
     <Compile Include="Script\Platform\PrPlatform.Git.Upload.cs" >
       <DependentUpon>PrPlatform.Git.cs</DependentUpon>
     </Compile>
+    <Compile Include="Script\Platform\PrPlatform.Py.cs" />
     <Compile Include="Script\Utils\NetUtils.cs" />
   </ItemGroup>
   <ItemGroup>

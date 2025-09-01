@@ -14,7 +14,7 @@ namespace AIO.UEditor
     /// <summary>
     /// 快捷工具箱
     /// </summary>
-    internal static partial class LnkToolsHelper
+    internal static class LnkToolsHelper
     {
         public static List<LnkTools> Data
         {
@@ -34,15 +34,14 @@ namespace AIO.UEditor
             var types = new List<Type>();
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (!assembly.GetName().Name.Contains("Editor")) continue;
+                if (!assembly.GetName().Name.Contains("Editor", StringComparison.InvariantCultureIgnoreCase)) continue;
                 types.AddRange(assembly.GetTypes().Where(type => !type.IsEnum).Where(type => !type.IsInterface));
             }
 
             try
             {
                 foreach (var method in
-                         from type in types
-                         // 过滤构造函数
+                         from type in types // 过滤构造函数
                          select type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                          into methods
                          from method in methods

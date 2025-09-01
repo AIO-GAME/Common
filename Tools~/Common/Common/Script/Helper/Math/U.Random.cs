@@ -720,8 +720,23 @@ namespace AIO
             }
 
             #endregion
-        }
 
-        #endregion
+            #endregion
+
+            #region Rand Enum
+
+            /// <summary>
+            /// 随机获取枚举值
+            /// </summary>
+            public static T RandEnum<T>()
+            where T : Enum
+            {
+                var values = Enum.GetValues(typeof(T));
+                if (values.Length == 0) return default;
+                return (T)values.GetValue(random.Next(0, values.Length));
+            }
+
+            #endregion
+        }
     }
 }

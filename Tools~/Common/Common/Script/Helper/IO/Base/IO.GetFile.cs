@@ -45,10 +45,7 @@ namespace AIO
             /// <param name="fileName">要查找的文件名。</param>
             /// <param name="directories">包含所有可能包含该文件的文件夹路径的 IEnumerable 类型实例。</param>
             /// <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
-            public static string TryPathsForFile(string fileName, in IEnumerable<string> directories)
-            {
-                return directories.Select(directory => Path.Combine(directory, fileName).Replace('\\', '/')).FirstOrDefault(File.Exists);
-            }
+            public static string TryPathsForFile(string fileName, in IEnumerable<string> directories) { return directories.Select(directory => Path.Combine(directory, fileName).Replace('\\', '/')).FirstOrDefault(File.Exists); }
 
             /// <summary>
             /// 在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
@@ -56,10 +53,7 @@ namespace AIO
             /// <param name="fileName">要查找的文件名。</param>
             /// <param name="directories">包含所有可能包含该文件的文件夹路径的可变参数数组。</param>
             /// <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
-            public static string TryPathsForFile(in string fileName, params string[] directories)
-            {
-                return TryPathsForFile(fileName, (IEnumerable<string>)directories);
-            }
+            public static string TryPathsForFile(in string fileName, params string[] directories) { return TryPathsForFile(fileName, (IEnumerable<string>)directories); }
 
             /// <summary>
             /// 获取当前所有文件夹中所有文件信息
@@ -225,15 +219,18 @@ namespace AIO
             }
 
             /// <summary>
+            /// 返回文件字节长度
+            /// </summary>
+            /// <param name="path">文件相对路径</param>
+            public static long GetFileLength(FileInfo path) { return !path.Exists ? 0 : path.Length; }
+
+            /// <summary>
             /// 返回文件名，不含路径 默认带文件名后缀
             /// </summary>
             /// <param name="path">文件路径</param>
             /// <param name="extension">是否有后缀</param>
             /// <returns>文件名</returns>
-            public static string GetFileName(string path, bool extension = true)
-            {
-                return extension ? Path.GetFileName(path) : Path.GetFileNameWithoutExtension(path);
-            }
+            public static string GetFileName(string path, bool extension = true) { return extension ? Path.GetFileName(path) : Path.GetFileNameWithoutExtension(path); }
 
             /// <summary>
             /// 返回文件名，不含路径 默认带文件名后缀

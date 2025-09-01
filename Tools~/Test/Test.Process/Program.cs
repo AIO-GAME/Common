@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Reflection;
 using Newtonsoft.Json;
 using AIO.PY4N;
+using Models;
 
 namespace AIO
 {
@@ -129,6 +130,14 @@ namespace AIO
 
         private static async void Test()
         {
+            var json = "{\"142293516\":{\"name\":\"张欣\",\"pid\":142293516}}";
+            var jdata = JsonConvert.DeserializeObject<Dictionary<string, PlayerData>>(json);
+
+            foreach (var pair in jdata)
+            {
+                Console.WriteLine($"ID: {pair.Key}, Name: {pair.Value.Name}, PID: {pair.Value.PID}");
+            }
+
             for (int i = 0; i < 100; i++)
             {
                 var isMale  = AHelper.Random.RandBool();
