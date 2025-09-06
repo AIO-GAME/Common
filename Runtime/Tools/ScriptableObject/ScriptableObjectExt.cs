@@ -21,15 +21,14 @@ namespace AIO
 #if UNITY_EDITOR
             if (!instance)
             {
-                var dirinfo = new DirectoryInfo(Application.dataPath);
-                foreach (var info in dirinfo.GetFiles("*.asset", SearchOption.AllDirectories))
+                var path    = Application.dataPath;
+                var dirinfo = new DirectoryInfo(path);
+                foreach (var assetPath in dirinfo.
+                                          GetFiles($"{typeof(T).Name}.asset", SearchOption.AllDirectories).
+                                          Select(info => info.FullName.Replace(dirinfo.FullName, "Assets")))
                 {
-                    if (info.Name == $"{typeof(T).Name}.asset")
-                    {
-                        var assetPath = info.FullName.Replace(Application.dataPath, "Assets");
-                        instance = AssetDatabase.LoadAssetAtPath<T>(assetPath);
-                        if (instance != null) break;
-                    }
+                    instance = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+                    if (instance != null) break;
                 }
 
                 if (instance == null)

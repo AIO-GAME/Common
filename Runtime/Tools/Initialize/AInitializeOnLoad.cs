@@ -13,10 +13,11 @@ using UnityEditor;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO
 {
     /// <summary>
-    /// AInitializeOnLoad
+    /// 标记 <see cref="AInitAttribute"/> 的方法会在编辑器加载和运行时初始化时调用
+    /// 可多次标记，按Order顺序执行
     /// </summary>
     internal static class AInitializeOnLoad
     {
@@ -33,12 +34,10 @@ namespace AIO.UEditor
         private static void DebugLog(EInitAttrMode mode, MethodBase method)
         {
             if (method.ReflectedType is null) throw new NullReferenceException();
-#if UNITY_EDITOR
             Debug.Log(MethodsPath.TryGetValue(method.MethodHandle.Value, out var tuple)
-                          ? $"<color=#F7DC6F><b>[初始化] {mode}</b> : </color> {method.ReflectedType.ToDetails()}:{method.Name} () (at {tuple.Item1}:{tuple.Item2})"
+                          ? $"<color=#F7DC6F><b>[初始化] {mode}</b> : </color> {method.ReflectedType.ToDetails()} : {method.Name} () (at {tuple.Item1}:{tuple.Item2})"
                           : $"<color=#F7DC6F><b>[初始化] {mode}</b> : </color> {method.ReflectedType.ToDetails()} : {method.Name} ()"
                      );
-#endif
         }
 
         private static void DebugError(EInitAttrMode mode, MemberInfo method, Exception e) { Debug.LogException(new Error(mode, method, e)); }
@@ -70,8 +69,8 @@ namespace AIO.UEditor
             {
                 if (!MethodsEditor.TryGetValue(attr.Order, out var queue))
                 {
-                    OrdersEditor.Add(attr.Order);
                     MethodsEditor[attr.Order] = queue = new Queue<MethodInfo>();
+                    OrdersEditor.Add(attr.Order);
                 }
 
                 queue.Enqueue(method);
@@ -80,106 +79,106 @@ namespace AIO.UEditor
 
             if (attr.Mode.HasFlag(EInitAttrMode.RuntimeAfterSceneLoad))
             {
-                if (MethodsRuntimeAfterSceneLoad.TryGetValue(attr.Order, out var queue))
-                {
-                    queue.Enqueue(method);
-                }
-                else
+                if (!MethodsRuntimeAfterSceneLoad.TryGetValue(attr.Order, out var queue))
                 {
                     OrdersRuntimeAfterSceneLoad.Add(attr.Order);
-                    MethodsRuntimeAfterSceneLoad.Add(attr.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeAfterSceneLoad[attr.Order].Enqueue(method);
+                    queue = MethodsRuntimeAfterSceneLoad[attr.Order] = new Queue<MethodInfo>();
                 }
+
+                queue.Enqueue(method);
             }
 
             if (attr.Mode.HasFlag(EInitAttrMode.RuntimeBeforeSceneLoad))
             {
-                if (MethodsRuntimeBeforeSceneLoad.TryGetValue(attr.Order, out var queue))
-                {
-                    queue.Enqueue(method);
-                }
-                else
+                if (!MethodsRuntimeBeforeSceneLoad.TryGetValue(attr.Order, out var queue))
                 {
                     OrdersRuntimeBeforeSceneLoad.Add(attr.Order);
-                    MethodsRuntimeBeforeSceneLoad.Add(attr.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeBeforeSceneLoad[attr.Order].Enqueue(method);
+                    queue = MethodsRuntimeBeforeSceneLoad[attr.Order] = new Queue<MethodInfo>();
                 }
+
+                queue.Enqueue(method);
             }
 
             if (attr.Mode.HasFlag(EInitAttrMode.RuntimeAfterAssembliesLoaded))
             {
-                if (MethodsRuntimeAfterAssembliesLoaded.TryGetValue(attr.Order, out var queue))
-                {
-                    queue.Enqueue(method);
-                }
-                else
+                if (!MethodsRuntimeAfterAssembliesLoaded.TryGetValue(attr.Order, out var queue))
                 {
                     OrdersRuntimeAfterAssembliesLoaded.Add(attr.Order);
-                    MethodsRuntimeAfterAssembliesLoaded.Add(attr.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeAfterAssembliesLoaded[attr.Order].Enqueue(method);
+                    MethodsRuntimeAfterAssembliesLoaded[attr.Order] = new Queue<MethodInfo>();
                 }
+
+                queue.Enqueue(method);
             }
 
             if (attr.Mode.HasFlag(EInitAttrMode.RuntimeBeforeSplashScreen))
             {
-                if (MethodsRuntimeBeforeSplashScreen.TryGetValue(attr.Order, out var queue))
-                {
-                    queue.Enqueue(method);
-                }
-                else
+                if (!MethodsRuntimeBeforeSplashScreen.TryGetValue(attr.Order, out var queue))
                 {
                     OrdersRuntimeBeforeSplashScreen.Add(attr.Order);
-                    MethodsRuntimeBeforeSplashScreen.Add(attr.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeBeforeSplashScreen[attr.Order].Enqueue(method);
+                    MethodsRuntimeBeforeSplashScreen[attr.Order] = new Queue<MethodInfo>();
                 }
+
+                queue.Enqueue(method);
             }
 
             if (attr.Mode.HasFlag(EInitAttrMode.RuntimeSubsystemRegistration))
             {
-                if (MethodsRuntimeSubsystemRegistration.TryGetValue(attr.Order, out var queue))
-                {
-                    queue.Enqueue(method);
-                }
-                else
+                if (!MethodsRuntimeSubsystemRegistration.TryGetValue(attr.Order, out var queue))
                 {
                     OrdersRuntimeSubsystemRegistration.Add(attr.Order);
-                    MethodsRuntimeSubsystemRegistration.Add(attr.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeSubsystemRegistration[attr.Order].Enqueue(method);
+                    MethodsRuntimeSubsystemRegistration[attr.Order] = new Queue<MethodInfo>();
                 }
+
+                queue.Enqueue(method);
             }
         }
 
         static AInitializeOnLoad()
         {
 #if UNITY_EDITOR
-            MethodsPath   = new Dictionary<IntPtr, Tuple<string, int>>();
             OrdersEditor  = new SortedSet<int>();
+            MethodsPath   = new Dictionary<IntPtr, Tuple<string, int>>();
             MethodsEditor = new Dictionary<int, Queue<MethodInfo>>();
 #endif
-            OrdersRuntimeBeforeSceneLoad        = new SortedSet<int>();
+
+            OrdersRuntimeBeforeSceneLoad       = new SortedSet<int>();
+            OrdersRuntimeAfterSceneLoad        = new SortedSet<int>();
+            OrdersRuntimeAfterAssembliesLoaded = new SortedSet<int>();
+            OrdersRuntimeBeforeSplashScreen    = new SortedSet<int>();
+            OrdersRuntimeSubsystemRegistration = new SortedSet<int>();
+
             MethodsRuntimeBeforeSceneLoad       = new Dictionary<int, Queue<MethodInfo>>();
-            OrdersRuntimeAfterSceneLoad         = new SortedSet<int>();
             MethodsRuntimeAfterSceneLoad        = new Dictionary<int, Queue<MethodInfo>>();
-            OrdersRuntimeAfterAssembliesLoaded  = new SortedSet<int>();
             MethodsRuntimeAfterAssembliesLoaded = new Dictionary<int, Queue<MethodInfo>>();
-            OrdersRuntimeBeforeSplashScreen     = new SortedSet<int>();
             MethodsRuntimeBeforeSplashScreen    = new Dictionary<int, Queue<MethodInfo>>();
-            OrdersRuntimeSubsystemRegistration  = new SortedSet<int>();
             MethodsRuntimeSubsystemRegistration = new Dictionary<int, Queue<MethodInfo>>();
 
-            foreach (var type in AHelper.Assembly.GetAllType())
+            var dict = new Dictionary<MethodInfo, AInitAttribute>();
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (type.Value.IsEnum) continue;
-                if (type.Value.IsInterface) continue;
-                foreach (var method in type.Value.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+                foreach (var type in assembly.GetTypes())
                 {
-                    if (!method.IsStatic) continue;
-                    if (method.IsAbstract) continue;
-                    if (method.IsGenericMethod) continue;
-                    if (method.GetParameters().Length > 0) continue;
-                    var attribute = method.GetCustomAttribute<AInitAttribute>(false);
-                    if (attribute is null) continue;
-                    Processing(attribute, method);
+                    if (type.IsEnum) continue;
+                    if (type.IsInterface) continue;
+                    foreach (var method in type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+                    {
+                        if (!method.IsStatic) continue;
+                        if (method.IsAbstract) continue;
+                        if (method.IsGenericMethod) continue;
+                        if (method.GetParameters().Length > 0) continue;
+                        var attribute = method.GetCustomAttribute<AInitAttribute>(false);
+                        if (attribute is null) continue;
+                        dict[method] = attribute;
+                    }
+                }
+            }
+
+            foreach (var kvp in dict)
+            {
+                try { Processing(kvp.Value, kvp.Key); }
+                catch (Exception e)
+                {
+                    DebugError(kvp.Value.Mode, kvp.Key, e);
                 }
             }
         }
@@ -189,181 +188,187 @@ namespace AIO.UEditor
         public static void InitializeOnLoadMethod()
         {
             foreach (var method in OrdersEditor.SelectMany(item => MethodsEditor[item]))
+            {
+                EditorUtility.DisplayProgressBar("初始化", $"{method.DeclaringType?.FullName}:{method.Name} ()", 0f);
                 try
                 {
                     method.Invoke(null, null);
-                    DebugLog(EInitAttrMode.Editor, method);
                 }
                 catch (Exception e)
                 {
                     DebugError(EInitAttrMode.Editor, method, e);
                 }
 
-            EditorApplication.quitting += quit;
-            return;
-
-            void quit()
-            {
-                EditorApplication.quitting -= quit;
-                MethodsEditor.Clear();
-                OrdersEditor.Clear();
+                EditorUtility.DisplayProgressBar("初始化", $"{method.DeclaringType?.FullName}:{method.Name} ()", 1f);
             }
+
+            EditorUtility.ClearProgressBar();
+            Application.quitting       += InitializeOnLoadMethodQuit;
+            EditorApplication.quitting += InitializeOnLoadMethodQuit;
         }
+
+        private static void InitializeOnLoadMethodQuit()
+        {
+            Application.quitting       -= InitializeOnLoadMethodQuit;
+            EditorApplication.quitting -= InitializeOnLoadMethodQuit;
+            MethodsEditor.Clear();
+            OrdersEditor.Clear();
+            OrdersRuntimeSubsystemRegistration.Clear();
+            MethodsRuntimeSubsystemRegistration.Clear();
+            OrdersRuntimeBeforeSplashScreen.Clear();
+            MethodsRuntimeBeforeSplashScreen.Clear();
+            OrdersRuntimeAfterAssembliesLoaded.Clear();
+            MethodsRuntimeAfterAssembliesLoaded.Clear();
+            OrdersRuntimeBeforeSceneLoad.Clear();
+            MethodsRuntimeBeforeSceneLoad.Clear();
+            OrdersRuntimeAfterSceneLoad.Clear();
+            MethodsRuntimeAfterSceneLoad.Clear();
+        }
+
 #endif
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void RuntimeInitializeOnLoadMethod()
         {
             foreach (var method in OrdersRuntimeBeforeSceneLoad.SelectMany(item => MethodsRuntimeBeforeSceneLoad[item]))
+            {
+#if UNITY_EDITOR
+                EditorUtility.DisplayProgressBar("场景加载前", $"{method.DeclaringType?.FullName}:{method.Name} ()", 0f);
+#endif
                 try
                 {
                     method.Invoke(null, null);
+#if !UNITY_EDITOR
                     DebugLog(EInitAttrMode.RuntimeBeforeSceneLoad, method);
+#endif
                 }
                 catch (Exception e)
                 {
                     DebugError(EInitAttrMode.RuntimeBeforeSceneLoad, method, e);
                 }
-
-            Application.quitting += quit;
 #if UNITY_EDITOR
-            EditorApplication.quitting += quit;
+                EditorUtility.DisplayProgressBar("场景加载前", $"{method.DeclaringType?.FullName}:{method.Name} ()", 1f);
 #endif
-            return;
-
-            void quit()
-            {
-                Application.quitting -= quit;
-#if UNITY_EDITOR
-                EditorApplication.quitting -= quit;
-#endif
-                OrdersRuntimeBeforeSceneLoad.Clear();
-                MethodsRuntimeBeforeSceneLoad.Clear();
             }
+
+#if UNITY_EDITOR
+            EditorUtility.ClearProgressBar();
+#endif
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void RuntimeInitializeAfterSceneLoadMethod()
         {
             foreach (var method in OrdersRuntimeAfterSceneLoad.SelectMany(item => MethodsRuntimeAfterSceneLoad[item]))
+            {
+#if UNITY_EDITOR
+                EditorUtility.DisplayProgressBar("场景加载后", $"{method.DeclaringType?.FullName}:{method.Name} ()", 0f);
+#endif
                 try
                 {
-                    DebugLog(EInitAttrMode.RuntimeAfterSceneLoad, method);
                     method.Invoke(null, null);
+#if !UNITY_EDITOR
+                    DebugLog(EInitAttrMode.RuntimeAfterSceneLoad, method);
+#endif
                 }
                 catch (Exception e)
                 {
                     DebugError(EInitAttrMode.RuntimeAfterSceneLoad, method, e);
                 }
-
-            Application.quitting += quit;
 #if UNITY_EDITOR
-            EditorApplication.quitting += quit;
+                EditorUtility.DisplayProgressBar("场景加载后", $"{method.DeclaringType?.FullName}:{method.Name} ()", 1f);
 #endif
-            return;
-
-            void quit()
-            {
-                Application.quitting -= quit;
-#if UNITY_EDITOR
-                EditorApplication.quitting -= quit;
-#endif
-                OrdersRuntimeAfterSceneLoad.Clear();
-                MethodsRuntimeAfterSceneLoad.Clear();
             }
+
+#if UNITY_EDITOR
+            EditorUtility.ClearProgressBar();
+#endif
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void RuntimeInitializeAfterAssembliesLoadedMethod()
         {
             foreach (var method in OrdersRuntimeAfterAssembliesLoaded.SelectMany(item => MethodsRuntimeAfterAssembliesLoaded[item]))
+            {
+#if UNITY_EDITOR
+                EditorUtility.DisplayProgressBar("程序加载完毕后", $"{method.DeclaringType?.FullName}:{method.Name} ()", 0f);
+#endif
                 try
                 {
-                    DebugLog(EInitAttrMode.RuntimeAfterAssembliesLoaded, method);
                     method.Invoke(null, null);
+#if !UNITY_EDITOR
+                    DebugLog(EInitAttrMode.RuntimeAfterAssembliesLoaded, method);
+#endif
                 }
                 catch (Exception e)
                 {
                     DebugError(EInitAttrMode.RuntimeAfterAssembliesLoaded, method, e);
                 }
-
-            Application.quitting += quit;
 #if UNITY_EDITOR
-            EditorApplication.quitting += quit;
+                EditorUtility.DisplayProgressBar("程序加载完毕后", $"{method.DeclaringType?.FullName}:{method.Name} ()", 1f);
 #endif
-            return;
-
-            void quit()
-            {
-                Application.quitting -= quit;
-#if UNITY_EDITOR
-                EditorApplication.quitting -= quit;
-#endif
-                OrdersRuntimeAfterAssembliesLoaded.Clear();
-                MethodsRuntimeAfterAssembliesLoaded.Clear();
             }
+#if UNITY_EDITOR
+            EditorUtility.ClearProgressBar();
+#endif
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static void RuntimeInitializeBeforeSplashScreenMethod()
         {
             foreach (var method in OrdersRuntimeBeforeSplashScreen.SelectMany(item => MethodsRuntimeBeforeSplashScreen[item]))
+            {
+#if UNITY_EDITOR
+                EditorUtility.DisplayProgressBar("启动画面之前", $"{method.DeclaringType?.FullName}:{method.Name} ()", 0f);
+#endif
                 try
                 {
-                    DebugLog(EInitAttrMode.RuntimeBeforeSplashScreen, method);
                     method.Invoke(null, null);
+#if !UNITY_EDITOR
+                    DebugLog(EInitAttrMode.RuntimeBeforeSplashScreen, method);
+#endif
                 }
                 catch (Exception e)
                 {
                     DebugError(EInitAttrMode.RuntimeBeforeSplashScreen, method, e);
                 }
-
-            Application.quitting += quit;
 #if UNITY_EDITOR
-            EditorApplication.quitting += quit;
+                EditorUtility.DisplayProgressBar("启动画面之前", $"{method.DeclaringType?.FullName}:{method.Name} ()", 1f);
 #endif
-            return;
-
-            void quit()
-            {
-                Application.quitting -= quit;
-#if UNITY_EDITOR
-                EditorApplication.quitting -= quit;
-#endif
-                OrdersRuntimeBeforeSplashScreen.Clear();
-                MethodsRuntimeBeforeSplashScreen.Clear();
             }
+#if UNITY_EDITOR
+            EditorUtility.ClearProgressBar();
+#endif
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void RuntimeInitializeSubsystemRegistrationMethod()
         {
             foreach (var method in OrdersRuntimeSubsystemRegistration.SelectMany(item => MethodsRuntimeSubsystemRegistration[item]))
+            {
+#if UNITY_EDITOR
+                EditorUtility.DisplayProgressBar("子系统注册", $"{method.DeclaringType?.FullName}:{method.Name} ()", 0f);
+#endif
                 try
                 {
-                    DebugLog(EInitAttrMode.RuntimeSubsystemRegistration, method);
                     method.Invoke(null, null);
+#if !UNITY_EDITOR
+                    DebugLog(EInitAttrMode.RuntimeSubsystemRegistration, method);
+#endif
                 }
                 catch (Exception e)
                 {
                     DebugError(EInitAttrMode.RuntimeSubsystemRegistration, method, e);
                 }
-
-            Application.quitting += quit;
 #if UNITY_EDITOR
-            EditorApplication.quitting += quit;
+                EditorUtility.DisplayProgressBar("子系统注册", $"{method.DeclaringType?.FullName}:{method.Name} ()", 1f);
 #endif
-            return;
-
-            void quit()
-            {
-                Application.quitting -= quit;
-#if UNITY_EDITOR
-                EditorApplication.quitting -= quit;
-#endif
-                OrdersRuntimeSubsystemRegistration.Clear();
-                MethodsRuntimeSubsystemRegistration.Clear();
             }
+
+
+#if UNITY_EDITOR
+            EditorUtility.ClearProgressBar();
+#endif
         }
     }
 }

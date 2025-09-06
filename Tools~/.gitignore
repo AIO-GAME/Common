@@ -76,3 +76,4 @@ TestResult.xml
 
 !*.sln
 !*.csproj
+!*Test

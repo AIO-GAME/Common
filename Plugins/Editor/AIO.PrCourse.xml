@@ -6444,6 +6444,13 @@
             命令 无需判断平台
             </summary>
         </member>
+        <member name="M:AIO.PrPlatform.SetPermission(System.String,System.String)">
+            <summary>
+            设置属性
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
         <member name="T:AIO.PrPlatform.File">
             <summary>
             文件

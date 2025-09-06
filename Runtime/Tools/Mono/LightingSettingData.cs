@@ -60,7 +60,7 @@ namespace AIO
 
                 so.ApplyModifiedProperties();
             }
-            
+
             if (GUILayout.Button("应用"))
             {
                 m_Target.Apply();
@@ -72,9 +72,7 @@ namespace AIO
 
     #endregion
 
-    [CreateAssetMenu(menuName = "Rendering/Lighting Setting Data", fileName = "LightingSettingData", order = 0)]
     [ExecuteAlways]
-    [DisallowMultipleComponent]
     public class LightingSettingData : MonoBehaviour
     {
         #region class

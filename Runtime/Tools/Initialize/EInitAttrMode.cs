@@ -10,7 +10,7 @@ using System;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO
 {
     /// <summary>
     /// E InitAttr Mode

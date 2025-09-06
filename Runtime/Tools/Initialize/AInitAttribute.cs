@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO
 {
     /// <summary>
     /// 初始化属性

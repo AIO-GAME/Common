@@ -76,9 +76,13 @@ namespace AIO.UEditor
 
                 var temp = toolbar
 #if UNITY_2022_1_OR_NEWER && !UNITY_2023_1_OR_NEWER
-                    .Q<VisualElement>("ToolbarContainerContent")
+                          .Q<VisualElement>("ToolbarContainerContent")
 #endif
-                          .Q<VisualElement>("ToolbarZonePlayMode").Q<VisualElement>("PlayMode").Children().First();
+                          .
+                           Q<VisualElement>("ToolbarZonePlayMode").
+                           Q<VisualElement>("PlayMode").
+                           Children().
+                           First();
 
                 if (temp is null) break;
 
@@ -125,7 +129,7 @@ namespace AIO.UEditor
             ms_CurrentToolbar = toolbars.Length > 0 ? (ScriptableObject)toolbars[0] : null;
             if (!ms_CurrentToolbar) return;
 #if UNITY_2020_1_OR_NEWER
-            var backend  = guiBackend.GetValue(ms_CurrentToolbar);
+            var backend = guiBackend.GetValue(ms_CurrentToolbar);
             var elements = VISUALTREE_PROPERTYINFO.GetValue(backend, null) as VisualElement;
 #else
             var elements = VISUALTREE_PROPERTYINFO.GetValue(ms_CurrentToolbar, null) as VisualElement;

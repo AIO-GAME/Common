@@ -18,7 +18,10 @@ namespace AIO
         /// </summary>
         public partial class Random
         {
-            private static System.Random random;
+            /// <summary>
+            /// 随机数生成器
+            /// </summary>
+            internal static System.Random random;
 
             static Random() { random = new System.Random(System.Guid.NewGuid().GetHashCode()); }
 

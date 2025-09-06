@@ -743,7 +743,6 @@
         <Compile Include="Script\Helper\IO\Base\IO.GetFile.cs"/>
         <Compile Include="Script\Helper\IO\Base\IO.Set.cs" />
         <Compile Include="Script\Helper\IO\Base\IO.Try.cs"/>
-        <Compile Include="Script\Helper\Math\U.Random.String.cs" />
         <Compile Include="Script\Helper\Net\Client\NetBuffer.cs"/>
         <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs"/>
         <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs"/>
@@ -965,6 +964,7 @@
         <Compile Include="Script\Tools\Pool\Pool.SortedList.cs" />
         <Compile Include="Script\Tools\Pool\Pool.Stack.cs" />
         <Compile Include="Script\Tools\Pool\Pool.Using.cs" />
+        <Compile Include="Script\Tools\RandomName\RandomChineseName.cs" />
         <Compile Include="Script\Tools\Singleton\Singleton.cs" />
         <Compile Include="Script\Tools\Storage\Bin\Bin.Dictionary.cs" />
         <Compile Include="Script\Tools\Storage\Bin\Bin.HashSet.cs" />

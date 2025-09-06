@@ -8,7 +8,6 @@ using System.Net.Http;
 using System.Reflection;
 using Newtonsoft.Json;
 using AIO.PY4N;
-using Models;
 
 namespace AIO
 {
@@ -128,24 +127,40 @@ namespace AIO
             Console.WriteLine(data2.data.answer);
         }
 
+        /// <summary>
+        /// 常见女性名字字（可扩展）
+        /// </summary>
+        public static readonly List<char> ChineseFemaleNames = new List<char>
+        {
+            '芳', '娜', '静', '丽', '敏', '燕', '娟', '雪', '艳', '梅',
+            '婷', '慧', '琳', '欣', '佳', '玉', '彤', '怡', '诗', '露',
+            "宝", "璐", "璇", "珊", "莹", "瑶", "晴", "倩", '璇', '珊',
+            '蓉', '晴', '婧', '妍'
+        };
+
+        /// <summary>
+        /// 生僻字名字库（适用于男女）
+        /// </summary>
+        public static readonly List<char> ChineseRareNameChars = new List<char>
+        {
+            '昉', '珧', '颉', '祎', '潞', '泷', '沣', '骐', '珺', '琛',
+            '峤', '飏', '忻', '杼', '晗', '卿', '煦', '翊', '嵘', '濡',
+            '槿', '荻', '澹', '蓁', '忪', '郗', '茈', '暄', '翎', '羲'
+        };
+
         private static async void Test()
         {
-            var json = "{\"142293516\":{\"name\":\"张欣\",\"pid\":142293516}}";
-            var jdata = JsonConvert.DeserializeObject<Dictionary<string, PlayerData>>(json);
-
-            foreach (var pair in jdata)
-            {
-                Console.WriteLine($"ID: {pair.Key}, Name: {pair.Value.Name}, PID: {pair.Value.PID}");
-            }
+            var rand = new RandomChineseName('张');
+            rand.AddNames(ChineseFemaleNames);
+            rand.AddRareNames(ChineseRareNameChars);
 
             for (int i = 0; i < 100; i++)
             {
-                var isMale  = AHelper.Random.RandBool();
-                var useRare = AHelper.Random.RandBool();
-                var maxLen  = AHelper.Random.RandInt32(2, 5);
-                var name    = AHelper.Random.RandomChineseName(isMale: isMale, useRare: useRare, maxLen: maxLen);
-                var py      = Pinyin4Net.GetPinyin(name, PinyinFormat.WITH_TONE_MARK);
-                Console.WriteLine($"{(isMale ? "男" : "女")} | [{name} : {py}]");
+                rand.UseRare = AHelper.Random.RandBool();
+                rand.MaxLen  = AHelper.Random.RandInt32(2, 5);
+                var name = rand.GetName();
+                var py   = Pinyin4Net.GetPinyin(name, PinyinFormat.WITH_TONE_MARK);
+                Console.WriteLine($"[{name} : {py}]");
             }
 
 

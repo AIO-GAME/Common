@@ -6701,6 +6701,9 @@
         <member name="P:AIO.AProgress.Speed">
             <inheritdoc />
         </member>
+        <member name="P:AIO.AProgress.SpeedStr">
+            <inheritdoc />
+        </member>
         <member name="P:AIO.AProgress.CurrentInfo">
             <inheritdoc />
         </member>
@@ -6887,6 +6890,11 @@
         <member name="P:AIO.IProgressInfo.CurrentValue">
             <summary>
             当前值
+            </summary>
+        </member>
+        <member name="P:AIO.IProgressInfo.SpeedStr">
+            <summary>
+            每秒下载速度
             </summary>
         </member>
         <member name="P:AIO.IProgressInfo.Speed">
@@ -7294,6 +7302,12 @@
             </summary>
         </member>
         <member name="M:AIO.AHelper.IO.GetFileLength(System.String)">
+            <summary>
+            返回文件字节长度
+            </summary>
+            <param name="path">文件相对路径</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.GetFileLength(System.IO.FileInfo)">
             <summary>
             返回文件字节长度
             </summary>
@@ -8348,380 +8362,6 @@
             写入 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="T:AIO.AHelper.Random">
-            <summary>
-            随机数工具类
-            </summary>
-        </member>
-        <member name="F:AIO.AHelper.Random.ChineseSurnames">
-            <summary>
-            常用姓氏（可扩展）
-            </summary>
-        </member>
-        <member name="F:AIO.AHelper.Random.ChineseMaleNames">
-            <summary>
-            常见男性名字字（可扩展）
-            </summary>
-        </member>
-        <member name="F:AIO.AHelper.Random.ChineseFemaleNames">
-            <summary>
-            常见女性名字字（可扩展）
-            </summary>
-        </member>
-        <member name="F:AIO.AHelper.Random.ChineseRareNameChars">
-            <summary>
-            生僻字名字库（适用于男女）
-            </summary>
-        </member>
-        <member name="M:AIO.AHelper.Random.Init">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandomChineseName(System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Single)">
-            <summary>
-            生成随机中文姓名
-            </summary>
-            <param name="isMale">是否为男性</param>
-            <param name="useRare">是否使用生僻字</param>
-            <param name="allowRepetition">是否允许重复使用同一个字</param>
-            <param name="maxLen">姓名的最大长度</param>
-            <param name="rare">生僻字使用概率，0-1之间</param>
-            <returns>姓名字符串</returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandDouble">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.NextLong(System.Int64,System.Int64)">
-             <summary>
-            
-             </summary>
-             <param name="minValue"></param>
-             <param name="maxValue"></param>
-             <returns></returns>
-             <exception cref="T:System.ArgumentException"></exception>
-        </member>
-        <member name="M:AIO.AHelper.Random.Refresh">
-            <summary>
-            刷新随机种子
-            </summary>
-        </member>
-        <member name="M:AIO.AHelper.Random.Refresh(System.Random@)">
-            <summary>
-            刷新随机种子
-            </summary>
-        </member>
-        <member name="M:AIO.AHelper.Random.Refresh(System.Int32@)">
-            <summary>
-            刷新随机种子
-            </summary>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArray``1(System.Int32,System.Collections.Generic.ICollection{``0}@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <param name="array"></param>
-             <typeparam name="T"></typeparam>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArray``1(System.Int32@,System.Collections.Generic.IList{``0}@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <param name="array"></param>
-             <typeparam name="T"></typeparam>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArray``1(System.Int32,System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
-            <param name="array"></param>
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-            <param name="count"></param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArray``2(System.Int32@,System.Collections.Generic.IDictionary{``0,``1}@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <param name="array"></param>
-             <typeparam name="T1"></typeparam>
-             <typeparam name="T2"></typeparam>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@)">
-             <summary>
-            
-             </summary>
-             <param name="array"></param>
-             <typeparam name="T"></typeparam>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@)">
-             <summary>
-            
-             </summary>
-             <param name="array"></param>
-             <typeparam name="T"></typeparam>
-             <returns></returns>
-             <exception cref="T:System.SystemException"></exception>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@)">
-            <summary>
-            随机获取字典中的一个键值对
-            </summary>
-            <param name="array"> 要获取值的字典</param>
-            <typeparam name="T1"> 键的类型</typeparam>
-            <typeparam name="T2"> 值的类型</typeparam>
-            <returns> 返回字典中的一个键值对</returns>
-            <exception cref="T:System.SystemException"> 如果字典为空或没有可用的键值对，则抛出此异常</exception>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
-            <param name="array"></param>
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@,System.Int32@,System.Int32)">
-            <param name="array"></param>
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int32@,System.Int32)">
-            <param name="array"></param>
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArrayWeight(System.Collections.Generic.IList{System.Single}@)">
-            <summary>
-            随机权重
-            </summary>
-            <param name="weights">传入数组的总和 应为1</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandArrayWeight``1(System.Collections.Generic.IList{System.Single}@,System.Collections.Generic.IList{``0}@)">
-            <summary>
-            随机权重
-            </summary>
-            <param name="weights">传入数组的总和 应为1</param>
-            <param name="values"></param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandBool">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandBoolArray(System.Int32@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandByte">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandBytes(System.Byte@,System.Int32@)">
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandByteArray(System.Int32@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandByteArray(System.Int32@,System.Int32@,System.Int32)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <param name="min"></param>
-             <param name="max"></param>
-             <returns></returns>
-             <exception cref="T:System.ArgumentException"></exception>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandSByte">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandSByteArray(System.Int32@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandSByteArray(System.Int32@,System.SByte@,System.SByte@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <param name="lower"></param>
-             <param name="upper"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt16">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt16(System.UInt16@,System.Int32@)">
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt16Array(System.Int32@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt32(System.UInt32@,System.UInt32@)">
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt32">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt32Array(System.Int32@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt64(System.UInt64@,System.UInt64@)">
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt64">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandUInt64Array(System.Int32@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt16(System.Int16@,System.Int32@)">
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt16">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt16Array(System.Int32@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt32">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt32(System.Int32@,System.Int32@)">
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt32Array(System.Int32,System.Int32,System.Int32,System.Boolean)">
-            <param name="count"></param>
-            <param name="minValue">下限-包含</param>
-            <param name="maxValue">上限-不包含</param>
-            <param name="hasRepeat">是否包含重复 Ture:包含 False:不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32})">
-             <summary>
-            
-             </summary>
-             <param name="weights"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32},System.Int32)">
-             <summary>
-            
-             </summary>
-             <param name="weights"></param>
-             <param name="weightRandomMinVal"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt64">
-             <summary>
-            
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt64(System.Int64@,System.Int64@)">
-            <param name="lower">下限-包含</param>
-            <param name="upper">上限-不包含</param>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandInt64Array(System.Int32@)">
-             <summary>
-            
-             </summary>
-             <param name="count"></param>
-             <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandFloat">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandFloat(System.Boolean,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="hasNan"></param>
-            <param name="hasInfinity"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.AHelper.Random.BreakArray``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:AIO.AHelper.Random.BreakArray``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="lower"></param>
-            <param name="upper"></param>
-            <typeparam name="T"></typeparam>
-            <exception cref="T:System.ArgumentException"></exception>
-        </member>
-        <member name="M:AIO.AHelper.Random.RandEnum``1">
-            <summary>
-            随机获取枚举值
-            </summary>
-        </member>
         <member name="T:AIO.AHelper.FTP">
             <summary>
             FTP
@@ -9392,7 +9032,7 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AIO.AHelper.Http.DownloadAsync(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AIO.AHelper.Http.DownloadAsync(System.String,System.String,System.Boolean,System.UInt16,System.Int32,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
@@ -9401,9 +9041,23 @@
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
+            <param name="againCount">重试次数</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AIO.AHelper.Http.DownloadAsync(System.Uri,System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AIO.AHelper.Http.DownloadAsync(System.String,System.String,System.Action{AIO.IProgressInfo},System.Boolean,System.UInt16,System.Int32,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="localPath">保存路径</param>
+            <param name="onProgress">进度回调</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <param name="againCount">重试次数</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AIO.AHelper.Http.DownloadAsync(System.Uri,System.String,System.Boolean,System.UInt16,System.Int32,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
@@ -9412,9 +9066,10 @@
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
+            <param name="againCount">重试次数</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AIO.AHelper.Http.Download(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AIO.AHelper.Http.Download(System.String,System.String,System.Boolean,System.UInt16,System.Int32,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
@@ -9423,13 +9078,37 @@
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
+            <param name="againCount">重试次数</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AIO.AHelper.Http.DownloadOperation(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AIO.AHelper.Http.DownloadOperation(System.String,System.String,System.Boolean,System.UInt16,System.Int32,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
             <param name="remoteUrl">远端路径</param>
+            <param name="localPath">保存路径</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <param name="againCount">重试次数</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AIO.AHelper.Http.DownloadAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrls">远端路径</param>
+            <param name="localPath">保存路径</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AIO.AHelper.Http.DownloadAsync(System.Collections.Generic.IEnumerable{System.String},System.IO.FileSystemInfo,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrls">远端路径</param>
             <param name="localPath">保存路径</param>
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
@@ -9437,6 +9116,17 @@
             <exception cref="T:System.Exception">异常</exception>
         </member>
         <member name="M:AIO.AHelper.Http.Download(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrls">远端路径</param>
+            <param name="localPath">保存根路径</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AIO.AHelper.Http.Download(System.Collections.Generic.IEnumerable{System.String},System.IO.FileSystemInfo,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
@@ -10847,6 +10537,349 @@
             <param name="stream"></param>
             <param name="bufferSize">自定义缓冲区大小16K</param>
         </member>
+        <member name="T:AIO.AHelper.Random">
+            <summary>
+            随机数工具类
+            </summary>
+        </member>
+        <member name="F:AIO.AHelper.Random.random">
+            <summary>
+            随机数生成器
+            </summary>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandDouble">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.NextLong(System.Int64,System.Int64)">
+             <summary>
+            
+             </summary>
+             <param name="minValue"></param>
+             <param name="maxValue"></param>
+             <returns></returns>
+             <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:AIO.AHelper.Random.Refresh">
+            <summary>
+            刷新随机种子
+            </summary>
+        </member>
+        <member name="M:AIO.AHelper.Random.Refresh(System.Random@)">
+            <summary>
+            刷新随机种子
+            </summary>
+        </member>
+        <member name="M:AIO.AHelper.Random.Refresh(System.Int32@)">
+            <summary>
+            刷新随机种子
+            </summary>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArray``1(System.Int32,System.Collections.Generic.ICollection{``0}@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <param name="array"></param>
+             <typeparam name="T"></typeparam>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArray``1(System.Int32@,System.Collections.Generic.IList{``0}@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <param name="array"></param>
+             <typeparam name="T"></typeparam>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArray``1(System.Int32,System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
+            <param name="array"></param>
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+            <param name="count"></param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArray``2(System.Int32@,System.Collections.Generic.IDictionary{``0,``1}@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <param name="array"></param>
+             <typeparam name="T1"></typeparam>
+             <typeparam name="T2"></typeparam>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@)">
+             <summary>
+            
+             </summary>
+             <param name="array"></param>
+             <typeparam name="T"></typeparam>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@)">
+             <summary>
+            
+             </summary>
+             <param name="array"></param>
+             <typeparam name="T"></typeparam>
+             <returns></returns>
+             <exception cref="T:System.SystemException"></exception>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+            <summary>
+            随机获取字典中的一个键值对
+            </summary>
+            <param name="array"> 要获取值的字典</param>
+            <typeparam name="T1"> 键的类型</typeparam>
+            <typeparam name="T2"> 值的类型</typeparam>
+            <returns> 返回字典中的一个键值对</returns>
+            <exception cref="T:System.SystemException"> 如果字典为空或没有可用的键值对，则抛出此异常</exception>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
+            <param name="array"></param>
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@,System.Int32@,System.Int32)">
+            <param name="array"></param>
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int32@,System.Int32)">
+            <param name="array"></param>
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArrayWeight(System.Collections.Generic.IList{System.Single}@)">
+            <summary>
+            随机权重
+            </summary>
+            <param name="weights">传入数组的总和 应为1</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandArrayWeight``1(System.Collections.Generic.IList{System.Single}@,System.Collections.Generic.IList{``0}@)">
+            <summary>
+            随机权重
+            </summary>
+            <param name="weights">传入数组的总和 应为1</param>
+            <param name="values"></param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandBool">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandBoolArray(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandByte">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandBytes(System.Byte@,System.Int32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandByteArray(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandByteArray(System.Int32@,System.Int32@,System.Int32)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <param name="min"></param>
+             <param name="max"></param>
+             <returns></returns>
+             <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandSByte">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandSByteArray(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandSByteArray(System.Int32@,System.SByte@,System.SByte@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <param name="lower"></param>
+             <param name="upper"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt16">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt16(System.UInt16@,System.Int32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt16Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt32(System.UInt32@,System.UInt32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt32">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt32Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt64(System.UInt64@,System.UInt64@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt64">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandUInt64Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt16(System.Int16@,System.Int32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt16">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt16Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt32">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt32(System.Int32@,System.Int32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt32Array(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <param name="count"></param>
+            <param name="minValue">下限-包含</param>
+            <param name="maxValue">上限-不包含</param>
+            <param name="hasRepeat">是否包含重复 Ture:包含 False:不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32})">
+             <summary>
+            
+             </summary>
+             <param name="weights"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32},System.Int32)">
+             <summary>
+            
+             </summary>
+             <param name="weights"></param>
+             <param name="weightRandomMinVal"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt64">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt64(System.Int64@,System.Int64@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandInt64Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandFloat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandFloat(System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="hasNan"></param>
+            <param name="hasInfinity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.Random.BreakArray``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:AIO.AHelper.Random.BreakArray``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="lower"></param>
+            <param name="upper"></param>
+            <typeparam name="T"></typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:AIO.AHelper.Random.RandEnum``1">
+            <summary>
+            随机获取枚举值
+            </summary>
+        </member>
         <member name="T:AIO.AHelper.Status">
             <summary>
             状态值比较
@@ -11355,6 +11388,13 @@
             </summary>
             <param name="str">字符串</param>
             <returns>字符串</returns>
+        </member>
+        <member name="M:AIO.AHelper.String.RemoveInvalidCharacters(System.String)">
+            <summary>
+            只允许中文，英文，数字和普通符号
+            </summary>
+            <param name="text"> 输入文本 </param>
+            <returns> 过滤后的文本 </returns>
         </member>
         <member name="M:AIO.AHelper.String.ToConvertBlock(System.String[])">
             <summary>
@@ -21153,13 +21193,182 @@
             释放Stack
             </summary>
         </member>
+        <member name="T:AIO.RandomChineseName">
+            <summary>
+            随机中文姓名生成器
+            </summary>
+            <code>
+            var random = new RandomChineseName();
+            random.MaxLen = 3;
+            random.UseRare = true;
+            random.Rare = 0.3f;
+            random.AllowRepetition = false;
+            random.AddNames(xxx);
+            random.AddRareName(xxx);
+            string name = random.Random('张');
+            </code>
+        </member>
+        <member name="P:AIO.RandomChineseName.ChineseSurnames">
+            <summary>
+            常用姓氏（可扩展）
+            </summary>
+        </member>
+        <member name="P:AIO.RandomChineseName.NameChineseChars">
+            <summary>
+            常见名字（可扩展）
+            </summary>
+        </member>
+        <member name="P:AIO.RandomChineseName.RareNameChineseChars">
+            <summary>
+            生僻字名字库
+            </summary>
+        </member>
+        <member name="P:AIO.RandomChineseName.NamePyChars">
+            <summary>
+            姓名拼音
+            </summary>
+        </member>
+        <member name="P:AIO.RandomChineseName.RareNamePyChars">
+            <summary>
+            生僻字拼音
+            </summary>
+        </member>
+        <member name="P:AIO.RandomChineseName.MaxLen">
+            <summary>
+            姓名的最大长度
+            </summary>
+        </member>
+        <member name="P:AIO.RandomChineseName.Rare">
+            <summary>
+            生僻字使用概率，0-1之间
+            </summary>
+        </member>
+        <member name="P:AIO.RandomChineseName.UseRare">
+            <summary>
+            是否使用生僻字
+            </summary>
+        </member>
+        <member name="P:AIO.RandomChineseName.Repetition">
+            <summary>
+            是否允许重复使用同一个字
+            </summary>
+        </member>
+        <member name="M:AIO.RandomChineseName.#ctor(System.Char,System.Char[])">
+            <summary>
+            初始化随机中文姓名生成器
+            </summary>
+            <param name="surname"> 常用姓氏 </param>
+            <param name="surnames"> 常用姓氏 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.#ctor">
+            <summary>
+            初始化随机中文姓名生成器
+            </summary>
+        </member>
+        <member name="M:AIO.RandomChineseName.#ctor(System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            初始化随机中文姓名生成器
+            </summary>
+            <param name="surnames"> 常用姓氏 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.#ctor(System.Collections.Generic.IEnumerable{System.Char},System.Collections.Generic.IEnumerable{System.Char},System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            初始化随机中文姓名生成器
+            </summary>
+            <param name="surnames"> 常用姓氏 </param>
+            <param name="names"> 常用名字 </param>
+            <param name="rareName"> 生僻字名字 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.AddSurnames(System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            添加常用姓氏
+            </summary>
+            <param name="surnames"> 常用姓氏 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.AddSurnames(System.Char,System.Char[])">
+            <summary>
+            添加常用姓氏
+            </summary>
+            <param name="surname"> 常用姓氏 </param>
+            <param name="surnames"> 常用姓氏 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.AddSurnames(System.Char)">
+            <summary>
+            添加常用姓氏
+            </summary>
+            <param name="surname"> 常用姓氏 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.ClearSurnames">
+            <summary>
+            清空常用姓氏
+            </summary>
+        </member>
+        <member name="M:AIO.RandomChineseName.AddNames(System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            添加常用姓氏
+            </summary>
+            <param name="names"> 常用姓氏 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.AddNames(System.Char,System.Char[])">
+            <summary>
+            添加常用姓氏
+            </summary>
+            <param name="name"> 常用姓氏 </param>
+            <param name="names"> 常用姓氏 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.ClearNames">
+            <summary>
+            清空常用名字
+            </summary>
+        </member>
+        <member name="M:AIO.RandomChineseName.AddRareNames(System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            添加生僻字名字
+            </summary>
+            <param name="names"> 生僻字名字 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.AddRareNames(System.Char,System.Char[])">
+            <summary>
+            添加生僻字名字
+            </summary>
+            <param name="name"> 生僻字名字 </param>
+            <param name="names"> 生僻字名字 </param>
+        </member>
+        <member name="M:AIO.RandomChineseName.ClearRareNames">
+            <summary>
+            清空生僻字名字
+            </summary>
+        </member>
+        <member name="M:AIO.RandomChineseName.GetName">
+            <summary>
+            随机获取中文姓名
+            </summary>
+            <returns>姓名字符串</returns>
+        </member>
+        <member name="M:AIO.RandomChineseName.GetName(System.Collections.Generic.IList{System.Char})">
+            <summary>
+            随机获取中文姓名
+            </summary>
+            <param name="surnames"> 指定姓氏 </param>
+            <returns>姓名字符串</returns>
+        </member>
+        <member name="M:AIO.RandomChineseName.GetName(System.Char)">
+            <summary>
+            随机获取中文姓名
+            </summary>
+            <param name="surname"> 指定姓氏 </param>
+            <returns>姓名字符串</returns>
+        </member>
+        <member name="M:AIO.RandomChineseName.Dispose">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.Singleton`1">
             <summary>
             单例模式
             </summary>
             <typeparam name="T">泛型</typeparam>
         </member>
-        <member name="P:AIO.Singleton`1.Instance">
+        <member name="P:AIO.Singleton`1.Inst">
             <summary>
             实例
             </summary>
