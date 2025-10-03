@@ -192,7 +192,7 @@ namespace AIO
                     if (data == null || data.Length == 0) request.ContentLength = 0;
                     return await GetResponseTextAsync(request, options.Encoding);
                 }
-                catch (Exception e)
+                catch
                 {
                     request?.Abort();
                     return null;

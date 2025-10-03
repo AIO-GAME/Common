@@ -11,24 +11,22 @@ namespace AIO
     /// 单例模式
     /// </summary>
     /// <typeparam name="T">泛型</typeparam>
-    public abstract class Singleton<T>
+    [DebuggerStepThrough]
+    public abstract class Singleton<T> : IDisposable
     where T : IDisposable, new()
     {
-        private static T mInstance;
+        private static Lazy<T> mInstance;
 
         /// <summary>
         /// 实例
         /// </summary>
-        protected static T Inst
+        public static T Inst
         {
             get
             {
-                //如果是引用类型创建一个T实例，如果是值类型返回值的默认值
-                if (mInstance == null) mInstance = default;
-                if (mInstance == null) mInstance = Activator.CreateInstance<T>();
-                return mInstance;
+                if (mInstance == null) mInstance = new Lazy<T>(CreateInstance);
+                return mInstance.Value;
             }
-            set => mInstance = value;
         }
 
         /// <summary>
@@ -42,18 +40,26 @@ namespace AIO
         /// <summary>
         /// 创建实例
         /// </summary>
-        public static void CreateInstance()
+        [DebuggerStepThrough]
+        private static T CreateInstance()
         {
-            if (mInstance == null) mInstance = default;
-            if (mInstance == null) mInstance = Activator.CreateInstance<T>();
+            T inst;
+            try
+            {
+                inst = new T();
+            }
+            catch
+            {
+                inst = Activator.CreateInstance<T>();
+            }
+
+            return inst;
         }
 
-        /// <summary>
-        /// 释放实例
-        /// </summary>
-        public static void ReleaseInstance()
+        [DebuggerStepThrough]
+        void IDisposable.Dispose()
         {
-            mInstance.Dispose();
+            mInstance?.Value.Dispose();
         }
     }
 }

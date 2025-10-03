@@ -349,6 +349,13 @@ namespace AIO.UEditor
             /// 打开窗口
             /// </summary>
             /// <param name="type"><see cref="EditorWindow"/></param>
+            /// <param name="title">标题</param>
+            public static EditorWindow Open(Type type, GUIContent title) { return Open(type, title, false, true); }
+
+            /// <summary>
+            /// 打开窗口
+            /// </summary>
+            /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="utility">边框</param>
             public static EditorWindow Open(Type type, bool utility) { return Open(type, GTContent.Empty, utility, true); }
 

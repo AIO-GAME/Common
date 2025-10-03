@@ -10,70 +10,76 @@ using System.Linq;
 namespace AIO
 {
     /// <summary>
-    /// 
+    /// 对象池系统
     /// </summary>
-    public abstract partial class PoolSystem<T> : IDisposable
+    public static class PoolSystem
+    {
+        /// <summary>
+        /// 回收对象
+        /// </summary>
+        /// <param name="entity">实体</param>
+        public static void Recycle<T>(T entity)
+        where T : new()
+        {
+            PoolSystem<T>.Recycle(entity);
+        }
+
+        /// <summary>
+        /// 回收对象
+        /// </summary>
+        /// <param name="id">实体ID</param>
+        public static void Recycle<T>(int id)
+        where T : new()
+        {
+            PoolSystem<T>.Recycle(id);
+        }
+
+        /// <summary>
+        /// 分配对象
+        /// </summary>
+        /// <returns>实体</returns>
+        public static T Alloc<T>()
+        where T : new()
+        {
+            return PoolSystem<T>.Alloc();
+        }
+
+        /// <summary>
+        /// 分配对象
+        /// </summary>
+        /// <returns>实体</returns>
+        public static T Alloc<T>(params object[] args)
+        where T : new()
+        {
+            return PoolSystem<T>.Alloc(args);
+        }
+
+        /// <summary>
+        /// 分配对象
+        /// </summary>
+        /// <returns>实体</returns>
+        public static void Alloc<T>(out T entity)
+        where T : new()
+        {
+            entity = PoolSystem<T>.Alloc();
+        }
+    }
+
+    /// <summary>
+    /// 对象池系统
+    /// </summary>
+    internal partial class PoolSystem<T> : Singleton<PoolSystem<T>>, IDisposable
     where T : new()
     {
         /// <summary>
-        /// 实例
-        /// </summary>
-        protected static PoolSystem<T> Instance { get; private set; }
-
-        /// <summary>
-        /// 是否存在实例
-        /// </summary>
-        public static bool IsInstance
-        {
-            [DebuggerStepThrough] get => Instance != null;
-        }
-
-        /// <summary>
-        /// 初始化系统
-        /// </summary>
-        protected static void CreateInstance<TY>()
-        where TY : PoolSystem<T>, new()
-        {
-            if (Instance is null) Instance = Activator.CreateInstance<TY>();
-        }
-
-        /// <summary>
-        ///  添加存活对象
-        /// </summary>
-        /// <param name="entity">实体</param>
-        protected void AddSurviving(T entity)
-        {
-            var eid = GetEID(entity);
-            if (!BusyPool.ContainsKey(eid)) BusyPool[eid] = entity;
-        }
-
-        /// <summary>
-        /// 移除存活对象
-        /// </summary>
-        /// <param name="entity">实体</param>
-        protected void RemoveSurviving(T entity)
-        {
-            FreePool.Enqueue(entity);
-            var eid = Instance.GetEID(entity);
-            if (Instance.BusyPool.ContainsKey(eid)) Instance.BusyPool.Remove(eid);
-        }
-
-        /// <summary>
         /// 卸载系统
         /// </summary>
-        public static void UnInstall()
-        {
-            Instance.Dispose();
-            Instance = null;
-        }
+        public static void UnInstall() { Inst.Dispose(); }
 
         /// <summary>
         /// 清理缓存数据
         /// </summary>
-        public static void ClearCache()
-        {
-            Instance.Clear();
-        }
+        public static void ClearCache() { Inst.Clear(); }
 
         #region Allocate
 
@@ -81,10 +87,21 @@ namespace AIO
         /// 分配对象
         /// </summary>
         /// <returns>实体</returns>
+        public static T Alloc(params object[] args)
+        {
+            var entity = Inst.FreePool.Count == 0 ? Inst.CreateEntity(args) : Inst.FreePool.Dequeue();
+            Inst.AddSurviving(entity);
+            return entity;
+        }
+
+        /// <summary>
+        /// 分配对象
+        /// </summary>
+        /// <returns>实体</returns>
         public static T Alloc()
         {
-            var entity = Instance.FreePool.Count == 0 ? Instance.CreateEntity() : Instance.FreePool.Dequeue();
-            Instance.AddSurviving(entity);
+            var entity = Inst.FreePool.Count == 0 ? Inst.CreateEntity() : Inst.FreePool.Dequeue();
+            Inst.AddSurviving(entity);
             return entity;
         }
 
@@ -96,10 +113,7 @@ namespace AIO
         /// 查询正在使用的对象
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<T> FindAll()
-        {
-            return Instance.BusyPool.Select(item => item.Value);
-        }
+        public static IEnumerable<T> FindAll() { return Inst.BusyPool.Select(item => item.Value); }
 
         /// <summary>
         /// 查询正在使用的对象
@@ -108,7 +122,7 @@ namespace AIO
         /// <returns>实例单位对象</returns>
         public static T Find(in int id)
         {
-            Instance.BusyPool.TryGetValue(id, out var entity);
+            Inst.BusyPool.TryGetValue(id, out var entity);
             return entity;
         }
 
@@ -117,10 +131,7 @@ namespace AIO
         /// </summary>
         /// <param name="ids">实例ID列表</param>
         /// <returns>实例单位对象</returns>
-        public static IEnumerable<T> Find(IEnumerable<int> ids)
-        {
-            return from id in ids where Instance.BusyPool.ContainsKey(id) select Instance.BusyPool[id];
-        }
+        public static IEnumerable<T> Find(IEnumerable<int> ids) { return from id in ids where Inst.BusyPool.ContainsKey(id) select Inst.BusyPool[id]; }
 
         #endregion
 
@@ -130,10 +141,7 @@ namespace AIO
         /// 回收对象
         /// </summary>
         /// <param name="entity">实体</param>
-        public static void Recycle(T entity)
-        {
-            Instance.RemoveSurviving(entity);
-        }
+        public static void Recycle(T entity) { Inst.RemoveSurviving(entity); }
 
         /// <summary>
         /// 回收对象
@@ -141,7 +149,7 @@ namespace AIO
         /// <param name="eid">实体ID</param>
         public static void Recycle(int eid)
         {
-            if (Instance.BusyPool.TryGetValue(eid, out var entity)) Recycle(entity);
+            if (Inst.BusyPool.TryGetValue(eid, out var entity)) Recycle(entity);
         }
 
         /// <summary>
@@ -149,9 +157,9 @@ namespace AIO
         /// </summary>
         public static void RecycleAll()
         {
-            foreach (var entity in Instance.BusyPool) Instance.FreePool.Enqueue(entity.Value);
+            foreach (var kvp in Inst.BusyPool) Inst.FreePool.Enqueue(kvp.Value);
 
-            Instance.BusyPool.Clear();
+            Inst.BusyPool.Clear();
         }
 
         #endregion

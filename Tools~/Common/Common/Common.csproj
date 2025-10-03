@@ -768,8 +768,12 @@
         <Compile Include="Script\Helper\Net\U.HTTP.cs"/>
         <Compile Include="Script\Helper\Net\U.Net.cs"/>
         <Compile Include="Script\Helper\Net\U.Net.Helper.cs"/>
-        <Compile Include="Script\Helper\Reflect\U.Reflect.cs"/>
-        <Compile Include="Script\Helper\Time\UTimeStamp.cs"/>
+        <Compile Include="Script\Helper\QRCoder\U.QRCoder.cs" />
+        <Compile Include="Script\Helper\QRCoder\QRCodeData.cs" />
+        <Compile Include="Script\Helper\QRCoder\QRCodeGenerator.cs" />
+        <Compile Include="Script\Helper\QRCoder\QRCoder.cs" />
+        <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
+        <Compile Include="Script\Helper\Time\UTimeStamp.cs" />
         <Compile Include="Script\Interface\Basics\COM.cs">
           <AutoGen>True</AutoGen>
           <DesignTime>True</DesignTime>
@@ -947,7 +951,7 @@
         <Compile Include="Script\Tools\PList\PListPrimitives\PListString.cs" />
         <Compile Include="Script\Tools\PList\PListRoot.cs" />
         <Compile Include="Script\Tools\PoolSystem\Class\Pool.StringBuilder.cs" />
-        <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.cs" />
+        <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G2.cs" />
         <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G1.cs" />
         <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G1.Inst.cs" />
         <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.Static.cs" />
@@ -1084,12 +1088,10 @@
         <Reference Include="System.Net.Http" />
         <Reference Include="System.Xml" />
         <None Include="app.config" />
+        <Content Include="NuGet.config" />
         <Content Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
-            <ExcludeAssets>all</ExcludeAssets>
-        </PackageReference>
         <PackageReference Include="System.Buffers" Version="4.3.0" />
         <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.*">
             <ExcludeAssets>all</ExcludeAssets>

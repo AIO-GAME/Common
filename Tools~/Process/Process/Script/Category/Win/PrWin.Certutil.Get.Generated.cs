@@ -14,7 +14,7 @@ namespace AIO
             #region MD5
       
             /// <summary>
-            ///  <see cref="MD5"/> 算法 计算 <see cref="target"/>
+            ///  <see cref="MD5"/> 算法 计算 目标值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> 执行器 </returns>
@@ -23,7 +23,7 @@ namespace AIO
                 => Create(cmd, "-hashfile \"{0}\" MD5", target.Replace('/', '\\'));
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="MD5"/> 值
+            /// 获取 目标值 的 <see cref="MD5"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> MD5 值 </returns>
@@ -38,7 +38,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="MD5"/> 值
+            /// 获取 目标值 的 <see cref="MD5"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> MD5 值 </returns>
@@ -58,7 +58,7 @@ namespace AIO
             #region SHA1
       
             /// <summary>
-            ///  <see cref="SHA1"/> 算法 计算 <see cref="target"/>
+            ///  <see cref="SHA1"/> 算法 计算 目标值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> 执行器 </returns>
@@ -67,7 +67,7 @@ namespace AIO
                 => Create(cmd, "-hashfile \"{0}\" SHA1", target.Replace('/', '\\'));
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="SHA1"/> 值
+            /// 获取 目标值 的 <see cref="SHA1"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> SHA1 值 </returns>
@@ -82,7 +82,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="SHA1"/> 值
+            /// 获取 目标值 的 <see cref="SHA1"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> SHA1 值 </returns>
@@ -102,7 +102,7 @@ namespace AIO
             #region SHA256
       
             /// <summary>
-            ///  <see cref="SHA256"/> 算法 计算 <see cref="target"/>
+            ///  <see cref="SHA256"/> 算法 计算 目标值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> 执行器 </returns>
@@ -111,7 +111,7 @@ namespace AIO
                 => Create(cmd, "-hashfile \"{0}\" SHA256", target.Replace('/', '\\'));
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="SHA256"/> 值
+            /// 获取 target 的 <see cref="SHA256"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> SHA256 值 </returns>
@@ -126,7 +126,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="SHA256"/> 值
+            /// 获取 目标值 的 <see cref="SHA256"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> SHA256 值 </returns>
@@ -146,7 +146,7 @@ namespace AIO
             #region SHA384
       
             /// <summary>
-            ///  <see cref="SHA384"/> 算法 计算 <see cref="target"/>
+            ///  <see cref="SHA384"/> 算法 计算 目标值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> 执行器 </returns>
@@ -155,7 +155,7 @@ namespace AIO
                 => Create(cmd, "-hashfile \"{0}\" SHA384", target.Replace('/', '\\'));
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="SHA384"/> 值
+            /// 获取 目标值 的 <see cref="SHA384"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> SHA384 值 </returns>
@@ -170,7 +170,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="SHA384"/> 值
+            /// 获取 目标值 的 <see cref="SHA384"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> SHA384 值 </returns>
@@ -190,7 +190,7 @@ namespace AIO
             #region SHA512
       
             /// <summary>
-            ///  <see cref="SHA512"/> 算法 计算 <see cref="target"/>
+            ///  <see cref="SHA512"/> 算法 计算 目标值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> 执行器 </returns>
@@ -199,7 +199,7 @@ namespace AIO
                 => Create(cmd, "-hashfile \"{0}\" SHA512", target.Replace('/', '\\'));
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="SHA512"/> 值
+            /// 获取 目标值 的 <see cref="SHA512"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> SHA512 值 </returns>
@@ -214,7 +214,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 <see cref="SHA512"/> 值
+            /// 获取 目标值 的 <see cref="SHA512"/> 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <returns> SHA512 值 </returns>

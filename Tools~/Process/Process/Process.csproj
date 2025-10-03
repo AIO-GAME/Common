@@ -357,6 +357,7 @@
     <Compile Include="Script\Utils\NetUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="NuGet.config" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

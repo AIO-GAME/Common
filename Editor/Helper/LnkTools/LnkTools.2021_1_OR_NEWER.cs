@@ -1,11 +1,12 @@
 #if UNITY_2021_1_OR_NEWER
 
-#region namespace
+#region namespace 
 
 #if !UNITY_2023_1_OR_NEWER
-using System.Runtime.CompilerServices;
 using MonoHook;
+using System.Runtime.CompilerServices;
 #endif
+
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.EditorTools;
@@ -20,12 +21,14 @@ using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
-    [Overlay(typeof(SceneView), "Lnk", true
+    [Icon("Packages/com.aio.package/Resources/Editor/Icon/Setting/icon_option_button.png"),
+     Overlay(typeof(SceneView), "Lnk", true
 #if UNITY_2023_1_OR_NEWER
         , defaultLayout = Layout.VerticalToolbar
 #endif
-     ), Icon("Packages/com.aio.package/Resources/Editor/Icon/Setting/icon_option_button.png")]
-    public class LnkToolOverlay : ToolbarOverlay, ITransientOverlay
+            )]
+    public class LnkToolOverlay
+        : ToolbarOverlay, ITransientOverlay
 #if UNITY_2022_1_OR_NEWER
         , ICreateHorizontalToolbar, ICreateVerticalToolbar
 #endif
@@ -130,11 +133,9 @@ namespace AIO.UEditor
 
 #endif
 
-
         private const BindingFlags ToolBarBind    = BindingFlags.Instance | BindingFlags.Public;
         private const BindingFlags ToolBarBindNon = BindingFlags.Instance | BindingFlags.NonPublic;
         public const  string       k_Id           = "unity-lnk-toolbar";
-
 
         public  bool          visible => content?.visible ?? false;
         private Editor        m_Editor;
@@ -409,10 +410,7 @@ namespace AIO.UEditor
             CreateEditor();
         }
 
-        ~LnkToolOverlay()
-        {
-            ToolManager.activeToolChanged -= OnToolChanged;
-        }
+        ~LnkToolOverlay() { ToolManager.activeToolChanged -= OnToolChanged; }
 
         private void OnToolChanged()
         {
@@ -420,25 +418,16 @@ namespace AIO.UEditor
             typeof(Overlay).GetMethod("RebuildContent", ToolBarBindNon)?.Invoke(this, null);
         }
 
-        private void OnPlayModeStateChanged(PlayModeStateChange state)
-        {
-            typeof(Overlay).GetMethod("RebuildContent", ToolBarBindNon)?.Invoke(this, null);
-        }
+        private void OnPlayModeStateChanged(PlayModeStateChange state) { typeof(Overlay).GetMethod("RebuildContent", ToolBarBindNon)?.Invoke(this, null); }
 
-        public override void OnCreated()
-        {
-            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
-        }
+        public override void OnCreated() { EditorApplication.playModeStateChanged += OnPlayModeStateChanged; }
 
-        public override void OnWillBeDestroyed()
-        {
-            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
-        }
+        public override void OnWillBeDestroyed() { EditorApplication.playModeStateChanged -= OnPlayModeStateChanged; }
 
         private void CreateEditor()
         {
             Object.DestroyImmediate(m_Editor);
-            var type = typeof(ToolManager).Assembly.GetType("UnityEditor.EditorTools.EditorToolManager", true);
+            var type       = typeof(ToolManager).Assembly.GetType("UnityEditor.EditorTools.EditorToolManager", true);
             var activeTool = type.GetProperty("activeTool", BindingFlags.Static | BindingFlags.NonPublic);
             m_Editor = Editor.CreateEditor(activeTool?.GetValue(null) as Object);
         }

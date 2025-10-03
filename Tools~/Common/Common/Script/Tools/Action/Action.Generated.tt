@@ -99,6 +99,14 @@ namespace AIO
         for (var j = 1; j <= i ; j++)
         {
 #>
+        /// <param name="t<#= j #>">The value of the <#= j #>th parameter.</param>
+<#
+    }
+#>
+<#
+        for (var j = 1; j <= i ; j++)
+        {
+#>
         /// <typeparam name="T<#= j #>">The type of the <#= j #>th parameter.</typeparam>
 <#
     }

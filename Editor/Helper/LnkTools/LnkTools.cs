@@ -137,15 +137,19 @@ namespace AIO.UEditor
             {
                 Temp = new GUIContent
                 {
-                    image = AssetDatabase.LoadAssetAtPath<Texture2D>(attribute.IconRelative)
+                    image = AssetDatabase.LoadAssetAtPath<Texture2D>(attribute.@IconRelative.Replace("/", "\\"))
                 };
             }
             else if (!string.IsNullOrEmpty(attribute.IconResource))
             {
-                Temp = new GUIContent
+                if (attribute.IconResource.StartsWith("Packages/") || attribute.IconResource.StartsWith("Assets/"))
                 {
-                    image = Resources.Load<Texture2D>(attribute.IconResource)
-                };
+                    Temp = new GUIContent { image = AssetDatabase.LoadAssetAtPath<Texture2D>(attribute.@IconResource.Replace("/", "\\")) };
+                }
+                else
+                {
+                    Temp = new GUIContent { image = Resources.Load<Texture2D>(attribute.IconResource) };
+                }
             }
 
             if (!Temp?.image)

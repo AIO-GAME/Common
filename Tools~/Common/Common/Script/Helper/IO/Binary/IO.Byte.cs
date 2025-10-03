@@ -136,7 +136,6 @@ namespace AIO
                     File.SetLastWriteTimeUtc(path, DateTime.Now);
                 }
 
-                end: ;
                 return buffer;
             }
         }

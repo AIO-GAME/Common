@@ -54,9 +54,8 @@ namespace AIO.UEditor
                         }
                     }
 
-                    foreach (var method in type.GetMethods(
-                                                           BindingFlags.Instance
-                                                         | BindingFlags.Static |
+                    foreach (var method in type.GetMethods(BindingFlags.Instance |
+                                                           BindingFlags.Static |
                                                            BindingFlags.DeclaredOnly |
                                                            BindingFlags.Public |
                                                            BindingFlags.NonPublic |
@@ -84,25 +83,25 @@ namespace AIO.UEditor
 
                                 var genericArgumentsStr = string.Join(",", gList.Select(param => param.FullName));
 
-                                var parameterInfo = string.Join(",", methodDefinition.GetParameters()
-                                                                                     .Select(param => string.IsNullOrEmpty(param.ParameterType.FullName)
+                                var parameterInfo = string.Join(",", methodDefinition.GetParameters().
+                                                                                      Select(param => string.IsNullOrEmpty(param.ParameterType.FullName)
                                                                                                  ? gList[param.ParameterType.GenericParameterPosition].FullName
-                                                                                                 : param.ParameterType.FullName))
-                                                          .Replace("System.Object", "object")
-                                                          .Replace("System.String", "string")
-                                                          .Replace("System.Single", "float")
-                                                          .Replace("System.Boolean", "bool")
-                                                          .Replace("System.Double", "double")
-                                                          .Replace("System.Byte", "byte")
-                                                          .Replace("System.Int16", "short")
-                                                          .Replace("System.Int32", "int")
-                                                          .Replace("System.Int64", "long")
-                                                          .Replace("System.UInt32", "uint")
-                                                          .Replace("System.UInt64", "ulong")
-                                                          .Replace("System.UInt16", "ushort")
-                                                          .Replace("System.SByte", "sbyte")
-                                                          .Replace("System.Char", "char")
-                                                          .Replace("System.Decimal", "decimal")
+                                                                                                 : param.ParameterType.FullName)).
+                                                           Replace("System.Object", "object").
+                                                           Replace("System.String", "string").
+                                                           Replace("System.Single", "float").
+                                                           Replace("System.Boolean", "bool").
+                                                           Replace("System.Double", "double").
+                                                           Replace("System.Byte", "byte").
+                                                           Replace("System.Int16", "short").
+                                                           Replace("System.Int32", "int").
+                                                           Replace("System.Int64", "long").
+                                                           Replace("System.UInt32", "uint").
+                                                           Replace("System.UInt64", "ulong").
+                                                           Replace("System.UInt16", "ushort").
+                                                           Replace("System.SByte", "sbyte").
+                                                           Replace("System.Char", "char").
+                                                           Replace("System.Decimal", "decimal")
                                     ;
 
                                 key = string.IsNullOrEmpty(genericArgumentsStr)
@@ -111,22 +110,7 @@ namespace AIO.UEditor
                             }
                             else
                             {
-                                var parameterInfo = string.Join(",", method.GetParameters().Select(param => param.ParameterType.FullName))
-                                                          .Replace("System.Object", "object")
-                                                          .Replace("System.String", "string")
-                                                          .Replace("System.Single", "float")
-                                                          .Replace("System.Boolean", "bool")
-                                                          .Replace("System.Double", "double")
-                                                          .Replace("System.Byte", "byte")
-                                                          .Replace("System.Int16", "short")
-                                                          .Replace("System.Int32", "int")
-                                                          .Replace("System.Int64", "long")
-                                                          .Replace("System.UInt32", "uint")
-                                                          .Replace("System.UInt64", "ulong")
-                                                          .Replace("System.UInt16", "ushort")
-                                                          .Replace("System.SByte", "sbyte")
-                                                          .Replace("System.Char", "char")
-                                                          .Replace("System.Decimal", "decimal");
+                                var parameterInfo = string.Join(",", method.GetParameters().Select(param => param.ParameterType.FullName)).Replace("System.Object", "object").Replace("System.String", "string").Replace("System.Single", "float").Replace("System.Boolean", "bool").Replace("System.Double", "double").Replace("System.Byte", "byte").Replace("System.Int16", "short").Replace("System.Int32", "int").Replace("System.Int64", "long").Replace("System.UInt32", "uint").Replace("System.UInt64", "ulong").Replace("System.UInt16", "ushort").Replace("System.SByte", "sbyte").Replace("System.Char", "char").Replace("System.Decimal", "decimal");
                                 key = $"{fullName}:{method.Name} ({parameterInfo})";
                             }
                         }

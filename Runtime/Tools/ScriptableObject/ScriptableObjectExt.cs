@@ -49,8 +49,15 @@ namespace AIO
                     instance = CreateInstance<T>();
                     var resourcesDir = Path.Combine(Application.dataPath, "Resources");
                     if (!Directory.Exists(resourcesDir)) Directory.CreateDirectory(resourcesDir);
-                    AssetDatabase.CreateAsset(instance, $"Assets/Resources/{typeof(T).Name}.asset");
-                    AssetDatabase.SaveAssets();
+                    try
+                    {
+                        AssetDatabase.CreateAsset(instance, $"Assets/Resources/{typeof(T).Name}.asset");
+                        AssetDatabase.SaveAssets();
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
                 }
             }
 

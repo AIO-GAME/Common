@@ -72,10 +72,10 @@ namespace AIO
                     request.ContentType = $"{application} {charset}";
                     return GetResponseText(request, encoding);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     request?.Abort();
-                    return string.Empty;
+                    return e.Message;
                 }
             }
 

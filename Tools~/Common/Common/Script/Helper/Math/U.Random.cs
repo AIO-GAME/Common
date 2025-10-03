@@ -492,6 +492,9 @@ namespace AIO
             /// <param name="upper">上限-不包含</param>
             public static short RandInt16(in short lower, in int upper) { return (short)random.Next(lower, short.MaxValue < upper ? short.MaxValue : upper); }
 
+            /// <param name="upper">上限-不包含</param>
+            public static short RandInt16(in int upper) { return (short)random.Next(0, short.MaxValue < upper ? short.MaxValue : upper); }
+
             /// <summary>
             ///
             /// </summary>

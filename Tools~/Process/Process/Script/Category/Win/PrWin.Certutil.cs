@@ -14,7 +14,7 @@ namespace AIO
             private const string cmd = "certutil";
 
             /// <summary>
-            ///  <see cref="MD5"/> 算法 计算 <see cref="target"/>
+            ///  <see cref="MD5"/> 算法 计算 目标值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <param name="type"> 类型 </param>
@@ -22,7 +22,7 @@ namespace AIO
             public static IExecutor Custom(string target, string type) => Create(cmd, "-hashfile \"{0}\" {1}", target.Replace('/', '\\'), type);
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 自定义算法 值
+            /// 获取 目标值 的 自定义算法 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <param name="type"> 类型 </param>
@@ -38,7 +38,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 获取 <see cref="target"/> 的 自定义算法 值
+            /// 获取 目标值 的 自定义算法 值
             /// </summary>
             /// <param name="target"> 目标文件路径 </param>
             /// <param name="type"> 类型 </param>

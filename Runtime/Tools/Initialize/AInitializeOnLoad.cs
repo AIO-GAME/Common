@@ -34,10 +34,14 @@ namespace AIO
         private static void DebugLog(EInitAttrMode mode, MethodBase method)
         {
             if (method.ReflectedType is null) throw new NullReferenceException();
+#if UNITY_EDITOR
             Debug.Log(MethodsPath.TryGetValue(method.MethodHandle.Value, out var tuple)
                           ? $"<color=#F7DC6F><b>[初始化] {mode}</b> : </color> {method.ReflectedType.ToDetails()} : {method.Name} () (at {tuple.Item1}:{tuple.Item2})"
                           : $"<color=#F7DC6F><b>[初始化] {mode}</b> : </color> {method.ReflectedType.ToDetails()} : {method.Name} ()"
                      );
+#else
+            Debug.Log($"[初始化] {mode} : {method.ReflectedType.ToDetails()} : {method.Name} ()");
+#endif
         }
 
         private static void DebugError(EInitAttrMode mode, MemberInfo method, Exception e) { Debug.LogException(new Error(mode, method, e)); }

@@ -70,8 +70,10 @@ namespace AIO.UEditor
         public string IconBuiltin { get; set; }
 
         /// <summary>
-        /// 相对路径图标 使用 AssetDatabase.LoadAssetAtPath 加载
+        /// 相对路径图标 使用 <see cref="UnityEditor.AssetDatabase.LoadAssetAtPath"/> 加载
         /// </summary>
+        /// Assets/..
+        /// Packages/..
         public string IconRelative { get; set; }
 
         /// <summary>
