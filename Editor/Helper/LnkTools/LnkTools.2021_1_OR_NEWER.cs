@@ -2,7 +2,7 @@
 
 #region namespace 
 
-#if !UNITY_2023_1_OR_NEWER
+#if !UNITY_2022_1_OR_NEWER
 using MonoHook;
 using System.Runtime.CompilerServices;
 #endif
