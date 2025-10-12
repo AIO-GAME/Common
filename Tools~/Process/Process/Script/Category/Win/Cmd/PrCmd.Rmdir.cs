@@ -1,6 +1,6 @@
 ﻿namespace AIO
 {
-    public partial class PrCmd
+    partial class PrCmd
     {
         #region Nested type: Rmdir
 
@@ -12,10 +12,7 @@
             /// <summary>
             /// 执行
             /// </summary>
-            public static IExecutor Execute(in string target)
-            {
-                return Create().Input(string.Format("{0} \"{1}\" /S /Q", CMD_Rmdir, target.Replace('/', '\\')));
-            }
+            public static IExecutor Execute(in string target) { return Create().Input(string.Format("{0} \"{1}\" /S /Q", CMD_Rmdir, target.Replace('/', '\\'))); }
         }
 
         #endregion

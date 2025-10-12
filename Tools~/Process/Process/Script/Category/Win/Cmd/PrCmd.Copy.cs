@@ -1,6 +1,6 @@
 ﻿namespace AIO
 {
-    public partial class PrCmd
+    partial class PrCmd
     {
         #region Nested type: Copy
 
@@ -38,20 +38,14 @@
             /// </summary>
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
-            public static IExecutor Binary(in string source, in string target)
-            {
-                return Create().Input(string.Format("{0} \"{1}\" /B /D \"{2}\" /V /Y /L", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\')));
-            }
+            public static IExecutor Binary(in string source, in string target) { return Create().Input(string.Format("{0} \"{1}\" /B /D \"{2}\" /V /Y /L", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\'))); }
 
             /// <summary>
             /// 文本文件
             /// </summary>
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
-            public static IExecutor ASCII(in string source, in string target)
-            {
-                return Create().Input(string.Format("{0} \"{1}\" /A /D \"{2}\" /V /Y /L", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\')));
-            }
+            public static IExecutor ASCII(in string source, in string target) { return Create().Input(string.Format("{0} \"{1}\" /A /D \"{2}\" /V /Y /L", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\'))); }
 
             /// <summary>
             /// 复制
@@ -69,20 +63,14 @@
             /// </summary>
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
-            public static IExecutor NetBinary(in string source, in string target)
-            {
-                return Create().Input(string.Format("{0} \"{1}\" /B /D \"{2}\" /V /Y /L /Z", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\')));
-            }
+            public static IExecutor NetBinary(in string source, in string target) { return Create().Input(string.Format("{0} \"{1}\" /B /D \"{2}\" /V /Y /L /Z", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\'))); }
 
             /// <summary>
             /// 复制网络文件
             /// </summary>
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
-            public static IExecutor NetASCII(in string source, in string target)
-            {
-                return Create().Input(string.Format("{0} \"{1}\" /A /D \"{2}\" /V /Y /L /Z", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\')));
-            }
+            public static IExecutor NetASCII(in string source, in string target) { return Create().Input(string.Format("{0} \"{1}\" /A /D \"{2}\" /V /Y /L /Z", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\'))); }
         }
 
         #endregion

@@ -13,13 +13,29 @@ namespace AIO
     partial class ExtendIEnumerable
     {
         /// <summary>
-        /// 转化为HashSet
+        /// 转化为 <see cref="HashSet{T}"/>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable)
-        {
-            return new HashSet<T>(enumerable);
-        }
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable) { return new HashSet<T>(enumerable); }
+
+        /// <summary>
+        /// 转化为 <see cref=" SortedSet{T}"/>
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static SortedSet<T> ToSortedSet<T>(this IEnumerable<T> enumerable) { return new SortedSet<T>(enumerable); }
+
+        /// <summary>
+        /// 转化为 <see cref=" Queue{T}"/>
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Queue<T> ToQueue<T>(this IEnumerable<T> enumerable) { return new Queue<T>(enumerable); }
+
+        /// <summary>
+        /// 转化为 <see cref=" Stack{T}"/>
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Stack<T> ToStack<T>(this IEnumerable<T> enumerable) { return new Stack<T>(enumerable); }
+
 
         /// <summary>
         /// 将 IEnumerable 中的元素转换为以指定分隔符分隔的字符串
@@ -28,10 +44,7 @@ namespace AIO
         /// <param name="separator">用于间隔每个元素的字符串</param>
         /// <returns>以分隔符分隔的字符串</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToSeparatedString(this IEnumerable enumerable, in string separator)
-        {
-            return string.Join(separator, enumerable.Cast<object>().Select(o => o?.ToString() ?? "(null)").ToArray());
-        }
+        public static string ToSeparatedString(this IEnumerable enumerable, in string separator) { return string.Join(separator, enumerable.Cast<object>().Select(o => o?.ToString() ?? "(null)").ToArray()); }
 
         /// <summary>
         /// 将 IEnumerable 中的元素转换为逗号分隔的字符串
@@ -39,10 +52,7 @@ namespace AIO
         /// <param name="enumerable">IEnumerable 对象，包含要转换的元素</param>
         /// <returns>逗号分隔的字符串</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToCommaSeparatedString(this IEnumerable enumerable)
-        {
-            return ToSeparatedString(enumerable, ", ");
-        }
+        public static string ToCommaSeparatedString(this IEnumerable enumerable) { return ToSeparatedString(enumerable, ", "); }
 
         /// <summary>
         /// 将 IEnumerable 中的元素转换为以行结束符分隔的字符串
@@ -50,9 +60,6 @@ namespace AIO
         /// <param name="enumerable">IEnumerable 对象，包含要转换的元素</param>
         /// <returns>以行结束符分隔的字符串</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToLineSeparatedString(this IEnumerable enumerable)
-        {
-            return ToSeparatedString(enumerable, Environment.NewLine);
-        }
+        public static string ToLineSeparatedString(this IEnumerable enumerable) { return ToSeparatedString(enumerable, Environment.NewLine); }
     }
 }

@@ -9700,6 +9700,12 @@
             容量缓存 : 1M
             </summary>
         </member>
+        <member name="M:AIO.AHelper.Net.VerifyDownloadFileComplete(System.String)">
+            <summary>
+            验证下载文件是否下载完成
+            </summary>
+            <returns> 是否下载完成 </returns>
+        </member>
         <member name="M:AIO.AHelper.Net.UriParamSerialize(System.Object@)">
             <summary>
             Model对象转换为uri网址参数形式
@@ -20629,9 +20635,21 @@
             <summary>
             回收对象
             </summary>
-            <param name="eid">实体ID</param>
+            <param name="id">实体ID</param>
         </member>
         <member name="M:AIO.PoolSystem.Alloc``1">
+            <summary>
+            分配对象
+            </summary>
+            <returns>实体</returns>
+        </member>
+        <member name="M:AIO.PoolSystem.Alloc``1(System.Object[])">
+            <summary>
+            分配对象
+            </summary>
+            <returns>实体</returns>
+        </member>
+        <member name="M:AIO.PoolSystem.Alloc``1(``0@)">
             <summary>
             分配对象
             </summary>
@@ -20642,7 +20660,7 @@
             对象池系统
             </summary>
             <summary>
-            
+            对象池系统
             </summary>
         </member>
         <member name="M:AIO.PoolSystem`1.UnInstall">
@@ -20654,6 +20672,12 @@
             <summary>
             清理缓存数据
             </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Alloc(System.Object[])">
+            <summary>
+            分配对象
+            </summary>
+            <returns>实体</returns>
         </member>
         <member name="M:AIO.PoolSystem`1.Alloc">
             <summary>
@@ -20742,7 +20766,7 @@
              清空缓存数据
             </summary>
         </member>
-        <member name="M:AIO.PoolSystem`1.CreateEntity">
+        <member name="M:AIO.PoolSystem`1.CreateEntity(System.Object[])">
             <summary>
             分配对象
             </summary>

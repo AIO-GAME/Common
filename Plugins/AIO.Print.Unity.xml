@@ -4,6 +4,114 @@
         <name>AIO.Print.Unity</name>
     </assembly>
     <members>
+        <member name="T:AIO.LOG">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:AIO.LOG.TAG">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="P:AIO.LOG.Enabled">
+            <summary>
+            是否开启日志输出
+            </summary>
+        </member>
+        <member name="F:AIO.LOG.enabled">
+            <summary>
+            是否开启日志输出
+            </summary>
+        </member>
+        <member name="P:AIO.LOG.COLOR_LOG">
+            <summary>
+            日志颜色
+            </summary>
+        </member>
+        <member name="P:AIO.LOG.COLOR_EXCEPTION">
+            <summary>
+            异常颜色
+            </summary>
+        </member>
+        <member name="P:AIO.LOG.COLOR_WARNING">
+            <summary>
+            警告颜色
+            </summary>
+        </member>
+        <member name="P:AIO.LOG.COLOR_ERROR">
+            <summary>
+            错误颜色
+            </summary>
+        </member>
+        <member name="M:AIO.LOG.#ctor(System.String)">
+            <param name="tag"> 标签 </param>
+        </member>
+        <member name="M:AIO.LOG.#ctor(System.String,System.Boolean)">
+            <param name="tag"> 标签 </param>
+            <param name="enable"> 是否开启日志输出 </param>
+        </member>
+        <member name="M:AIO.LOG.#ctor(System.String,System.Func{System.Boolean})">
+            <param name="tag"> 标签 </param>
+            <param name="enable"> 是否开启日志输出 </param>
+        </member>
+        <member name="M:AIO.LOG.W(System.String,System.Object[])">
+            <summary>
+            <para>Logs a formatted warning message to the Unity Console.</para>
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">Format arguments.</param>
+        </member>
+        <member name="M:AIO.LOG.W(System.String)">
+            <summary>
+            <para>A variant of Debug.Log that logs a warning message to the console.</para>
+            </summary>
+            <param name="message">String or object to be converted to string representation for display.</param>
+        </member>
+        <member name="M:AIO.LOG.Exception(System.Exception)">
+            <summary>
+                <para>A variant of Debug.Log that logs an error message to the console.</para>
+            </summary>
+            <param name="exception">Runtime Exception.</param>
+        </member>
+        <member name="M:AIO.LOG.Exception(System.String)">
+            <summary>
+                <para>A variant of Debug.Log that logs an error message to the console.</para>
+            </summary>
+            <param name="exception">Runtime Exception.</param>
+        </member>
+        <member name="M:AIO.LOG.I(System.String)">
+            <summary>
+                <para>Logs a message to the Unity Console.</para>
+            </summary>
+            <param name="message">String or object to be converted to string representation for display.</param>
+        </member>
+        <member name="M:AIO.LOG.I(System.String,System.Object[])">
+            <summary>
+                <para>Logs a formatted message to the Unity Console.</para>
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">Format arguments.</param>
+        </member>
+        <member name="M:AIO.LOG.E(System.String)">
+            <summary>
+                <para>A variant of Debug.Log that logs an error message to the console.</para>
+            </summary>
+            <param name="message">String or object to be converted to string representation for display.</param>
+        </member>
+        <member name="M:AIO.LOG.E(System.String,System.Object[])">
+            <summary>
+                <para>Logs a formatted error message to the Unity console.</para>
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">Format arguments.</param>
+        </member>
+        <member name="M:AIO.LOG.E(System.Exception)">
+            <summary>
+                <para>A variant of Debug.Log that logs an error message to the console.</para>
+            </summary>
+            <param name="message">String or object to be converted to string representation for display.</param>
+        </member>
         <member name="T:UnityEngine.Print">
             <summary>
             Unity 输出

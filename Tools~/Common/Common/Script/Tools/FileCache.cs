@@ -202,8 +202,8 @@ namespace AIO
 
             private static void OnCreated(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
             {
-                var key  = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var file = e.FullPath.Replace('\\', Path.PathSeparator);
+                var key  = e.FullPath.Replace('\\', Path.DirectorySeparatorChar).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var file = e.FullPath.Replace('\\', Path.DirectorySeparatorChar);
 
                 // Skip missing files
                 if (!File.Exists(file))
@@ -220,8 +220,8 @@ namespace AIO
                 if (e.ChangeType != WatcherChangeTypes.Changed)
                     return;
 
-                var key  = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var file = e.FullPath.Replace('\\', Path.PathSeparator);
+                var key  = e.FullPath.Replace('\\', Path.DirectorySeparatorChar).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var file = e.FullPath.Replace('\\', Path.DirectorySeparatorChar);
 
                 // Skip missing files
                 if (!File.Exists(file))
@@ -235,18 +235,18 @@ namespace AIO
 
             private static void OnDeleted(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
             {
-                var key  = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var file = e.FullPath.Replace('\\', Path.PathSeparator);
+                var key  = e.FullPath.Replace('\\', Path.DirectorySeparatorChar).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var file = e.FullPath.Replace('\\', Path.DirectorySeparatorChar);
 
                 cache.RemoveFileInternal(entry._path, key);
             }
 
             private static void OnRenamed(object sender, RenamedEventArgs e, FileCache cache, FileCacheEntry entry)
             {
-                var oldKey  = e.OldFullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var oldFile = e.OldFullPath.Replace('\\', Path.PathSeparator);
-                var newKey  = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var newFile = e.FullPath.Replace('\\', Path.PathSeparator);
+                var oldKey  = e.OldFullPath.Replace('\\', Path.DirectorySeparatorChar).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var oldFile = e.OldFullPath.Replace('\\', Path.DirectorySeparatorChar);
+                var newKey  = e.FullPath.Replace('\\', Path.DirectorySeparatorChar).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var newFile = e.FullPath.Replace('\\', Path.DirectorySeparatorChar);
 
                 // Skip missing files
                 if (!File.Exists(newFile))

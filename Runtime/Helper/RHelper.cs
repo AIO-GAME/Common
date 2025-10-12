@@ -4,6 +4,7 @@
 |*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -35,10 +36,32 @@ namespace AIO
             OnDemandRendering.renderFrameInterval = frame;
         }
 
+#if UNITY_2022_1_OR_NEWER
         /// <summary>
         /// 设置物理模拟开关
         /// </summary>
         /// <param name="auto"> 是否自动模拟 </param>
-        public static void PhysicsSimulation(bool auto) { Physics.autoSimulation = auto; }
+        public static void PhysicsSimulation(SimulationMode auto) { Physics.simulationMode = auto; }
+
+        /// <summary>
+        /// 设置物理模拟开关
+        /// </summary>
+        /// <param name="auto"> 是否自动模拟 </param>
+        public static void PhysicsSimulation(SimulationMode2D auto) { Physics2D.simulationMode = auto; }
+#endif
+
+        /// <summary>
+        /// 设置物理模拟开关
+        /// </summary>
+        /// <param name="auto"> 是否自动模拟 </param>
+
+#if UNITY_2022_1_OR_NEWER
+        [Obsolete("Use PhysicsSimulation(SimulationMode auto) or PhysicsSimulation(SimulationMode2D auto) instead.")]
+#endif
+        public static void PhysicsSimulation(bool auto)
+        {
+            Physics2D.autoSimulation = auto;
+            Physics.autoSimulation   = auto;
+        }
     }
 }

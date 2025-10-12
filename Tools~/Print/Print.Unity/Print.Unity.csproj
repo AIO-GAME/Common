@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\LOG.cs" />
     <Compile Include="Script\UPrint.cs" />
     <Compile Include="Script\UPrintAssert.cs" />
     <Compile Include="Script\UPrintError.cs" />

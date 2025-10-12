@@ -112,5 +112,35 @@ namespace AIO
                 for (var i = start; i < end; ++i)
                     array.Add(others[i]);
         }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
+        public static void Add<T>(this HashSet<T> array, in IEnumerable<T> others)
+        {
+            if (array is null) throw new ArgumentNullException(nameof(array), "The input array is null.");
+            if (others is null) return;
+            foreach (var t in others) array.Add(t);
+        }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
+        public static void Add<T>(this HashSet<T> array, in T a1, in T a2)
+        {
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            array.Add(a1);
+            array.Add(a2);
+        }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
+        public static void Add<T>(this HashSet<T> array, in T a1, params T[] a2)
+        {
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            array.Add(a1);
+            foreach (var t in a2) array.Add(t);
+        }
     }
 }

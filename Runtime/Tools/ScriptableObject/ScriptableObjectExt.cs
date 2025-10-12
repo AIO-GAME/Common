@@ -3,9 +3,11 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace AIO
 {
+    [Preserve]
     [Serializable]
     public class ScriptableObject<T> : ScriptableObject
     where T : ScriptableObject<T>
@@ -14,8 +16,10 @@ namespace AIO
         private static T instance;
 #endif
 
+        [Preserve]
         private static T GetResource() { return Resources.LoadAll<T>(typeof(T).Name).FirstOrDefault(item => item); }
 
+        [Preserve]
         public static T GetOrCreate()
         {
 #if UNITY_EDITOR

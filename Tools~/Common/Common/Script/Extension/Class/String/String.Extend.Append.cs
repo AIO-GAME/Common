@@ -12,7 +12,7 @@ namespace AIO
         /// <summary>
         ///     在最前添加指定字符到指定长度
         /// </summary>
-        public static string AppendToFrontChar(this string str, in char paddingChar, in int length)
+        public static string AppendToFront(this string str, in char paddingChar, in int length)
         {
             if (str.Length >= length) return str;
 
@@ -44,7 +44,7 @@ namespace AIO
         /// <summary>
         ///     在最后添加指定字符到指定字节长度
         /// </summary>
-        public static string AppendToLastChar(this string str, in char paddingChar, in int byteLength)
+        public static string AppendToLast(this string str, in char paddingChar, in int byteLength)
         {
             if (str.GetBytesLength() >= byteLength) return str;
 
