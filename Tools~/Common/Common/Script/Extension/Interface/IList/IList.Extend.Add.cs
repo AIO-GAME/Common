@@ -142,5 +142,15 @@ namespace AIO
             array.Add(a1);
             foreach (var t in a2) array.Add(t);
         }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
+        public static void AddRange<T>(this HashSet<T> array, IEnumerable<T> others)
+        {
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            if (others is null) return;
+            foreach (var t in others) array.Add(t);
+        }
     }
 }

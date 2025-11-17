@@ -3,10 +3,11 @@
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     partial class VectorExtend
     {
@@ -25,10 +26,7 @@ namespace AIO.UEngine
         /// <param name="sourceValue">源向量</param>
         /// <param name="targetValue">目标向量</param>
         /// <returns>是否约等于</returns>
-        public static bool Approximately(this Vector2 sourceValue, Vector2 targetValue)
-        {
-            return sourceValue.x.Approximately(targetValue.x) && sourceValue.y.Approximately(targetValue.y);
-        }
+        public static bool Approximately(this Vector2 sourceValue, Vector2 targetValue) { return sourceValue.x.Approximately(targetValue.x) && sourceValue.y.Approximately(targetValue.y); }
 
         /// <summary>
         /// 计算距离

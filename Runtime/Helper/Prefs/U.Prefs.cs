@@ -2,6 +2,7 @@
 
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
@@ -14,31 +15,23 @@ namespace AIO
         /// <summary>
         /// 持久化数据
         /// </summary>
+        [Preserve]
         public static partial class Prefs
         {
             /// <summary>
             /// 判断是否存在Key
             /// </summary>
-            public static bool HasKey(in string key)
-            {
-                return PlayerPrefs.HasKey(key);
-            }
+            public static bool HasKey(in string key) { return PlayerPrefs.HasKey(key); }
 
             /// <summary>
             /// 删除全部
             /// </summary>
-            public static void DeleteAll()
-            {
-                PlayerPrefs.DeleteAll();
-            }
+            public static void DeleteAll() { PlayerPrefs.DeleteAll(); }
 
             /// <summary>
             /// 删除指定key
             /// </summary>
-            public static void DeleteKey(in string key)
-            {
-                PlayerPrefs.DeleteKey(key);
-            }
+            public static void DeleteKey(in string key) { PlayerPrefs.DeleteKey(key); }
 
             /// <summary>
             /// 判断游戏是否第一次初始化

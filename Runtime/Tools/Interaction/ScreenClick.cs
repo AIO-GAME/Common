@@ -68,21 +68,25 @@ namespace AIO
         /// <summary>
         /// 特效预设
         /// </summary>
+        [Label("特效预设")]
         public GameObject Template;
 
         /// <summary>
         /// UI根节点
         /// </summary>
+        [Label("UI根节点")]
         public Transform RootTransform;
 
         /// <summary>
         /// 实体对象
         /// </summary>
+        [Label("实体对象")]
         public GameObject Entity;
 
         /// <summary>
         /// 特效缩放比例
         /// </summary>
+        [Label("特效缩放比例")]
         public float Scale
         {
             get => Template != null ? Template.transform.localScale.x : 0f;
@@ -96,6 +100,7 @@ namespace AIO
         /// <summary>
         /// UI摄像机
         /// </summary>
+        [Label("UI摄像机")]
         public Camera UICamera;
 
         internal void Reset() { CreateEffect(); }

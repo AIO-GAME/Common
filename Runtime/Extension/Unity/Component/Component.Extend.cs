@@ -6,7 +6,7 @@ using UnityEngine;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     public static class ComponentExtend
     {

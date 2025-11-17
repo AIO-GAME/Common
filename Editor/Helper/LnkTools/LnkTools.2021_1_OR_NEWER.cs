@@ -1,12 +1,13 @@
 #if UNITY_2021_1_OR_NEWER
 
-#region namespace 
+#region namespace
 
 #if !UNITY_2022_1_OR_NEWER
 using MonoHook;
 using System.Runtime.CompilerServices;
 #endif
 
+using System;
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.EditorTools;
@@ -415,21 +416,25 @@ namespace AIO.UEditor
         private void OnToolChanged()
         {
             CreateEditor();
-            typeof(Overlay).GetMethod("RebuildContent", ToolBarBindNon)?.Invoke(this, null);
+            s_RebuildContentMethod.Value?.Invoke(this, null);
         }
 
-        private void OnPlayModeStateChanged(PlayModeStateChange state) { typeof(Overlay).GetMethod("RebuildContent", ToolBarBindNon)?.Invoke(this, null); }
+        private static readonly Lazy<MethodInfo> s_RebuildContentMethod
+            = new Lazy<MethodInfo>(() => typeof(Overlay).GetMethod("RebuildContent", ToolBarBindNon));
+
+        private void OnPlayModeStateChanged(PlayModeStateChange state) { s_RebuildContentMethod.Value?.Invoke(this, null); }
 
         public override void OnCreated() { EditorApplication.playModeStateChanged += OnPlayModeStateChanged; }
 
         public override void OnWillBeDestroyed() { EditorApplication.playModeStateChanged -= OnPlayModeStateChanged; }
 
+        private static readonly Lazy<PropertyInfo> s_activeTool
+            = new Lazy<PropertyInfo>(() => typeof(ToolManager).Assembly.GetType("UnityEditor.EditorTools.EditorToolManager", true)?.GetProperty("activeTool", BindingFlags.Static | BindingFlags.NonPublic));
+
         private void CreateEditor()
         {
             Object.DestroyImmediate(m_Editor);
-            var type       = typeof(ToolManager).Assembly.GetType("UnityEditor.EditorTools.EditorToolManager", true);
-            var activeTool = type.GetProperty("activeTool", BindingFlags.Static | BindingFlags.NonPublic);
-            m_Editor = Editor.CreateEditor(activeTool?.GetValue(null) as Object);
+            m_Editor = Editor.CreateEditor(s_activeTool.Value?.GetValue(null) as Object);
         }
     }
 }

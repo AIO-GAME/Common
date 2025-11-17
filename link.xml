@@ -1,9 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <linker>
-       <assembly fullname="AIO.Attribute" preserve="all"/>
-       <assembly fullname="AIO.Common" preserve="all"/>
-       <assembly fullname="AIO.Ensure" preserve="all"/>
-       <assembly fullname="AIO.Print" preserve="all"/>
-       <assembly fullname="AIO.Print.Console" preserve="all"/>
-       <assembly fullname="AIO.Print.Unity" preserve="all"/>
+    <assembly fullname="AIO.Attribute" preserve="all"/>
+    <assembly fullname="AIO.Common" preserve="all"/>
+    <assembly fullname="AIO.Ensure" preserve="all"/>
+    <assembly fullname="AIO.Print" preserve="all"/>
+    <assembly fullname="AIO.Print.Console" preserve="all"/>
+    <assembly fullname="AIO.Print.Unity" preserve="all"/>
+
+    <!--
+      ============================
+      ✅ 系统泛型与集合
+      ============================
+    -->
+    <assembly fullname="mscorlib">
+        <type fullname="System.Collections.Generic.Dictionary`2" preserve="all">
+            <method name="get_Item"/>
+            <method name="set_Item"/>
+            <method name="ContainsKey"/>
+            <method name="TryGetValue"/>
+            <method name="Add"/>
+            <method name="Remove"/>
+            <method name="Clear"/>
+            <method name="GetEnumerator"/>
+        </type>
+
+        <!-- List<T> -->
+        <type fullname="System.Collections.Generic.List`1" preserve="all">
+            <method name="Add"/>
+            <method name="get_Item"/>
+            <method name="set_Item"/>
+            <method name="Contains"/>
+            <method name="Remove"/>
+            <method name="Clear"/>
+            <method name="get_Count"/>
+            <method name="GetEnumerator"/>
+        </type>
+
+        <!-- KeyValuePair<TKey, TValue> -->
+        <type fullname="System.Collections.Generic.KeyValuePair`2" preserve="all">
+            <method name="get_Key"/>
+            <method name="get_Value"/>
+        </type>
+
+        <!-- HashSet<T> -->
+        <type fullname="System.Collections.Generic.HashSet`1" preserve="all">
+            <method name="Add"/>
+            <method name="Remove"/>
+            <method name="Contains"/>
+            <method name="Clear"/>
+        </type>
+
+        <!-- Tuple<T1, T2> -->
+        <type fullname="System.Tuple`2" preserve="all"/>
+
+        <!-- 常用 System.Linq -->
+        <type fullname="System.Linq.Enumerable" preserve="all"/>
+    </assembly>
+
+    <!--
+      ============================
+      ✅ Unity 常用类型
+      ============================
+    -->
+    <assembly fullname="UnityEngine.CoreModule">
+        <type fullname="UnityEngine.GameObject" preserve="all"/>
+        <type fullname="UnityEngine.Transform" preserve="all"/>
+        <type fullname="UnityEngine.Component" preserve="all"/>
+    </assembly>
+
+    <assembly fullname="UnityEngine.CoreModule" preserve="all">
+        <type fullname="UnityEngine.Color32" preserve="all"/>
+        <type fullname="UnityEngine.Color" preserve="all"/>
+        <type fullname="UnityEngine.Color" preserve="all"/>
+        <type fullname="UnityEngine.TextAsset" preserve="all"/>
+        <type fullname="UnityEngine.Texture" preserve="all"/>
+        <type fullname="UnityEngine.Texture2D" preserve="all"/>
+    </assembly>
+    <assembly fullname="UnityEngine.AudioModule" preserve="all">
+        <type fullname="UnityEngine.AudioClip" preserve="all"/>
+    </assembly>
 </linker>

@@ -21,7 +21,7 @@ namespace AIO
         public static T GetAttribute<T>(this Enum value)
         where T : Attribute
         {
-            var fieldInfo = value.GetType().GetField(value.ToString());
+            var fieldInfo  = value.GetType().GetField(value.ToString());
             var attributes = (T[])fieldInfo.GetCustomAttributes(typeof(T), false);
             return attributes.Length > 0 ? attributes[0] : null;
         }
@@ -32,8 +32,8 @@ namespace AIO
         public static IEnumerable<T> GetAttributeOfEnumMember<T>(this Enum enumVal)
         where T : Attribute
         {
-            var type = enumVal.GetType();
-            var memInfo = type.GetMember(enumVal.ToString());
+            var type       = enumVal.GetType();
+            var memInfo    = type.GetMember(enumVal.ToString());
             var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
             return attributes.Cast<T>();
         }
@@ -44,9 +44,9 @@ namespace AIO
         public static Dictionary<T, string> GetDescriptionDic<T>(this T value)
         where T : struct, Enum
         {
-            var type = typeof(T);
+            var type           = typeof(T);
             var descriptionDic = new Dictionary<T, string>();
-            var values = Enum.GetNames(type);
+            var values         = Enum.GetNames(type);
             foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 var attribute = field.GetCustomAttribute(typeof(DescriptionAttribute), false);
@@ -66,10 +66,23 @@ namespace AIO
         where T : struct, Enum
         {
             var description = value.ToString();
-            var fieldInfo = value.GetType().GetField(description);
-            var attributes = fieldInfo.GetCustomAttribute<DescriptionAttribute>(false);
+            var fieldInfo   = value.GetType().GetField(description);
+            var attributes  = fieldInfo.GetCustomAttribute<DescriptionAttribute>(false);
             if (attributes != null) return attributes.Description;
             return description;
+        }
+
+        /// <summary>
+        /// 获取枚举唯一编码
+        /// </summary>
+        /// <param name="value"> 枚举值 </param>
+        /// <returns> 唯一编码 </returns>
+        public static long GetUID(this Enum value)
+        {
+            var enumType  = value.GetType();
+            var enumHash  = enumType.GetHashCode();
+            var valueHash = value.GetHashCode();
+            return $"{enumHash}_{valueHash}".GetHashCode();
         }
     }
 }

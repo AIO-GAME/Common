@@ -1,0 +1,106 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#
+    var tuples = new List<Tuple<string, string, string>>()
+    {
+        Tuple.Create("System.Collections.Generic.List", "T", "List"),
+        Tuple.Create("System.Collections.Generic.HashSet", "T", "HashSet"),
+        Tuple.Create("System.Collections.Generic.LinkedList", "T", "LinkedList"),
+        Tuple.Create("System.Collections.Generic.Stack", "T", "Stack"),
+        Tuple.Create("System.Collections.Generic.Queue", "T", "Queue"),
+        Tuple.Create("System.Collections.Generic.SortedList", "K,V", "SortedList"),
+        Tuple.Create("System.Collections.Generic.Dictionary", "K,V", "Dictionary"),
+        Tuple.Create("System.Collections.Concurrent.ConcurrentDictionary", "K,V", "ConcurrentDictionary"),
+        Tuple.Create("System.Collections.Concurrent.ConcurrentBag", "T", "ConcurrentBag"),
+        Tuple.Create("System.Collections.Concurrent.ConcurrentQueue", "T", "ConcurrentQueue"),
+        Tuple.Create("System.Collections.Concurrent.ConcurrentStack", "T", "ConcurrentStack"),
+        Tuple.Create("System.Collections.SortedList", "", "SortedList"),
+        Tuple.Create("System.Collections.Hashtable", "", "Hashtable"),
+    };
+#>
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+namespace AIO
+{
+    partial class Pool
+    {
+<#
+    foreach (var tuple in tuples)
+    {
+        var t1 = string.IsNullOrEmpty(tuple.Item2) ? "" : $"<{tuple.Item2}>";
+        var t2 = string.IsNullOrEmpty(tuple.Item2) ? "" : $"{{{tuple.Item2}}}";
+        var typeParams = new List<string>();
+        if (!string.IsNullOrEmpty(tuple.Item2))
+        {
+            var genericParams = tuple.Item2.Split(',');
+            typeParams.AddRange(genericParams.Select(param => $"/// <typeparam name=\"{param}\">Generic</typeparam>"));
+        }
+        var typeParamsComment = string.Join("\n        ", typeParams);
+#>
+
+	    #region <#= tuple.Item1 #><#= t1 #>
+
+        /// <summary>
+        /// 缓存 => 创建 <see cref="<#= tuple.Item1 #><#= t2 #>"/>
+        /// </summary><#= typeParamsComment #>
+        /// <returns><see cref="<#= tuple.Item1 #><#= t2 #>"/></returns>
+        public static <#= tuple.Item1 #><#= t1 #> <#= tuple.Item3 #><#= t1 #>() => Pooling.<#= tuple.Item3 #><#= t1 #>.Alloc();
+
+        /// <summary>
+        /// 缓存 => 释放 <see cref="<#= tuple.Item1 #><#= t2 #>"/>
+        /// </summary><#= typeParamsComment #>
+        /// <param name="array"><see cref="<#= tuple.Item1 #><#= t2 #>"/></param>
+        public static void Free<#= t1 #>(this <#= tuple.Item1 #><#= t1 #> array)
+        {
+            Pooling.<#= tuple.Item3 #><#= t1 #>.Release(array);
+            array = null;
+        }
+
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="<#= tuple.Item1 #><#= t2 #>"/>
+        /// </summary>
+        /// <param name="value"><see cref="<#= tuple.Item1 #><#= t2 #>"/></param>
+        public static IDisposable Using<#= t1 #>(out <#= tuple.Item1 #><#= t1 #> value)
+        {
+            var disposable = new Disposable<<#= tuple.Item1 #><#= t1 #>>(Pooling.<#= tuple.Item3 #><#= t1 #>.Alloc(), release => release.Free());
+            value = disposable.Item;
+            return disposable;
+        }
+
+	    #endregion
+<#
+    }
+#>
+
+        /// <summary>
+        /// 缓存 => 释放 <see cref="System.Collections.Generic.IEnumerable{T}"/>
+        /// </summary>/// <typeparam name="T">Generic</typeparam>
+        /// <param name="array"><see cref="System.Collections.Generic.IEnumerable{T}"/></param>
+        public static void Free<T>(this IEnumerable<T> array)
+        {
+            if (array == null) return;
+            switch (array)
+            {
+<#
+    foreach (var tuple in tuples)
+    {
+        if (string.IsNullOrEmpty(tuple.Item2)) continue;
+        if (tuple.Item2.Contains(',')) continue;
+        var t1 = $"<{tuple.Item2}>";
+#>
+                case <#= tuple.Item1 #><#= t1 #> <#= tuple.Item3.ToLower() #>:
+                    Pooling.<#= tuple.Item3 #><#= t1 #>.Release(<#= tuple.Item3.ToLower() #>);
+                    return;
+<#
+    }
+#>
+            }
+            array = null;
+        }
+    }
+}

@@ -10,6 +10,7 @@ using UnityEngine;
 [assembly: InternalsVisibleTo("AIO.Unity.Editor")]
 [assembly: InternalsVisibleTo("AIO.Build.Editor")]
 [assembly: InternalsVisibleTo("AIO.Tools.Editor")]
+[assembly: InternalsVisibleTo("AIO.Unity.Runtime")]
 [assembly: UnityAPICompatibilityVersion("2019.4.0", true)]
 
 namespace AIO.UEditor

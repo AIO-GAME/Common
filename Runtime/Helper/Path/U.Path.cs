@@ -2,6 +2,7 @@
 
 using System.IO;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
@@ -15,6 +16,7 @@ namespace AIO
         /// 提供了一些与路径相关的实用方法。
         /// 包含与程序集有关的实用方法和属性的静态类
         /// </summary>
+        [Preserve]
         public static class Path
         {
             static Path()

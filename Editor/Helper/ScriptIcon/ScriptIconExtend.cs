@@ -57,10 +57,12 @@ namespace AIO.UEditor
 
         public static void SetIcon(string local, Texture asset)
         {
+            if (EditorPrefs.GetBool(local)) return;
             if (local.StartsWith("Library") || !asset) return;
             AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset.GetInstanceID(), out var guid, out long _);
             if (string.IsNullOrEmpty(guid)) return;
             SetIcon(local, guid);
+            EditorPrefs.SetBool(local, true);
         }
 
         public static void SetIconRelative(string local, string addr)

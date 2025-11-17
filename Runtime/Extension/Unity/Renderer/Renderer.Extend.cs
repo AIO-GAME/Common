@@ -2,19 +2,18 @@
 
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
 namespace AIO.UEngine
 {
-    /// <summary>
-    /// Renderer 扩展
-    /// </summary>
     public static class RendererExtend
     {
         /// <summary>
         /// 计算模型的中心点坐标
         /// </summary>
+        [Preserve]
         public static Vector3 GetMeshFilterCenter<T>(this T trans)
         where T : Renderer
         {
@@ -24,6 +23,7 @@ namespace AIO.UEngine
         /// <summary>
         /// 计算模型的中心点坐标
         /// </summary>
+        [Preserve]
         public static Vector3 GetMeshFilterCenter<T>(this T[] trans)
         where T : Renderer
         {

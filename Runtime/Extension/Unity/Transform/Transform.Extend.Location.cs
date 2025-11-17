@@ -8,10 +8,11 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     partial class TransformExtend
     {
@@ -20,6 +21,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <param name="target">目标</param>
         /// <returns>位置</returns>
+        [Preserve]
         public static Location GetLocation(this Transform target)
         {
             if (target == null) return Location.Null;
@@ -37,6 +39,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <param name="target">目标</param>
         /// <param name="location">位置</param>
+        [Preserve]
         public static void SetLocation(this Transform target, Location location)
         {
             if (target == null || location == Location.Null) return;
@@ -50,6 +53,7 @@ namespace AIO.UEngine
     /// 物体位置（包含局部坐标、局部旋转、局部缩放）
     /// </summary>
     [Serializable]
+    [Preserve]
     public struct Location : IEquatable<Location>
     {
         /// <summary>
@@ -88,15 +92,9 @@ namespace AIO.UEngine
 
         public static Location Null => new Location(Vector3.zero, Vector3.zero, Vector3.zero);
 
-        public bool Equals(Location other)
-        {
-            return Position.Equals(other.Position) && Rotation.Equals(other.Rotation) && Scale.Equals(other.Scale);
-        }
+        public bool Equals(Location other) { return Position.Equals(other.Position) && Rotation.Equals(other.Rotation) && Scale.Equals(other.Scale); }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Location other && Equals(other);
-        }
+        public override bool Equals(object obj) { return obj is Location other && Equals(other); }
 
         public override int GetHashCode()
         {
@@ -112,17 +110,11 @@ namespace AIO.UEngine
         /// <summary>
         /// 判断两个 Location 是否相等
         /// </summary>
-        public static bool operator ==(Location a, Location b)
-        {
-            return a.Position == b.Position && a.Rotation == b.Rotation && a.Scale == b.Scale;
-        }
+        public static bool operator ==(Location a, Location b) { return a.Position == b.Position && a.Rotation == b.Rotation && a.Scale == b.Scale; }
 
         /// <summary>
         /// 判断两个 Location 是否不相等
         /// </summary>
-        public static bool operator !=(Location a, Location b)
-        {
-            return !(a == b);
-        }
+        public static bool operator !=(Location a, Location b) { return !(a == b); }
     }
 }

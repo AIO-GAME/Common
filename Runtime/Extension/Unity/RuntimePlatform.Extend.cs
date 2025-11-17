@@ -1,6 +1,7 @@
 ﻿#region
 
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
@@ -9,6 +10,7 @@ namespace AIO
     /// <summary>
     /// 扩展
     /// </summary>
+    [Preserve]
     public static class RuntimePlatformExtend
     {
         /// <summary>

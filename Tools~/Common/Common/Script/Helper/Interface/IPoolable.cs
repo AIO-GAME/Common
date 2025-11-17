@@ -3,16 +3,16 @@
     /// <summary>
     /// 对象池
     /// </summary>
-    public interface IPoolable
+    public interface IPoolable : System.IDisposable
     {
         /// <summary>
-        /// 创建
+        /// 初始化
         /// </summary>
-        void New();
+        void Initialize();
 
         /// <summary>
-        /// 释放
+        /// 重置
         /// </summary>
-        void Free();
+        void Reset();
     }
 }

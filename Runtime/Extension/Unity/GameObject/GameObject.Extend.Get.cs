@@ -5,7 +5,7 @@ using UnityEngine;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     partial class GameObjectExtend
     {
@@ -27,8 +27,19 @@ namespace AIO.UEngine
         public static T GetOrAddComponent<T>(this GameObject go)
         where T : Component
         {
-            var r = go.GetComponent<T>();
+            var r            = go.GetComponent<T>();
             if (r == null) r = go.AddComponent<T>();
+            return r;
+        }
+
+        /// <summary>
+        /// 获取或添加组件
+        /// </summary>
+        public static T GetOrAddComponent<T>(this MonoBehaviour go)
+        where T : Component
+        {
+            var r            = go.GetComponent<T>();
+            if (r == null) r = go.gameObject.AddComponent<T>();
             return r;
         }
 

@@ -36,8 +36,8 @@ namespace AIO.UEditor
                     else
                     {
                         _CODE = System.IO.Path.Combine(System.IO.Path.GetTempPath(),
-                                                       System.IO.Path.GetTempFileName())
-                                      .GetHashCode();
+                                                       System.IO.Path.GetTempFileName()).
+                                       GetHashCode();
                         EditorPrefs.SetInt(key, _CODE);
                     }
 

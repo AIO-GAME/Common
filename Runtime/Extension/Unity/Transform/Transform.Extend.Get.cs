@@ -2,12 +2,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     partial class TransformExtend
     {
@@ -16,6 +18,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <param name="trans">源目标</param>
         /// <param name="recursion">是否递归</param>
+        [Preserve]
         public static void SortChild(this Transform trans, bool recursion)
         {
             var transforms = new List<Transform>(GetChildes(trans));
@@ -27,15 +30,15 @@ namespace AIO.UEngine
             }
         }
 
-
         /// <summary>
         /// 获取子物体
         /// </summary>
         /// <param name="trans">源目标</param>
+        [Preserve]
         public static Transform[] GetChildes(this Transform trans)
         {
             if (trans.childCount <= 0) return Array.Empty<Transform>();
-            var objs = new Transform[trans.childCount];
+            var objs                                           = new Transform[trans.childCount];
             for (var i = 0; i < trans.childCount; i++) objs[i] = trans.GetChild(i);
             return objs;
         }
@@ -44,6 +47,7 @@ namespace AIO.UEngine
         /// 获取全部子物体
         /// </summary>
         /// <param name="trans">源目标</param>
+        [Preserve]
         public static List<Transform> GetChildesAll(this Transform trans)
         {
             var list = new List<Transform>();
@@ -57,11 +61,12 @@ namespace AIO.UEngine
         /// </summary>
         /// <param name="trans">源目标</param>
         /// <param name="name">父物体名称</param>
+        [Preserve]
         public static int[] GetTransformSiblingIndex(this Transform trans, in string name)
         {
             if (trans != null && trans != default)
             {
-                var str = new StringBuilder();
+                var str       = new StringBuilder();
                 var transform = trans;
                 while (transform.name != name)
                 {
@@ -71,8 +76,8 @@ namespace AIO.UEngine
                     str.Append('.');
                 }
 
-                var split = str.ToString().Split('.');
-                var index = new int[split.Length];
+                var split                                                               = str.ToString().Split('.');
+                var index                                                               = new int[split.Length];
                 for (var i = split.Length - 1; i >= 0; i--) index[split.Length - i - 1] = int.Parse(split[i]);
 
                 return index;
@@ -84,6 +89,7 @@ namespace AIO.UEngine
         /// <summary>
         /// 获取全部子物体相同组件
         /// </summary>
+        [Preserve]
         public static List<T> GetChildesComponents<T>(this Transform trans)
         where T : Component
         {
@@ -92,6 +98,17 @@ namespace AIO.UEngine
             for (var i = 0; i < trans.childCount; i++) list.AddRange(trans.GetChild(i).GetComponents<T>());
 
             return list;
+        }
+
+        /// <summary>
+        /// 获得子节点下的对象
+        /// </summary>
+        [Preserve]
+        public static Transform GetChildWithName(this Transform trans, string name)
+        {
+            if (string.IsNullOrEmpty(name) || trans == null || trans.childCount == 0) return null;
+            var list = trans.GetComponentsInChildren<Transform>();
+            return list?.FirstOrDefault(item => item.name == name);
         }
     }
 }

@@ -541,6 +541,8 @@ namespace AIO.UEditor
                 return WindowList[key];
             }
 
+            public static EditorWindow Open(GWindowAttribute attribute) => Open(attribute.RuntimeType, attribute.GetTitle(), attribute.DockType);
+
             private const BindingFlags PROPERTY_BIND =
                 BindingFlags.Public | BindingFlags.GetProperty | BindingFlags.Instance;
 

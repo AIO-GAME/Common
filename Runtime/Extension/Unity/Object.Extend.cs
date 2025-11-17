@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Scripting;
 using UObject = UnityEngine.Object;
 
 #endregion
@@ -12,11 +13,13 @@ namespace AIO.UEngine
     /// <summary>
     /// Unity Object 扩展
     /// </summary>
+    [Preserve]
     public static class UnityObjectExtend
     {
         /// <summary>
         /// 判断目标是否销毁
         /// </summary>
+        [Preserve]
         public static bool IsDestroyed(this UObject target)
         {
             // Checks whether a Unity object is not actually a null reference,
@@ -30,6 +33,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
+        [Preserve]
         public static bool IsUnityNull(this UObject target)
         {
             // Checks whether an object is null or Unity pseudo-null
@@ -44,6 +48,7 @@ namespace AIO.UEngine
         /// <param name="obj"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [Preserve]
         public static T AsUnityNull<T>(this T obj)
         where T : UObject
         {
@@ -55,6 +60,7 @@ namespace AIO.UEngine
         /// <summary>
         /// 排除Unity空引用
         /// </summary>
+        [Preserve]
         public static IEnumerable<T> NotUnityNull<T>(this IEnumerable<T> enumerable)
         where T : UObject
         {
@@ -64,6 +70,7 @@ namespace AIO.UEngine
         /// <summary>
         /// 转换为安全字符
         /// </summary>
+        [Preserve]
         public static string ToSafeString(this UObject uo)
         {
             if (ReferenceEquals(uo, null)) return "(null)";

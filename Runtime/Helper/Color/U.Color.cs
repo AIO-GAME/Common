@@ -3,6 +3,7 @@
 using System.Globalization;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
@@ -13,29 +14,27 @@ namespace AIO
         /// <summary>
         /// 16进制 转换为 #FFFFFF
         /// </summary>
-        public static string ToConvertHtmlString(this UnityEngine.Color color)
-        {
-            return ColorUtility.ToHtmlStringRGB(color);
-        }
+        [Preserve]
+        public static string ToConvertHtmlString(this UnityEngine.Color color) { return ColorUtility.ToHtmlStringRGB(color); }
 
         /// <summary>
         /// 16进制 转换为 #FFFFFF
         /// </summary>
-        public static string ToConvertHtmlString(this Color32 color)
-        {
-            return ColorUtility.ToHtmlStringRGBA(color);
-        }
+        [Preserve]
+        public static string ToConvertHtmlString(this Color32 color) { return ColorUtility.ToHtmlStringRGBA(color); }
 
         #region Nested type: Color
 
         /// <summary>
         /// 颜色工具类
         /// </summary>
+        [Preserve]
         public static class Color
         {
             /// <summary>
             /// 颜色 R G B A
             /// </summary>
+            [Preserve]
             public static UnityEngine.Color IntToColor(uint col)
             {
                 var b = (byte)(col & 0xff);
@@ -48,6 +47,7 @@ namespace AIO
             /// <summary>
             /// 颜色 R G B A
             /// </summary>
+            [Preserve]
             public static uint ColorToInt(in UnityEngine.Color col)
             {
                 return (uint)(col.b * 255) |
@@ -59,6 +59,7 @@ namespace AIO
             /// <summary>
             /// #FFFFFF 转换为 16进制
             /// </summary>
+            [Preserve]
             public static string ToHex(uint col)
             {
                 // RGBA 顺序不可改
@@ -73,6 +74,7 @@ namespace AIO
             /// <summary>
             /// #FFFFFF 转换为 16进制
             /// </summary>
+            [Preserve]
             public static string ToHex(int red, int green, int blue, int alpha)
             {
                 // RGBA 顺序不可改
@@ -87,6 +89,7 @@ namespace AIO
             /// <summary>
             /// #FFFFFF 转换为 16进制
             /// </summary>
+            [Preserve]
             public static string ToHex(int red, int green, int blue)
             {
                 // RGBA 顺序不可改
@@ -100,6 +103,7 @@ namespace AIO
             /// <summary>
             /// hex转换到color
             /// </summary>
+            [Preserve]
             public static UnityEngine.Color HexToColor(string hex)
             {
                 hex = hex.TrimStart('#');
@@ -107,15 +111,16 @@ namespace AIO
                 var br = byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber);
                 var bg = byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber);
                 var bb = byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber);
-                var r = br / 255f;
-                var g = bg / 255f;
-                var b = bb / 255f;
+                var r  = br / 255f;
+                var g  = bg / 255f;
+                var b  = bb / 255f;
                 return new UnityEngine.Color(r, g, b);
             }
 
             /// <summary>
             /// hex转换到color32
             /// </summary>
+            [Preserve]
             public static Color32 HexToColor32(string hex)
             {
                 hex = hex.TrimStart('#');

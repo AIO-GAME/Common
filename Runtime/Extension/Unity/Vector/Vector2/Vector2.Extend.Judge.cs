@@ -3,15 +3,17 @@
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     /// <summary>
     /// 2D 方向描述 共9种 正直方向4种 斜方向4种 重叠1种
     /// -1代表向下 0代表垂直 1代表Y向上 -3代表向左 3代表向右
     /// </summary>
+    [Preserve]
     public enum Direction2D
     {
         /// <summary> 左下 </summary>
@@ -56,8 +58,8 @@ namespace AIO.UEngine
         public static bool JudgeAngle(this Vector2 V1, in Vector2 target, in float Value)
         {
             // 获取宽 高
-            var X = V1.x - target.x;
-            var Y = target.y - V1.y;
+            var X   = V1.x - target.x;
+            var Y   = target.y - V1.y;
             var Cos = Y / Math.Sqrt(X * X + Y * Y);              // Cos角度
             if (Cos > 0) return Cos >= Math.Cos(90 - Value / 2); // 左半轴角度
             if (Cos < 0) return Cos <= Math.Cos(90 + Value / 2); // 右半轴角度
@@ -68,10 +70,7 @@ namespace AIO.UEngine
         /// 长度判断 如果在 0-Value范围 则返回true 否则false
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool JudgeLength(this Vector2 V1, in Vector2 target, in float Value)
-        {
-            return Vector2.Distance(V1, target) < Value;
-        }
+        public static bool JudgeLength(this Vector2 V1, in Vector2 target, in float Value) { return Vector2.Distance(V1, target) < Value; }
 
         /// <summary>
         /// 计算位置
@@ -81,7 +80,7 @@ namespace AIO.UEngine
         public static Direction2D JudgeDirection(this Vector2 V1, in Vector2 target)
         {
             if (V1 == target) return Direction2D.Overlap;
-            var Dir = (target - V1).normalized;        //位置差，方向
+            var Dir  = (target - V1).normalized;       //位置差，方向
             var YDot = Vector2.Dot(Vector2.down, Dir); //点乘判断前后：
             var XDot = Vector2.Dot(Vector2.left, Dir); //点乘判断左右：
             // dot > 0 方向基本相同，夹角在0°到90°之间，< 0 方向基本相反，夹角在90°到180°之间 = 0 正交，相互垂直

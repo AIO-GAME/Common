@@ -7,12 +7,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Scripting;
 
 namespace AIO
 {
     /// <summary>
     /// Utils Unity Engine
     /// </summary>
+    [Preserve]
     public static partial class RHelper
     {
         /// <summary>

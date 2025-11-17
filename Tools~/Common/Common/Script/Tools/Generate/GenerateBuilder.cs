@@ -7,7 +7,7 @@ namespace AIO
     /// <summary>
     /// 生成器
     /// </summary>
-    public class GenerateBuilder
+    public class GenerateBuilder : IDisposable
     {
         /// <summary>
         /// 生成器
@@ -56,6 +56,47 @@ namespace AIO
             else indent = string.Empty;
 
             Builder.Append('}').AppendLine();
+            return this;
+        }
+
+        /// <summary>
+        ///   减少一个代码块
+        /// </summary>
+        public GenerateBuilder DecBlock(string line)
+        {
+            if (indent.Length >= 4)
+            {
+                indent = indent.Substring(0, indent.Length - 4);
+                Builder.Append(indent);
+            }
+            else indent = string.Empty;
+
+            if (string.IsNullOrEmpty(line))
+            {
+                Builder.Append('}').AppendLine();
+            }
+
+            else
+            {
+                Builder.Append('}').Append(line).AppendLine();
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///   减少一个代码块
+        /// </summary>
+        public GenerateBuilder DecBlock(char line)
+        {
+            if (indent.Length >= 4)
+            {
+                indent = indent.Substring(0, indent.Length - 4);
+                Builder.Append(indent);
+            }
+            else indent = string.Empty;
+
+            Builder.Append('}').Append(line).AppendLine();
             return this;
         }
 
@@ -151,6 +192,15 @@ namespace AIO
         {
             indent = string.Empty;
             Builder.Clear();
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            Builder?.Clear();
+            Builder = null;
+            indent  = null;
+            GC.SuppressFinalize(this);
         }
     }
 }

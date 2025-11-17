@@ -55,6 +55,12 @@
             <param name="tag"> 标签 </param>
             <param name="enable"> 是否开启日志输出 </param>
         </member>
+        <member name="P:AIO.LOG.Item(UnityEngine.LogType)">
+            <summary>
+            根据日志类型输出对应的日志
+            </summary>
+            <param name="type"> 日志类型 </param>
+        </member>
         <member name="M:AIO.LOG.W(System.String,System.Object[])">
             <summary>
             <para>Logs a formatted warning message to the Unity Console.</para>
@@ -111,6 +117,344 @@
                 <para>A variant of Debug.Log that logs an error message to the console.</para>
             </summary>
             <param name="message">String or object to be converted to string representation for display.</param>
+        </member>
+        <member name="M:AIO.LOG.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.Internal.MonoSingleton">
+            <summary>
+            从这个基类继承以创建单例。
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.MonoSingleton.Log">
+            <summary>
+            日志记录器。
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.MonoSingleton.LogEnabled">
+            <summary>
+            启用或禁用日志记录。
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.MonoSingleton.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.SetLogInfo(System.String)">
+            <summary>
+            设置日志信息
+            </summary>
+            <param name="title">标题</param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.SetLogInfo(System.String,System.String)">
+            <summary>
+            设置日志信息
+            </summary>
+            <param name="title">标题</param>
+            <param name="color">颜色</param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.SetLogInfo(System.String,UnityEngine.Color)">
+            <summary>
+            设置日志信息
+            </summary>
+            <param name="title">标题</param>
+            <param name="color">颜色</param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.SetLogInfo(System.String,UnityEngine.Color32)">
+            <summary>
+            设置日志信息
+            </summary>
+            <param name="title">标题</param>
+            <param name="color">颜色</param>
+        </member>
+        <member name="F:AIO.Internal.MonoSingleton.ShuttingDown">
+            <summary>
+            检查我们是否即将被销毁。
+            </summary>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.Dispose">
+            <summary>
+            销毁单例。
+            </summary>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.LogI(System.String)">
+            <summary>
+            日志
+            </summary>
+            <param name="msg"> 消息 </param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.LogI(System.String,System.Object[])">
+            <summary>
+            日志
+            </summary>
+            <param name="msg"> 消息 </param>
+            <param name="args"> 参数 </param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.LogW(System.String)">
+            <summary>
+            警告日志
+            </summary>
+            <param name="msg"> 消息 </param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.LogW(System.String,System.Object[])">
+            <summary>
+            警告日志
+            </summary>
+            <param name="msg"> 消息 </param>
+            <param name="args"> 参数 </param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.LogE(System.String)">
+            <summary>
+            错误日志
+            </summary>
+            <param name="msg"> 消息 </param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.LogE(System.String,System.Object[])">
+            <summary>
+            错误日志
+            </summary>
+            <param name="msg"> 消息 </param>
+            <param name="args"> 参数 </param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.LogE(System.Exception)">
+            <summary>
+            错误日志
+            </summary>
+            <param name="msg"> 消息 </param>
+        </member>
+        <member name="P:AIO.Internal.MonoSingleton.gameObject">
+            <summary>
+            单例根节点。
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.MonoSingleton.transform">
+            <summary>
+            单例根节点的Transform。
+            </summary>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.AddComponent``1">
+            <summary>
+            为单例添加组件。
+            </summary>
+            <typeparam name="T"> 组件类型。</typeparam>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.Instantiate``1(``0)">
+            <summary>
+            实例化对象
+            </summary>
+            <param name="original"> 原对象 </param>
+            <typeparam name="T"> 对象类型 </typeparam>
+            <returns> 新对象 </returns>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.Instantiate``1(``0,UnityEngine.Transform)">
+            <summary>
+            实例化对象
+            </summary>
+            <param name="original"> 原对象 </param>
+            <typeparam name="T"> 对象类型 </typeparam>
+            <param name="trans"> 变换组件 </param>
+            <returns> 新对象 </returns>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.Instantiate``1(``0,UnityEngine.Transform,System.Boolean)">
+            <summary>
+            实例化对象
+            </summary>
+            <param name="original"> 原对象 </param>
+            <typeparam name="T"> 对象类型 </typeparam>
+            <param name="trans"> 变换组件 </param>
+            <param name="worldPositionStays"> 是否保持世界位置 </param>
+            <returns> 新对象 </returns>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.DontDestroyOnLoad(UnityEngine.Object)">
+            <summary>
+            场景切换时不销毁对象
+            </summary>
+            <param name="target"> 目标对象 </param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.Destroy(UnityEngine.Object)">
+            <summary>
+            销毁对象
+            </summary>
+            <param name="target"> 目标对象 </param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.StartCoroutine(System.Collections.IEnumerator)">
+            <summary>
+            启动协程
+            </summary>
+            <param name="routine"></param>
+        </member>
+        <member name="M:AIO.Internal.MonoSingleton.StopCoroutine(System.Collections.IEnumerator)">
+            <summary>
+            停止协程
+            </summary>
+            <param name="routine"></param>
+        </member>
+        <member name="E:AIO.Internal.MonoSingleton.OnUpdate">
+            <summary>
+            添加更新事件
+            </summary>
+        </member>
+        <member name="E:AIO.Internal.MonoSingleton.OnLateUpdate">
+            <summary>
+            添加更新事件
+            </summary>
+        </member>
+        <member name="E:AIO.Internal.MonoSingleton.OnFixedUpdate">
+            <summary>
+            添加更新事件
+            </summary>
+        </member>
+        <member name="T:AIO.MonoSingleton`1">
+            <summary>
+            从这个基类继承以创建单例。
+            </summary>
+        </member>
+        <member name="P:AIO.MonoSingleton`1.IsNull">
+            <summary>
+            是否存在实例
+            </summary>
+        </member>
+        <member name="M:AIO.MonoSingleton`1.Register">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:AIO.MonoSingleton`1.Register1">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:AIO.MonoSingleton`1.RegisterAsync">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="P:AIO.MonoSingleton`1.Instance">
+            <summary>
+            单例实例。
+            </summary>
+        </member>
+        <member name="M:AIO.MonoSingleton`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:SingletonBehaviour">
+            <summary>
+            单例基类
+            </summary>
+        </member>
+        <member name="P:SingletonBehaviour.Data">
+            <summary>
+            单例类型名称列表
+            </summary>
+        </member>
+        <member name="P:SingletonBehaviour.Array">
+            <summary>
+            单例数组
+            </summary>
+        </member>
+        <member name="F:SingletonBehaviour.EnableLog">
+            <summary>
+            启用日志记录
+            </summary>
+        </member>
+        <member name="T:UnityEngine.UnityConsole">
+            <summary>
+            Unity 控制台输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.EnabledLog">
+            <summary>
+            关闭 LOG 输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.EnabledError">
+            <summary>
+            关闭 LOG 输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.ENABLED_ALL_NO_CONDITION">
+            <summary>
+            关闭 LOG 输出
+            </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.UnityConsoleType.Log">
+            <summary>
+            正常输出
+            </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.UnityConsoleType.Error">
+            <summary>
+            错误输出
+            </summary>
+        </member>
+        <member name="T:UnityEngine.UnityConsole.UnityTextWriter">
+            <summary>
+            Unity 重置定向 输出
+            Redirects writes to System.Console to Unity3D's Debug.Log.
+            </summary>
+            <see url="https://www.jacksondunstan.com/articles/2986"/>
+            <author name="Jackson Dunstan"/>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Flush">
+            <summary>
+            刷新
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.String)">
+            <summary>
+            写入
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.Char)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.Char[],System.Int32,System.Int32)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:UnityEngine.UnityConsole.UnityTextWriter.Encoding">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.WriterOut">
+            <summary>
+            Unity Log 输出
+            </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.WriterError">
+            <summary>
+            Unity Error 输出
+            </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.OriginalOut">
+            <summary>
+            源 输出
+            </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.OriginalError">
+            <summary>
+            源 输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.DisableALL">
+            <summary>
+            关闭 全部输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.DisableLog">
+            <summary>
+            关闭 LOG 输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.DisableError">
+            <summary>
+            关闭 ERROR 输出
+            </summary>
         </member>
         <member name="T:UnityEngine.Print">
             <summary>
@@ -407,104 +751,6 @@
         <member name="M:UnityEngine.Print.WarnFormat(System.String@,System.Object[])">
             <summary>
             警告
-            </summary>
-        </member>
-        <member name="T:UnityEngine.UnityConsole">
-            <summary>
-            Unity 控制台输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.EnabledLog">
-            <summary>
-            关闭 LOG 输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.EnabledError">
-            <summary>
-            关闭 LOG 输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.ENABLED_ALL_NO_CONDITION">
-            <summary>
-            关闭 LOG 输出
-            </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.UnityConsoleType.Log">
-            <summary>
-            正常输出
-            </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.UnityConsoleType.Error">
-            <summary>
-            错误输出
-            </summary>
-        </member>
-        <member name="T:UnityEngine.UnityConsole.UnityTextWriter">
-            <summary>
-            Unity 重置定向 输出
-            Redirects writes to System.Console to Unity3D's Debug.Log.
-            </summary>
-            <see url="https://www.jacksondunstan.com/articles/2986"/>
-            <author name="Jackson Dunstan"/>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Flush">
-            <summary>
-            刷新
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.String)">
-            <summary>
-            写入
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.Char)">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.Char[],System.Int32,System.Int32)">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:UnityEngine.UnityConsole.UnityTextWriter.Encoding">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.WriterOut">
-            <summary>
-            Unity Log 输出
-            </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.WriterError">
-            <summary>
-            Unity Error 输出
-            </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.OriginalOut">
-            <summary>
-            源 输出
-            </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.OriginalError">
-            <summary>
-            源 输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.DisableALL">
-            <summary>
-            关闭 全部输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.DisableLog">
-            <summary>
-            关闭 LOG 输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.DisableError">
-            <summary>
-            关闭 ERROR 输出
             </summary>
         </member>
     </members>

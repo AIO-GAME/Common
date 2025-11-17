@@ -3,11 +3,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AIO.UEngine;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     public static partial class TransformExtend
     {
@@ -16,6 +18,7 @@ namespace AIO.UEngine
         /// <summary>
         /// 销毁全部子物体
         /// </summary>
+        [Preserve]
         public static void DestroyChildes(this Transform trans)
         {
             if (trans == null) return;
@@ -28,20 +31,19 @@ namespace AIO.UEngine
         /// <summary>
         /// 根据索引 获取当前物体下指定物体的子物体
         /// </summary>
-        public static Transform TransformSiblingIndexToObj(this Transform trans, in IList<int> indexes)
-        {
-            return indexes.Count == 0 ? null : indexes.Aggregate(trans, (current, index) => current.GetChild(index));
-        }
+        [Preserve]
+        public static Transform TransformSiblingIndexToObj(this Transform trans, in IList<int> indexes) { return indexes.Count == 0 ? null : indexes.Aggregate(trans, (current, index) => current.GetChild(index)); }
 
         /// <summary>
         /// 全路径
         /// </summary>
         /// <param name="tran">自身</param>
         /// <returns>在场景中的全路径</returns>
+        [Preserve]
         public static string FullName(this Transform tran)
         {
             var tfs = Pool.List<Transform>();
-            var tf = tran;
+            var tf  = tran;
             tfs.Add(tf);
             while (tf.parent)
             {
@@ -59,6 +61,7 @@ namespace AIO.UEngine
 
         #region Find
 
+        [Preserve]
         public static T FindComponentInChild<T>(this Transform transform, in string name)
         where T : Component
         {
@@ -66,6 +69,7 @@ namespace AIO.UEngine
             return r.Equals(null) ? null : r.GetComponent<T>();
         }
 
+        [Preserve]
         public static void FillChild(this Transform parent, in ICollection<Transform> r, in bool recursion)
         {
             for (int i = 0, max = parent.childCount; i < max; ++i)
@@ -76,12 +80,13 @@ namespace AIO.UEngine
             }
         }
 
+        [Preserve]
         public static Transform FindOrCreateChild(this Transform self, string target, char[] sep = null)
         {
             var r = self.Find(target);
             if (r == null)
             {
-                var ps = target.Split(sep ?? gSeps);
+                var ps     = target.Split(sep ?? gSeps);
                 var parent = self;
                 foreach (var p in ps)
                 {
@@ -94,6 +99,7 @@ namespace AIO.UEngine
             return r;
         }
 
+        [Preserve]
         public static Transform FindChildR(this Transform self, string target)
         {
             if (string.Equals(self.name, target)) return self;
@@ -111,6 +117,7 @@ namespace AIO.UEngine
 
         #region Remove
 
+        [Preserve]
         public static void RemoveInactiveChild(this Transform tf)
         {
             for (var i = tf.childCount - 1; i >= 0; --i)
@@ -121,6 +128,7 @@ namespace AIO.UEngine
             }
         }
 
+        [Preserve]
         public static void RemoveInactiveChildImm(this Transform tf)
         {
             for (var i = tf.childCount - 1; i >= 0; --i)
@@ -132,5 +140,7 @@ namespace AIO.UEngine
         }
 
         #endregion
+
+
     }
 }

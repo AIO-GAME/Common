@@ -1442,7 +1442,7 @@
             <param name="encoding">编码方式</param>
             <returns>SHA256结果(返回长度为44字节的字符串)</returns>
         </member>
-        <member name="M:AIO.ExtendString.AppendToFrontChar(System.String,System.Char@,System.Int32@)">
+        <member name="M:AIO.ExtendString.AppendToFront(System.String,System.Char@,System.Int32@)">
             <summary>
                 在最前添加指定字符到指定长度
             </summary>
@@ -1457,7 +1457,7 @@
                 在最前添加指定字符
             </summary>
         </member>
-        <member name="M:AIO.ExtendString.AppendToLastChar(System.String,System.Char@,System.Int32@)">
+        <member name="M:AIO.ExtendString.AppendToLast(System.String,System.Char@,System.Int32@)">
             <summary>
                 在最后添加指定字符到指定字节长度
             </summary>
@@ -2111,6 +2111,338 @@
             <param name="source">要进行操作的字符串。</param>
             <param name="value">要移除的字符串。</param>
             <returns>移除指定字符串后的新字符串，或者如果当前字符串不是以指定字符串结尾，则返回原始字符串。</returns>
+        </member>
+        <member name="T:AIO.TupleExtend">
+            <summary>
+            元组扩展
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`2.Length">
+            <summary>
+            The number of items in the tuple.
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`2.Item1">
+            <summary> 参数1 </summary>
+        </member>
+        <member name="P:AIO.ATuple`2.Item2">
+            <summary> 参数2 </summary>
+        </member>
+        <member name="M:AIO.ATuple`2.#ctor(`0,`1)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Tuple`2"/> class.
+            </summary>
+        </member>
+        <member name="M:AIO.ATuple`2.ToString">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`2.Equals(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`2.Equals(System.Tuple{`0,`1})">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`2.CompareTo(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`2.GetHashCode">
+            <summary>
+            作为默认哈希函数。
+            </summary>
+            <returns>当前的哈希代码</returns>
+        </member>
+        <member name="M:AIO.ATuple`2.Unpack(System.Action{`0,`1})">
+            <summary>
+            解包元组。
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`3.Length">
+            <summary>
+            The number of items in the tuple.
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`3.Item1">
+            <summary> 参数1 </summary>
+        </member>
+        <member name="P:AIO.ATuple`3.Item2">
+            <summary> 参数2 </summary>
+        </member>
+        <member name="P:AIO.ATuple`3.Item3">
+            <summary> 参数3 </summary>
+        </member>
+        <member name="M:AIO.ATuple`3.#ctor(`0,`1,`2)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Tuple`3"/> class.
+            </summary>
+        </member>
+        <member name="M:AIO.ATuple`3.ToString">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`3.Equals(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`3.Equals(System.Tuple{`0,`1,`2})">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`3.CompareTo(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`3.GetHashCode">
+            <summary>
+            作为默认哈希函数。
+            </summary>
+            <returns>当前的哈希代码</returns>
+        </member>
+        <member name="M:AIO.ATuple`3.Unpack(System.Action{`0,`1,`2})">
+            <summary>
+            解包元组。
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`4.Length">
+            <summary>
+            The number of items in the tuple.
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`4.Item1">
+            <summary> 参数1 </summary>
+        </member>
+        <member name="P:AIO.ATuple`4.Item2">
+            <summary> 参数2 </summary>
+        </member>
+        <member name="P:AIO.ATuple`4.Item3">
+            <summary> 参数3 </summary>
+        </member>
+        <member name="P:AIO.ATuple`4.Item4">
+            <summary> 参数4 </summary>
+        </member>
+        <member name="M:AIO.ATuple`4.#ctor(`0,`1,`2,`3)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Tuple`4"/> class.
+            </summary>
+        </member>
+        <member name="M:AIO.ATuple`4.ToString">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`4.Equals(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`4.Equals(System.Tuple{`0,`1,`2,`3})">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`4.CompareTo(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`4.GetHashCode">
+            <summary>
+            作为默认哈希函数。
+            </summary>
+            <returns>当前的哈希代码</returns>
+        </member>
+        <member name="M:AIO.ATuple`4.Unpack(System.Action{`0,`1,`2,`3})">
+            <summary>
+            解包元组。
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`5.Length">
+            <summary>
+            The number of items in the tuple.
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`5.Item1">
+            <summary> 参数1 </summary>
+        </member>
+        <member name="P:AIO.ATuple`5.Item2">
+            <summary> 参数2 </summary>
+        </member>
+        <member name="P:AIO.ATuple`5.Item3">
+            <summary> 参数3 </summary>
+        </member>
+        <member name="P:AIO.ATuple`5.Item4">
+            <summary> 参数4 </summary>
+        </member>
+        <member name="P:AIO.ATuple`5.Item5">
+            <summary> 参数5 </summary>
+        </member>
+        <member name="M:AIO.ATuple`5.#ctor(`0,`1,`2,`3,`4)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Tuple`5"/> class.
+            </summary>
+        </member>
+        <member name="M:AIO.ATuple`5.ToString">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`5.Equals(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`5.Equals(System.Tuple{`0,`1,`2,`3,`4})">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`5.CompareTo(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`5.GetHashCode">
+            <summary>
+            作为默认哈希函数。
+            </summary>
+            <returns>当前的哈希代码</returns>
+        </member>
+        <member name="M:AIO.ATuple`5.Unpack(System.Action{`0,`1,`2,`3,`4})">
+            <summary>
+            解包元组。
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`6.Length">
+            <summary>
+            The number of items in the tuple.
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`6.Item1">
+            <summary> 参数1 </summary>
+        </member>
+        <member name="P:AIO.ATuple`6.Item2">
+            <summary> 参数2 </summary>
+        </member>
+        <member name="P:AIO.ATuple`6.Item3">
+            <summary> 参数3 </summary>
+        </member>
+        <member name="P:AIO.ATuple`6.Item4">
+            <summary> 参数4 </summary>
+        </member>
+        <member name="P:AIO.ATuple`6.Item5">
+            <summary> 参数5 </summary>
+        </member>
+        <member name="P:AIO.ATuple`6.Item6">
+            <summary> 参数6 </summary>
+        </member>
+        <member name="M:AIO.ATuple`6.#ctor(`0,`1,`2,`3,`4,`5)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Tuple`6"/> class.
+            </summary>
+        </member>
+        <member name="M:AIO.ATuple`6.ToString">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`6.Equals(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`6.Equals(System.Tuple{`0,`1,`2,`3,`4,`5})">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`6.CompareTo(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`6.GetHashCode">
+            <summary>
+            作为默认哈希函数。
+            </summary>
+            <returns>当前的哈希代码</returns>
+        </member>
+        <member name="M:AIO.ATuple`6.Unpack(System.Action{`0,`1,`2,`3,`4,`5})">
+            <summary>
+            解包元组。
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`7.Length">
+            <summary>
+            The number of items in the tuple.
+            </summary>
+        </member>
+        <member name="P:AIO.ATuple`7.Item1">
+            <summary> 参数1 </summary>
+        </member>
+        <member name="P:AIO.ATuple`7.Item2">
+            <summary> 参数2 </summary>
+        </member>
+        <member name="P:AIO.ATuple`7.Item3">
+            <summary> 参数3 </summary>
+        </member>
+        <member name="P:AIO.ATuple`7.Item4">
+            <summary> 参数4 </summary>
+        </member>
+        <member name="P:AIO.ATuple`7.Item5">
+            <summary> 参数5 </summary>
+        </member>
+        <member name="P:AIO.ATuple`7.Item6">
+            <summary> 参数6 </summary>
+        </member>
+        <member name="P:AIO.ATuple`7.Item7">
+            <summary> 参数7 </summary>
+        </member>
+        <member name="M:AIO.ATuple`7.#ctor(`0,`1,`2,`3,`4,`5,`6)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Tuple`7"/> class.
+            </summary>
+        </member>
+        <member name="M:AIO.ATuple`7.ToString">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`7.Equals(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`7.Equals(System.Tuple{`0,`1,`2,`3,`4,`5,`6})">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`7.CompareTo(System.Object)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.ATuple`7.GetHashCode">
+            <summary>
+            作为默认哈希函数。
+            </summary>
+            <returns>当前的哈希代码</returns>
+        </member>
+        <member name="M:AIO.ATuple`7.Unpack(System.Action{`0,`1,`2,`3,`4,`5,`6})">
+            <summary>
+            解包元组。
+            </summary>
         </member>
         <member name="T:AIO.MethodReflectionInfo">
             <summary>
@@ -2829,6 +3161,13 @@
             获取自定义属性值
             </summary>
         </member>
+        <member name="M:AIO.ExtendEnum.GetUID(System.Enum)">
+            <summary>
+            获取枚举唯一编码
+            </summary>
+            <param name="value"> 枚举值 </param>
+            <returns> 唯一编码 </returns>
+        </member>
         <member name="T:AIO.GenericClosingException">
             <summary>
             这是一个密封类 GenericClosingException，继承自 Exception
@@ -3181,7 +3520,22 @@
         </member>
         <member name="M:AIO.ExtendIEnumerable.ToHashSet``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
-            转化为HashSet
+            转化为 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendIEnumerable.ToSortedSet``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 <see cref="T:System.Collections.Generic.SortedSet`1"/>
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendIEnumerable.ToQueue``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendIEnumerable.ToStack``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 <see cref="T:System.Collections.Generic.Stack`1"/>
             </summary>
         </member>
         <member name="M:AIO.ExtendIEnumerable.ToSeparatedString(System.Collections.IEnumerable,System.String@)">
@@ -3926,6 +4280,26 @@
             </summary>
         </member>
         <member name="M:AIO.ExtendIList.AddRange``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0},System.Int32,System.Int32)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendIList.Add``1(System.Collections.Generic.HashSet{``0},System.Collections.Generic.IEnumerable{``0}@)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendIList.Add``1(System.Collections.Generic.HashSet{``0},``0@,``0@)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendIList.Add``1(System.Collections.Generic.HashSet{``0},``0@,``0[])">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendIList.AddRange``1(System.Collections.Generic.HashSet{``0},System.Collections.Generic.IEnumerable{``0})">
             <summary>
             添加
             </summary>
@@ -7066,6 +7440,451 @@
             <returns>
             "Progress: 0.00% Speed: 0.00MB/s Remaining: 0:00:00"
             </returns>
+        </member>
+        <member name="T:AIO.MGRandom">
+            <summary>
+            随机数单例
+            </summary>
+        </member>
+        <member name="P:AIO.MGRandom.Main">
+            <summary>
+            主随机数对象
+            </summary>
+        </member>
+        <member name="M:AIO.MGRandom.OnInitializeAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MGRandom.Get(System.Int64)">
+            <summary>
+            获取随机数对象
+            </summary>
+        </member>
+        <member name="M:AIO.MGRandom.Get(System.Int64,System.Int32)">
+            <summary>
+            获取随机数对象
+            </summary>
+        </member>
+        <member name="M:AIO.MGRandom.OnDispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.RandomItem">
+            <summary>
+            随机项
+            </summary>
+        </member>
+        <member name="P:AIO.RandomItem.Seed">
+            <summary>
+            随机种子
+            </summary>
+        </member>
+        <member name="M:AIO.RandomItem.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.RandomItem.SetSeed">
+            <summary>
+            刷新随机种子
+            </summary>
+        </member>
+        <member name="M:AIO.RandomItem.SetSeed(System.Int32@)">
+            <summary>
+            刷新随机种子
+            </summary>
+        </member>
+        <member name="M:AIO.RandomItem.RandDouble">
+            <summary>
+            随机获取 <see cref="T:System.Double"/>
+            </summary>
+        </member>
+        <member name="M:AIO.RandomItem.RandDouble(System.Double,System.Double)">
+            <summary>
+            随机获取限定范围 <see cref="T:System.Double"/>
+            </summary>
+            <param name="min"> 最小值-包含 </param>
+            <param name="max"> 最大值-不包含 </param>
+            <exception cref="T:System.ArgumentException"> 当 min 大于 max 时抛出 </exception>
+            <returns><see cref="T:System.Double"/></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandDoubleArray(System.Int32)">
+            <summary>
+            随机获取 <see cref="T:System.Double"/>
+            </summary>
+            <param name="count">数量</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandDoubleArray(System.Int32,System.Double,System.Double)">
+            <summary>
+            随机获取 <see cref="T:System.Double"/>[]
+            </summary>
+            <param name="count">数量</param>
+            <param name="min"> 最小值-包含 </param>
+            <param name="max"> 最大值-不包含 </param>
+            <exception cref="T:System.ArgumentException"> 当 min 大于 max 时抛出 </exception>
+            <returns><see cref="T:System.Double"/>[]</returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandLong(System.Int64,System.Int64)">
+            <summary>
+            随机获取限定范围 <see cref="T:System.Int64"/>
+            </summary>
+            <param name="min"> 最小值-包含 </param>
+            <param name="max"> 最大值-不包含 </param>
+            <returns><see cref="T:System.Int64"/></returns>
+            <exception cref="T:System.ArgumentException"> 当 min 大于 max 时抛出 </exception>
+        </member>
+        <member name="M:AIO.RandomItem.RandLong">
+            <summary>
+            随机获取 <see cref="T:System.Int64"/>
+            </summary>
+        </member>
+        <member name="M:AIO.RandomItem.RandLongArray(System.Int32)">
+            <summary>
+            随机获取 <see cref="T:System.Int64"/>[]
+            </summary>
+            <param name="count">数量</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandLongArray(System.Int32,System.Int64,System.Int64)">
+            <summary>
+            随机获取限定范围 <see cref="T:System.Int64"/>
+            </summary>
+            <param name="count">数量</param>
+            <param name="min"> 最小值-包含 </param>
+            <param name="max"> 最大值-不包含 </param>
+            <returns><see cref="T:System.Int64"/></returns>
+            <exception cref="T:System.ArgumentException"> 当 min 大于 max 时抛出 </exception>
+        </member>
+        <member name="M:AIO.RandomItem.RandArray``1(System.Int32,System.Collections.Generic.ICollection{``0}@)">
+            <summary>
+            随机获取数组 - 包含重复元素
+            </summary>
+            <param name="count">数量</param>
+            <param name="array">数组</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>数组</returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandArray``1(System.Int32@,System.Collections.Generic.List{``0}@)">
+            <summary>
+            随机获取数组 - 包含重复元素
+            </summary>
+            <param name="count">数量</param>
+            <param name="array">数组</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>数组</returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandArray``1(System.Int32,System.Collections.Generic.List{``0},System.Int32,System.Int32)">
+            <summary>
+            随机获取 <see cref="T:System.Collections.Generic.IList`1"/> - 包含重复元素
+            </summary>
+            <param name="count">数量</param>
+            <param name="array">数组</param>
+            <param name="lower">限定下限-包含</param>
+            <param name="upper">限定上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandArray``1(System.Int32,System.Collections.Generic.HashSet{``0},System.Int32,System.Int32)">
+            <summary>
+            随机获取 <see cref="T:System.Collections.Generic.IList`1"/> - 包含重复元素
+            </summary>
+            <param name="count">数量</param>
+            <param name="array">数组</param>
+            <param name="lower">限定下限-包含</param>
+            <param name="upper">限定上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandArray``2(System.Int32,System.Collections.Generic.IDictionary{``0,``1}@)">
+            <summary>
+            随机获取 <see cref="T:System.Collections.Generic.Dictionary`2"/> - 不包含重复元素
+            </summary>
+            <param name="count">数量</param>
+            <param name="array">数组</param>
+            <typeparam name="T1">泛型1</typeparam>
+            <typeparam name="T2">泛型2</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandValue``1(System.Collections.Generic.ICollection{``0}@)">
+            <summary>
+            随机获取数组中的一个值 <see cref="!:T"/>
+            </summary>
+            <param name="array">数组</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns><see cref="!:T"/>泛型</returns>
+            <exception cref="T:System.SystemException"> 如果字典为空或没有可用的键值对，则抛出此异常</exception>
+        </member>
+        <member name="M:AIO.RandomItem.RandValue``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+            <summary>
+            随机获取字典中的一个键值对
+            </summary>
+            <param name="array"> 要获取值的字典</param>
+            <typeparam name="T1"> 键的类型</typeparam>
+            <typeparam name="T2"> 值的类型</typeparam>
+            <returns> 返回字典中的一个键值对</returns>
+            <exception cref="T:System.SystemException"> 如果字典为空或没有可用的键值对，则抛出此异常</exception>
+        </member>
+        <member name="M:AIO.RandomItem.RandValue``1(System.Collections.Generic.IList{``0}@,System.Int32,System.Int32)">
+            <summary>
+            随机获取 数组中的一个值 <see cref="!:T"/>
+            </summary>
+            <param name="array">数组</param>
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandValue``1(System.Collections.Generic.ICollection{``0}@,System.Int32,System.Int32)">
+            <summary>
+            随机获取 数组中的一个值 <see cref="!:T"/>
+            </summary>
+            <param name="array">数组</param>
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandValue``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int32,System.Int32)">
+            <summary>
+            随机获取 字典中的一个键值对
+            </summary>
+            <param name="array">数组</param>
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandValue``1(System.Collections.Generic.IList{``0}@,System.Int32)">
+            <summary>
+            随机获取 数组中的多个值 - 不包含重复元素
+            </summary>
+            <param name="array">数组</param>
+            <param name="count">数量</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandWeight(System.Collections.Generic.IList{System.Single}@)">
+            <summary>
+            随机权重
+            </summary>
+            <param name="array">传入数组的总和 应为1</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandWeight``1(System.Collections.Generic.IList{System.Single}@,System.Collections.Generic.IList{``0}@)">
+            <summary>
+            随机权重
+            </summary>
+            <param name="array">传入数组的总和 应为1</param>
+            <param name="values"></param>
+        </member>
+        <member name="M:AIO.RandomItem.RandWeight``1(System.Collections.Generic.ICollection{System.Tuple{System.Single,``0}}@)">
+            <summary>
+            随机权重
+            </summary>
+            <param name="array">传入数组的总和 应为1</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandWeight(System.Collections.Generic.IList{System.Int32},System.Int32)">
+            <summary>
+            随机权重选择
+            </summary>
+            <param name="array">数组</param>
+            <param name="min">权重最小值</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandBool">
+            <summary>
+            随机获取 <see cref="T:System.Boolean"/>
+            </summary>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandBoolArray(System.Int32@)">
+            <summary>
+            随机获取 <see cref="T:System.Boolean"/>[]
+            </summary>
+            <param name="count">数量</param>
+            <returns><see cref="T:System.Boolean"/>[]</returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandByte">
+            <summary>
+            随机获取 <see cref="T:System.Byte"/>
+            </summary>
+            <returns><see cref="T:System.Byte"/></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandByte(System.Byte@,System.Int32@)">
+            <summary>
+            随机获取 <see cref="T:System.Byte"/>
+            </summary>
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandByteArray(System.Int32@)">
+            <summary>
+            随机获取 <see cref="T:System.Byte"/>
+            </summary>
+            <param name="count"></param>
+        </member>
+        <member name="M:AIO.RandomItem.RandByteArray(System.Int32@,System.Int32@,System.Int32)">
+            <summary>
+            随机获取 <see cref="T:System.Byte"/>
+            </summary>
+            <param name="count"></param>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:AIO.RandomItem.RandSByte">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandSByteArray(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandSByteArray(System.Int32@,System.SByte@,System.SByte@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <param name="lower"></param>
+             <param name="upper"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt16">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt16(System.UInt16@,System.Int32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt16Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt32(System.UInt32@,System.UInt32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt32">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt32Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt64(System.UInt64@,System.UInt64@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt64">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandUInt64Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt16(System.Int16@,System.Int32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt16(System.Int32@)">
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt16">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt16Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt32">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt32(System.Int32@,System.Int32@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt32Array(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <param name="count"></param>
+            <param name="minValue">下限-包含</param>
+            <param name="maxValue">上限-不包含</param>
+            <param name="hasRepeat">是否包含重复 Ture:包含 False:不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32})">
+             <summary>
+            
+             </summary>
+             <param name="weights"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt64">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt64(System.Int64@,System.Int64@)">
+            <param name="lower">下限-包含</param>
+            <param name="upper">上限-不包含</param>
+        </member>
+        <member name="M:AIO.RandomItem.RandInt64Array(System.Int32@)">
+             <summary>
+            
+             </summary>
+             <param name="count"></param>
+             <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandFloat">
+            <summary>
+            随机获取 <see cref="T:System.Single"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.RandFloat(System.Boolean,System.Boolean)">
+            <summary>
+            随机获取 <see cref="T:System.Single"/>
+            </summary>
+            <param name="hasNan"> 允许NaN </param>
+            <param name="hasInfinity"> 允许Infinity </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.RandomItem.BreakArray``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            将数组打乱顺序
+            </summary>
+            <param name="array">数组</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="M:AIO.RandomItem.BreakArray``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
+            <summary>
+            将数组打乱顺序
+            </summary>
+            <param name="array">数组</param>
+            <param name="lower"></param>
+            <param name="upper"></param>
+            <typeparam name="T"></typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:AIO.RandomItem.RandEnum``1">
+            <summary>
+            随机获取枚举值
+            </summary>
         </member>
         <member name="T:AIO.AHelper">
             <summary>
@@ -15507,6 +16326,16 @@
               减少一个代码块
             </summary>
         </member>
+        <member name="M:AIO.GenerateBuilder.DecBlock(System.String)">
+            <summary>
+              减少一个代码块
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.DecBlock(System.Char)">
+            <summary>
+              减少一个代码块
+            </summary>
+        </member>
         <member name="M:AIO.GenerateBuilder.WriteHeader(System.String)">
             <summary>
             写入头部
@@ -15549,6 +16378,9 @@
             <summary>
             重置
             </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.Dispose">
+            <inheritdoc />
         </member>
         <member name="T:AIO.ScriptTextBuilder">
             <summary>
@@ -16104,6 +16936,12 @@
             <summary>
             HashCode is designed to quickly compute hash codes of arbitrary objects.
             </summary>
+        </member>
+        <member name="T:AIO.IO.DirectoryComparer">
+            <summary>
+            Compares two directories and finds differences (new, modified, deleted files/folders).
+            </summary>
+            <example>https://gist.github.com/yasirkula/5c5f407a7b90450c8804af67113eba70</example>
         </member>
         <member name="T:AIO.MailHandle">
             <summary>
@@ -20900,119 +21738,483 @@
             回收所有正在使用的对象
             </summary>
         </member>
+        <member name="T:AIO.Pooling.Generic`1">
+            <summary>
+            通用
+            </summary>
+        </member>
+        <member name="M:AIO.Pooling.Generic`1.Alloc(System.Func{`0})">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:AIO.Pooling.Generic`1.Alloc">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:AIO.Pooling.Generic`1.Recycle(`0)">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pooling.Generic`1.ClearCache">
+            <summary>
+            清空缓存
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.Hashtable">
+            <summary>
+            <see cref="T:System.Collections.Hashtable"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.ArrayList">
+            <summary>
+            <see cref="T:System.Collections.ArrayList"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.ConcurrentBag`1">
+            <summary>
+            <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.ConcurrentDictionary`2">
+            <summary>
+            <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.ConcurrentQueue`1">
+            <summary>
+            <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.ConcurrentStack`1">
+            <summary>
+            <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.Dictionary`2">
+            <summary>
+            <see cref="T:System.Collections.Generic.Dictionary`2"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.HashSet`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.HashSet`1"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.LinkedList`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.LinkedList`1"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.List`1">
+            <summary>
+            <see cref="T:AIO.Pooling.List`1"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.Queue`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.Queue`1"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.SortedList`2">
+            <summary>
+            <see cref="T:System.Collections.Generic.SortedList`2"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.SortedList">
+            <summary>
+            <see cref="T:System.Collections.SortedList"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.Pooling.Stack`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.Stack`1"/> 对象池
+            </summary>
+        </member>
+        <member name="T:AIO.PoolExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToHashtablePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为 <see cref="T:System.Collections.Hashtable"/> 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToHashtablePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为 <see cref="T:System.Collections.Hashtable"/> 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToArrayListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 <see cref="T:System.Collections.ArrayList"/> 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToArrayListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为 <see cref="T:System.Collections.ArrayList"/> 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToArrayListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为 <see cref="T:System.Collections.ArrayList"/> 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentBagPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentBagPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentBagPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToConcurrentStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToLinkedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToLinkedListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToLinkedListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToSortedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
         <member name="T:AIO.Pool">
             <summary>
             对象池
             </summary>
         </member>
-        <member name="M:AIO.Pool.List``1">
+        <member name="M:AIO.Pool.List``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Generic.List`1"/>
             </summary>
+            <param name="val">参数</param>
             <typeparam name="T">Generic</typeparam>
             <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
         </member>
-        <member name="M:AIO.Pool.HashSet``1">
+        <member name="M:AIO.Pool.List``1(``0)">
             <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.List`1"/>
             </summary>
+            <param name="val">参数</param>
             <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
+            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
         </member>
-        <member name="M:AIO.Pool.LinkedList``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
-        </member>
-        <member name="M:AIO.Pool.Stack``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
-        </member>
-        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.Stack{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:AIO.Pool.Queue``1">
+        <member name="M:AIO.Pool.Queue``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
             </summary>
+            <param name="val">参数</param>
             <typeparam name="T">Generic</typeparam>
             <returns><see cref="T:System.Collections.Generic.Queue`1"/></returns>
         </member>
-        <member name="M:AIO.Pool.SortedList``2">
+        <member name="M:AIO.Pool.Stack``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
             </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.HashSet``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.LinkedList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>
+            </summary>
+            <param name="val">参数</param>
             <typeparam name="K">Generic</typeparam>
             <typeparam name="V">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/></returns>
         </member>
-        <member name="M:AIO.Pool.Dictionary``2">
+        <member name="M:AIO.Pool.ConcurrentBag``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentQueue``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentStack``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Dictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
             </summary>
+            <param name="val">参数</param>
             <typeparam name="K">Generic</typeparam>
             <typeparam name="V">Generic</typeparam>
             <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
         </member>
-        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.List{``0})">
+        <member name="M:AIO.Pool.SortedList``2(System.Collections.Generic.IDictionary{``0,``1})">
             <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
             </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.Queue{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:AIO.Pool.Free``2(System.Collections.Generic.SortedList{``0,``1})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
-            </summary>
+            <param name="val">参数</param>
             <typeparam name="K">Generic</typeparam>
             <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.SortedList`2"/></returns>
         </member>
-        <member name="M:AIO.Pool.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
+        <member name="M:AIO.Pool.Queue``1(``0)">
             <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
             </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Queue`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Stack``1(``0)">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.HashSet``1(``0)">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.LinkedList``1(``0)">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentDictionary``2(System.Collections.Generic.KeyValuePair{``0,``1})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>
+            </summary>
+            <param name="val">参数</param>
             <typeparam name="K">Generic</typeparam>
             <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/></returns>
         </member>
-        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.LinkedList{``0})">
+        <member name="M:AIO.Pool.ConcurrentBag``1(``0)">
             <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentQueue``1(``0)">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentStack``1(``0)">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Dictionary``2(System.Collections.Generic.KeyValuePair{``0,``1})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+        </member>
+        <member name="M:AIO.Pool.SortedList``2(System.Collections.Generic.KeyValuePair{``0,``1})">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>
+            <param name="val">参数</param>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.SortedList`2"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Alloc``1">
+            <summary>
+            创建通用对象
             </summary>
             <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:AIO.IPoolable"/></returns>
         </member>
-        <member name="T:AIO.Pool.ADictionary`2">
+        <member name="M:AIO.Pool.Alloc``1(System.Func{``0})">
             <summary>
-            Dictionary 对象池
+            创建通用对象
+            </summary>
+            <param name="constructor">构造函数</param>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:AIO.IPoolable"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free``1(``0)">
+            <summary>
+            回收通用对象
+            </summary>
+            <param name="item"> 对象 </param>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:AIO.Pool.DisposeAll">
+            <summary>
+            释放所有对象池
             </summary>
         </member>
-        <member name="M:AIO.Pool.ADictionary`2.New">
+        <member name="M:AIO.Pool.ClearAllCache">
             <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:AIO.Pool.ADictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
-            <summary>
-            释放
+            清理所有缓存
             </summary>
         </member>
         <member name="T:AIO.Pool.Disposable`1">
@@ -21036,115 +22238,251 @@
             释放
             </summary>
         </member>
-        <member name="T:AIO.Pool.Generic`1">
+        <member name="M:AIO.Pool.List``1">
             <summary>
-            通用
-            </summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
         </member>
-        <member name="M:AIO.Pool.Generic`1.New(System.Func{`0})">
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.List{``0})">
             <summary>
-            创建
-            </summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Generic.List`1"/></param>
         </member>
-        <member name="M:AIO.Pool.Generic`1.New">
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.List{``0}@)">
             <summary>
-            创建
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
             </summary>
+            <param name="value"><see cref="T:System.Collections.Generic.List`1"/></param>
         </member>
-        <member name="M:AIO.Pool.Generic`1.Free(`0)">
+        <member name="M:AIO.Pool.HashSet``1">
             <summary>
-            释放
-            </summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
         </member>
-        <member name="T:AIO.Pool.AHashSet`1">
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.HashSet{``0})">
             <summary>
-            HashSet对象池
-            </summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Generic.HashSet`1"/></param>
         </member>
-        <member name="M:AIO.Pool.AHashSet`1.New">
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
             <summary>
-            创建新的
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
             </summary>
+            <param name="value"><see cref="T:System.Collections.Generic.HashSet`1"/></param>
         </member>
-        <member name="M:AIO.Pool.AHashSet`1.Free(System.Collections.Generic.HashSet{`0})">
+        <member name="M:AIO.Pool.LinkedList``1">
             <summary>
-            释放HashSet
-            </summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
         </member>
-        <member name="T:AIO.Pool.ALinkedList`1">
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.LinkedList{``0})">
             <summary>
-            List对象池
-            </summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Generic.LinkedList`1"/></param>
         </member>
-        <member name="M:AIO.Pool.ALinkedList`1.New">
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.LinkedList{``0}@)">
             <summary>
-            创建新的
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
             </summary>
+            <param name="value"><see cref="T:System.Collections.Generic.LinkedList`1"/></param>
         </member>
-        <member name="M:AIO.Pool.ALinkedList`1.Free(System.Collections.Generic.LinkedList{`0})">
+        <member name="M:AIO.Pool.Stack``1">
             <summary>
-            释放List
-            </summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
         </member>
-        <member name="T:AIO.Pool.AList`1">
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.Stack{``0})">
             <summary>
-            List对象池
-            </summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Generic.Stack`1"/></param>
         </member>
-        <member name="M:AIO.Pool.AList`1.New">
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
             <summary>
-            创建新的
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
             </summary>
+            <param name="value"><see cref="T:System.Collections.Generic.Stack`1"/></param>
         </member>
-        <member name="M:AIO.Pool.AList`1.Free(System.Collections.Generic.List{`0})">
+        <member name="M:AIO.Pool.Queue``1">
             <summary>
-            释放List
-            </summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Queue`1"/></returns>
         </member>
-        <member name="T:AIO.Pool.AQueue`1">
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.Queue{``0})">
             <summary>
-            Queue对象池
-            </summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Generic.Queue`1"/></param>
         </member>
-        <member name="M:AIO.Pool.AQueue`1.New">
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
             <summary>
-            创建新的
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
             </summary>
+            <param name="value"><see cref="T:System.Collections.Generic.Queue`1"/></param>
         </member>
-        <member name="M:AIO.Pool.AQueue`1.Free(System.Collections.Generic.Queue{`0})">
+        <member name="M:AIO.Pool.SortedList``2">
             <summary>
-            释放Queue
-            </summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>/// <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.SortedList`2"/></returns>
         </member>
-        <member name="T:AIO.Pool.ASortedList`2">
+        <member name="M:AIO.Pool.Free``2(System.Collections.Generic.SortedList{``0,``1})">
             <summary>
-            Dictionary 对象池
-            </summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>/// <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Generic.SortedList`2"/></param>
         </member>
-        <member name="M:AIO.Pool.ASortedList`2.New">
+        <member name="M:AIO.Pool.Using``2(System.Collections.Generic.SortedList{``0,``1}@)">
             <summary>
-            创建
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
             </summary>
+            <param name="value"><see cref="T:System.Collections.Generic.SortedList`2"/></param>
         </member>
-        <member name="M:AIO.Pool.ASortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
+        <member name="M:AIO.Pool.Dictionary``2">
             <summary>
-            释放
-            </summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>/// <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
         </member>
-        <member name="T:AIO.Pool.AStack`1">
+        <member name="M:AIO.Pool.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
             <summary>
-            Stack对象池
-            </summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>/// <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Generic.Dictionary`2"/></param>
         </member>
-        <member name="M:AIO.Pool.AStack`1.New">
+        <member name="M:AIO.Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
             <summary>
-            创建新的
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
             </summary>
+            <param name="value"><see cref="T:System.Collections.Generic.Dictionary`2"/></param>
         </member>
-        <member name="M:AIO.Pool.AStack`1.Free(System.Collections.Generic.Stack{`0})">
+        <member name="M:AIO.Pool.ConcurrentDictionary``2">
             <summary>
-            释放Stack
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>
+            </summary>/// <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>
+            </summary>/// <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/></param>
+        </member>
+        <member name="M:AIO.Pool.Using``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1}@)">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>
             </summary>
+            <param name="value"><see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/></param>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentBag``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Concurrent.ConcurrentBag{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.Using``1(System.Collections.Concurrent.ConcurrentBag{``0}@)">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/>
+            </summary>
+            <param name="value"><see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentQueue``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Concurrent.ConcurrentQueue{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.Using``1(System.Collections.Concurrent.ConcurrentQueue{``0}@)">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
+            </summary>
+            <param name="value"><see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.ConcurrentStack``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Concurrent.ConcurrentStack{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.Using``1(System.Collections.Concurrent.ConcurrentStack{``0}@)">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/>
+            </summary>
+            <param name="value"><see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.SortedList">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.SortedList"/>
+            </summary>
+            <returns><see cref="T:System.Collections.SortedList"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free(System.Collections.SortedList)">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.SortedList"/>
+            </summary>
+            <param name="array"><see cref="T:System.Collections.SortedList"/></param>
+        </member>
+        <member name="M:AIO.Pool.Using(System.Collections.SortedList@)">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.SortedList"/>
+            </summary>
+            <param name="value"><see cref="T:System.Collections.SortedList"/></param>
+        </member>
+        <member name="M:AIO.Pool.Hashtable">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Hashtable"/>
+            </summary>
+            <returns><see cref="T:System.Collections.Hashtable"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free(System.Collections.Hashtable)">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Hashtable"/>
+            </summary>
+            <param name="array"><see cref="T:System.Collections.Hashtable"/></param>
+        </member>
+        <member name="M:AIO.Pool.Using(System.Collections.Hashtable@)">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Hashtable"/>
+            </summary>
+            <param name="value"><see cref="T:System.Collections.Hashtable"/></param>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            </summary>/// <typeparam name="T">Generic</typeparam>
+            <param name="array"><see cref="T:System.Collections.Generic.IEnumerable`1"/></param>
         </member>
         <member name="M:AIO.Pool.Using``1(``0@)">
             <summary>
@@ -21159,156 +22497,6 @@
         <member name="M:AIO.Pool.Using``1(``0,System.Action{``0})">
             <summary>
             引用释放
-            </summary>
-        </member>
-        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.List{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:AIO.Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="T:AIO.PoolExtend">
-            <summary>
-            扩展
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为 Dictionary 并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
-            <summary>
-            释放 Dictionary
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            释放HashSet
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToLinkedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToLinkedListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToLinkedListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.LinkedList{``0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.List{``0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.Queue{``0})">
-            <summary>
-            释放Queue
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToSortedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为 Dictionary 并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.Free``2(System.Collections.Generic.SortedList{``0,``1})">
-            <summary>
-            释放 Dictionary
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.Stack{``0})">
-            <summary>
-            释放Stack
             </summary>
         </member>
         <member name="T:AIO.RandomChineseName">
@@ -21486,19 +22674,259 @@
             </summary>
             <typeparam name="T">泛型</typeparam>
         </member>
+        <member name="M:AIO.Singleton`1.Register">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:AIO.Singleton`1.RegisterAsync">
+            <summary>
+            注册单例
+            </summary>
+        </member>
         <member name="P:AIO.Singleton`1.Inst">
             <summary>
             实例
             </summary>
         </member>
-        <member name="P:AIO.Singleton`1.HasInstance">
+        <member name="P:AIO.Singleton`1.Instance">
+            <summary>
+            实例
+            </summary>
+        </member>
+        <member name="P:AIO.Singleton`1.IsNull">
             <summary>
             是否存在实例
             </summary>
         </member>
-        <member name="M:AIO.Singleton`1.CreateInstance">
+        <member name="M:AIO.Singleton`1.Member``1">
             <summary>
-            创建实例
+            获取单例成员
+            </summary>
+            <typeparam name="TSingleton"> 泛型 </typeparam>
+            <returns> 单例成员 </returns>
+        </member>
+        <member name="M:AIO.Singleton`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.Singleton">
+            <summary>
+            单例模式
+            </summary>
+        </member>
+        <member name="F:AIO.Singleton.lock">
+            <summary>
+            锁对象
+            </summary>
+        </member>
+        <member name="M:AIO.Singleton.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:AIO.Singleton.OnFullName">
+            <summary>
+            完整名称回调
+            </summary>
+        </member>
+        <member name="P:AIO.Singleton.FullName">
+            <summary>
+            完整名称
+            </summary>
+        </member>
+        <member name="P:AIO.Singleton.AutoDispose">
+            <summary>
+            是否自动释放
+            </summary>
+        </member>
+        <member name="P:AIO.Singleton.AutoDisposePriority">
+            <summary>
+            自动释放优先级，数值越大优先级越高
+            </summary>
+        </member>
+        <member name="P:AIO.Singleton.RegisterTask">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:AIO.Singleton.ResetAsync">
+            <summary>
+            重置单例
+            </summary>
+        </member>
+        <member name="M:AIO.Singleton.OnResetAsync">
+            <summary>
+            重置单例
+            </summary>
+        </member>
+        <member name="M:AIO.Singleton.Dispose">
+            <inheritdoc cref="M:System.IDisposable.Dispose"/>
+        </member>
+        <member name="M:AIO.Singleton.System#IDisposable#Dispose">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.Singleton.IsInitialized">
+            <summary>
+            单例是否已初始化。
+            </summary>
+        </member>
+        <member name="P:AIO.Singleton.RealType">
+            <summary>
+            单例的真实类型。
+            </summary>
+        </member>
+        <member name="M:AIO.Singleton.InitializeAsync">
+            <summary>
+            初始化单例。
+            </summary>
+        </member>
+        <member name="M:AIO.Singleton.OnInitializeAsync">
+            <summary>
+            初始化单例。
+            </summary>
+        </member>
+        <member name="M:AIO.Singleton.Equals(System.Object)">
+            <summary>
+            确定指定的对象是否等于当前对象。
+            </summary>
+            <param name="obj">要与当前对象进行比较的对象。</param>
+            <returns>如果指定的对象等于当前对象，则为 true，否则为 false。</returns>
+        </member>
+        <member name="M:AIO.Singleton.GetHashCode">
+            <summary>
+            作为默认哈希函数。
+            </summary>
+            <returns>当前的哈希代码</returns>
+        </member>
+        <member name="M:AIO.Singleton.OnDispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务
+            </summary>
+        </member>
+        <member name="T:AIO.Internal.SingletonArray">
+            <summary>
+            数组单例基类
+            </summary>
+        </member>
+        <member name="M:AIO.Internal.SingletonArray.ClearAll">
+            <summary>
+            清空所有对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Internal.SingletonArray.ToString">
+            <summary>
+            重写ToString方法
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.SingletonArray.Count">
+            <summary>
+            总数量
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.SingletonArray.FreeCount">
+            <summary>
+            空闲数量
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.SingletonArray.BusyCount">
+            <summary>
+            使用中数量
+            </summary>
+        </member>
+        <member name="M:AIO.Internal.SingletonArray.ClearCache">
+            <summary>
+            清空缓存对象池
+            </summary>
+        </member>
+        <member name="T:AIO.SingletonArray`2">
+            <summary>
+            数组单例模式
+            </summary>
+            <typeparam name="TSingleton"></typeparam>
+            <typeparam name="T2"></typeparam>
+        </member>
+        <member name="P:AIO.SingletonArray`2.free">
+            <summary>
+            空闲集合
+            </summary>
+        </member>
+        <member name="P:AIO.SingletonArray`2.busy">
+            <summary>
+            使用中集合
+            </summary>
+        </member>
+        <member name="M:AIO.SingletonArray`2.OnInitializeAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.SingletonArray`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.SingletonArray`2.Create">
+            <summary>
+            创建新的
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.SingletonArray`2.Recycle(`1)">
+            <summary>
+            回收数组
+            </summary>
+            <param name="array"></param>
+        </member>
+        <member name="M:AIO.SingletonArray`2.Pop">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:AIO.SingletonArray`2.Push(`1)">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="P:AIO.SingletonArray`2.Instance">
+            <summary>
+            实例
+            </summary>
+        </member>
+        <member name="M:AIO.SingletonArray`2.Register">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="M:AIO.SingletonArray`2.Register1">
+            <summary>
+            注册单例
+            </summary>
+        </member>
+        <member name="P:AIO.SingletonArray`2.Count">
+            <summary>
+            总数量
+            </summary>
+        </member>
+        <member name="P:AIO.SingletonArray`2.FreeCount">
+            <summary>
+            空闲数量
+            </summary>
+        </member>
+        <member name="P:AIO.SingletonArray`2.BusyCount">
+            <summary>
+            使用中数量
+            </summary>
+        </member>
+        <member name="M:AIO.SingletonArray`2.Alloc">
+            <summary>
+            申请
+            </summary>
+            <returns> <see cref="!:T2"/> </returns>
+        </member>
+        <member name="M:AIO.SingletonArray`2.Release(`1)">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:AIO.SingletonArray`2.ClearCache">
+            <summary>
+            清空缓存对象池
             </summary>
         </member>
         <member name="T:AIO.Version">
@@ -23175,14 +24603,14 @@
             对象池
             </summary>
         </member>
-        <member name="M:AIO.IPoolable.New">
+        <member name="M:AIO.IPoolable.Initialize">
             <summary>
-            创建
+            初始化
             </summary>
         </member>
-        <member name="M:AIO.IPoolable.Free">
+        <member name="M:AIO.IPoolable.Reset">
             <summary>
-            释放
+            重置
             </summary>
         </member>
         <member name="T:AIO.CRC32Algorithm">

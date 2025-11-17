@@ -10,12 +10,12 @@ namespace AIO
     /// 日志
     /// </summary>
     [Preserve]
-    public class LOG
+    public class LOG : IDisposable
     {
         /// <summary>
         /// 标签
         /// </summary>
-        public string TAG { get; }
+        public string TAG { get; internal set; }
 
         /// <summary>
         /// 是否开启日志输出
@@ -51,6 +51,11 @@ namespace AIO
         /// </summary>
         public string COLOR_ERROR { get; set; } = "#F44336";
 
+        // /// <summary>
+        // /// 断言颜色
+        // /// </summary>
+        // public string COLOR_ASSERT { get; set; } = "#9C27B0";
+
         /// <param name="tag"> 标签 </param>
         public LOG(string tag) { TAG = tag; }
 
@@ -71,6 +76,48 @@ namespace AIO
         }
 
         private Func<bool> _enabled;
+
+        /// <summary>
+        /// 根据日志类型输出对应的日志
+        /// </summary>
+        /// <param name="type"> 日志类型 </param>
+        [Preserve]
+        public string this[LogType type]
+        {
+            get
+            {
+                switch (type)
+                {
+                    case LogType.Log:       return COLOR_LOG;
+                    case LogType.Exception: return COLOR_EXCEPTION;
+                    case LogType.Warning:   return COLOR_WARNING;
+                    case LogType.Error:     return COLOR_ERROR;
+                    // case LogType.Assert:    return COLOR_ASSERT;
+                    default: return string.Empty;
+                }
+            }
+            set
+            {
+                switch (type)
+                {
+                    case LogType.Log:
+                        I(value);
+                        break;
+                    case LogType.Exception:
+                        E(value);
+                        break;
+                    case LogType.Warning:
+                        W(value);
+                        break;
+                    case LogType.Error:
+                        E(value);
+                        break;
+                    case LogType.Assert:
+                        I($"暂不支持 Assert 类型日志设置 - {value}");
+                        break;
+                }
+            }
+        }
 
         #region LogWarning
 
@@ -187,5 +234,16 @@ namespace AIO
         }
 
         #endregion
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            Enabled         = false;
+            _enabled        = null;
+            COLOR_LOG       = null;
+            COLOR_EXCEPTION = null;
+            COLOR_WARNING   = null;
+            COLOR_ERROR     = null;
+        }
     }
 }

@@ -8,13 +8,11 @@ namespace AIO
 {
     public partial class Pool
     {
-        #region Nested type: Disposable
-
         /// <summary>
         /// An <see cref="IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
         /// statements instead of needing to manually release everything.
         /// </summary>
-        internal readonly struct Disposable<T> : IDisposable
+        internal struct Disposable<T> : IDisposable
         {
             /// <summary>
             /// The object acquired from the <see cref="Disposable{T}"/>.
@@ -24,7 +22,7 @@ namespace AIO
             /// <summary>
             /// Called by IDisposable.Dispose.
             /// </summary>
-            public readonly Action<T> OnRelease;
+            private Action<T> OnRelease;
 
             /// <summary>
             /// 释放
@@ -38,9 +36,8 @@ namespace AIO
             public void Dispose()
             {
                 OnRelease?.Invoke(Item);
+                OnRelease = null;
             }
         }
-
-        #endregion
     }
 }

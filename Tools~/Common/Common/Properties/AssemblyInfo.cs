@@ -20,7 +20,6 @@ using System.Runtime.InteropServices;
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
 [assembly: Guid("b0d5708a-7c94-4bcb-805d-a718034e5724")]
 
-
 [assembly: AssemblyVersion(AssemblyInfo.Version)]
 [assembly: AssemblyFileVersion(AssemblyInfo.FileVersion)]
 [assembly: AssemblyCompany(AssemblyInfo.Company)]
@@ -32,6 +31,7 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("AIO.Unity.Runtime")]
 [assembly: InternalsVisibleTo("AIO.Unity.Editor")]
 [assembly: InternalsVisibleTo("AIO.Asset.Runtime")]
+[assembly: InternalsVisibleTo("AIO.Print.Unity")]
 
 /// <summary>
 /// 程序集信息

@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     #region
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 #endregion
 
-namespace AIO.UEngine
+namespace AIO
 {
     partial class VectorExtend
     {
