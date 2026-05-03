@@ -1,9 +1,7 @@
 ﻿#region
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using AIO.Internal;
 
@@ -35,6 +33,9 @@ namespace AIO
         /// </summary>
         public static Func<Type, string> OnFullName { get; set; }
 
+        /// <summary>
+        /// 全名 缓存变量
+        /// </summary>
         private string _fullNameCache;
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace AIO
         /// <summary>
         /// 自动释放优先级，数值越大优先级越高
         /// </summary>
-        protected internal int AutoDisposePriority { get; set; } = 0;
+        protected internal int AutoDisposePriority { get; set; }
 
         /// <summary>
         /// 注册单例
@@ -76,7 +77,7 @@ namespace AIO
         /// <summary>
         /// 重置单例
         /// </summary>
-        protected virtual Task OnResetAsync() { return Task.CompletedTask; }
+        protected virtual Task OnResetAsync() => Task.CompletedTask;
 
         /// <inheritdoc cref="IDisposable.Dispose"/>
         [DebuggerStepThrough, DebuggerHidden]
@@ -112,14 +113,13 @@ namespace AIO
                 {
                     SingletonData.Array.Enqueue(array);
                 }
+                else if (!SingletonData.Data.ContainsKey(RealType))
+                {
+                    SingletonData.Data.TryAdd(RealType, this);
+                }
                 else
                 {
-                    if (SingletonData.Data.ContainsKey(RealType))
-                    {
-                        throw new InvalidOperationException($"单例类型 {RealType.FullName} 已存在，请勿重复初始化同一单例类型。");
-                    }
-
-                    SingletonData.Data.Add(RealType, this);
+                    throw new InvalidOperationException($"单例类型 {RealType.FullName} 已存在，请勿重复初始化同一单例类型。");
                 }
             }
 

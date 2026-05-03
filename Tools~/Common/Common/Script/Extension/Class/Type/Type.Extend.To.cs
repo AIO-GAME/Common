@@ -13,7 +13,7 @@ namespace AIO
         ///     转化为指定类型
         /// </summary>
         public static T As<T>(this object target)
-        where T : class
+            where T : class
         {
             return target as T;
         }

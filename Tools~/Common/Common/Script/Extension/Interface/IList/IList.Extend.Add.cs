@@ -73,6 +73,7 @@ namespace AIO
         public static void Add<T>(this IList<T> array, IEnumerable<T> arr)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
+            if (arr is null) return;
             foreach (var item in arr) array.Add(item);
         }
 
@@ -102,10 +103,10 @@ namespace AIO
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (others == null || others.Count == 0) return;
 
-            if (start < 0) start            = 0;
+            if (start < 0) start = 0;
             if (start > others.Count) start = others.Count;
 
-            if (end < start) end        = start;
+            if (end < start) end = start;
             if (end > others.Count) end = others.Count;
 
             if (start < others.Count - 1 && end > start)

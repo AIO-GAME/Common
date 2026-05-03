@@ -32,14 +32,7 @@ namespace AIO
         /// </summary>
         public static void Register()
         {
-            if (LazyInstance == null) Register1();
-        }
-
-        /// <summary>
-        /// 注册单例
-        /// </summary>
-        private static void Register1()
-        {
+            if (LazyInstance != null) return;
             lock (@lock) LazyInstance = new Lazy<T>(CreateInstance);
             LazyInstance.Value.RegisterTask.Wait();
         }
@@ -49,10 +42,9 @@ namespace AIO
         /// </summary>
         public static async Task RegisterAsync()
         {
-            lock (@lock)
-            {
-                if (LazyInstance == null) LazyInstance = new Lazy<T>(CreateInstance);
-            }
+            if (LazyInstance == null)
+                lock (@lock)
+                    LazyInstance = new Lazy<T>(CreateInstance);
 
             await LazyInstance.Value.RegisterTask;
         }

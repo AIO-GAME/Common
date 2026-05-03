@@ -36,6 +36,14 @@ namespace AIO
             return disposable;
         }
 
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Generic.List{T}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Generic.List<T>> UsingList<T>()
+        {
+            return new Disposable<System.Collections.Generic.List<T>>(Pooling.List<T>.Alloc(), release => release.Free());
+        }
+
 	    #endregion
 
 	    #region System.Collections.Generic.HashSet<T>
@@ -65,6 +73,14 @@ namespace AIO
             var disposable = new Disposable<System.Collections.Generic.HashSet<T>>(Pooling.HashSet<T>.Alloc(), release => release.Free());
             value = disposable.Item;
             return disposable;
+        }
+
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Generic.HashSet{T}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Generic.HashSet<T>> UsingHashSet<T>()
+        {
+            return new Disposable<System.Collections.Generic.HashSet<T>>(Pooling.HashSet<T>.Alloc(), release => release.Free());
         }
 
 	    #endregion
@@ -98,6 +114,14 @@ namespace AIO
             return disposable;
         }
 
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Generic.LinkedList{T}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Generic.LinkedList<T>> UsingLinkedList<T>()
+        {
+            return new Disposable<System.Collections.Generic.LinkedList<T>>(Pooling.LinkedList<T>.Alloc(), release => release.Free());
+        }
+
 	    #endregion
 
 	    #region System.Collections.Generic.Stack<T>
@@ -129,6 +153,14 @@ namespace AIO
             return disposable;
         }
 
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Generic.Stack{T}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Generic.Stack<T>> UsingStack<T>()
+        {
+            return new Disposable<System.Collections.Generic.Stack<T>>(Pooling.Stack<T>.Alloc(), release => release.Free());
+        }
+
 	    #endregion
 
 	    #region System.Collections.Generic.Queue<T>
@@ -158,6 +190,14 @@ namespace AIO
             var disposable = new Disposable<System.Collections.Generic.Queue<T>>(Pooling.Queue<T>.Alloc(), release => release.Free());
             value = disposable.Item;
             return disposable;
+        }
+
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Generic.Queue{T}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Generic.Queue<T>> UsingQueue<T>()
+        {
+            return new Disposable<System.Collections.Generic.Queue<T>>(Pooling.Queue<T>.Alloc(), release => release.Free());
         }
 
 	    #endregion
@@ -193,6 +233,14 @@ namespace AIO
             return disposable;
         }
 
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Generic.SortedList{K,V}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Generic.SortedList<K,V>> UsingSortedList<K,V>()
+        {
+            return new Disposable<System.Collections.Generic.SortedList<K,V>>(Pooling.SortedList<K,V>.Alloc(), release => release.Free());
+        }
+
 	    #endregion
 
 	    #region System.Collections.Generic.Dictionary<K,V>
@@ -224,6 +272,14 @@ namespace AIO
             var disposable = new Disposable<System.Collections.Generic.Dictionary<K,V>>(Pooling.Dictionary<K,V>.Alloc(), release => release.Free());
             value = disposable.Item;
             return disposable;
+        }
+
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Generic.Dictionary{K,V}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Generic.Dictionary<K,V>> UsingDictionary<K,V>()
+        {
+            return new Disposable<System.Collections.Generic.Dictionary<K,V>>(Pooling.Dictionary<K,V>.Alloc(), release => release.Free());
         }
 
 	    #endregion
@@ -259,6 +315,14 @@ namespace AIO
             return disposable;
         }
 
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Concurrent.ConcurrentDictionary{K,V}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Concurrent.ConcurrentDictionary<K,V>> UsingConcurrentDictionary<K,V>()
+        {
+            return new Disposable<System.Collections.Concurrent.ConcurrentDictionary<K,V>>(Pooling.ConcurrentDictionary<K,V>.Alloc(), release => release.Free());
+        }
+
 	    #endregion
 
 	    #region System.Collections.Concurrent.ConcurrentBag<T>
@@ -288,6 +352,14 @@ namespace AIO
             var disposable = new Disposable<System.Collections.Concurrent.ConcurrentBag<T>>(Pooling.ConcurrentBag<T>.Alloc(), release => release.Free());
             value = disposable.Item;
             return disposable;
+        }
+
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Concurrent.ConcurrentBag{T}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Concurrent.ConcurrentBag<T>> UsingConcurrentBag<T>()
+        {
+            return new Disposable<System.Collections.Concurrent.ConcurrentBag<T>>(Pooling.ConcurrentBag<T>.Alloc(), release => release.Free());
         }
 
 	    #endregion
@@ -321,6 +393,14 @@ namespace AIO
             return disposable;
         }
 
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Concurrent.ConcurrentQueue{T}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Concurrent.ConcurrentQueue<T>> UsingConcurrentQueue<T>()
+        {
+            return new Disposable<System.Collections.Concurrent.ConcurrentQueue<T>>(Pooling.ConcurrentQueue<T>.Alloc(), release => release.Free());
+        }
+
 	    #endregion
 
 	    #region System.Collections.Concurrent.ConcurrentStack<T>
@@ -350,6 +430,14 @@ namespace AIO
             var disposable = new Disposable<System.Collections.Concurrent.ConcurrentStack<T>>(Pooling.ConcurrentStack<T>.Alloc(), release => release.Free());
             value = disposable.Item;
             return disposable;
+        }
+
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Concurrent.ConcurrentStack{T}"/>
+        /// </summary>
+        public static IUsing<System.Collections.Concurrent.ConcurrentStack<T>> UsingConcurrentStack<T>()
+        {
+            return new Disposable<System.Collections.Concurrent.ConcurrentStack<T>>(Pooling.ConcurrentStack<T>.Alloc(), release => release.Free());
         }
 
 	    #endregion
@@ -383,6 +471,14 @@ namespace AIO
             return disposable;
         }
 
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.SortedList"/>
+        /// </summary>
+        public static IUsing<System.Collections.SortedList> UsingSortedList()
+        {
+            return new Disposable<System.Collections.SortedList>(Pooling.SortedList.Alloc(), release => release.Free());
+        }
+
 	    #endregion
 
 	    #region System.Collections.Hashtable
@@ -412,6 +508,14 @@ namespace AIO
             var disposable = new Disposable<System.Collections.Hashtable>(Pooling.Hashtable.Alloc(), release => release.Free());
             value = disposable.Item;
             return disposable;
+        }
+
+        /// <summary>
+        /// 引用缓存 => 释放 <see cref="System.Collections.Hashtable"/>
+        /// </summary>
+        public static IUsing<System.Collections.Hashtable> UsingHashtable()
+        {
+            return new Disposable<System.Collections.Hashtable>(Pooling.Hashtable.Alloc(), release => release.Free());
         }
 
 	    #endregion

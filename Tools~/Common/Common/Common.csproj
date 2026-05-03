@@ -730,6 +730,18 @@
         <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs">
             <DependentUpon>Char.Extend.cs</DependentUpon>
         </Compile>
+        <Compile Include="Script\FMach\TSMath\Fix64.cs" />
+        <Compile Include="Script\FMach\TSMath\Fix64AcosLut.cs" />
+        <Compile Include="Script\FMach\TSMath\Fix64SinLut.cs" />
+        <Compile Include="Script\FMach\TSMath\Fix64TanLut.cs" />
+        <Compile Include="Script\FMach\TSMath\FixConst.cs" />
+        <Compile Include="Script\FMach\TSMath\TSMath.cs" />
+        <Compile Include="Script\FMach\TSMath\TSMatrix.cs" />
+        <Compile Include="Script\FMach\TSMath\TSMatrix4x4.cs" />
+        <Compile Include="Script\FMach\TSMath\TSQuaternion.cs" />
+        <Compile Include="Script\FMach\TSMath\TSVector.cs" />
+        <Compile Include="Script\FMach\TSMath\TSVector2.cs" />
+        <Compile Include="Script\FMach\TSMath\TSVector4.cs" />
         <Compile Include="Script\Handle\AHandle.cs" />
         <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
         <Compile Include="Script\Handle\Net\FTP\Handle.FTP.Task.cs" />
@@ -873,6 +885,7 @@
         </Compile>
         <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs" />
         <Compile Include="Script\Tools\Buffer\Ring\BufferRing.Extend.cs" />
+        <Compile Include="Script\Tools\Console\ConsoleCpoy.cs" />
         <Compile Include="Script\Tools\Console\CS.cs" />
         <Compile Include="Script\Tools\FileCache.cs" />
         <Compile Include="Script\Tools\Generate\GenerateBuilder.cs" />

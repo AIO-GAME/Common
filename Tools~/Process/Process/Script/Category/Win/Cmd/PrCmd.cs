@@ -9,6 +9,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -69,7 +71,7 @@ namespace AIO
                 if (p.StartInfo.RedirectStandardInput) p.StartInfo.StandardInputEncoding = encoding;
 #endif
                 if (Info.RedirectStandardOutput) Info.StandardOutputEncoding = encoding;
-                if (Info.RedirectStandardError) Info.StandardErrorEncoding   = encoding;
+                if (Info.RedirectStandardError) Info.StandardErrorEncoding = encoding;
             }
             catch (Exception ex)
             {
@@ -83,7 +85,9 @@ namespace AIO
 
         private sealed class ExecutorCmd : Executor
         {
-            public ExecutorCmd(in ProcessStartInfo info) : base(info) { }
+            public ExecutorCmd(in ProcessStartInfo info) : base(info)
+            {
+            }
 
             public override IResult Sync()
             {
@@ -91,7 +95,7 @@ namespace AIO
                 try
                 {
                     Pr.Disposed += result.ReceivedDisposed;
-                    Pr.Exited   += result.ReceivedExited;
+                    Pr.Exited += result.ReceivedExited;
 
                     if (Pr.StartInfo.RedirectStandardOutput)
                     {
@@ -106,7 +110,7 @@ namespace AIO
                     }
 
                     var hasArgumentsMLine = false;
-                    var inputStr          = inputs.ToString();
+                    var inputStr = inputs.ToString();
                     if (inputs.Length > 0)
                     {
                         hasArgumentsMLine = inputStr.Split('\n').Length > 2;
@@ -114,7 +118,7 @@ namespace AIO
                             Pr.StartInfo.Arguments = "/U /D /Q /V:ON /F:ON /E:ON";
                         else
                             Pr.StartInfo.Arguments = string.Concat(Pr.StartInfo.Arguments, " \" ",
-                                                                   inputs.ToString().Substring(0, inputs.Length - 1), " \"");
+                                inputs.ToString().Substring(0, inputs.Length - 1), " \"");
                     }
 
                     Pr.Refresh();
@@ -153,7 +157,7 @@ namespace AIO
                     if (Pr.StartInfo.RedirectStandardInput) Pr.StandardInput.Close();
 
                     Pr.Disposed -= result.ReceivedDisposed;
-                    Pr.Exited   -= result.ReceivedExited;
+                    Pr.Exited -= result.ReceivedExited;
                 }
                 catch (Exception ex)
                 {
@@ -176,47 +180,65 @@ namespace AIO
         /// 创建构造器
         /// </summary>
         /// <returns>结果执行器</returns>
-        public static IExecutor Create() { return Activator.CreateInstance<PrCmd>().SetInArgs(CMD_ARGS).Execute(); }
+        public static IExecutor Create()
+        {
+            return Activator.CreateInstance<PrCmd>().SetInArgs(CMD_ARGS).Execute();
+        }
 
         /// <summary>
         /// 创建
         /// </summary>
-        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>
         /// <param name="format">Format:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in (string, string) cmd_work, in string format, params object[] args) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(format, args).Execute(); }
+        public new static IExecutor Create(in (string, string) cmd_work, in string format, params object[] args)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(format, args).Execute();
+        }
 
         /// <summary>
         /// 创建
         /// </summary>
-        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>
         /// <param name="args">参数</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in (string, string) cmd_work, in StringBuilder args) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args.ToString()).Execute(); }
+        public new static IExecutor Create(in (string, string) cmd_work, in StringBuilder args)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args.ToString()).Execute();
+        }
 
         /// <summary>
         /// 创建
         /// </summary>
-        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>
         /// <param name="args">参数</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in (string, string) cmd_work, in string args) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args).Execute(); }
+        public new static IExecutor Create(in (string, string) cmd_work, in string args)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args).Execute();
+        }
 
         /// <summary>
         /// 创建
         /// </summary>
-        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>
         /// <param name="args">参数</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in (string, string) cmd_work, in ICollection<string> args) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args).Execute(); }
+        public new static IExecutor Create(in (string, string) cmd_work, in ICollection<string> args)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args).Execute();
+        }
 
         /// <summary>
         /// 创建
         /// </summary>
-        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>        
+        /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in (string, string) cmd_work) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).Execute(); }
+        public new static IExecutor Create(in (string, string) cmd_work)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).Execute();
+        }
 
         /// <summary>
         /// 创建
@@ -225,7 +247,10 @@ namespace AIO
         /// <param name="format">Format:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in string cmd, in string format, params object[] args) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd).SetInArgs(format, args).Execute(); }
+        public new static IExecutor Create(in string cmd, in string format, params object[] args)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd).SetInArgs(format, args).Execute();
+        }
 
         /// <summary>
         /// 创建
@@ -233,7 +258,10 @@ namespace AIO
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in string cmd, in ICollection<string> args) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd).SetInArgs(args).Execute(); }
+        public new static IExecutor Create(in string cmd, in ICollection<string> args)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd).SetInArgs(args).Execute();
+        }
 
         /// <summary>
         /// 创建
@@ -241,7 +269,10 @@ namespace AIO
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in string cmd, in string args) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd).SetInArgs(args).Execute(); }
+        public new static IExecutor Create(in string cmd, in string args)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd).SetInArgs(args).Execute();
+        }
 
         /// <summary>
         /// 创建
@@ -249,7 +280,10 @@ namespace AIO
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
-        public new static IExecutor Create(in string cmd, in StringBuilder args) { return Activator.CreateInstance<PrCmd>().SetFileName(cmd).SetInArgs(args.ToString()).Execute(); }
+        public new static IExecutor Create(in string cmd, in StringBuilder args)
+        {
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd).SetInArgs(args.ToString()).Execute();
+        }
 
         #endregion
 
@@ -273,11 +307,53 @@ namespace AIO
         /// <summary>
         /// 获取文件ID
         /// </summary>
+        /// <param name="file"> 文件路径:NoNull</param>
+        /// <returns> 文件ID:NoNull</returns>
+        public static async Task<string> GetFileIDAsync(FileInfo file)
+        {
+            if (file == null || !file.Exists) return string.Empty;
+            var executor = Create().Input($"fsutil file queryFileID \"{file.FullName}\"");
+            executor.EnableOutput = false;
+            var result = await executor;
+            var output = result.StdOut.ToString();
+            if (output.StartsWith("Error")) return string.Empty;
+            if (result.ExitCode == 0)
+            {
+                if (output.Contains(" "))
+                {
+                    var sp = output.Split(' ');
+                    if (sp.Length > 1) return sp.Last().Trim();
+                }
+                else return output;
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// 获取文件ID
+        /// </summary>
         /// <param name="path"> 文件路径:NoNull</param>
         /// <returns> 文件ID:NoNull</returns>
         public static string GetFileID(string path)
         {
             var executor = Create().Input($"fsutil file queryFileID {path}");
+            executor.EnableOutput = false;
+            var result = executor.Sync();
+            var output = result.StdOut.ToString();
+            if (output.StartsWith("Error")) return string.Empty;
+            return result.ExitCode == 0 ? output.Replace("File ID is ", "").Trim() : string.Empty;
+        }
+
+        /// <summary>
+        /// 获取文件ID
+        /// </summary>
+        /// <param name="file"> 文件路径:NoNull</param>
+        /// <returns> 文件ID:NoNull</returns>
+        public static string GetFileID(FileInfo file)
+        {
+            if (file == null || !file.Exists) return string.Empty;
+            var executor = Create().Input($"fsutil file queryFileID {file.FullName}");
             executor.EnableOutput = false;
             var result = executor.Sync();
             var output = result.StdOut.ToString();

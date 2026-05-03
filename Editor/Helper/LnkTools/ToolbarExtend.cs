@@ -1,12 +1,12 @@
-﻿#region namespace
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+
+#region
 
 #if !UNITY_2019_1_OR_NEWER
 using UnityEngine.Experimental.UIElements;
@@ -54,64 +54,81 @@ namespace AIO.UEditor
         private static Dictionary<GUIContent, VisualElement> toolbarElements =
             new Dictionary<GUIContent, VisualElement>();
 
-        [AInit(Mode = EInitAttrMode.Both, Order = -1)]
+        private static bool isInitialized;
+
+        [InitializeOnLoadMethod]
+        private static void Install()
+        {
+            isInitialized               =  false;
+            EditorApplication.delayCall -= Initialize;
+            EditorApplication.delayCall += Initialize;
+        }
+
 #if UNITY_2021_1_OR_NEWER
-        private static async void Init()
+        private static async void Initialize()
 #else
-        private static void Init()
+        private static void Initialize()
 #endif
         {
+            if (isInitialized) return;
 #if UNITY_2021_1_OR_NEWER
             var toolbars = Resources.FindObjectsOfTypeAll(TOOLBAR_TYPE);
             if (toolbars is null || toolbars.Length <= 0) return;
             while (true)
             {
                 var toolbar = TOOLBAR_TYPE.GetField("m_Root", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(toolbars[0]) as VisualElement;
-
-                if (toolbar is null)
-                {
-                    await Task.Delay(200);
-                    continue;
-                }
-
-                var temp = toolbar
+                var temp = toolbar?.
 #if UNITY_2022_1_OR_NEWER && !UNITY_2023_1_OR_NEWER
-                          .Q<VisualElement>("ToolbarContainerContent")
+                           Q<VisualElement>("ToolbarContainerContent").
 #endif
-                          .
                            Q<VisualElement>("ToolbarZonePlayMode").
                            Q<VisualElement>("PlayMode").
                            Children().
                            First();
+                if (temp is null)
+                {
+                    await Task.Delay(100);
+                    continue;
+                }
 
-                if (temp is null) break;
-
-                if (Application.isEditor)
-                    foreach (var lnk in from lnk in LnkToolsHelper.Data
-                                        where lnk.ShowMode == ELnkShowMode.Toolbar
-                                        where lnk.Mode == ELnkToolsMode.OnlyEditor || lnk.Mode == ELnkToolsMode.AllMode
-                                        select lnk)
+                var isPlayMode = Application.isPlaying;
+                var isEditor   = Application.isEditor;
+                foreach (var lnk in Data)
+                {
+                    switch (lnk.RuntimeMode)
                     {
-                        if (toolbarElements.TryGetValue(lnk.Content, out var value))
-                            if (value != null)
-                                continue;
-
-                        toolbarElements[lnk.Content] = LnkToolOverlay.GetVoid(lnk);
-                        temp.Add(toolbarElements[lnk.Content]);
+                        default:
+                        case ELnkToolsMode.AllMode: break;
+                        case ELnkToolsMode.OnlyEditor when !isEditor:
+                        case ELnkToolsMode.OnlyRuntime when !isPlayMode:
+                        case ELnkToolsMode.NoMode:
+                            continue;
                     }
-                else if (Application.isPlaying)
-                    foreach (var lnk in from lnk in LnkToolsHelper.Data
-                                        where lnk.ShowMode == ELnkShowMode.Toolbar
-                                        where lnk.Mode == ELnkToolsMode.OnlyRuntime || lnk.Mode == ELnkToolsMode.AllMode
-                                        select lnk)
+
+                    switch (lnk.ShowMode)
                     {
-                        if (toolbarElements.TryGetValue(lnk.Content, out var value))
-                            if (value != null)
-                                continue;
-
-                        toolbarElements[lnk.Content] = LnkToolOverlay.GetVoid(lnk);
-                        temp.Add(toolbarElements[lnk.Content]);
+                        default:
+                        case ELnkShowMode.SceneView: continue;
+                        case ELnkShowMode.ToolbarLeft:
+                        case ELnkShowMode.ToolbarRight:
+                            break;
                     }
+
+                    if (toolbarElements.TryGetValue(lnk.Content, out var value) && value != null) continue;
+
+                    var element = toolbarElements[lnk.Content] = LnkToolOverlay.GetVoid(lnk);
+                    switch (lnk.ShowMode)
+                    {
+                        case ELnkShowMode.ToolbarLeft:
+                            temp.Insert(0, element);
+                            break;
+                        case ELnkShowMode.ToolbarRight:
+                            temp.Add(element);
+                            break;
+                        default:
+                        case ELnkShowMode.SceneView: break;
+                    }
+                }
 
                 break;
             }
@@ -119,6 +136,7 @@ namespace AIO.UEditor
             EditorApplication.update -= OnUpdate;
             EditorApplication.update += OnUpdate;
 #endif
+            isInitialized = true;
         }
 
 #if !UNITY_2021_1_OR_NEWER
@@ -153,7 +171,7 @@ namespace AIO.UEditor
             if (Application.isEditor)
             {
                 foreach (var lnk in from lnk in LnkToolsHelper.Data
-                                    where lnk.ShowMode == ELnkShowMode.Toolbar
+                                    where lnk.ShowMode == ELnkShowMode.ToolbarLeft || lnk.ShowMode == ELnkShowMode.ToolbarRight
                                     where lnk.Mode == ELnkToolsMode.OnlyEditor || lnk.Mode == ELnkToolsMode.AllMode
                                     select lnk)
                 {
@@ -168,7 +186,7 @@ namespace AIO.UEditor
             else if (Application.isPlaying)
             {
                 foreach (var lnk in from lnk in LnkToolsHelper.Data
-                                    where lnk.ShowMode == ELnkShowMode.Toolbar
+                                    where lnk.ShowMode == ELnkShowMode.ToolbarLeft || lnk.ShowMode == ELnkShowMode.ToolbarRight
                                     where lnk.Mode == ELnkToolsMode.OnlyRuntime || lnk.Mode == ELnkToolsMode.AllMode
                                     select lnk)
                 {
@@ -182,5 +200,52 @@ namespace AIO.UEditor
             }
         }
 #endif
+
+        private static readonly Lazy<List<LnkToolDataInternal>> Lazy = new Lazy<List<LnkToolDataInternal>>(GetLnkTools);
+
+        internal static List<LnkToolDataInternal> AddData => Lazy.Value;
+
+        internal static IReadOnlyList<LnkToolDataInternal> Data => Lazy.Value;
+
+        private static List<LnkToolDataInternal> GetLnkTools()
+        {
+            var list  = Pool.List<LnkToolDataInternal>();
+            var types = Pool.List<Type>();
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                var info = assembly.GetName();
+                if (!info.Name.Contains("Editor", StringComparison.InvariantCultureIgnoreCase)) continue;
+                if (info.Name.Contains("UnityEngine", StringComparison.InvariantCultureIgnoreCase)) continue;
+                if (info.Name.Contains("UnityEditor", StringComparison.InvariantCultureIgnoreCase)) continue;
+                types.AddRange(assembly.GetTypes().Where(type => !type.IsEnum).Where(type => !type.IsInterface));
+            }
+
+            try
+            {
+                foreach (var method in types.Select(type => type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)).
+                                             SelectMany(methods => methods, (methods, method) => new
+                                             {
+                                                 methods,
+                                                 method
+                                             }).
+                                             Where(t => !t.method.IsConstructor).
+                                             Where(t => t.method.IsDefined(typeof(LnkToolsAttribute), false)).
+                                             Where(t => t.method.ReturnType == typeof(bool) || t.method.ReturnType == typeof(void)).
+                                             Select(t => t.method))
+                    list.Add(new LnkToolDataInternal(method));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+            list.Sort((x, y) =>
+            {
+                if (x.Priority < y.Priority) return -1;
+                return x.Priority == y.Priority ? 0 : 1;
+            });
+            return list;
+        }
     }
 }

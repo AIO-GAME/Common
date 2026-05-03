@@ -19,7 +19,7 @@ namespace AIO.Internal
         /// <summary>
         /// 重写ToString方法
         /// </summary>
-        public sealed override string ToString() { return string.Empty; }
+        public sealed override string ToString() => string.Empty;
 
         /// <summary>
         /// 总数量

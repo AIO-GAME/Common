@@ -279,6 +279,7 @@
     <Compile Include="Script\Category\Svn\PrSvn.CheckOut.cs" >
       <DependentUpon>PrSvn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.Attr.cs" />
     <Compile Include="Script\Category\Win\Cmd\PrCmd.Copy.cs" />
     <Compile Include="Script\Category\Win\Cmd\PrCmd.cs" />
     <Compile Include="Script\Category\Special\PrException.cs" />

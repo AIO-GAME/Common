@@ -136,10 +136,7 @@ namespace AIO
             /// <summary>
             /// 反序列化
             /// </summary>
-            public static T Deserialize<T>(in string data)
-            {
-                return JsonConvert.DeserializeObject<T>(data, JSONNormalSettings);
-            }
+            public static T Deserialize<T>(in string data) => JsonConvert.DeserializeObject<T>(data, JSONNormalSettings);
 
             /// <summary>
             /// 反序列化

@@ -80,49 +80,109 @@ namespace AIO
 
         #region WriteLine
 
-        public static void WriteLine(object message)                         { Console.WriteLine(message); }
-        public static void WriteLine(string message)                         { Console.WriteLine(message); }
-        public static void WriteLine(string format, params object[] message) { Console.WriteLine(format, message); }
+        public static void WriteLine(object message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public static void WriteLine(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public static void WriteLine(string format, params object[] message)
+        {
+            Console.WriteLine(format, message);
+        }
 
         #endregion
 
         public static ConsoleColor WarnColor { get; set; } = ConsoleColor.DarkYellow;
 
-        public static void WriteLineWarn(Exception exception)                       { WriteLine(WarnColor, exception.Message); }
-        public static void WriteLineWarn(string    message)                         { WriteLine(WarnColor, message); }
-        public static void WriteLineWarn(object    message)                         { WriteLine(WarnColor, message); }
-        public static void WriteLineWarn(string    format, params object[] message) { WriteLine(WarnColor, format, message); }
+        public static void WriteLineWarn(Exception exception)
+        {
+            WriteLine(WarnColor, exception.Message);
+        }
+
+        public static void WriteLineWarn(string message)
+        {
+            WriteLine(WarnColor, message);
+        }
+
+        public static void WriteLineWarn(object message)
+        {
+            WriteLine(WarnColor, message);
+        }
+
+        public static void WriteLineWarn(string format, params object[] message)
+        {
+            WriteLine(WarnColor, format, message);
+        }
 
         public static ConsoleColor ErrorColor { get; set; } = ConsoleColor.Red;
 
-        public static void WriteLineError(Exception exception)                       { WriteLine(ErrorColor, exception.Message); }
-        public static void WriteLineError(string    message)                         { WriteLine(ErrorColor, message); }
-        public static void WriteLineError(object    message)                         { WriteLine(ErrorColor, message); }
-        public static void WriteLineError(string    format, params object[] message) { WriteLine(ErrorColor, format, message); }
+        public static void WriteLineError(Exception exception)
+        {
+            WriteLine(ErrorColor, exception.Message);
+        }
+
+        public static void WriteLineError(string message)
+        {
+            WriteLine(ErrorColor, message);
+        }
+
+        public static void WriteLineError(object message)
+        {
+            WriteLine(ErrorColor, message);
+        }
+
+        public static void WriteLineError(string format, params object[] message)
+        {
+            WriteLine(ErrorColor, format, message);
+        }
 
         public static ConsoleColor InfoColor { get; set; } = ConsoleColor.Green;
 
-        public static void WriteLineInfo(string message)                         { WriteLine(InfoColor, message); }
-        public static void WriteLineInfo(object message)                         { WriteLine(InfoColor, message); }
-        public static void WriteLineInfo(string format, params object[] message) { WriteLine(InfoColor, format, message); }
+        public static void WriteLineInfo(string message)
+        {
+            WriteLine(InfoColor, message);
+        }
 
-        public static void WriteLineInfo(string message, ConsoleColor color) { WriteLine(color, message); }
-        public static void WriteLineInfo(object message, ConsoleColor color) { WriteLine(color, message); }
+        public static void WriteLineInfo(object message)
+        {
+            WriteLine(InfoColor, message);
+        }
 
-        private static readonly string content = new string(' ', Console.BufferWidth - 1);
+        public static void WriteLineInfo(string format, params object[] message)
+        {
+            WriteLine(InfoColor, format, message);
+        }
+
+        public static void WriteLineInfo(string message, ConsoleColor color)
+        {
+            WriteLine(color, message);
+        }
+
+        public static void WriteLineInfo(object message, ConsoleColor color)
+        {
+            WriteLine(color, message);
+        }
+
+        private static readonly string content = new string(' ', Console.BufferWidth);
 
         public static void WriteLineCursor(string message, ConsoleColor color = ConsoleColor.White, bool fill = false)
         {
             // 如果光标已到达或超过缓冲区底部，则扩展缓冲区
             if (Console.CursorTop + 1 >= Console.BufferHeight)
-            { // 增加缓冲区高度，至少加1行，避免越界
+            {
+                // 增加缓冲区高度，至少加1行，避免越界
                 Console.BufferHeight = Console.CursorTop + 2;
             }
 
-            Console.SetCursorPosition(0, Console.CursorTop);     //将光标至于当前行的开始位置
-            Console.Write(content);                              //用空格将当前行填满，相当于清除当前行
+            Console.SetCursorPosition(0, Console.CursorTop); //将光标至于当前行的开始位置
+            Console.Write(content); //用空格将当前行填满，相当于清除当前行
             Console.SetCursorPosition(0, Console.CursorTop - 1); //将光标恢复至开始时的位置
-            WriteLine(color, message, fill: fill);               //输出新的内容
+            WriteLine(color, message, fill: fill); //输出新的内容
         }
 
         public static void WriteLineCursor(string message, int cursor, ConsoleColor color = ConsoleColor.White)
@@ -131,7 +191,7 @@ namespace AIO
             if (cursor >= Console.BufferHeight)
             {
                 Console.BufferHeight = cursor;
-                cursor               = Console.BufferHeight - 1;
+                cursor = Console.BufferHeight - 1;
             }
 
             try
@@ -164,7 +224,8 @@ namespace AIO
                 Console.SetCursorPosition(0, cursor);
             }
             catch
-            { // ignored
+            {
+                // ignored
             }
 
             message = message.TrimStart('\n', '\r', '\t').TrimEnd(' ', '\n', '\r', '\t');

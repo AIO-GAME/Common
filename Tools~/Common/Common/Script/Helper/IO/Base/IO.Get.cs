@@ -1,6 +1,7 @@
 #region
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,7 +22,7 @@ namespace AIO
             /// <param name="fileName">文件名</param>
             public static string GetTempPath(string fileName = null)
             {
-                var temp                   = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                var temp = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 if (fileName != null) temp = Path.Combine(temp, fileName);
                 return temp.Replace('\\', Path.AltDirectorySeparatorChar);
             }
@@ -44,13 +45,13 @@ namespace AIO
                 try
                 {
                     // Optimization: Try a simple substring if possible
-                    path      = path.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                    path = path.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
                     directory = directory.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
                     if (path.StartsWith(directory, StringComparison.Ordinal)) return path.Substring(directory.Length);
                     // Otherwise, use the URI library
 
-                    var pathUri   = new Uri(path);
+                    var pathUri = new Uri(path);
                     var folderUri = new Uri(directory);
 
                     return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('\\', Path.AltDirectorySeparatorChar));
@@ -58,7 +59,7 @@ namespace AIO
                 catch (UriFormatException uriFormatException)
                 {
                     throw new UriFormatException(
-                                                 $"Failed to get relative path.\nPath: {path}\nDirectory:{directory}\n{uriFormatException}");
+                        $"Failed to get relative path.\nPath: {path}\nDirectory:{directory}\n{uriFormatException}");
                 }
             }
 
@@ -73,7 +74,7 @@ namespace AIO
                 {
                     using var hashAlgorithm = new MD5CryptoServiceProvider();
                     {
-                        int readLength;                    //每次读取长度
+                        int readLength; //每次读取长度
                         var output = new byte[bufferSize]; //计算MD5
                         var buffer = new byte[bufferSize];
                         while ((readLength = inputStream.Read(buffer, 0, buffer.Length)) > 0) hashAlgorithm.TransformBlock(buffer, 0, readLength, output, 0);
@@ -96,25 +97,76 @@ namespace AIO
             public static string GetLnkTargetPath(string filepath)
             {
                 using var br = new BinaryReader(File.OpenRead(filepath));
-                br.ReadBytes(0x14);            // skip the first 20 bytes (HeaderSize and LinkCLSID)
+                br.ReadBytes(0x14); // skip the first 20 bytes (HeaderSize and LinkCLSID)
                 uint lflags = br.ReadUInt32(); // read the LinkFlags structure (4 bytes)
-                if ((lflags & 0x01) == 1)      // if the HasLinkTargetIDList bit is set then skip the stored IDList
-                {                              // structure and header
+                if ((lflags & 0x01) == 1) // if the HasLinkTargetIDList bit is set then skip the stored IDList
+                {
+                    // structure and header
                     br.ReadBytes(0x34);
                     var skip = br.ReadUInt16(); // this counts of how far we need to skip ahead
                     br.ReadBytes(skip);
                 }
 
                 var length = br.ReadUInt32(); // get the number of bytes the path contains
-                br.ReadBytes(0x0C);           // skip 12 bytes (LinkInfoHeaderSize, LinkInfoFlgas, and VolumeIDOffset)
-                var lbpos = br.ReadUInt32();  // Find the location of the LocalBasePath position
+                br.ReadBytes(0x0C); // skip 12 bytes (LinkInfoHeaderSize, LinkInfoFlgas, and VolumeIDOffset)
+                var lbpos = br.ReadUInt32(); // Find the location of the LocalBasePath position
                 // Skip to the path position
                 // (subtract the length of the read (4 bytes), the length of the skip (12 bytes), and
                 // the length of the lbpos read (4 bytes) from the lbpos)
                 br.ReadBytes((int)lbpos - 0x14);
-                var size     = length - lbpos - 0x02;
+                var size = length - lbpos - 0x02;
                 var bytePath = br.ReadBytes((int)size);
                 return Encoding.UTF8.GetString(bytePath, 0, bytePath.Length);
+            }
+
+            /// <summary>
+            /// 获取视频时长（秒）
+            /// </summary>
+            /// <param name="source">视频文件路径</param>
+            /// <param name="ffmpegfile">ffmpeg可执行文件路径，默认为"ffmpeg"，即系统环境变量中可直接调用ffmpeg</param>
+            /// <returns>视频时长（秒），如果获取失败则返回0秒</returns>
+            public static int GetVideoDuration(string source, string ffmpegfile = "ffmpeg")
+            {
+                return GetVideoDuration(new FileInfo(source), ffmpegfile);
+            }
+
+            /// <summary>
+            /// 获取视频时长（秒）
+            /// </summary>
+            /// <param name="source">视频文件路径</param>
+            /// <param name="ffmpegfile">ffmpeg可执行文件路径，默认为"ffmpeg"，即系统环境变量中可直接调用ffmpeg</param>
+            /// <returns>视频时长（秒），如果获取失败则返回0秒</returns>
+            public static int GetVideoDuration(FileInfo source, string ffmpegfile = "ffmpeg")
+            {
+                try
+                {
+                    using var ffmpeg = new Process();
+                    string duration; // soon will hold our video's duration in the form "HH:MM:SS.UU"
+                    string result; // temp variable holding a string representation of our video's duration
+                    StreamReader errorreader; // StringWriter to hold output from ffmpeg
+
+                    ffmpeg.StartInfo.UseShellExecute = false;
+                    ffmpeg.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    ffmpeg.StartInfo.RedirectStandardError = true;
+                    ffmpeg.StartInfo.FileName = ffmpegfile;
+                    ffmpeg.StartInfo.Arguments = "-i " + source.FullName;
+                    ffmpeg.Start();
+                    errorreader = ffmpeg.StandardError;
+                    ffmpeg.WaitForExit();
+                    result = errorreader.ReadToEnd();
+                    duration = result.Substring(result.IndexOf("Duration: ", StringComparison.CurrentCultureIgnoreCase) + ("Duration: ").Length,
+                        ("00:00:00").Length);
+
+                    var ss = duration.Split(':');
+                    var h = int.Parse(ss[0]);
+                    var m = int.Parse(ss[1]);
+                    var s = int.Parse(ss[2]);
+                    return h * 3600 + m * 60 + s;
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
             }
         }
 

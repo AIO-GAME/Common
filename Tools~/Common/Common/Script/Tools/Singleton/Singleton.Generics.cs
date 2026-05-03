@@ -19,11 +19,11 @@ namespace AIO
         /// </summary>
         public static void Register()
         {
-            if (LazyInstance == null) Register1();
+            if (LazyInstance == null) RegisterInternal();
             else LazyInstance.Value.RegisterTask.Wait();
         }
 
-        private static void Register1()
+        private static void RegisterInternal()
         {
             lock (@lock) LazyInstance = new Lazy<T>(Activator.CreateInstance<T>);
             LazyInstance.Value.RegisterTask.Wait();
@@ -49,7 +49,7 @@ namespace AIO
         {
             get
             {
-                if (LazyInstance == null) Register1();
+                if (LazyInstance == null) RegisterInternal();
                 if (!LazyInstance.Value.IsInitialized)
                     throw new Exception($"【Singleton】 Instance '{typeof(T).FullName}' is not initialized. Please call '{nameof(RegisterAsync)}' first.");
                 return LazyInstance.Value;
@@ -63,7 +63,7 @@ namespace AIO
         {
             get
             {
-                if (LazyInstance == null) Register1();
+                if (LazyInstance == null) RegisterInternal();
                 if (!LazyInstance.Value.IsInitialized)
                     throw new Exception($"【Singleton】 Instance '{typeof(T).FullName}' is not initialized. Please call '{nameof(RegisterAsync)}' first.");
                 return LazyInstance.Value;

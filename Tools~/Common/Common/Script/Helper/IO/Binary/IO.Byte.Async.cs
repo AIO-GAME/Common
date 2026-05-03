@@ -20,7 +20,10 @@ namespace AIO
             /// 异步 加载 Byte Array
             /// </summary>
             /// <param name="path">路径</param>
-            public static async Task<byte[]> ReadByteArrayAsync(string path) { return await ReadAsync(path); }
+            public static async Task<byte[]> ReadByteArrayAsync(string path)
+            {
+                return await ReadAsync(path);
+            }
 
             /// <summary>
             /// 异步 写入数据
@@ -28,8 +31,8 @@ namespace AIO
             public static async Task<bool> WriteByteArrayAsync(
                 string path,
                 byte[] bytes,
-                bool   coded  = false,
-                bool   concat = false)
+                bool coded = false,
+                bool concat = false)
             {
                 if (!coded) return await WriteAsync(path, bytes, 0, bytes.Length, concat);
                 for (var i = 0; i < bytes.Length; i++)
@@ -49,32 +52,43 @@ namespace AIO
             public static async Task<bool> WriteAsync(
                 string path,
                 byte[] bytes,
-                int    offset,
-                int    length,
-                bool   concat,
-                int    bufferSize = 4096)
+                int offset,
+                int length,
+                bool concat,
+                int bufferSize = 4096)
             {
                 FileStream fs = null;
+                File.SetLastAccessTime(path, DateTime.Now);
                 try
                 {
                     var dir = Path.GetDirectoryName(path);
                     if (!string.IsNullOrEmpty(dir) && !ExistsDir(dir)) Directory.CreateDirectory(dir);
-                    var mode = concat ? FileMode.Append : FileMode.OpenOrCreate;
-                    fs = new FileStream(path, mode, FileAccess.Write, FileShare.ReadWrite | FileShare.Inheritable, bufferSize, true);
+                    fs = new FileStream(path,
+                        concat ? FileMode.Append : FileMode.OpenOrCreate,
+                        FileAccess.ReadWrite,
+                        FileShare.ReadWrite | FileShare.Inheritable,
+                        bufferSize,
+                        FileOptions.WriteThrough | FileOptions.Asynchronous
+                    );
+                    fs.Lock(offset, length);
+                    if (fs.CanSeek) fs.Seek(offset, SeekOrigin.Begin); // 重置流位置
                     await fs.WriteAsync(bytes, offset, length);
-                    // if (fs.CanSeek) fs.Seek(0, SeekOrigin.Begin); // 重置流位置
+                    fs.Unlock(offset, length);
                     await fs.FlushAsync();
-                    fs.Flush(flushToDisk: true);
-                    File.SetLastWriteTimeUtc(path, DateTime.Now);
+                    fs.Flush(true);
                 }
                 catch (Exception e)
                 {
+                    fs?.Unlock(0, length);
+                    await Task.Delay(100);
                     throw new IOException($"Error writing to file '{path}': {e.Message}", e);
                 }
                 finally
                 {
                     fs?.Close();
                     fs?.Dispose();
+                    File.SetLastWriteTimeUtc(path, DateTime.Now);
+                    new FileInfo(path).Refresh();
                 }
 
                 return true;
@@ -90,8 +104,8 @@ namespace AIO
             public static async Task<bool> WriteAsync(
                 string path,
                 Stream stream,
-                bool   concat,
-                int    bufferSize = 4096)
+                bool concat,
+                int bufferSize = 4096)
             {
                 FileStream fs = null;
                 try
@@ -129,11 +143,17 @@ namespace AIO
             public static async Task<byte[]> ReadAsync(string path, int bufferSize = 4096)
             {
                 if (!ExistsFile(path)) return Array.Empty<byte>();
-                FileStream fs    = null;
-                byte[]     datas = null;
+                FileStream fs = null;
+                byte[] datas = null;
                 try
                 {
-                    fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Inheritable, bufferSize, true);
+                    File.SetLastAccessTime(path, DateTime.Now);
+                    fs = new FileStream(path,
+                        FileMode.OpenOrCreate,
+                        FileAccess.ReadWrite,
+                        FileShare.ReadWrite | FileShare.Inheritable | FileShare.Delete,
+                        bufferSize, FileOptions.Asynchronous
+                    );
                     var length = (int)fs.Length;
                     var buffer = new byte[length];
                     var offset = 0;
@@ -141,7 +161,7 @@ namespace AIO
                     while (offset < length)
                     {
                         var count = System.Math.Min(bufferSize, length - offset);
-                        var n     = await fs.ReadAsync(buffer, offset, count);
+                        var n = await fs.ReadAsync(buffer, offset, count);
                         if (n == 0) break; // 到达文件末尾
                         offset += n;
                     }

@@ -161,7 +161,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="lnk">lnk数据</param>
         /// <returns>元素展示</returns>
-        internal static VisualElement GetBool(LnkTools lnk)
+        internal static VisualElement GetBool(LnkToolDataInternal lnk)
         {
             var toolbar = new ToolbarToggle
             {
@@ -203,7 +203,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="lnk">lnk数据</param>
         /// <returns>元素展示</returns>
-        internal static VisualElement GetVoid(LnkTools lnk)
+        internal static VisualElement GetVoid(LnkToolDataInternal lnk)
         {
             var toolbar = new EditorToolbarButton(lnk.Invoke)
             {
@@ -271,7 +271,7 @@ namespace AIO.UEditor
                     element.style.marginTop            = 1.5f;
                 }
 
-                if (index >= LnkToolsHelper.Data.Count - 1)
+                if (index >= ToolbarExtend.Data.Count - 1)
                 {
                     element.style.borderBottomLeftRadius  = 3;
                     element.style.borderBottomRightRadius = 3;
@@ -295,7 +295,7 @@ namespace AIO.UEditor
                     element.style.borderTopLeftRadius    = 3;
                 }
 
-                if (index >= LnkToolsHelper.Data.Count - 1)
+                if (index >= ToolbarExtend.Data.Count - 1)
                 {
                     element.style.marginRight             = 1.5f;
                     element.style.borderTopRightRadius    = 3;
@@ -334,18 +334,18 @@ namespace AIO.UEditor
             }
 
             var index = 0;
-            foreach (var lnk in LnkToolsHelper.Data)
+            foreach (var lnk in ToolbarExtend.Data)
             {
                 if (lnk.ShowMode != ELnkShowMode.SceneView) continue;
                 index++;
-                var toolbar = lnk.hasReturn ? GetBool(lnk) : GetVoid(lnk);
+                var toolbar = lnk.HasReturnBool ? GetBool(lnk) : GetVoid(lnk);
 
                 toolbar.tooltip                             = lnk.Content.tooltip;
                 toolbar.style.backgroundColor               = lnk.BackgroundColor;
                 toolbar.style.unityBackgroundImageTintColor = lnk.ForegroundColor;
                 ChangeVisualElement(toolbar, index, isVertical);
 
-                switch (lnk.Mode)
+                switch (lnk.RuntimeMode)
                 {
                     case ELnkToolsMode.OnlyRuntime: // 禁用元素点击
                         toolbar.SetEnabled(EditorApplication.isPlaying);
@@ -391,7 +391,7 @@ namespace AIO.UEditor
                 },
                 pickingMode = PickingMode.Position
             };
-            if (m_Editor is null) return m_Content;
+            if (m_Editor == null) return m_Content;
             var isVertical = IsVertical();
 #if UNITY_2022_1_OR_NEWER
             m_Content.Add(CreateContent(isVertical ? Layout.VerticalToolbar : Layout.HorizontalToolbar));
@@ -422,14 +422,14 @@ namespace AIO.UEditor
         private static readonly Lazy<MethodInfo> s_RebuildContentMethod
             = new Lazy<MethodInfo>(() => typeof(Overlay).GetMethod("RebuildContent", ToolBarBindNon));
 
+        private static readonly Lazy<PropertyInfo> s_activeTool
+            = new Lazy<PropertyInfo>(() => typeof(ToolManager).Assembly.GetType("UnityEditor.EditorTools.EditorToolManager", true)?.GetProperty("activeTool", BindingFlags.Static | BindingFlags.NonPublic));
+
         private void OnPlayModeStateChanged(PlayModeStateChange state) { s_RebuildContentMethod.Value?.Invoke(this, null); }
 
         public override void OnCreated() { EditorApplication.playModeStateChanged += OnPlayModeStateChanged; }
 
         public override void OnWillBeDestroyed() { EditorApplication.playModeStateChanged -= OnPlayModeStateChanged; }
-
-        private static readonly Lazy<PropertyInfo> s_activeTool
-            = new Lazy<PropertyInfo>(() => typeof(ToolManager).Assembly.GetType("UnityEditor.EditorTools.EditorToolManager", true)?.GetProperty("activeTool", BindingFlags.Static | BindingFlags.NonPublic));
 
         private void CreateEditor()
         {

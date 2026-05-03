@@ -18,7 +18,7 @@ namespace AIO.Internal
         /// <summary>
         /// 日志记录器。
         /// </summary>
-        internal protected LOG Log => LazyLog.Value;
+        protected internal LOG Log => LazyLog.Value;
 
         private Lazy<LOG> LazyLog = new Lazy<LOG>(CreateLOG, true);
 

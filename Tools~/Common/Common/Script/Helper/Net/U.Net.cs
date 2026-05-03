@@ -21,12 +21,14 @@ namespace AIO
 
             internal static readonly byte[] CODE = { 1, 3, 9, 3, 1, 3, 9, 3, 1 };
 
-            private Net() { }
+            private Net()
+            {
+            }
 
             /// <summary>
             /// 验证下载文件是否下载完成
             /// </summary>
-            /// <returns> 是否下载完成 </returns>
+            /// <returns> 完成返回 true，未完成返回 false </returns>
             public static bool VerifyDownloadFileComplete(string filePath)
             {
                 if (!File.Exists(filePath)) return false;
@@ -34,8 +36,8 @@ namespace AIO
                 if (fs.Length < CODE.Length) return true;
 
                 var buffer = new byte[CODE.Length];
-                var read   = fs.Read(buffer, 0, buffer.Length);
-                return !CODE.Where((t, i) => buffer[i] != t).Any();
+                var read = fs.Read(buffer, 0, buffer.Length);
+                return CODE.Where((t, i) => buffer[i] != t).Any();
             }
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using AIO;
 using AIO.Internal;
 using UnityEngine;
@@ -17,7 +16,7 @@ public class SingletonBehaviour : MonoBehaviour
     /// <summary>
     /// 单例类型名称列表
     /// </summary>
-    public Dictionary<Type, Singleton> Data => SingletonData.Data;
+    public ConcurrentDictionary<Type, Singleton> Data => SingletonData.Data;
 
     /// <summary>
     /// 单例数组
