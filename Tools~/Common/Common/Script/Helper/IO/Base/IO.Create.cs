@@ -20,17 +20,12 @@ namespace AIO
             public static void CreateDir(in string directory, in bool clear = false)
             {
                 var info = new DirectoryInfo(directory);
-                // 判断文件夹是否存在 判断是否需要清空文件夹
-                if (info.Exists)
+                if (info.Exists) // 判断文件夹是否存在 判断是否需要清空文件夹
                 {
                     if (!clear) return;
-                    info.Delete(true);
-                    info.Create();
+                    ClearDir(info);
                 }
-                else
-                {
-                    info.Create();
-                }
+                else info.Create();
             }
         }
 

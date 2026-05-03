@@ -10,6 +10,11 @@ namespace AIO
 	    #region System.Collections.Generic.List<T>
 
         /// <summary>
+        /// 空数组
+        /// </summary>
+        public static  T[] Empty<T>() => Array.Empty<T>();
+
+        /// <summary>
         /// 缓存 => 创建 <see cref="System.Collections.Generic.List{T}"/>
         /// </summary>/// <typeparam name="T">Generic</typeparam>
         /// <returns><see cref="System.Collections.Generic.List{T}"/></returns>

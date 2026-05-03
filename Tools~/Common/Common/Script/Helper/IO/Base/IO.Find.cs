@@ -21,29 +21,14 @@ namespace AIO
             /// <param name="op">匹配模式</param>
             /// <param name="searchPatterns">条件 "*value*"</param>
             /// <returns></returns>
-            public static List<string> FindPaths(
+            public static IReadOnlyList<FileInfo> FindPaths(
                 string          dir,
                 SearchOption    op = SearchOption.AllDirectories,
                 params string[] searchPatterns)
             {
-                dir = dir.Replace('\\', Path.AltDirectorySeparatorChar);
-                // 检查文件夹是否存在
-                if (!Directory.Exists(dir)) return Pool.List<string>();
-
                 // 设置默认搜索条件
                 if (searchPatterns == null || searchPatterns.Length == 0) searchPatterns = new[] { "*" };
-
-                var result = Pool.List<string>();
-
-                // 对每种文件类型进行筛选
-                foreach (var pattern in searchPatterns)
-                {
-                    // 获取符合条件的文件路径
-                    var paths = Directory.GetFiles(dir, pattern, op);
-                    result.AddRange(paths.Select(path => path.Replace('\\', '/')));
-                }
-
-                return result;
+                return FindPaths(dir, op, Pool.List<string>(searchPatterns));
             }
 
             /// <summary>
@@ -53,23 +38,30 @@ namespace AIO
             /// <param name="op">匹配模式</param>
             /// <param name="searchPatterns">条件 "*value*"</param>
             /// <returns></returns>
-            public static List<string> FindPaths(
+            public static IReadOnlyList<FileInfo> FindPaths(
                 string              dir,
                 SearchOption        op             = SearchOption.AllDirectories,
                 ICollection<string> searchPatterns = null)
             {
-                dir = dir.Replace('\\', Path.AltDirectorySeparatorChar);
-                if (!Directory.Exists(dir)) return null;
-                var result = new List<string>();
-                // 设置默认搜索条件
-                if (searchPatterns is null || searchPatterns.Count == 0)
-                    searchPatterns = new[] { "*" };
-                foreach (var pattern in searchPatterns)
-                {
-                    var paths = Directory.GetFiles(dir, pattern, op);
-                    result.AddRange(paths.Select(path => path.Replace('\\', '/')));
-                }
+                return FindPaths(new DirectoryInfo(dir), op, searchPatterns);
+            }
 
+            /// <summary>
+            /// 查询匹配 返回符合条件的路径
+            /// </summary>
+            /// <param name="dir">文件夹路径</param>
+            /// <param name="op">匹配模式</param>
+            /// <param name="searchPatterns">条件 "*value*"</param>
+            /// <returns></returns>
+            public static IReadOnlyList<FileInfo> FindPaths(
+                DirectoryInfo       dir,
+                SearchOption        op             = SearchOption.AllDirectories,
+                ICollection<string> searchPatterns = null)
+            {
+                if (!dir.Exists) return null;
+                var result                                                              = new List<FileInfo>();
+                if (searchPatterns is null || searchPatterns.Count == 0) searchPatterns = new[] { "*" };
+                foreach (var pattern in searchPatterns) result.AddRange(dir.GetFiles(pattern, op));
                 return result;
             }
         }

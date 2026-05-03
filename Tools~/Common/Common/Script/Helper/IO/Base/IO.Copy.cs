@@ -127,9 +127,7 @@ namespace AIO
                        new FileStream(destinationFilePath, FileMode.CreateNew, FileAccess.Write))
                 {
                     var buffer = new byte[bufferSize];
-                    int bytesRead;
-
-                    // 循环读取源文件的内容，并写入目标文件的文件流
+                    int bytesRead; // 循环读取源文件的内容，并写入目标文件的文件流
                     while ((bytesRead = sourceStream.Read(buffer, 0, buffer.Length)) > 0) destinationStream.Write(buffer, 0, bytesRead);
                 }
 

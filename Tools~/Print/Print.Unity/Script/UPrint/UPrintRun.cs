@@ -85,13 +85,11 @@ namespace UnityEngine
             in string format = "g")
         {
             if (IsNotOut || NoStatus(LOG)) return;
-            using (var p = new UPrintElapse(title).Start())
-            {
-                action0.Invoke();
-                action1.Invoke();
-                action2.Invoke();
-                p.Finish(format);
-            }
+            using var p = new UPrintElapse(title).Start();
+            action0.Invoke();
+            action1.Invoke();
+            action2.Invoke();
+            p.Finish(format);
         }
 
         /// <summary>

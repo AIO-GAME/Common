@@ -10,6 +10,20 @@ partial class Program
     static async Task Main(string[] args)
     {
         const string savePath = @"E:\WWW\";
+
+        const string findPath = @"X:\\AIO\\Packages\\Unity.Common\\Editor\\Extension\\";
+
+        var paths = AHelper.IO.GetDirsInfo(findPath);
+
+        foreach (var VARIABLE in paths)
+        {
+            Console.WriteLine(VARIABLE);
+        }
+
+        Console.Read();
+        return;
+
+
         // using (var handle = AHandle.HTTP.Create("http://127.0.0.1/HOT"))
         // {
         //     var arg = new ProgressArgs
@@ -38,7 +52,7 @@ partial class Program
         //     Console.WriteLine(await handle.PostAsync("com.google.play.review", "com.google.play.review"));
         // }
         var timeout = TimeSpan.FromHours(1);
-    
+
         // bool Handler(FileCache cache, string key, byte[] value, TimeSpan timespan)
         // {
         //     var response = new HttpResponse();
@@ -48,11 +62,11 @@ partial class Program
         //     response.SetBody(value);
         //     return cache.Add(key, response.Cache.Data, timespan);
         // }
-    
+
         var handle = new FileCache();
         handle.InsertPath(@"E:\WWW");
         handle.Add("add", "asdasd");
-    
+
         Console.WriteLine(handle.Get<string>("add"));
         Console.WriteLine(handle.ContainPath(@"E:\WWW/com.google.play.review"));
         Console.WriteLine(handle.ContainPath(@"\com.google.play.review"));
@@ -62,11 +76,13 @@ partial class Program
         {
             Console.WriteLine(Encoding.UTF8.GetString(rTuple.Item2));
         }
+
         rTuple = handle.Get(@"/com.google.play.review");
         if (rTuple.Item1)
         {
             Console.WriteLine(Encoding.UTF8.GetString(rTuple.Item2));
         }
+
         Console.Read();
     }
 }

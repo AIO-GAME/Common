@@ -1679,6 +1679,22 @@
                 获取闭合字符段
             </summary>
         </member>
+        <member name="M:AIO.ExtendString.GetEncoding(System.String,System.String)">
+            <summary>
+            获取指定编码
+            </summary>
+            <param name="str">字符串</param>
+            <param name="encoding">编码类型</param>
+            <returns>返回指定编码字符串</returns>
+        </member>
+        <member name="M:AIO.ExtendString.GetEncoding(System.String,System.Text.Encoding)">
+            <summary>
+            获取指定编码
+            </summary>
+            <param name="str">字符串</param>
+            <param name="encoding">编码类型</param>
+            <returns>返回指定编码字符串</returns>
+        </member>
         <member name="M:AIO.ExtendString.IndexesOf(System.String,System.String)">
             <summary>
                 在字符串中查找所有出现指定子字符串的位置，忽略大小写
@@ -5866,6 +5882,1914 @@
             <param name="ms">Milliseconds</param>
             <returns>String with time period representation</returns>
         </member>
+        <member name="T:AIO.FMach.FP">
+            <summary>
+            Represents a Q31.32 fixed-point number.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Sign(AIO.FMach.FP)">
+            <summary>
+            Returns a number indicating the sign of a Fix64 number.
+            Returns 1 if the value is positive, 0 if is 0, and -1 if it is negative.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Abs(AIO.FMach.FP)">
+            <summary>
+            Returns the absolute value of a Fix64 number.
+            Note: Abs(Fix64.MinValue) == Fix64.MaxValue.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.FastAbs(AIO.FMach.FP)">
+            <summary>
+            Returns the absolute value of a Fix64 number.
+            FastAbs(Fix64.MinValue) is undefined.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Floor(AIO.FMach.FP)">
+            <summary>
+            Returns the largest integer less than or equal to the specified number.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Ceiling(AIO.FMach.FP)">
+            <summary>
+            Returns the smallest integral value that is greater than or equal to the specified number.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Round(AIO.FMach.FP)">
+            <summary>
+            Rounds a value to the nearest integral value.
+            If the value is halfway between an even and an uneven value, returns the even value.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.op_Addition(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Adds x and y. Performs saturating addition, i.e. in case of overflow,
+            rounds to MinValue or MaxValue depending on sign of operands.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.OverflowAdd(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Adds x and y performing overflow checking. Should be inlined by the CLR.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.FastAdd(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Adds x and y witout performing overflow checking. Should be inlined by the CLR.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.op_Subtraction(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Subtracts y from x. Performs saturating substraction, i.e. in case of overflow,
+            rounds to MinValue or MaxValue depending on sign of operands.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.OverflowSub(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Subtracts y from x witout performing overflow checking. Should be inlined by the CLR.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.FastSub(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Subtracts y from x witout performing overflow checking. Should be inlined by the CLR.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.OverflowMul(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Performs multiplication without checking for overflow.
+            Useful for performance-critical code where the values are guaranteed not to cause overflow
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.FastMul(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Performs multiplication without checking for overflow.
+            Useful for performance-critical code where the values are guaranteed not to cause overflow
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.FastMod(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Performs modulo as fast as possible; throws if x == MinValue and y == -1.
+            Use the operator (%) for a more reliable but slower modulo.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Sqrt(AIO.FMach.FP)">
+            <summary>
+            Returns the square root of a specified number.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            The argument was negative.
+            </exception>
+        </member>
+        <member name="M:AIO.FMach.FP.Sin(AIO.FMach.FP)">
+            <summary>
+            Returns the Sine of x.
+            This function has about 9 decimals of accuracy for small values of x.
+            It may lose accuracy as the value of x grows.
+            Performance: about 25% slower than Math.Sin() in x64, and 200% slower in x86.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.FastSin(AIO.FMach.FP)">
+            <summary>
+            Returns a rough approximation of the Sine of x.
+            This is at least 3 times faster than Sin() on x86 and slightly faster than Math.Sin(),
+            however its accuracy is limited to 4-5 decimals, for small enough values of x.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Cos(AIO.FMach.FP)">
+            <summary>
+            Returns the cosine of x.
+            See Sin() for more details.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.FastCos(AIO.FMach.FP)">
+            <summary>
+            Returns a rough approximation of the cosine of x.
+            See FastSin for more details.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Tan(AIO.FMach.FP)">
+            <summary>
+            Returns the tangent of x.
+            </summary>
+            <remarks>
+            This function is not well-tested. It may be wildly inaccurate.
+            </remarks>
+        </member>
+        <member name="M:AIO.FMach.FP.Atan(AIO.FMach.FP)">
+            <summary>
+            Returns the arctan of of the specified number, calculated using Euler series
+            This function has at least 7 decimals of accuracy.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.Acos(AIO.FMach.FP)">
+            <summary>
+            Returns the arccos of of the specified number, calculated using Atan and Sqrt
+            This function has at least 7 decimals of accuracy.
+            </summary>
+        </member>
+        <member name="P:AIO.FMach.FP.RawValue">
+            <summary>
+            The underlying integer representation
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.FP.#ctor(System.Int64)">
+            <summary>
+            This is the constructor from raw value; it can only be used interally.
+            </summary>
+            <param name="rawValue"></param>
+        </member>
+        <member name="F:AIO.FMach.FP.Pi">
+            <summary>
+            The value of Pi
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.PiOver2">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.PiTimes2">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.PiInv">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.PiOver2Inv">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.Deg2Rad">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.Rad2Deg">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.LutInterval">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.Log2Max">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.Log2Min">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.FMach.FP.Ln2">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:AIO.FMach.TSMath">
+            <summary>
+            Contains common math operations.
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMath.Pi">
+            <summary>
+            PI constant.
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMath.PiOver2">
+              @brief PI over 2 constant.
+            
+        </member>
+        <member name="F:AIO.FMach.TSMath.Epsilon">
+            <summary>
+            A small value often used to decide if numeric
+            results are zero.
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMath.Deg2Rad">
+              @brief Degree to radians constant.
+            
+        </member>
+        <member name="F:AIO.FMach.TSMath.Rad2Deg">
+              @brief Radians to degree constant.
+            
+        </member>
+        <member name="F:AIO.FMach.TSMath.Infinity">
+            @brief FP infinity.
+            
+        </member>
+        <member name="M:AIO.FMach.TSMath.Sqrt(AIO.FMach.FP)">
+            <summary>
+            Gets the square root.
+            </summary>
+            <param name="number">The number to get the square root from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Max(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Gets the maximum number of two values.
+            </summary>
+            <param name="val1">The first value.</param>
+            <param name="val2">The second value.</param>
+            <returns>Returns the largest value.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Min(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Gets the minimum number of two values.
+            </summary>
+            <param name="val1">The first value.</param>
+            <param name="val2">The second value.</param>
+            <returns>Returns the smallest value.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Max(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Gets the maximum number of three values.
+            </summary>
+            <param name="val1">The first value.</param>
+            <param name="val2">The second value.</param>
+            <param name="val3">The third value.</param>
+            <returns>Returns the largest value.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Clamp(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Returns a number which is within [min,max]
+            </summary>
+            <param name="value">The value to clamp.</param>
+            <param name="min">The minimum value.</param>
+            <param name="max">The maximum value.</param>
+            <returns>The clamped value.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Clamp01(AIO.FMach.FP)">
+            <summary>
+            Returns a number which is within [FP.Zero, FP.One]
+            </summary>
+            <param name="value">The value to clamp.</param>
+            <returns>The clamped value.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Absolute(AIO.FMach.TSMatrix@,AIO.FMach.TSMatrix@)">
+            <summary>
+            Changes every sign of the matrix entry to '+'
+            </summary>
+            <param name="matrix">The matrix.</param>
+            <param name="result">The absolute matrix.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Sin(AIO.FMach.FP)">
+            <summary>
+            Returns the sine of value.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Cos(AIO.FMach.FP)">
+            <summary>
+            Returns the cosine of value.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Tan(AIO.FMach.FP)">
+            <summary>
+            Returns the tan of value.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Asin(AIO.FMach.FP)">
+            <summary>
+            Returns the arc sine of value.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Acos(AIO.FMach.FP)">
+            <summary>
+            Returns the arc cosine of value.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Atan(AIO.FMach.FP)">
+            <summary>
+            Returns the arc tan of value.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Atan2(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Returns the arc tan of coordinates x-y.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Floor(AIO.FMach.FP)">
+            <summary>
+            Returns the largest integer less than or equal to the specified number.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Ceiling(AIO.FMach.FP)">
+            <summary>
+            Returns the smallest integral value that is greater than or equal to the specified number.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Round(AIO.FMach.FP)">
+            <summary>
+            Rounds a value to the nearest integral value.
+            If the value is halfway between an even and an uneven value, returns the even value.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Sign(AIO.FMach.FP)">
+            <summary>
+            Returns a number indicating the sign of a Fix64 number.
+            Returns 1 if the value is positive, 0 if is 0, and -1 if it is negative.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Abs(AIO.FMach.FP)">
+            <summary>
+            Returns the absolute value of a Fix64 number.
+            Note: Abs(Fix64.MinValue) == Fix64.MaxValue.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Pow2(AIO.FMach.FP)">
+            <summary>
+            Returns 2 raised to the specified power.
+            Provides at least 6 decimals of accuracy.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Log2(AIO.FMach.FP)">
+            <summary>
+            Returns the base-2 logarithm of a specified number.
+            Provides at least 9 decimals of accuracy.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            The argument was non-positive
+            </exception>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Ln(AIO.FMach.FP)">
+            <summary>
+            Returns the natural logarithm of a specified number.
+            Provides at least 7 decimals of accuracy.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            The argument was non-positive
+            </exception>
+        </member>
+        <member name="M:AIO.FMach.TSMath.Pow(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Returns a specified number raised to the specified power.
+            Provides about 5 digits of accuracy for the result.
+            </summary>
+            <exception cref="T:System.DivideByZeroException">
+            The base was zero, with a negative exponent
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            The base was negative, with a non-zero exponent
+            </exception>
+        </member>
+        <member name="T:AIO.FMach.TSMatrix">
+            <summary>
+            3x3 Matrix.
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M11">
+            <summary>
+            M11
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M12">
+            <summary>
+            M12
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M13">
+            <summary>
+            M13
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M21">
+            <summary>
+            M21
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M22">
+            <summary>
+            M22
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M23">
+            <summary>
+            M23
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M31">
+            <summary>
+            M31
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M32">
+            <summary>
+            M32
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.M33">
+            <summary>
+            M33
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix.Identity">
+            <summary>
+            Identity matrix.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.#ctor(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Initializes a new instance of the matrix structure.
+            </summary>
+            <param name="m11">m11</param>
+            <param name="m12">m12</param>
+            <param name="m13">m13</param>
+            <param name="m21">m21</param>
+            <param name="m22">m22</param>
+            <param name="m23">m23</param>
+            <param name="m31">m31</param>
+            <param name="m32">m32</param>
+            <param name="m33">m33</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Multiply(AIO.FMach.TSMatrix,AIO.FMach.TSMatrix)">
+            <summary>
+            Multiply two matrices. Notice: matrix multiplication is not commutative.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <returns>The product of both matrices.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Multiply(AIO.FMach.TSMatrix@,AIO.FMach.TSMatrix@,AIO.FMach.TSMatrix@)">
+            <summary>
+            Multiply two matrices. Notice: matrix multiplication is not commutative.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <param name="result">The product of both matrices.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Add(AIO.FMach.TSMatrix,AIO.FMach.TSMatrix)">
+            <summary>
+            Matrices are added.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <returns>The sum of both matrices.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Add(AIO.FMach.TSMatrix@,AIO.FMach.TSMatrix@,AIO.FMach.TSMatrix@)">
+            <summary>
+            Matrices are added.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <param name="result">The sum of both matrices.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Inverse(AIO.FMach.TSMatrix)">
+            <summary>
+            Calculates the inverse of a give matrix.
+            </summary>
+            <param name="matrix">The matrix to invert.</param>
+            <returns>The inverted JMatrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Inverse(AIO.FMach.TSMatrix@,AIO.FMach.TSMatrix@)">
+            <summary>
+            Calculates the inverse of a give matrix.
+            </summary>
+            <param name="matrix">The matrix to invert.</param>
+            <param name="result">The inverted JMatrix.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Multiply(AIO.FMach.TSMatrix,AIO.FMach.FP)">
+            <summary>
+            Multiply a matrix by a scalefactor.
+            </summary>
+            <param name="matrix1">The matrix.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>A JMatrix multiplied by the scale factor.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Multiply(AIO.FMach.TSMatrix@,AIO.FMach.FP,AIO.FMach.TSMatrix@)">
+            <summary>
+            Multiply a matrix by a scalefactor.
+            </summary>
+            <param name="matrix1">The matrix.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">A JMatrix multiplied by the scale factor.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.CreateFromLookAt(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Creates a JMatrix representing an orientation from a quaternion.
+            </summary>
+            <param name="quaternion">The quaternion the matrix should be created from.</param>
+            <returns>JMatrix representing an orientation.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.CreateFromQuaternion(AIO.FMach.TSQuaternion@,AIO.FMach.TSMatrix@)">
+            <summary>
+            Creates a JMatrix representing an orientation from a quaternion.
+            </summary>
+            <param name="quaternion">The quaternion the matrix should be created from.</param>
+            <param name="result">JMatrix representing an orientation.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Transpose(AIO.FMach.TSMatrix)">
+            <summary>
+            Creates the transposed matrix.
+            </summary>
+            <param name="matrix">The matrix which should be transposed.</param>
+            <returns>The transposed JMatrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.Transpose(AIO.FMach.TSMatrix@,AIO.FMach.TSMatrix@)">
+            <summary>
+            Creates the transposed matrix.
+            </summary>
+            <param name="matrix">The matrix which should be transposed.</param>
+            <param name="result">The transposed JMatrix.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.op_Multiply(AIO.FMach.TSMatrix,AIO.FMach.TSMatrix)">
+            <summary>
+            Multiplies two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The product of both values.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.op_Addition(AIO.FMach.TSMatrix,AIO.FMach.TSMatrix)">
+            <summary>
+            Adds two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The sum of both values.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.op_Subtraction(AIO.FMach.TSMatrix,AIO.FMach.TSMatrix)">
+            <summary>
+            Subtracts two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The difference of both values.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.CreateFromAxisAngle(AIO.FMach.TSVector@,AIO.FMach.FP,AIO.FMach.TSMatrix@)">
+            <summary>
+            Creates a matrix which rotates around the given axis by the given angle.
+            </summary>
+            <param name="axis">The axis.</param>
+            <param name="angle">The angle.</param>
+            <param name="result">The resulting rotation matrix</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix.AngleAxis(AIO.FMach.FP,AIO.FMach.TSVector)">
+            <summary>
+            Creates a matrix which rotates around the given axis by the given angle.
+            </summary>
+            <param name="axis">The axis.</param>
+            <param name="angle">The angle.</param>
+            <returns>The resulting rotation matrix</returns>
+        </member>
+        <member name="T:AIO.FMach.TSMatrix4x4">
+            <summary>
+            3x3 Matrix.
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M11">
+            <summary>
+            M11
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M12">
+            <summary>
+            M12
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M13">
+            <summary>
+            M13
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M14">
+            <summary>
+            M14
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M21">
+            <summary>
+            M21
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M22">
+            <summary>
+            M22
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M23">
+            <summary>
+            M23
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M24">
+            <summary>
+            M24
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M31">
+            <summary>
+            M31
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M32">
+            <summary>
+            M32
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M33">
+            <summary>
+            M33
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M34">
+            <summary>
+            M34
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M41">
+            <summary>
+            M41
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M42">
+            <summary>
+            M42
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M43">
+            <summary>
+            M43
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.M44">
+            <summary>
+            M44
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSMatrix4x4.Identity">
+            <summary>
+            Identity matrix.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.#ctor(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Initializes a new instance of the matrix structure.
+            </summary>
+            <param name="m11">m11</param>
+            <param name="m12">m12</param>
+            <param name="m13">m13</param>
+            <param name="m14">m14</param>
+            <param name="m21">m21</param>
+            <param name="m22">m22</param>
+            <param name="m23">m23</param>
+            <param name="m24">m24</param>
+            <param name="m31">m31</param>
+            <param name="m32">m32</param>
+            <param name="m33">m33</param>
+            <param name="m34">m34</param>
+            <param name="m41">m41</param>
+            <param name="m42">m42</param>
+            <param name="m43">m43</param>
+            <param name="m44">m44</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Multiply(AIO.FMach.TSMatrix4x4,AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Multiply two matrices. Notice: matrix multiplication is not commutative.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <returns>The product of both matrices.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Multiply(AIO.FMach.TSMatrix4x4@,AIO.FMach.TSMatrix4x4@,AIO.FMach.TSMatrix4x4@)">
+            <summary>
+            Multiply two matrices. Notice: matrix multiplication is not commutative.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <param name="result">The product of both matrices.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Add(AIO.FMach.TSMatrix4x4,AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Matrices are added.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <returns>The sum of both matrices.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Add(AIO.FMach.TSMatrix4x4@,AIO.FMach.TSMatrix4x4@,AIO.FMach.TSMatrix4x4@)">
+            <summary>
+            Matrices are added.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <param name="result">The sum of both matrices.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Inverse(AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Calculates the inverse of a give matrix.
+            </summary>
+            <param name="matrix">The matrix to invert.</param>
+            <returns>The inverted JMatrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Inverse(AIO.FMach.TSMatrix4x4@,AIO.FMach.TSMatrix4x4@)">
+            <summary>
+            Calculates the inverse of a give matrix.
+            </summary>
+            <param name="matrix">The matrix to invert.</param>
+            <param name="result">The inverted JMatrix.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Multiply(AIO.FMach.TSMatrix4x4,AIO.FMach.FP)">
+            <summary>
+            Multiply a matrix by a scalefactor.
+            </summary>
+            <param name="matrix1">The matrix.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>A JMatrix multiplied by the scale factor.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Multiply(AIO.FMach.TSMatrix4x4@,AIO.FMach.FP,AIO.FMach.TSMatrix4x4@)">
+            <summary>
+            Multiply a matrix by a scalefactor.
+            </summary>
+            <param name="matrix1">The matrix.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">A JMatrix multiplied by the scale factor.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Rotate(AIO.FMach.TSQuaternion@,AIO.FMach.TSMatrix4x4@)">
+            <summary>
+            Creates a JMatrix representing an orientation from a quaternion.
+            </summary>
+            <param name="quaternion">The quaternion the matrix should be created from.</param>
+            <param name="result">JMatrix representing an orientation.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Transpose(AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Creates the transposed matrix.
+            </summary>
+            <param name="matrix">The matrix which should be transposed.</param>
+            <returns>The transposed JMatrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Transpose(AIO.FMach.TSMatrix4x4@,AIO.FMach.TSMatrix4x4@)">
+            <summary>
+            Creates the transposed matrix.
+            </summary>
+            <param name="matrix">The matrix which should be transposed.</param>
+            <param name="result">The transposed JMatrix.</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.op_Multiply(AIO.FMach.TSMatrix4x4,AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Multiplies two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The product of both values.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.op_Addition(AIO.FMach.TSMatrix4x4,AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Adds two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The sum of both values.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.op_UnaryNegation(AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Returns a new matrix with the negated elements of the given matrix.
+            </summary>
+            <param name="value">The source matrix.</param>
+            <returns>The negated matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.op_Subtraction(AIO.FMach.TSMatrix4x4,AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Subtracts two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The difference of both values.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Translate(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Creates a translation matrix.
+            </summary>
+            <param name="xPosition">The amount to translate on the X-axis.</param>
+            <param name="yPosition">The amount to translate on the Y-axis.</param>
+            <param name="zPosition">The amount to translate on the Z-axis.</param>
+            <returns>The translation matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Scale(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Creates a scaling matrix.
+            </summary>
+            <param name="xScale">Value to scale by on the X-axis.</param>
+            <param name="yScale">Value to scale by on the Y-axis.</param>
+            <param name="zScale">Value to scale by on the Z-axis.</param>
+            <returns>The scaling matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Scale(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.TSVector)">
+            <summary>
+            Creates a scaling matrix with a center point.
+            </summary>
+            <param name="xScale">Value to scale by on the X-axis.</param>
+            <param name="yScale">Value to scale by on the Y-axis.</param>
+            <param name="zScale">Value to scale by on the Z-axis.</param>
+            <param name="centerPoint">The center point.</param>
+            <returns>The scaling matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Scale(AIO.FMach.TSVector)">
+            <summary>
+            Creates a scaling matrix.
+            </summary>
+            <param name="scales">The vector containing the amount to scale by on each axis.</param>
+            <returns>The scaling matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Scale(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Creates a scaling matrix with a center point.
+            </summary>
+            <param name="scales">The vector containing the amount to scale by on each axis.</param>
+            <param name="centerPoint">The center point.</param>
+            <returns>The scaling matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Scale(AIO.FMach.FP)">
+            <summary>
+            Creates a uniform scaling matrix that scales equally on each axis.
+            </summary>
+            <param name="scale">The uniform scaling factor.</param>
+            <returns>The scaling matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.Scale(AIO.FMach.FP,AIO.FMach.TSVector)">
+            <summary>
+            Creates a uniform scaling matrix that scales equally on each axis with a center point.
+            </summary>
+            <param name="scale">The uniform scaling factor.</param>
+            <param name="centerPoint">The center point.</param>
+            <returns>The scaling matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.RotateX(AIO.FMach.FP)">
+            <summary>
+            Creates a matrix for rotating points around the X-axis.
+            </summary>
+            <param name="radians">The amount, in radians, by which to rotate around the X-axis.</param>
+            <returns>The rotation matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.RotateX(AIO.FMach.FP,AIO.FMach.TSVector)">
+            <summary>
+            Creates a matrix for rotating points around the X-axis, from a center point.
+            </summary>
+            <param name="radians">The amount, in radians, by which to rotate around the X-axis.</param>
+            <param name="centerPoint">The center point.</param>
+            <returns>The rotation matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.RotateY(AIO.FMach.FP)">
+            <summary>
+            Creates a matrix for rotating points around the Y-axis.
+            </summary>
+            <param name="radians">The amount, in radians, by which to rotate around the Y-axis.</param>
+            <returns>The rotation matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.RotateY(AIO.FMach.FP,AIO.FMach.TSVector)">
+            <summary>
+            Creates a matrix for rotating points around the Y-axis, from a center point.
+            </summary>
+            <param name="radians">The amount, in radians, by which to rotate around the Y-axis.</param>
+            <param name="centerPoint">The center point.</param>
+            <returns>The rotation matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.RotateZ(AIO.FMach.FP)">
+            <summary>
+            Creates a matrix for rotating points around the Z-axis.
+            </summary>
+            <param name="radians">The amount, in radians, by which to rotate around the Z-axis.</param>
+            <returns>The rotation matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.RotateZ(AIO.FMach.FP,AIO.FMach.TSVector)">
+            <summary>
+            Creates a matrix for rotating points around the Z-axis, from a center point.
+            </summary>
+            <param name="radians">The amount, in radians, by which to rotate around the Z-axis.</param>
+            <param name="centerPoint">The center point.</param>
+            <returns>The rotation matrix.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.AxisAngle(AIO.FMach.TSVector@,AIO.FMach.FP,AIO.FMach.TSMatrix4x4@)">
+            <summary>
+            Creates a matrix which rotates around the given axis by the given angle.
+            </summary>
+            <param name="axis">The axis.</param>
+            <param name="angle">The angle.</param>
+            <param name="result">The resulting rotation matrix</param>
+        </member>
+        <member name="M:AIO.FMach.TSMatrix4x4.AngleAxis(AIO.FMach.FP,AIO.FMach.TSVector)">
+            <summary>
+            Creates a matrix which rotates around the given axis by the given angle.
+            </summary>
+            <param name="axis">The axis.</param>
+            <param name="angle">The angle.</param>
+            <returns>The resulting rotation matrix</returns>
+        </member>
+        <member name="T:AIO.FMach.TSQuaternion">
+            <summary>
+            A Quaternion representing an orientation.
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSQuaternion.x">
+            <summary>The X component of the quaternion.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSQuaternion.y">
+            <summary>The Y component of the quaternion.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSQuaternion.z">
+            <summary>The Z component of the quaternion.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSQuaternion.w">
+            <summary>The W component of the quaternion.</summary>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.#ctor(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Initializes a new instance of the JQuaternion structure.
+            </summary>
+            <param name="x">The X component of the quaternion.</param>
+            <param name="y">The Y component of the quaternion.</param>
+            <param name="z">The Z component of the quaternion.</param>
+            <param name="w">The W component of the quaternion.</param>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Add(AIO.FMach.TSQuaternion,AIO.FMach.TSQuaternion)">
+            <summary>
+            Quaternions are added.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <returns>The sum of both quaternions.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Add(AIO.FMach.TSQuaternion@,AIO.FMach.TSQuaternion@,AIO.FMach.TSQuaternion@)">
+            <summary>
+            Quaternions are added.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="result">The sum of both quaternions.</param>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Subtract(AIO.FMach.TSQuaternion,AIO.FMach.TSQuaternion)">
+            <summary>
+            Quaternions are subtracted.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <returns>The difference of both quaternions.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Subtract(AIO.FMach.TSQuaternion@,AIO.FMach.TSQuaternion@,AIO.FMach.TSQuaternion@)">
+            <summary>
+            Quaternions are subtracted.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="result">The difference of both quaternions.</param>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Multiply(AIO.FMach.TSQuaternion,AIO.FMach.TSQuaternion)">
+            <summary>
+            Multiply two quaternions.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <returns>The product of both quaternions.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Multiply(AIO.FMach.TSQuaternion@,AIO.FMach.TSQuaternion@,AIO.FMach.TSQuaternion@)">
+            <summary>
+            Multiply two quaternions.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="result">The product of both quaternions.</param>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Multiply(AIO.FMach.TSQuaternion,AIO.FMach.FP)">
+            <summary>
+            Scale a quaternion
+            </summary>
+            <param name="quaternion1">The quaternion to scale.</param>
+            <param name="scaleFactor">Scale factor.</param>
+            <returns>The scaled quaternion.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Multiply(AIO.FMach.TSQuaternion@,AIO.FMach.FP,AIO.FMach.TSQuaternion@)">
+            <summary>
+            Scale a quaternion
+            </summary>
+            <param name="quaternion1">The quaternion to scale.</param>
+            <param name="scaleFactor">Scale factor.</param>
+            <param name="result">The scaled quaternion.</param>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.Normalize">
+            <summary>
+            Sets the length of the quaternion to one.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.CreateFromMatrix(AIO.FMach.TSMatrix)">
+            <summary>
+            Creates a quaternion from a matrix.
+            </summary>
+            <param name="matrix">A matrix representing an orientation.</param>
+            <returns>JQuaternion representing an orientation.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.CreateFromMatrix(AIO.FMach.TSMatrix@,AIO.FMach.TSQuaternion@)">
+            <summary>
+            Creates a quaternion from a matrix.
+            </summary>
+            <param name="matrix">A matrix representing an orientation.</param>
+            <param name="result">JQuaternion representing an orientation.</param>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.op_Multiply(AIO.FMach.TSQuaternion,AIO.FMach.TSQuaternion)">
+            <summary>
+            Multiply two quaternions.
+            </summary>
+            <param name="value1">The first quaternion.</param>
+            <param name="value2">The second quaternion.</param>
+            <returns>The product of both quaternions.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.op_Addition(AIO.FMach.TSQuaternion,AIO.FMach.TSQuaternion)">
+            <summary>
+            Add two quaternions.
+            </summary>
+            <param name="value1">The first quaternion.</param>
+            <param name="value2">The second quaternion.</param>
+            <returns>The sum of both quaternions.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.op_Subtraction(AIO.FMach.TSQuaternion,AIO.FMach.TSQuaternion)">
+            <summary>
+            Subtract two quaternions.
+            </summary>
+            <param name="value1">The first quaternion.</param>
+            <param name="value2">The second quaternion.</param>
+            <returns>The difference of both quaternions.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSQuaternion.op_Multiply(AIO.FMach.TSQuaternion,AIO.FMach.TSVector)">
+              @brief Rotates a {@link TSVector} by the {@link TSQuanternion}.
+            
+        </member>
+        <member name="T:AIO.FMach.TSVector">
+            <summary>
+            A vector structure.
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.x">
+            <summary>The X component of the vector.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.y">
+            <summary>The Y component of the vector.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.z">
+            <summary>The Z component of the vector.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.zero">
+            <summary>
+            A vector with components (0,0,0);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.left">
+            <summary>
+            A vector with components (-1,0,0);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.right">
+            <summary>
+            A vector with components (1,0,0);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.up">
+            <summary>
+            A vector with components (0,1,0);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.down">
+            <summary>
+            A vector with components (0,-1,0);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.back">
+            <summary>
+            A vector with components (0,0,-1);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.forward">
+            <summary>
+            A vector with components (0,0,1);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.one">
+            <summary>
+            A vector with components (1,1,1);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.MinValue">
+            <summary>
+            A vector with components 
+            (FP.MinValue,FP.MinValue,FP.MinValue);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector.MaxValue">
+            <summary>
+            A vector with components 
+            (FP.MaxValue,FP.MaxValue,FP.MaxValue);
+            </summary>
+        </member>
+        <member name="P:AIO.FMach.TSVector.sqrMagnitude">
+            <summary>
+            Gets the squared length of the vector.
+            </summary>
+            <returns>Returns the squared length of the vector.</returns>
+        </member>
+        <member name="P:AIO.FMach.TSVector.magnitude">
+            <summary>
+            Gets the length of the vector.
+            </summary>
+            <returns>Returns the length of the vector.</returns>
+        </member>
+        <member name="P:AIO.FMach.TSVector.normalized">
+            <summary>
+            Gets a normalized version of the vector.
+            </summary>
+            <returns>Returns a normalized version of the vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor initializing a new instance of the structure
+            </summary>
+            <param name="x">The X component of the vector.</param>
+            <param name="y">The Y component of the vector.</param>
+            <param name="z">The Z component of the vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Scale(AIO.FMach.TSVector)">
+            <summary>
+            Multiplies each component of the vector by the same components of the provided vector.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Set(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Sets all vector component to specific values.
+            </summary>
+            <param name="x">The X component of the vector.</param>
+            <param name="y">The Y component of the vector.</param>
+            <param name="z">The Z component of the vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.#ctor(AIO.FMach.FP)">
+            <summary>
+            Constructor initializing a new instance of the structure
+            </summary>
+            <param name="xyz">All components of the vector are set to xyz</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.ToString">
+            <summary>
+            Builds a string from the JVector.
+            </summary>
+            <returns>A string containing all three components.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Equals(System.Object)">
+            <summary>
+            Tests if an object is equal to this vector.
+            </summary>
+            <param name="obj">The object to test.</param>
+            <returns>Returns true if they are euqal, otherwise false.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Scale(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Multiplies each component of the vector by the same components of the provided vector.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Equality(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Tests if two JVector are equal.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>Returns true if both values are equal, otherwise false.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Inequality(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Tests if two JVector are not equal.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>Returns false if both values are equal, otherwise true.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Min(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Gets a vector with the minimum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>A vector with the minimum x,y and z values of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Min(AIO.FMach.TSVector@,AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            Gets a vector with the minimum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <param name="result">A vector with the minimum x,y and z values of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Max(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Gets a vector with the maximum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>A vector with the maximum x,y and z values of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Max(AIO.FMach.TSVector@,AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            Gets a vector with the maximum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <param name="result">A vector with the maximum x,y and z values of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.MakeZero">
+            <summary>
+            Sets the length of the vector to zero.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector.IsZero">
+            <summary>
+            Checks if the length of the vector is zero.
+            </summary>
+            <returns>Returns true if the vector is zero, otherwise false.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.IsNearlyZero">
+            <summary>
+            Checks if the length of the vector is nearly zero.
+            </summary>
+            <returns>Returns true if the vector is nearly zero, otherwise false.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Transform(AIO.FMach.TSVector,AIO.FMach.TSMatrix)">
+            <summary>
+            Transforms a vector by the given matrix.
+            </summary>
+            <param name="position">The vector to transform.</param>
+            <param name="matrix">The transform matrix.</param>
+            <returns>The transformed vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Transform(AIO.FMach.TSVector@,AIO.FMach.TSMatrix@,AIO.FMach.TSVector@)">
+            <summary>
+            Transforms a vector by the given matrix.
+            </summary>
+            <param name="position">The vector to transform.</param>
+            <param name="matrix">The transform matrix.</param>
+            <param name="result">The transformed vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.TransposedTransform(AIO.FMach.TSVector@,AIO.FMach.TSMatrix@,AIO.FMach.TSVector@)">
+            <summary>
+            Transforms a vector by the transposed of the given Matrix.
+            </summary>
+            <param name="position">The vector to transform.</param>
+            <param name="matrix">The transform matrix.</param>
+            <param name="result">The transformed vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Dot(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Calculates the dot product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>Returns the dot product of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Dot(AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            Calculates the dot product of both vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>Returns the dot product of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Add(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The sum of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Add(AIO.FMach.TSVector@,AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            Adds to vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <param name="result">The sum of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Divide(AIO.FMach.TSVector,AIO.FMach.FP)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Divide(AIO.FMach.TSVector@,AIO.FMach.FP,AIO.FMach.TSVector@)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">Returns the scaled vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Subtract(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The difference of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Subtract(AIO.FMach.TSVector@,AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            Subtracts to vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <param name="result">The difference of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Cross(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            The cross product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The cross product of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Cross(AIO.FMach.TSVector@,AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            The cross product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <param name="result">The cross product of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.GetHashCode">
+            <summary>
+            Gets the hashcode of the vector.
+            </summary>
+            <returns>Returns the hashcode of the vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Negate">
+            <summary>
+            Inverses the direction of the vector.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Negate(AIO.FMach.TSVector)">
+            <summary>
+            Inverses the direction of a vector.
+            </summary>
+            <param name="value">The vector to inverse.</param>
+            <returns>The negated vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Negate(AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            Inverses the direction of a vector.
+            </summary>
+            <param name="value">The vector to inverse.</param>
+            <param name="result">The negated vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Normalize(AIO.FMach.TSVector)">
+            <summary>
+            Normalizes the given vector.
+            </summary>
+            <param name="value">The vector which should be normalized.</param>
+            <returns>A normalized vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Normalize">
+            <summary>
+            Normalizes this vector.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Normalize(AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            Normalizes the given vector.
+            </summary>
+            <param name="value">The vector which should be normalized.</param>
+            <param name="result">A normalized vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Swap(AIO.FMach.TSVector@,AIO.FMach.TSVector@)">
+            <summary>
+            Swaps the components of both vectors.
+            </summary>
+            <param name="vector1">The first vector to swap with the second.</param>
+            <param name="vector2">The second vector to swap with the first.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Multiply(AIO.FMach.TSVector,AIO.FMach.FP)">
+            <summary>
+            Multiply a vector with a factor.
+            </summary>
+            <param name="value1">The vector to multiply.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the multiplied vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.Multiply(AIO.FMach.TSVector@,AIO.FMach.FP,AIO.FMach.TSVector@)">
+            <summary>
+            Multiply a vector with a factor.
+            </summary>
+            <param name="value1">The vector to multiply.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">Returns the multiplied vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Modulus(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Calculates the cross product of two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>Returns the cross product of both.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Multiply(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Calculates the dot product of two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>Returns the dot product of both.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Multiply(AIO.FMach.TSVector,AIO.FMach.FP)">
+            <summary>
+            Multiplies a vector by a scale factor.
+            </summary>
+            <param name="value1">The vector to scale.</param>
+            <param name="value2">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Multiply(AIO.FMach.FP,AIO.FMach.TSVector)">
+            <summary>
+            Multiplies a vector by a scale factor.
+            </summary>
+            <param name="value2">The vector to scale.</param>
+            <param name="value1">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Subtraction(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The difference of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Addition(AIO.FMach.TSVector,AIO.FMach.TSVector)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The sum of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector.op_Division(AIO.FMach.TSVector,AIO.FMach.FP)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector2.#ctor(AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Constructor foe standard 2D vector.
+            </summary>
+            <param name="x">
+            A <see cref="T:System.Single"/>
+            </param>
+            <param name="y">
+            A <see cref="T:System.Single"/>
+            </param>
+        </member>
+        <member name="M:AIO.FMach.TSVector2.#ctor(AIO.FMach.FP)">
+            <summary>
+            Constructor for "square" vector.
+            </summary>
+            <param name="value">
+            A <see cref="T:System.Single"/>
+            </param>
+        </member>
+        <member name="M:AIO.FMach.TSVector2.Distance(AIO.FMach.TSVector2,AIO.FMach.TSVector2)">
+            <summary>
+            Returns FP precison distanve between two vectors
+            </summary>
+            <param name="value1">
+            A <see cref="T:AIO.FMach.TSVector2"/>
+            </param>
+            <param name="value2">
+            A <see cref="T:AIO.FMach.TSVector2"/>
+            </param>
+            <returns>
+            A <see cref="T:System.Single"/>
+            </returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector2.Divide(AIO.FMach.TSVector2,AIO.FMach.TSVector2)">
+            <summary>
+            Devide first vector with the secund vector
+            </summary>
+            <param name="value1">
+            A <see cref="T:AIO.FMach.TSVector2"/>
+            </param>
+            <param name="value2">
+            A <see cref="T:AIO.FMach.TSVector2"/>
+            </param>
+            <returns>
+            A <see cref="T:AIO.FMach.TSVector2"/>
+            </returns>
+        </member>
+        <member name="T:AIO.FMach.TSVector4">
+            <summary>
+            A vector structure.
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector4.x">
+            <summary>The X component of the vector.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector4.y">
+            <summary>The Y component of the vector.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector4.z">
+            <summary>The Z component of the vector.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector4.w">
+            <summary>The W component of the vector.</summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector4.zero">
+            <summary>
+            A vector with components (0,0,0,0);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector4.one">
+            <summary>
+            A vector with components (1,1,1,1);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector4.MinValue">
+            <summary>
+            A vector with components
+            (FP.MinValue,FP.MinValue,FP.MinValue);
+            </summary>
+        </member>
+        <member name="F:AIO.FMach.TSVector4.MaxValue">
+            <summary>
+            A vector with components
+            (FP.MaxValue,FP.MaxValue,FP.MaxValue);
+            </summary>
+        </member>
+        <member name="P:AIO.FMach.TSVector4.sqrMagnitude">
+            <summary>
+            Gets the squared length of the vector.
+            </summary>
+            <returns>Returns the squared length of the vector.</returns>
+        </member>
+        <member name="P:AIO.FMach.TSVector4.magnitude">
+            <summary>
+            Gets the length of the vector.
+            </summary>
+            <returns>Returns the length of the vector.</returns>
+        </member>
+        <member name="P:AIO.FMach.TSVector4.normalized">
+            <summary>
+            Gets a normalized version of the vector.
+            </summary>
+            <returns>Returns a normalized version of the vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor initializing a new instance of the structure
+            </summary>
+            <param name="x">The X component of the vector.</param>
+            <param name="y">The Y component of the vector.</param>
+            <param name="z">The Z component of the vector.</param>
+            <param name="w">The W component of the vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Scale(AIO.FMach.TSVector4)">
+            <summary>
+            Multiplies each component of the vector by the same components of the provided vector.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Set(AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP,AIO.FMach.FP)">
+            <summary>
+            Sets all vector component to specific values.
+            </summary>
+            <param name="x">The X component of the vector.</param>
+            <param name="y">The Y component of the vector.</param>
+            <param name="z">The Z component of the vector.</param>
+            <param name="w">The W component of the vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.#ctor(AIO.FMach.FP)">
+            <summary>
+            Constructor initializing a new instance of the structure
+            </summary>
+            <param name="xyz">All components of the vector are set to xyz</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.ToString">
+            <summary>
+            Builds a string from the JVector.
+            </summary>
+            <returns>A string containing all three components.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Equals(System.Object)">
+            <summary>
+            Tests if an object is equal to this vector.
+            </summary>
+            <param name="obj">The object to test.</param>
+            <returns>Returns true if they are euqal, otherwise false.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Scale(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Multiplies each component of the vector by the same components of the provided vector.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.op_Equality(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Tests if two JVector are equal.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>Returns true if both values are equal, otherwise false.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.op_Inequality(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Tests if two JVector are not equal.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>Returns false if both values are equal, otherwise true.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Min(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Gets a vector with the minimum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>A vector with the minimum x,y and z values of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Min(AIO.FMach.TSVector4@,AIO.FMach.TSVector4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Gets a vector with the minimum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <param name="result">A vector with the minimum x,y and z values of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Max(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Gets a vector with the maximum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>A vector with the maximum x,y and z values of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Max(AIO.FMach.TSVector4@,AIO.FMach.TSVector4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Gets a vector with the maximum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <param name="result">A vector with the maximum x,y and z values of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.MakeZero">
+            <summary>
+            Sets the length of the vector to zero.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.IsZero">
+            <summary>
+            Checks if the length of the vector is zero.
+            </summary>
+            <returns>Returns true if the vector is zero, otherwise false.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.IsNearlyZero">
+            <summary>
+            Checks if the length of the vector is nearly zero.
+            </summary>
+            <returns>Returns true if the vector is nearly zero, otherwise false.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Transform(AIO.FMach.TSVector4,AIO.FMach.TSMatrix4x4)">
+            <summary>
+            Transforms a vector by the given matrix.
+            </summary>
+            <param name="position">The vector to transform.</param>
+            <param name="matrix">The transform matrix.</param>
+            <returns>The transformed vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Transform(AIO.FMach.TSVector@,AIO.FMach.TSMatrix4x4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Transforms a vector by the given matrix.
+            </summary>
+            <param name="vector">The vector to transform.</param>
+            <param name="matrix">The transform matrix.</param>
+            <param name="result">The transformed vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Dot(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Calculates the dot product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>Returns the dot product of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Dot(AIO.FMach.TSVector4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Calculates the dot product of both vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>Returns the dot product of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Add(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The sum of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Add(AIO.FMach.TSVector4@,AIO.FMach.TSVector4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Adds to vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <param name="result">The sum of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Divide(AIO.FMach.TSVector4,AIO.FMach.FP)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Divide(AIO.FMach.TSVector4@,AIO.FMach.FP,AIO.FMach.TSVector4@)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">Returns the scaled vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Subtract(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The difference of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Subtract(AIO.FMach.TSVector4@,AIO.FMach.TSVector4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Subtracts to vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <param name="result">The difference of both vectors.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.GetHashCode">
+            <summary>
+            Gets the hashcode of the vector.
+            </summary>
+            <returns>Returns the hashcode of the vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Negate">
+            <summary>
+            Inverses the direction of the vector.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Negate(AIO.FMach.TSVector4)">
+            <summary>
+            Inverses the direction of a vector.
+            </summary>
+            <param name="value">The vector to inverse.</param>
+            <returns>The negated vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Negate(AIO.FMach.TSVector4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Inverses the direction of a vector.
+            </summary>
+            <param name="value">The vector to inverse.</param>
+            <param name="result">The negated vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Normalize(AIO.FMach.TSVector4)">
+            <summary>
+            Normalizes the given vector.
+            </summary>
+            <param name="value">The vector which should be normalized.</param>
+            <returns>A normalized vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Normalize">
+            <summary>
+            Normalizes this vector.
+            </summary>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Normalize(AIO.FMach.TSVector4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Normalizes the given vector.
+            </summary>
+            <param name="value">The vector which should be normalized.</param>
+            <param name="result">A normalized vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Swap(AIO.FMach.TSVector4@,AIO.FMach.TSVector4@)">
+            <summary>
+            Swaps the components of both vectors.
+            </summary>
+            <param name="vector1">The first vector to swap with the second.</param>
+            <param name="vector2">The second vector to swap with the first.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Multiply(AIO.FMach.TSVector4,AIO.FMach.FP)">
+            <summary>
+            Multiply a vector with a factor.
+            </summary>
+            <param name="value1">The vector to multiply.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the multiplied vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.Multiply(AIO.FMach.TSVector4@,AIO.FMach.FP,AIO.FMach.TSVector4@)">
+            <summary>
+            Multiply a vector with a factor.
+            </summary>
+            <param name="value1">The vector to multiply.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">Returns the multiplied vector.</param>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.op_Multiply(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Calculates the dot product of two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>Returns the dot product of both.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.op_Multiply(AIO.FMach.TSVector4,AIO.FMach.FP)">
+            <summary>
+            Multiplies a vector by a scale factor.
+            </summary>
+            <param name="value1">The vector to scale.</param>
+            <param name="value2">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.op_Multiply(AIO.FMach.FP,AIO.FMach.TSVector4)">
+            <summary>
+            Multiplies a vector by a scale factor.
+            </summary>
+            <param name="value2">The vector to scale.</param>
+            <param name="value1">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.op_Subtraction(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The difference of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.op_Addition(AIO.FMach.TSVector4,AIO.FMach.TSVector4)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The sum of both vectors.</returns>
+        </member>
+        <member name="M:AIO.FMach.TSVector4.op_Division(AIO.FMach.TSVector4,AIO.FMach.FP)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
         <member name="T:AIO.AHandle">
             <summary>
             处理器帮助类
@@ -8335,12 +10259,12 @@
         </member>
         <member name="M:AIO.AHelper.IO.ClearDir(System.String@)">
             <summary>
-            清空当前文件夹
+            清空当前文件夹 | 不删除目标文件夹
             </summary>
         </member>
         <member name="M:AIO.AHelper.IO.ClearDir(System.IO.DirectoryInfo@)">
             <summary>
-            清空当前文件夹
+            清空当前文件夹 | 不删除目标文件夹
             </summary>
         </member>
         <member name="M:AIO.AHelper.IO.CopyChildNode(System.String@,System.String@,System.Boolean@)">
@@ -8560,6 +10484,15 @@
             <param name="searchPatterns">条件 "*value*"</param>
             <returns></returns>
         </member>
+        <member name="M:AIO.AHelper.IO.FindPaths(System.IO.DirectoryInfo,System.IO.SearchOption,System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            查询匹配 返回符合条件的路径
+            </summary>
+            <param name="dir">文件夹路径</param>
+            <param name="op">匹配模式</param>
+            <param name="searchPatterns">条件 "*value*"</param>
+            <returns></returns>
+        </member>
         <member name="M:AIO.AHelper.IO.GetTempPath(System.String)">
             <summary>
             获取临时文件夹路径
@@ -8589,6 +10522,22 @@
             </summary>
             <param name="filepath"> .lnk文件的路径</param>
             <returns> .lnk文件的目标路径</returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.GetVideoDuration(System.String,System.String)">
+            <summary>
+            获取视频时长（秒）
+            </summary>
+            <param name="source">视频文件路径</param>
+            <param name="ffmpegfile">ffmpeg可执行文件路径，默认为"ffmpeg"，即系统环境变量中可直接调用ffmpeg</param>
+            <returns>视频时长（秒），如果获取失败则返回0秒</returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.GetVideoDuration(System.IO.FileInfo,System.String)">
+            <summary>
+            获取视频时长（秒）
+            </summary>
+            <param name="source">视频文件路径</param>
+            <param name="ffmpegfile">ffmpeg可执行文件路径，默认为"ffmpeg"，即系统环境变量中可直接调用ffmpeg</param>
+            <returns>视频时长（秒），如果获取失败则返回0秒</returns>
         </member>
         <member name="M:AIO.AHelper.IO.MoveFile(System.String,System.String,System.Boolean)">
             <summary>
@@ -9064,7 +11013,20 @@
             异步 按照UTF-8读取文本文件
             </summary>
         </member>
+        <member name="M:AIO.AHelper.IO.ReadUTF8Async(System.IO.FileInfo)">
+            <summary>
+            异步 按照UTF-8读取文本文件
+            </summary>
+        </member>
         <member name="M:AIO.AHelper.IO.WriteUTF8Async(System.String,System.String,System.Boolean)">
+            <summary>
+            异步 将字符串按照UTF-8写入文件,默认覆盖
+            </summary>
+            <param name="path">路径</param>
+            <param name="text">内容</param>
+            <param name="concat">[Ture : 追加] [False : 覆盖]</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.WriteUTF8Async(System.IO.FileInfo,System.String,System.Boolean)">
             <summary>
             异步 将字符串按照UTF-8写入文件,默认覆盖
             </summary>
@@ -10523,7 +12485,7 @@
             <summary>
             验证下载文件是否下载完成
             </summary>
-            <returns> 是否下载完成 </returns>
+            <returns> 完成返回 true，未完成返回 false </returns>
         </member>
         <member name="M:AIO.AHelper.Net.UriParamSerialize(System.Object@)">
             <summary>
@@ -16174,6 +18136,27 @@
         <member name="M:AIO.RingBufferExtend.Write(AIO.BufferRing{System.Byte},System.IO.Stream)">
             <summary>
             写入数据
+            </summary>
+        </member>
+        <member name="T:AIO.ConsoleCopy">
+            <summary>
+            控制台输出复制到文件
+            </summary>
+        </member>
+        <member name="M:AIO.ConsoleCopy.DoubleWriter.System#IDisposable#Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:AIO.ConsoleCopy.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="path"> 文件路径 </param>
+        </member>
+        <member name="M:AIO.ConsoleCopy.Dispose">
+            <summary>
+            释放
             </summary>
         </member>
         <member name="T:AIO.CS">
@@ -22217,18 +24200,30 @@
             清理所有缓存
             </summary>
         </member>
+        <member name="T:AIO.Pool.IUsing`1">
+            <summary>
+            An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
+            statements instead of needing to manually release everything.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AIO.Pool.IUsing`1.Item">
+            <summary>
+            The object acquired from the <see cref="T:AIO.Pool.IUsing`1"/>.
+            </summary>
+        </member>
         <member name="T:AIO.Pool.Disposable`1">
             <summary>
             An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
             statements instead of needing to manually release everything.
             </summary>
         </member>
-        <member name="F:AIO.Pool.Disposable`1.Item">
+        <member name="P:AIO.Pool.Disposable`1.Item">
             <summary>
             The object acquired from the <see cref="T:AIO.Pool.Disposable`1"/>.
             </summary>
         </member>
-        <member name="F:AIO.Pool.Disposable`1.OnRelease">
+        <member name="F:AIO.Pool.Disposable`1._release">
             <summary>
             Called by IDisposable.Dispose.
             </summary>
@@ -22236,6 +24231,11 @@
         <member name="M:AIO.Pool.Disposable`1.#ctor(`0,System.Action{`0})">
             <summary>
             释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Empty``1">
+            <summary>
+            空数组
             </summary>
         </member>
         <member name="M:AIO.Pool.List``1">
@@ -22256,6 +24256,11 @@
             </summary>
             <param name="value"><see cref="T:System.Collections.Generic.List`1"/></param>
         </member>
+        <member name="M:AIO.Pool.UsingList``1">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+        </member>
         <member name="M:AIO.Pool.HashSet``1">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
@@ -22273,6 +24278,11 @@
             引用缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
             </summary>
             <param name="value"><see cref="T:System.Collections.Generic.HashSet`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.UsingHashSet``1">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
         </member>
         <member name="M:AIO.Pool.LinkedList``1">
             <summary>
@@ -22292,6 +24302,11 @@
             </summary>
             <param name="value"><see cref="T:System.Collections.Generic.LinkedList`1"/></param>
         </member>
+        <member name="M:AIO.Pool.UsingLinkedList``1">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+        </member>
         <member name="M:AIO.Pool.Stack``1">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
@@ -22310,6 +24325,11 @@
             </summary>
             <param name="value"><see cref="T:System.Collections.Generic.Stack`1"/></param>
         </member>
+        <member name="M:AIO.Pool.UsingStack``1">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>
+        </member>
         <member name="M:AIO.Pool.Queue``1">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
@@ -22327,6 +24347,11 @@
             引用缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
             </summary>
             <param name="value"><see cref="T:System.Collections.Generic.Queue`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.UsingQueue``1">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
         </member>
         <member name="M:AIO.Pool.SortedList``2">
             <summary>
@@ -22348,6 +24373,11 @@
             </summary>
             <param name="value"><see cref="T:System.Collections.Generic.SortedList`2"/></param>
         </member>
+        <member name="M:AIO.Pool.UsingSortedList``2">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>
+        </member>
         <member name="M:AIO.Pool.Dictionary``2">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
@@ -22367,6 +24397,11 @@
             引用缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
             </summary>
             <param name="value"><see cref="T:System.Collections.Generic.Dictionary`2"/></param>
+        </member>
+        <member name="M:AIO.Pool.UsingDictionary``2">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>
         </member>
         <member name="M:AIO.Pool.ConcurrentDictionary``2">
             <summary>
@@ -22388,6 +24423,11 @@
             </summary>
             <param name="value"><see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/></param>
         </member>
+        <member name="M:AIO.Pool.UsingConcurrentDictionary``2">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>
+            </summary>
+        </member>
         <member name="M:AIO.Pool.ConcurrentBag``1">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/>
@@ -22405,6 +24445,11 @@
             引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/>
             </summary>
             <param name="value"><see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.UsingConcurrentBag``1">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentBag`1"/>
+            </summary>
         </member>
         <member name="M:AIO.Pool.ConcurrentQueue``1">
             <summary>
@@ -22424,6 +24469,11 @@
             </summary>
             <param name="value"><see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/></param>
         </member>
+        <member name="M:AIO.Pool.UsingConcurrentQueue``1">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
+            </summary>
+        </member>
         <member name="M:AIO.Pool.ConcurrentStack``1">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/>
@@ -22441,6 +24491,11 @@
             引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/>
             </summary>
             <param name="value"><see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/></param>
+        </member>
+        <member name="M:AIO.Pool.UsingConcurrentStack``1">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Concurrent.ConcurrentStack`1"/>
+            </summary>
         </member>
         <member name="M:AIO.Pool.SortedList">
             <summary>
@@ -22460,6 +24515,11 @@
             </summary>
             <param name="value"><see cref="T:System.Collections.SortedList"/></param>
         </member>
+        <member name="M:AIO.Pool.UsingSortedList">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.SortedList"/>
+            </summary>
+        </member>
         <member name="M:AIO.Pool.Hashtable">
             <summary>
             缓存 => 创建 <see cref="T:System.Collections.Hashtable"/>
@@ -22477,6 +24537,11 @@
             引用缓存 => 释放 <see cref="T:System.Collections.Hashtable"/>
             </summary>
             <param name="value"><see cref="T:System.Collections.Hashtable"/></param>
+        </member>
+        <member name="M:AIO.Pool.UsingHashtable">
+            <summary>
+            引用缓存 => 释放 <see cref="T:System.Collections.Hashtable"/>
+            </summary>
         </member>
         <member name="M:AIO.Pool.Free``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
@@ -22727,6 +24792,11 @@
         <member name="P:AIO.Singleton.OnFullName">
             <summary>
             完整名称回调
+            </summary>
+        </member>
+        <member name="F:AIO.Singleton._fullNameCache">
+            <summary>
+            全名 缓存变量
             </summary>
         </member>
         <member name="P:AIO.Singleton.FullName">

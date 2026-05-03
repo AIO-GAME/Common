@@ -67,7 +67,7 @@ namespace UnityEngine
             if (IsNotOut || NoStatus(WARNING)) return;
             if (objs == null)
             {
-                Debug.unityLogger.Log(LogType.Warning, string.Format("{0} is null", nameof(objs)));
+                Debug.unityLogger.Log(LogType.Warning, $"{nameof(objs)} is null");
                 return;
             }
 

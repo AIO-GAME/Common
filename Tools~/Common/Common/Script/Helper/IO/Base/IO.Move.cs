@@ -57,16 +57,16 @@ namespace AIO
                 bool   overlay = false
             )
             {
-                source = source.Replace('\\', Path.AltDirectorySeparatorChar);
-                target = target.Replace('\\', Path.AltDirectorySeparatorChar);
-                if (!Directory.Exists(source)) return;
-                if (Directory.Exists(target))
+                var s = new DirectoryInfo(source.Replace('\\', Path.AltDirectorySeparatorChar));
+                var t = new DirectoryInfo(target.Replace('\\', Path.AltDirectorySeparatorChar));
+                if (!s.Exists) return;
+                if (t.Exists)
                 {
-                    if (overlay) Directory.Delete(target);
+                    if (overlay) t.Delete();
                     else return;
                 }
 
-                Directory.Move(source, target);
+                s.MoveTo(t.FullName);
             }
         }
 

@@ -27,9 +27,7 @@ namespace AIO
                 string       pattern,
                 SearchOption option)
             {
-                await Task.Run(() =>
-                                   Parallel.ForEach(GetFilesInfo(folder, pattern, option), file => { DeleteFile(file); })
-                );
+                await Task.Run(() => Parallel.ForEach(GetFilesInfo(folder, pattern, option), file => { DeleteFile(file); }));
             }
 
             /// <summary>
@@ -77,8 +75,7 @@ namespace AIO
             {
                 if (!director.Exists) return;
                 if (isAll)
-                    await Task.Run(() =>
-                                       Parallel.ForEach(director.GetFiles("*", option), file => { DeleteFile(file); }));
+                    await Task.Run(() => Parallel.ForEach(director.GetFiles("*", option), file => { DeleteFile(file); }));
 
                 director.Delete(isAll);
             }
@@ -93,7 +90,9 @@ namespace AIO
                 bool                isAll  = false)
             {
                 await Task.Run(() =>
-                                   Parallel.ForEach(directors, folder => { DeleteDir(new DirectoryInfo(folder), option, isAll); }));
+                {
+                    return Parallel.ForEach(directors, folder => DeleteDir(new DirectoryInfo(folder), option, isAll));
+                });
             }
 
             /// <summary>
@@ -106,7 +105,9 @@ namespace AIO
                 bool                       isAll  = false)
             {
                 await Task.Run(() =>
-                                   Parallel.ForEach(directors, folder => { DeleteDir(folder, option, isAll); }));
+                {
+                    return Parallel.ForEach(directors, folder => DeleteDir(folder, option, isAll));
+                });
             }
         }
 
